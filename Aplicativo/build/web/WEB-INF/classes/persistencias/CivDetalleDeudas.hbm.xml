@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2018 09:29:30 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivDetalleDeudas" table="CIV_DETALLE_DEUDAS" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="detdeuId" type="big_decimal">
+            <column name="DETDEU_ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="civDeudas" class="persistencias.CivDeudas" fetch="select">
+            <column name="DEU_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="civConceptos" class="persistencias.CivConceptos" fetch="select">
+            <column name="CON_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="detdeuReferencia" type="string">
+            <column name="DETDEU_REFERENCIA" length="50" />
+        </property>
+        <property name="detdeuFecha" type="date">
+            <column name="DETDEU_FECHA" length="7" not-null="true" />
+        </property>
+        <property name="detdeuEstado" type="big_decimal">
+            <column name="DETDEU_ESTADO" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="detdeuValor" type="big_decimal">
+            <column name="DETDEU_VALOR" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

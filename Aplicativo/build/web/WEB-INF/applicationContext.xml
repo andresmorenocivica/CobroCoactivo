@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!--bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="/WEB-INF/jdbc.properties" />
+
+<bean id="dataSource"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+    p:driverClassName="${jdbc.driverClassName}"
+    p:url="${jdbc.url}"
+    p:username="${jdbc.username}"
+    p:password="${jdbc.password}" /-->
+
+    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+    
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="cobroCoactivo" />
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.generate_statistics">false</prop>
+                <prop key="hibernate.connection.pool_size">3</prop>
+                <prop key="hibernate.max_fetch_depth">1</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+                <prop key="hibernate.transaction.auto_close_session">true</prop>
+                <prop key="hibernate.transaction.flush_before_completion">true</prop>
+                <prop key="hibernate.jdbc.use_get_generated_keys">true</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>persistencias/CivDetalleProcesojuridico.hbm.xml</value>
+                <value>persistencias/CivProcesosjuridicos.hbm.xml</value>
+                <value>persistencias/CivDeudas.hbm.xml</value>
+                <value>persistencias/CivDetalleRecUsu.hbm.xml</value>
+                <value>persistencias/CivModulos.hbm.xml</value>
+                <value>persistencias/CivPerfilrecurso.hbm.xml</value>
+                <value>persistencias/CivAttempts.hbm.xml</value>
+                <value>persistencias/CivErrores.hbm.xml</value>
+                <value>persistencias/CivDetalleDeudas.hbm.xml</value>
+                <value>persistencias/CivPlantillas.hbm.xml</value>
+                <value>persistencias/CivPerfiles.hbm.xml</value>
+                <value>persistencias/CivRecursos.hbm.xml</value>
+                <value>persistencias/CivPersonas.hbm.xml</value>
+                <value>persistencias/CivDetalleRecursos.hbm.xml</value>
+                <value>persistencias/CivConceptos.hbm.xml</value>
+                <value>persistencias/CivUspHistoria.hbm.xml</value>
+                <value>persistencias/CivHistorialPerfilRecurso.hbm.xml</value>
+                <value>persistencias/CivTipodocumentos.hbm.xml</value>
+                <value>persistencias/CivUsuarios.hbm.xml</value>
+                <value>persistencias/LogEventos.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- DAOS -->
+    <bean id="loginDAO" class="jdbc.dao.DaoLogin">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="attemptsDAO" class="jdbc.dao.DaoAttempts">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="personasDAO" class="jdbc.dao.DaoPersonas">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="usuariosDAO" class="jdbc.dao.DaoUsuarios">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="historialPerfilRecursoDAO" class="jdbc.dao.DaoHistorialPerfilRecurso">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="detalleRecursosDAO" class="jdbc.dao.DaoDetalleRecursos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="detalleRecUsuDAO" class="jdbc.dao.DaoDetalleRecUsu"> 
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="modulosDAO" class="jdbc.dao.DaoModulos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="perfilesDAO" class="jdbc.dao.DaoPerfiles">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="recursosDAO" class="jdbc.dao.DaoRecursos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="perfilRecursoDAO" class="jdbc.dao.DaoPerfilRecurso">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="plantillasDAO" class="jdbc.dao.DaoPlantillas">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="tiposDocumentosDAO" class="jdbc.dao.DaoTipoDocumento">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="deudasDAO" class="jdbc.dao.DaoDeudas">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+     <bean id="detalleDeudasDAO" class="jdbc.dao.DaoDetalleDeudas">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+     <bean id="procesosJuridicosDAO" class="jdbc.dao.DaoProcesosJuridicos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+     <bean id="detalleProcesosJuridicosDAO" class="jdbc.dao.DaoDetalleProcesosJuridicos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Transaction -->    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+    
+    
+    <!-- BOS -->
+    <bean id="loginBO" class="bo.LoginImplBO">
+        <property name="loginDAO" ref="loginDAO"></property>
+        <property name="attemptsDAO" ref="attemptsDAO"></property>
+        <property name="personasDAO" ref="personasDAO"></property>
+        <property name="usuariosDAO" ref="usuariosDAO" />
+        <property name="plantillasDAO" ref="plantillasDAO" />
+        <property name="perfilRecursoDAO" ref="perfilRecursoDAO" />
+    </bean>   
+   
+    <tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2018 09:29:30 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivConceptos" table="CIV_CONCEPTOS" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="conId" type="big_decimal">
+            <column name="CON_ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="conNombre" type="string">
+            <column name="CON_NOMBRE" length="100" not-null="true">
+                <comment>NOMBRE DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conDescripcion" type="string">
+            <column name="CON_DESCRIPCION" length="100">
+                <comment>DESCRIPCION DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conTipo" type="big_decimal">
+            <column name="CON_TIPO" precision="22" scale="0" not-null="true">
+                <comment>TIPO DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conClase" type="big_decimal">
+            <column name="CON_CLASE" precision="22" scale="0">
+                <comment>CLASE DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conPrioridad" type="big_decimal">
+            <column name="CON_PRIORIDAD" precision="22" scale="0">
+                <comment>PRIORIDAD DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conFechainicial" type="date">
+            <column name="CON_FECHAINICIAL" length="7" not-null="true">
+                <comment>FECHA INICIAL DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conFechafinal" type="date">
+            <column name="CON_FECHAFINAL" length="7">
+                <comment>FECHA FINAL DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <property name="conEstado" type="big_decimal">
+            <column name="CON_ESTADO" precision="22" scale="0" not-null="true">
+                <comment>ESTADO DEL CONCEPTO</comment>
+            </column>
+        </property>
+        <set name="civDetalleDeudases" table="CIV_DETALLE_DEUDAS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CON_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="persistencias.CivDetalleDeudas" />
+        </set>
+    </class>
+</hibernate-mapping>

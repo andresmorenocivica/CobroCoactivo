@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2018 09:29:30 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivDetalleProcesojuridico" table="CIV_DETALLE_PROCESOJURIDICO" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="detprojuId" type="big_decimal">
+            <column name="DETPROJU_ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="civProcesosjuridicos" class="persistencias.CivProcesosjuridicos" fetch="select">
+            <column name="PROJU_ID" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
+            <column name="USU_ID" precision="22" scale="0" />
+        </many-to-one>
+        <property name="detprojuTipo" type="big_decimal">
+            <column name="DETPROJU_TIPO" precision="22" scale="0" />
+        </property>
+        <property name="detprojuDiainicial" type="big_decimal">
+            <column name="DETPROJU_DIAINICIAL" precision="22" scale="0" />
+        </property>
+        <property name="detprojuDiafinal" type="big_decimal">
+            <column name="DETPROJU_DIAFINAL" precision="22" scale="0" />
+        </property>
+        <property name="repId" type="big_decimal">
+            <column name="REP_ID" precision="22" scale="0" />
+        </property>
+        <property name="detprojuDireccion" type="java.lang.Boolean">
+            <column name="DETPROJU_DIRECCION" precision="1" scale="0" />
+        </property>
+        <property name="detprojuEstado" type="big_decimal">
+            <column name="DETPROJU_ESTADO" precision="22" scale="0" />
+        </property>
+        <property name="detprojuFechainicial" type="date">
+            <column name="DETPROJU_FECHAINICIAL" length="7" />
+        </property>
+        <property name="detprojuFechafinal" type="date">
+            <column name="DETPROJU_FECHAFINAL" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

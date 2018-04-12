@@ -1,0 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jdbc.dao;
+
+import persistencias.CivDeudas;
+
+/**
+ *
+ * @author Admin
+ */
+public interface ITDeudas {
+    public long insert(CivDeudas civDeudas) throws Exception;
+    public boolean update(CivDeudas civDeudas)throws Exception;
+    public CivDeudas getDeuda(int deu_id)throws Exception;
+}

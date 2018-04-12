@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2018 09:29:30 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivDetalleRecUsu" table="CIV_DETALLE_REC_USU" schema="COBROCOACTIVO" optimistic-lock="version">
+        <composite-id name="id" class="persistencias.CivDetalleRecUsuId">
+            <key-property name="detRecId" type="big_decimal">
+                <column name="DET_REC_ID" precision="22" scale="0" />
+            </key-property>
+            <key-property name="usuId" type="big_decimal">
+                <column name="USU_ID" precision="22" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" update="false" insert="false" fetch="select">
+            <column name="USU_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="civRecursos" class="persistencias.CivRecursos" fetch="select">
+            <column name="REC_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="civDetalleRecursos" class="persistencias.CivDetalleRecursos" update="false" insert="false" fetch="select">
+            <column name="DET_REC_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="propiedadVisible" type="java.lang.Boolean">
+            <column name="PROPIEDAD_VISIBLE" precision="1" scale="0" />
+        </property>
+        <property name="propiedadEnabled" type="java.lang.Boolean">
+            <column name="PROPIEDAD_ENABLED" precision="1" scale="0" />
+        </property>
+        <property name="fechaInicial" type="date">
+            <column name="FECHA_INICIAL" length="7" />
+        </property>
+        <property name="fechaFin" type="date">
+            <column name="FECHA_FIN" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>
