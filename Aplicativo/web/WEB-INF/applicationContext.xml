@@ -46,26 +46,30 @@
         </property>
         <property name="mappingResources">
             <list>
-                <value>persistencias/CivDetalleProcesojuridico.hbm.xml</value>
-                <value>persistencias/CivProcesosjuridicos.hbm.xml</value>
-                <value>persistencias/CivDeudas.hbm.xml</value>
-                <value>persistencias/CivDetalleRecUsu.hbm.xml</value>
+                <value>persistencias/CivHistorialPerfilRecurso.hbm.xml</value>
                 <value>persistencias/CivModulos.hbm.xml</value>
-                <value>persistencias/CivPerfilrecurso.hbm.xml</value>
-                <value>persistencias/CivAttempts.hbm.xml</value>
+                <value>persistencias/CivDatospersona.hbm.xml</value>
+                <value>persistencias/CivUspHistoria.hbm.xml</value>
+                <value>persistencias/CivUsuarios.hbm.xml</value>
+                <value>persistencias/CivDeudas.hbm.xml</value>
                 <value>persistencias/CivErrores.hbm.xml</value>
+                <value>persistencias/CivDetalleRecUsu.hbm.xml</value>
                 <value>persistencias/CivDetalleDeudas.hbm.xml</value>
+                <value>persistencias/CivTipodocumentos.hbm.xml</value>
+                <value>persistencias/CivPersonas.hbm.xml</value>
+                <value>persistencias/CivTipoconcepto.hbm.xml</value>
+                <value>persistencias/CivConceptos.hbm.xml</value>
+                <value>persistencias/CivPerfilrecurso.hbm.xml</value>
+                <value>persistencias/CivProcesosjuridicos.hbm.xml</value>
+                <value>persistencias/CivTipodatopersona.hbm.xml</value>
+                <value>persistencias/CivDetalleRecursos.hbm.xml</value>
                 <value>persistencias/CivPlantillas.hbm.xml</value>
+                <value>persistencias/CivTipodeuda.hbm.xml</value>
+                <value>persistencias/CivDetalleProcesojuridico.hbm.xml</value>
+                <value>persistencias/CivAttempts.hbm.xml</value>
+                <value>persistencias/LogEventos.hbm.xml</value>
                 <value>persistencias/CivPerfiles.hbm.xml</value>
                 <value>persistencias/CivRecursos.hbm.xml</value>
-                <value>persistencias/CivPersonas.hbm.xml</value>
-                <value>persistencias/CivDetalleRecursos.hbm.xml</value>
-                <value>persistencias/CivConceptos.hbm.xml</value>
-                <value>persistencias/CivUspHistoria.hbm.xml</value>
-                <value>persistencias/CivHistorialPerfilRecurso.hbm.xml</value>
-                <value>persistencias/CivTipodocumentos.hbm.xml</value>
-                <value>persistencias/CivUsuarios.hbm.xml</value>
-                <value>persistencias/LogEventos.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -113,13 +117,13 @@
     <bean id="deudasDAO" class="jdbc.dao.DaoDeudas">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-     <bean id="detalleDeudasDAO" class="jdbc.dao.DaoDetalleDeudas">
+    <bean id="detalleDeudasDAO" class="jdbc.dao.DaoDetalleDeudas">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-     <bean id="procesosJuridicosDAO" class="jdbc.dao.DaoProcesosJuridicos">
+    <bean id="procesosJuridicosDAO" class="jdbc.dao.DaoProcesosJuridicos">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-     <bean id="detalleProcesosJuridicosDAO" class="jdbc.dao.DaoDetalleProcesosJuridicos">
+    <bean id="detalleProcesosJuridicosDAO" class="jdbc.dao.DaoDetalleProcesosJuridicos">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     

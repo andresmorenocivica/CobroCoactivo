@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivTipodatopersona" table="CIV_TIPODATOPERSONA" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="tipdatperId" type="big_decimal">
+            <column name="TIPDATPER_ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="tipdatperDescripcion" type="string">
+            <column name="TIPDATPER_DESCRIPCION" length="100" />
+        </property>
+        <property name="tipdatperEstado" type="big_decimal">
+            <column name="TIPDATPER_ESTADO" precision="22" scale="0" />
+        </property>
+        <property name="tipdatperFechainical" type="date">
+            <column name="TIPDATPER_FECHAINICAL" length="7" />
+        </property>
+        <property name="tipdatperFechafinal" type="date">
+            <column name="TIPDATPER_FECHAFINAL" length="7" />
+        </property>
+        <set name="civDatospersonas" table="CIV_DATOSPERSONA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TIPDATPER_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="persistencias.CivDatospersona" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -66,4 +66,8 @@ Contributor(s):
   <table-filter match-name="CIV_CONCEPTOS"/>
   <table-filter match-name="CIV_PROCESOSJURIDICOS"/>
   <table-filter match-name="CIV_DETALLE_PROCESOJURIDICO"/>
+  <table-filter match-name="CIV_DATOSPERSONA"/>
+  <table-filter match-name="CIV_TIPOCONCEPTO"/>
+  <table-filter match-name="CIV_TIPODATOPERSONA"/>
+  <table-filter match-name="CIV_TIPODEUDA"/>
 </hibernate-reverse-engineering>

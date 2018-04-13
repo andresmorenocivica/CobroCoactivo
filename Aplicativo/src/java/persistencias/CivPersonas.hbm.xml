@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/04/2018 09:29:30 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivPersonas" table="CIV_PERSONAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="perId" type="big_decimal">
@@ -17,12 +17,6 @@
         <property name="perFechanac" type="date">
             <column name="PER_FECHANAC" length="7" />
         </property>
-        <property name="perGruposanguineo" type="string">
-            <column name="PER_GRUPOSANGUINEO" length="2" />
-        </property>
-        <property name="perRh" type="string">
-            <column name="PER_RH" length="3" />
-        </property>
         <property name="perSexo" type="string">
             <column name="PER_SEXO" length="1" />
         </property>
@@ -37,12 +31,6 @@
         </property>
         <property name="perApellido2" type="string">
             <column name="PER_APELLIDO2" length="200" />
-        </property>
-        <property name="perEmail" type="string">
-            <column name="PER_EMAIL" length="200" />
-        </property>
-        <property name="perCelular" type="string">
-            <column name="PER_CELULAR" length="200" />
         </property>
         <property name="perLugarnacimiento" type="big_decimal">
             <column name="PER_LUGARNACIMIENTO" precision="22" scale="0" />
@@ -72,6 +60,12 @@
                 </column>
             </key>
             <one-to-many class="persistencias.CivUsuarios" />
+        </set>
+        <set name="civDatospersonas" table="CIV_DATOSPERSONA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PER_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="persistencias.CivDatospersona" />
         </set>
         <set name="civDeudases" table="CIV_DEUDAS" inverse="true" lazy="true" fetch="select">
             <key>

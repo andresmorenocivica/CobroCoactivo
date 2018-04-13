@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivTipodeuda" table="CIV_TIPODEUDA" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="tipdeuId" type="big_decimal">
+            <column name="TIPDEU_ID" precision="22" scale="0" />
+            <generator class="increment" />
+        </id>
+        <property name="tipdeuDescripcion" type="string">
+            <column name="TIPDEU_DESCRIPCION" length="100" />
+        </property>
+        <property name="tipdeuEstado" type="big_decimal">
+            <column name="TIPDEU_ESTADO" precision="22" scale="0" />
+        </property>
+        <property name="tipdeuFechainicial" type="date">
+            <column name="TIPDEU_FECHAINICIAL" length="7" />
+        </property>
+        <property name="tipdeuFechafinal" type="date">
+            <column name="TIPDEU_FECHAFINAL" length="7" />
+        </property>
+        <set name="civDeudases" table="CIV_DEUDAS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TIPDEU_ID" precision="22" scale="0" not-null="true">
+                    <comment>TIPO DE LA DEUDA</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencias.CivDeudas" />
+        </set>
+    </class>
+</hibernate-mapping>
