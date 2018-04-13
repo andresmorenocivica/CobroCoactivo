@@ -18,15 +18,11 @@ public class Personas {
     private int estado;
     private int lugarExpedicion;
     private String documento;
-    private String grupoSanguineo;
-    private String rh;
     private String sexo;
     private String nombre1;
     private String nombre2;
     private String apellido1;
     private String apellido2;
-    private String email;
-    private String celular;
     private Date fechaNacimiento;
     private Date fechaExpedicion;
     private Date fechaIniical;
@@ -118,34 +114,6 @@ public class Personas {
     }
 
     /**
-     * @return the grupoSanguineo
-     */
-    public String getGrupoSanguineo() {
-        return grupoSanguineo;
-    }
-
-    /**
-     * @param grupoSanguineo the grupoSanguineo to set
-     */
-    public void setGrupoSanguineo(String grupoSanguineo) {
-        this.grupoSanguineo = grupoSanguineo;
-    }
-
-    /**
-     * @return the rh
-     */
-    public String getRh() {
-        return rh;
-    }
-
-    /**
-     * @param rh the rh to set
-     */
-    public void setRh(String rh) {
-        this.rh = rh;
-    }
-
-    /**
      * @return the sexo
      */
     public String getSexo() {
@@ -213,34 +181,6 @@ public class Personas {
      */
     public void setApellido2(String apellido2) {
         this.apellido2 = apellido2;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the celular
-     */
-    public String getCelular() {
-        return celular;
-    }
-
-    /**
-     * @param celular the celular to set
-     */
-    public void setCelular(String celular) {
-        this.celular = celular;
     }
 
     /**
@@ -312,6 +252,6 @@ public class Personas {
     public void setFechaProceso(Date fechaProceso) {
         this.fechaProceso = fechaProceso;
     }
-    
+
     
 }
