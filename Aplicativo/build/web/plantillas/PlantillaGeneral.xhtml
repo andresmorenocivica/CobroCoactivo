@@ -235,6 +235,8 @@
                                     <li class="header">Navegacion Principal</li>
                                     <c:set value="0" var="valor"></c:set>
                                     <c:forEach items="#{loginBean.listPerfilRecursos}" var="modu">
+                                        <c:if test="${modu.civRecursos.civModulos.modId.intValue()!=valor}">
+                                            <c:set value="${modu.civRecursos.civModulos.modId.intValue()}" var="valor"></c:set>
                                             <li class="treeview">
                                                 <a href="#">
                                                     <i class="fa #{modu.civRecursos.civModulos.icon}"></i> <span>#{modu.civRecursos.civModulos.modNombre}</span>
@@ -242,13 +244,20 @@
                                                         <i class="fa fa-angle-left pull-right"></i>
                                                     </span>
                                                 </a>
+
                                                 <ul class="treeview-menu">
                                                     <c:forEach items="${loginBean.listPerfilRecursos}" var="val">
-                                                            <li><h:link outcome="${val.civRecursos.recCarpeta}${val.civRecursos.recDescripcion}"><i class="fa fa-circle-o"></i> ${val.civRecursos.recNombre}</h:link></li>
+                                                        <c:if test="${valor == val.civRecursos.civModulos.modId.intValue()}">
+                                                            <li><h:link outcome="${val.civRecursos.recCarpeta}${val.civRecursos.recDescripcion}"><i class="fa fa-circle-o"></i> ${val.civRecursos.recNombre} </h:link></li>
+                                                        </c:if>
                                                     </c:forEach>
                                                 </ul>
+
                                             </li>
+                                        </c:if>
+
                                     </c:forEach>
+
                                     <!--
                                         <li class="header">LABELS</li>
                                         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

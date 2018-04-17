@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 13/04/2018 11:20:37 AM by Hibernate Tools 4.3.1
+// Generated 17/04/2018 10:23:00 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,9 +11,9 @@ public class CivDetalleRecUsu  implements java.io.Serializable {
 
 
      private CivDetalleRecUsuId id;
-     private CivUsuarios civUsuarios;
-     private CivRecursos civRecursos;
      private CivDetalleRecursos civDetalleRecursos;
+     private CivRecursos civRecursos;
+     private CivUsuarios civUsuarios;
      private Boolean propiedadVisible;
      private Boolean propiedadEnabled;
      private Date fechaInicial;
@@ -23,17 +23,17 @@ public class CivDetalleRecUsu  implements java.io.Serializable {
     }
 
 	
-    public CivDetalleRecUsu(CivDetalleRecUsuId id, CivUsuarios civUsuarios, CivRecursos civRecursos, CivDetalleRecursos civDetalleRecursos) {
+    public CivDetalleRecUsu(CivDetalleRecUsuId id, CivDetalleRecursos civDetalleRecursos, CivRecursos civRecursos, CivUsuarios civUsuarios) {
         this.id = id;
-        this.civUsuarios = civUsuarios;
-        this.civRecursos = civRecursos;
         this.civDetalleRecursos = civDetalleRecursos;
+        this.civRecursos = civRecursos;
+        this.civUsuarios = civUsuarios;
     }
-    public CivDetalleRecUsu(CivDetalleRecUsuId id, CivUsuarios civUsuarios, CivRecursos civRecursos, CivDetalleRecursos civDetalleRecursos, Boolean propiedadVisible, Boolean propiedadEnabled, Date fechaInicial, Date fechaFin) {
+    public CivDetalleRecUsu(CivDetalleRecUsuId id, CivDetalleRecursos civDetalleRecursos, CivRecursos civRecursos, CivUsuarios civUsuarios, Boolean propiedadVisible, Boolean propiedadEnabled, Date fechaInicial, Date fechaFin) {
        this.id = id;
-       this.civUsuarios = civUsuarios;
-       this.civRecursos = civRecursos;
        this.civDetalleRecursos = civDetalleRecursos;
+       this.civRecursos = civRecursos;
+       this.civUsuarios = civUsuarios;
        this.propiedadVisible = propiedadVisible;
        this.propiedadEnabled = propiedadEnabled;
        this.fechaInicial = fechaInicial;
@@ -47,12 +47,12 @@ public class CivDetalleRecUsu  implements java.io.Serializable {
     public void setId(CivDetalleRecUsuId id) {
         this.id = id;
     }
-    public CivUsuarios getCivUsuarios() {
-        return this.civUsuarios;
+    public CivDetalleRecursos getCivDetalleRecursos() {
+        return this.civDetalleRecursos;
     }
     
-    public void setCivUsuarios(CivUsuarios civUsuarios) {
-        this.civUsuarios = civUsuarios;
+    public void setCivDetalleRecursos(CivDetalleRecursos civDetalleRecursos) {
+        this.civDetalleRecursos = civDetalleRecursos;
     }
     public CivRecursos getCivRecursos() {
         return this.civRecursos;
@@ -61,12 +61,12 @@ public class CivDetalleRecUsu  implements java.io.Serializable {
     public void setCivRecursos(CivRecursos civRecursos) {
         this.civRecursos = civRecursos;
     }
-    public CivDetalleRecursos getCivDetalleRecursos() {
-        return this.civDetalleRecursos;
+    public CivUsuarios getCivUsuarios() {
+        return this.civUsuarios;
     }
     
-    public void setCivDetalleRecursos(CivDetalleRecursos civDetalleRecursos) {
-        this.civDetalleRecursos = civDetalleRecursos;
+    public void setCivUsuarios(CivUsuarios civUsuarios) {
+        this.civUsuarios = civUsuarios;
     }
     public Boolean getPropiedadVisible() {
         return this.propiedadVisible;

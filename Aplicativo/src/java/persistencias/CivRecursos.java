@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 13/04/2018 11:20:37 AM by Hibernate Tools 4.3.1
+// Generated 17/04/2018 10:23:00 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class CivRecursos  implements java.io.Serializable {
 
 
      private BigDecimal recId;
-     private CivPerfiles civPerfiles;
      private CivModulos civModulos;
+     private CivPerfiles civPerfiles;
      private String recNombre;
      private String recDescripcion;
      private Date recFechainicial;
@@ -33,10 +33,10 @@ public class CivRecursos  implements java.io.Serializable {
     public CivRecursos(BigDecimal recId) {
         this.recId = recId;
     }
-    public CivRecursos(BigDecimal recId, CivPerfiles civPerfiles, CivModulos civModulos, String recNombre, String recDescripcion, Date recFechainicial, Date recFechafin, BigDecimal recEstado, String recCarpeta, BigDecimal recTipo, Set civDetalleRecUsus, Set civPerfilrecursos) {
+    public CivRecursos(BigDecimal recId, CivModulos civModulos, CivPerfiles civPerfiles, String recNombre, String recDescripcion, Date recFechainicial, Date recFechafin, BigDecimal recEstado, String recCarpeta, BigDecimal recTipo, Set civDetalleRecUsus, Set civPerfilrecursos) {
        this.recId = recId;
-       this.civPerfiles = civPerfiles;
        this.civModulos = civModulos;
+       this.civPerfiles = civPerfiles;
        this.recNombre = recNombre;
        this.recDescripcion = recDescripcion;
        this.recFechainicial = recFechainicial;
@@ -55,19 +55,19 @@ public class CivRecursos  implements java.io.Serializable {
     public void setRecId(BigDecimal recId) {
         this.recId = recId;
     }
-    public CivPerfiles getCivPerfiles() {
-        return this.civPerfiles;
-    }
-    
-    public void setCivPerfiles(CivPerfiles civPerfiles) {
-        this.civPerfiles = civPerfiles;
-    }
     public CivModulos getCivModulos() {
         return this.civModulos;
     }
     
     public void setCivModulos(CivModulos civModulos) {
         this.civModulos = civModulos;
+    }
+    public CivPerfiles getCivPerfiles() {
+        return this.civPerfiles;
+    }
+    
+    public void setCivPerfiles(CivPerfiles civPerfiles) {
+        this.civPerfiles = civPerfiles;
     }
     public String getRecNombre() {
         return this.recNombre;

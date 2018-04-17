@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/04/2018 10:23:03 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivRecursos" table="CIV_RECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan los recursos disponibles para los usuarios del sistema.</comment>
         <id name="recId" type="big_decimal">
             <column name="REC_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
-        <many-to-one name="civPerfiles" class="persistencias.CivPerfiles" fetch="select">
-            <column name="PERF_ID" precision="22" scale="0">
-                <comment>ID unico del perfil</comment>
-            </column>
-        </many-to-one>
         <many-to-one name="civModulos" class="persistencias.CivModulos" fetch="select">
             <column name="MOD_ID" precision="22" scale="0">
                 <comment>ID de modulo</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civPerfiles" class="persistencias.CivPerfiles" fetch="select">
+            <column name="PERF_ID" precision="22" scale="0">
+                <comment>ID unico del perfil</comment>
             </column>
         </many-to-one>
         <property name="recNombre" type="string">

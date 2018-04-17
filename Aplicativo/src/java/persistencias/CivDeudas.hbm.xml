@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/04/2018 10:23:03 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivDeudas" table="CIV_DEUDAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="deuId" type="big_decimal">
             <column name="DEU_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="civPersonas" class="persistencias.CivPersonas" fetch="select">
             <column name="PER_ID" precision="22" scale="0" not-null="true">
@@ -18,14 +18,14 @@
                 <comment>PROCESO JURIDICO DE LA DEUDA</comment>
             </column>
         </many-to-one>
-        <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
-            <column name="USU_ID" precision="22" scale="0" not-null="true">
-                <comment>USUARIO QUIEN CREO LA DEUDA EN EL SISTEMA</comment>
-            </column>
-        </many-to-one>
         <many-to-one name="civTipodeuda" class="persistencias.CivTipodeuda" fetch="select">
             <column name="TIPDEU_ID" precision="22" scale="0" not-null="true">
                 <comment>TIPO DE LA DEUDA</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
+            <column name="USU_ID" precision="22" scale="0" not-null="true">
+                <comment>USUARIO QUIEN CREO LA DEUDA EN EL SISTEMA</comment>
             </column>
         </many-to-one>
         <property name="deuFecha" type="date">

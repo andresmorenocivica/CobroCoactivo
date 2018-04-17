@@ -3,12 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/AMORENO/Documents/NetBeansProjects/Aplicativo/web/index.xhtml</file>
-            <file>file:/C:/Users/AMORENO/Documents/NetBeansProjects/Aplicativo/src/java/beans/BeanLogin.java</file>
-            <file>file:/C:/Users/AMORENO/Documents/NetBeansProjects/Aplicativo/web/CerrarSesion.jsp</file>
-            <file>file:/C:/Users/AMORENO/Documents/NetBeansProjects/Aplicativo/web/plantillas/PlantillaGeneral.xhtml</file>
-            <file>file:/C:/Users/AMORENO/Documents/NetBeansProjects/Aplicativo/src/java/bo/LoginBO.java</file>
-            <file>file:/C:/Users/AMORENO/Documents/NetBeansProjects/Aplicativo/src/java/bo/LoginImplBO.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/web/WEB-INF/applicationContext.xml</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/DaoTablasParametricas.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/DaoLogin.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/ITTablasParametricas.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/bo/GestionParametrosImpBO.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/web/paginas/parametrizacion/gestionTiposDeDatos.xhtml</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/ITAttempts.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/ITTipoDocumento.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/bo/LoginImplBO.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/beans/BeanLogin.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/bo/GestionParametrosBO.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/ITLogin.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/DaoPersonas.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/jdbc/dao/DaoTipoDocumento.java</file>
+            <file>file:/C:/Users/AMORENO/Documents/GitHub/CobroCoactivo/Aplicativo/src/java/beans/BeanGestionParametros.java</file>
         </group>
     </open-files>
 </project-private>

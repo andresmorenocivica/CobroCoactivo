@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/04/2018 10:23:03 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivDetalleRecursos" table="CIV_DETALLE_RECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="detRecId" type="big_decimal">
             <column name="DET_REC_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <property name="recId" type="big_decimal">
             <column name="REC_ID" precision="22" scale="0" />

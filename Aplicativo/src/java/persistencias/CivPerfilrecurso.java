@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 13/04/2018 11:20:37 AM by Hibernate Tools 4.3.1
+// Generated 17/04/2018 10:23:00 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,8 +11,8 @@ public class CivPerfilrecurso  implements java.io.Serializable {
 
 
      private CivPerfilrecursoId id;
-     private CivUsuarios civUsuarios;
      private CivRecursos civRecursos;
+     private CivUsuarios civUsuarios;
      private Date perrecFechaini;
      private Date perrecFechafin;
 
@@ -20,15 +20,15 @@ public class CivPerfilrecurso  implements java.io.Serializable {
     }
 
 	
-    public CivPerfilrecurso(CivPerfilrecursoId id, CivUsuarios civUsuarios, CivRecursos civRecursos) {
+    public CivPerfilrecurso(CivPerfilrecursoId id, CivRecursos civRecursos, CivUsuarios civUsuarios) {
         this.id = id;
-        this.civUsuarios = civUsuarios;
         this.civRecursos = civRecursos;
+        this.civUsuarios = civUsuarios;
     }
-    public CivPerfilrecurso(CivPerfilrecursoId id, CivUsuarios civUsuarios, CivRecursos civRecursos, Date perrecFechaini, Date perrecFechafin) {
+    public CivPerfilrecurso(CivPerfilrecursoId id, CivRecursos civRecursos, CivUsuarios civUsuarios, Date perrecFechaini, Date perrecFechafin) {
        this.id = id;
-       this.civUsuarios = civUsuarios;
        this.civRecursos = civRecursos;
+       this.civUsuarios = civUsuarios;
        this.perrecFechaini = perrecFechaini;
        this.perrecFechafin = perrecFechafin;
     }
@@ -40,19 +40,19 @@ public class CivPerfilrecurso  implements java.io.Serializable {
     public void setId(CivPerfilrecursoId id) {
         this.id = id;
     }
-    public CivUsuarios getCivUsuarios() {
-        return this.civUsuarios;
-    }
-    
-    public void setCivUsuarios(CivUsuarios civUsuarios) {
-        this.civUsuarios = civUsuarios;
-    }
     public CivRecursos getCivRecursos() {
         return this.civRecursos;
     }
     
     public void setCivRecursos(CivRecursos civRecursos) {
         this.civRecursos = civRecursos;
+    }
+    public CivUsuarios getCivUsuarios() {
+        return this.civUsuarios;
+    }
+    
+    public void setCivUsuarios(CivUsuarios civUsuarios) {
+        this.civUsuarios = civUsuarios;
     }
     public Date getPerrecFechaini() {
         return this.perrecFechaini;

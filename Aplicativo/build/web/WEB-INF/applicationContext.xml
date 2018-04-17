@@ -47,6 +47,7 @@
         <property name="mappingResources">
             <list>
                 <value>persistencias/CivHistorialPerfilRecurso.hbm.xml</value>
+                <value>persistencias/CivTablasparametricas.hbm.xml</value>
                 <value>persistencias/CivModulos.hbm.xml</value>
                 <value>persistencias/CivDatospersona.hbm.xml</value>
                 <value>persistencias/CivUspHistoria.hbm.xml</value>
@@ -126,6 +127,9 @@
     <bean id="detalleProcesosJuridicosDAO" class="jdbc.dao.DaoDetalleProcesosJuridicos">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+    <bean id="tablasParametricasDAO" class="jdbc.dao.DaoTablasParametricas">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
     
     
     
@@ -151,7 +155,12 @@
         <property name="usuariosDAO" ref="usuariosDAO" />
         <property name="plantillasDAO" ref="plantillasDAO" />
         <property name="perfilRecursoDAO" ref="perfilRecursoDAO" />
-    </bean>   
+    </bean> 
+    
+    <bean id="GestionParametrosBO" class="bo.GestionParametrosImpBO">
+        <property name="loginDAO" ref="loginDAO"></property>
+        <property name="tablasParametricasDAO" ref="tablasParametricasDAO"></property>
+    </bean>  
    
     <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 13/04/2018 11:20:47 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/04/2018 10:23:03 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivPerfiles" table="CIV_PERFILES" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan los diferentes perfiles de usuario del sistema. Ver CIV_USUPERFIL.</comment>
         <id name="perfId" type="big_decimal">
             <column name="PERF_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <property name="perfNombre" type="string">
             <column name="PERF_NOMBRE" length="300">
