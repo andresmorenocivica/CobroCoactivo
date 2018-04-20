@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/04/2018 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/04/2018 03:40:18 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivTipodeuda" table="CIV_TIPODEUDA" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tipdeuId" type="big_decimal">
             <column name="TIPDEU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="tipdeuDescripcion" type="string">
             <column name="TIPDEU_DESCRIPCION" length="100" />
@@ -19,6 +19,12 @@
         </property>
         <property name="tipdeuFechafinal" type="date">
             <column name="TIPDEU_FECHAFINAL" length="7" />
+        </property>
+        <property name="tipdeuNombrecorto" type="string">
+            <column name="TIPDEU_NOMBRECORTO" length="20" />
+        </property>
+        <property name="tipdeuCodigo" type="big_decimal">
+            <column name="TIPDEU_CODIGO" precision="22" scale="0" />
         </property>
         <set name="civDeudases" table="CIV_DEUDAS" inverse="true" lazy="true" fetch="select">
             <key>

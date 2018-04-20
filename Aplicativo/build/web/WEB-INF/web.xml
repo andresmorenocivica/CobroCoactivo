@@ -19,6 +19,12 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name>
+            javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL
+        </param-name>
+        <param-value>true</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -65,5 +71,6 @@
     <error-page>
         <error-code>500</error-code>
         <location>/500.jsp</location>
-    </error-page>
+    </error-page>  
+   
 </web-app>

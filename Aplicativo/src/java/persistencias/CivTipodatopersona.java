@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 17/04/2018 10:23:00 AM by Hibernate Tools 4.3.1
+// Generated 17/04/2018 03:40:17 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -18,6 +18,8 @@ public class CivTipodatopersona  implements java.io.Serializable {
      private BigDecimal tipdatperEstado;
      private Date tipdatperFechainical;
      private Date tipdatperFechafinal;
+     private String tipdatperNombrecorto;
+     private BigDecimal tipdatperCodigo;
      private Set civDatospersonas = new HashSet(0);
 
     public CivTipodatopersona() {
@@ -27,12 +29,14 @@ public class CivTipodatopersona  implements java.io.Serializable {
     public CivTipodatopersona(BigDecimal tipdatperId) {
         this.tipdatperId = tipdatperId;
     }
-    public CivTipodatopersona(BigDecimal tipdatperId, String tipdatperDescripcion, BigDecimal tipdatperEstado, Date tipdatperFechainical, Date tipdatperFechafinal, Set civDatospersonas) {
+    public CivTipodatopersona(BigDecimal tipdatperId, String tipdatperDescripcion, BigDecimal tipdatperEstado, Date tipdatperFechainical, Date tipdatperFechafinal, String tipdatperNombrecorto, BigDecimal tipdatperCodigo, Set civDatospersonas) {
        this.tipdatperId = tipdatperId;
        this.tipdatperDescripcion = tipdatperDescripcion;
        this.tipdatperEstado = tipdatperEstado;
        this.tipdatperFechainical = tipdatperFechainical;
        this.tipdatperFechafinal = tipdatperFechafinal;
+       this.tipdatperNombrecorto = tipdatperNombrecorto;
+       this.tipdatperCodigo = tipdatperCodigo;
        this.civDatospersonas = civDatospersonas;
     }
    
@@ -70,6 +74,20 @@ public class CivTipodatopersona  implements java.io.Serializable {
     
     public void setTipdatperFechafinal(Date tipdatperFechafinal) {
         this.tipdatperFechafinal = tipdatperFechafinal;
+    }
+    public String getTipdatperNombrecorto() {
+        return this.tipdatperNombrecorto;
+    }
+    
+    public void setTipdatperNombrecorto(String tipdatperNombrecorto) {
+        this.tipdatperNombrecorto = tipdatperNombrecorto;
+    }
+    public BigDecimal getTipdatperCodigo() {
+        return this.tipdatperCodigo;
+    }
+    
+    public void setTipdatperCodigo(BigDecimal tipdatperCodigo) {
+        this.tipdatperCodigo = tipdatperCodigo;
     }
     public Set getCivDatospersonas() {
         return this.civDatospersonas;

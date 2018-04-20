@@ -6,6 +6,7 @@
 package bo;
 
 import beans.BeanGestionParametros;
+import model.Parametros;
 
 /**
  *
@@ -14,4 +15,10 @@ import beans.BeanGestionParametros;
 public interface GestionParametrosBO {
     
     void llenarDatos(BeanGestionParametros bean)throws Exception;
+    
+    void eliminarRegistro (BeanGestionParametros bean)  throws Exception;
+    
+    void update(BeanGestionParametros bean) throws Exception;
+    
+    void save(BeanGestionParametros bean) throws Exception;
 }

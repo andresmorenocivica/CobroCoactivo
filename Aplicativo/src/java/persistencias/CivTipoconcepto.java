@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 17/04/2018 10:23:00 AM by Hibernate Tools 4.3.1
+// Generated 17/04/2018 03:40:17 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -18,6 +18,9 @@ public class CivTipoconcepto  implements java.io.Serializable {
      private BigDecimal tipconEstado;
      private Date tipconFechainicial;
      private Date tipconFechafinal;
+     private String tipconNombrecorto;
+     private BigDecimal tipconCodigo;
+     
      private Set civConceptoses = new HashSet(0);
 
     public CivTipoconcepto() {
@@ -27,12 +30,14 @@ public class CivTipoconcepto  implements java.io.Serializable {
     public CivTipoconcepto(BigDecimal tipconId) {
         this.tipconId = tipconId;
     }
-    public CivTipoconcepto(BigDecimal tipconId, String tipconDescripcion, BigDecimal tipconEstado, Date tipconFechainicial, Date tipconFechafinal, Set civConceptoses) {
+    public CivTipoconcepto(BigDecimal tipconId, String tipconDescripcion, BigDecimal tipconEstado, Date tipconFechainicial, Date tipconFechafinal, String tipconNombrecorto, BigDecimal tipconCodigo, Set civConceptoses) {
        this.tipconId = tipconId;
        this.tipconDescripcion = tipconDescripcion;
        this.tipconEstado = tipconEstado;
        this.tipconFechainicial = tipconFechainicial;
        this.tipconFechafinal = tipconFechafinal;
+       this.tipconNombrecorto = tipconNombrecorto;
+       this.tipconCodigo = tipconCodigo;
        this.civConceptoses = civConceptoses;
     }
    
@@ -70,6 +75,20 @@ public class CivTipoconcepto  implements java.io.Serializable {
     
     public void setTipconFechafinal(Date tipconFechafinal) {
         this.tipconFechafinal = tipconFechafinal;
+    }
+    public String getTipconNombrecorto() {
+        return this.tipconNombrecorto;
+    }
+    
+    public void setTipconNombrecorto(String tipconNombrecorto) {
+        this.tipconNombrecorto = tipconNombrecorto;
+    }
+    public BigDecimal getTipconCodigo() {
+        return this.tipconCodigo;
+    }
+    
+    public void setTipconCodigo(BigDecimal tipconCodigo) {
+        this.tipconCodigo = tipconCodigo;
     }
     public Set getCivConceptoses() {
         return this.civConceptoses;

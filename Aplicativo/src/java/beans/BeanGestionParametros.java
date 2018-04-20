@@ -11,10 +11,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import model.TipoDocumentos;
 import model.tablasParametricas;
 import utility.Log_Handler;
 import bo.GestionParametrosBO;
+import model.Parametros;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -22,17 +23,20 @@ import bo.GestionParametrosBO;
  */
 public class BeanGestionParametros implements Serializable {
 
-    private List<TipoDocumentos> listaTipoDocumentos = new ArrayList<>();
     private List<tablasParametricas> listaTablasParametricas = new ArrayList<>();
     private BeanLogin loginBO;
     private GestionParametrosBO gestionParametrosBO;
+    private Parametros registroParametro = new Parametros();
+    private boolean editable = true;
+
+    private String nombreCorto;
 
     @PostConstruct
     public void cargarDatos() {
         try {
             getLoginBO().getNombre();
             getGestionParametrosBO().llenarDatos(this);
-            
+
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -40,18 +44,55 @@ public class BeanGestionParametros implements Serializable {
         }
     }
 
-    /**
-     * @return the listaTipoDocumentos
-     */
-    public List<TipoDocumentos> getListaTipoDocumentos() {
-        return listaTipoDocumentos;
+    public void eliminar() {
+        try {
+            getGestionParametrosBO().eliminarRegistro(this);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
     }
 
-    /**
-     * @param listaTipoDocumentos the listaTipoDocumentos to set
-     */
-    public void setListaTipoDocumentos(List<TipoDocumentos> listaTipoDocumentos) {
-        this.listaTipoDocumentos = listaTipoDocumentos;
+    public void update() {
+        try {
+            getGestionParametrosBO().update(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#detalleParametro').modal('hide')");
+
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+
+        }
+
+    }
+
+    public void save() {
+        try {
+            getGestionParametrosBO().save(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#detalleParametro').modal('hide')");
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+
+    }
+
+    public void crearRegistro(tablasParametricas tablaParametrica) {
+        try {
+            setEditable(false);
+            Parametros nuevoRegistroParametro = new Parametros();
+            nuevoRegistroParametro.setNombreTabla(tablaParametrica.getNombreTabla());
+            setRegistroParametro(nuevoRegistroParametro);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
     }
 
     /**
@@ -82,7 +123,6 @@ public class BeanGestionParametros implements Serializable {
         this.loginBO = loginBO;
     }
 
-
     /**
      * @return the gestionParametrosBO
      */
@@ -95,6 +135,48 @@ public class BeanGestionParametros implements Serializable {
      */
     public void setGestionParametrosBO(GestionParametrosBO gestionParametrosBO) {
         this.gestionParametrosBO = gestionParametrosBO;
+    }
+
+    /**
+     * @return the registroParametro
+     */
+    public Parametros getRegistroParametro() {
+        return registroParametro;
+    }
+
+    /**
+     * @param registroParametro the registroParametro to set
+     */
+    public void setRegistroParametro(Parametros registroParametro) {
+        this.registroParametro = registroParametro;
+    }
+
+    /**
+     * @return the nombreCorto
+     */
+    public String getNombreCorto() {
+        return nombreCorto;
+    }
+
+    /**
+     * @param nombreCorto the nombreCorto to set
+     */
+    public void setNombreCorto(String nombreCorto) {
+        this.nombreCorto = nombreCorto;
+    }
+
+    /**
+     * @return the editable
+     */
+    public boolean isEditable() {
+        return editable;
+    }
+
+    /**
+     * @param editable the editable to set
+     */
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/04/2018 10:23:03 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17/04/2018 03:40:18 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivTipoconcepto" table="CIV_TIPOCONCEPTO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tipconId" type="big_decimal">
             <column name="TIPCON_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="tipconDescripcion" type="string">
             <column name="TIPCON_DESCRIPCION" length="100" />
@@ -19,6 +19,12 @@
         </property>
         <property name="tipconFechafinal" type="date">
             <column name="TIPCON_FECHAFINAL" length="7" />
+        </property>
+        <property name="tipconNombrecorto" type="string">
+            <column name="TIPCON_NOMBRECORTO" length="20" />
+        </property>
+        <property name="tipconCodigo" type="big_decimal">
+            <column name="TIPCON_CODIGO" precision="22" scale="0" />
         </property>
         <set name="civConceptoses" table="CIV_CONCEPTOS" inverse="true" lazy="true" fetch="select">
             <key>

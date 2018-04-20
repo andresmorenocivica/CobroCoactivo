@@ -130,6 +130,15 @@
     <bean id="tablasParametricasDAO" class="jdbc.dao.DaoTablasParametricas">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
+    <bean id="tipoConceptosDAO" class="jdbc.dao.DaoTipoConceptos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="tipoDeudaDAO" class="jdbc.dao.DaoTipoDeuda">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="tipoPersonasDAO" class="jdbc.dao.DaoTipoPersonas">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
     
     
     
@@ -160,6 +169,10 @@
     <bean id="GestionParametrosBO" class="bo.GestionParametrosImpBO">
         <property name="loginDAO" ref="loginDAO"></property>
         <property name="tablasParametricasDAO" ref="tablasParametricasDAO"></property>
+        <property name="tiposDocumentosDAO" ref="tiposDocumentosDAO"></property>
+        <property name="tipoConceptosDAO" ref="tipoConceptosDAO"></property>
+        <property name="tipoDeudaDAO" ref="tipoDeudaDAO"></property>
+        <property name="tipoPersonasDAO" ref="tipoPersonasDAO"></property>
     </bean>  
    
     <tx:annotation-driven transaction-manager="transactionManager" />

@@ -5,19 +5,23 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Admin
  */
 public class tablasParametricas {
+
     private long id;
     private String nombreTabla;
     private String nombre;
     private int estado;
     private Date fechaInicial;
     private Date fechaFinal;
+    List<Parametros> listParametros = new ArrayList<>();
 
     /**
      * @return the id
@@ -102,6 +106,13 @@ public class tablasParametricas {
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
-    
-    
+
+    public List<Parametros> getListParametros() {
+        return listParametros;
+    }
+
+    public void setListParametros(List<Parametros> listParametros) {
+        this.listParametros = listParametros;
+    }
+
 }

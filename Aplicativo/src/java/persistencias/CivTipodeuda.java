@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 17/04/2018 10:23:00 AM by Hibernate Tools 4.3.1
+// Generated 17/04/2018 03:40:17 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -18,6 +18,8 @@ public class CivTipodeuda  implements java.io.Serializable {
      private BigDecimal tipdeuEstado;
      private Date tipdeuFechainicial;
      private Date tipdeuFechafinal;
+     private String tipdeuNombrecorto;
+     private BigDecimal tipdeuCodigo;
      private Set civDeudases = new HashSet(0);
 
     public CivTipodeuda() {
@@ -27,12 +29,14 @@ public class CivTipodeuda  implements java.io.Serializable {
     public CivTipodeuda(BigDecimal tipdeuId) {
         this.tipdeuId = tipdeuId;
     }
-    public CivTipodeuda(BigDecimal tipdeuId, String tipdeuDescripcion, BigDecimal tipdeuEstado, Date tipdeuFechainicial, Date tipdeuFechafinal, Set civDeudases) {
+    public CivTipodeuda(BigDecimal tipdeuId, String tipdeuDescripcion, BigDecimal tipdeuEstado, Date tipdeuFechainicial, Date tipdeuFechafinal, String tipdeuNombrecorto, BigDecimal tipdeuCodigo, Set civDeudases) {
        this.tipdeuId = tipdeuId;
        this.tipdeuDescripcion = tipdeuDescripcion;
        this.tipdeuEstado = tipdeuEstado;
        this.tipdeuFechainicial = tipdeuFechainicial;
        this.tipdeuFechafinal = tipdeuFechafinal;
+       this.tipdeuNombrecorto = tipdeuNombrecorto;
+       this.tipdeuCodigo = tipdeuCodigo;
        this.civDeudases = civDeudases;
     }
    
@@ -70,6 +74,20 @@ public class CivTipodeuda  implements java.io.Serializable {
     
     public void setTipdeuFechafinal(Date tipdeuFechafinal) {
         this.tipdeuFechafinal = tipdeuFechafinal;
+    }
+    public String getTipdeuNombrecorto() {
+        return this.tipdeuNombrecorto;
+    }
+    
+    public void setTipdeuNombrecorto(String tipdeuNombrecorto) {
+        this.tipdeuNombrecorto = tipdeuNombrecorto;
+    }
+    public BigDecimal getTipdeuCodigo() {
+        return this.tipdeuCodigo;
+    }
+    
+    public void setTipdeuCodigo(BigDecimal tipdeuCodigo) {
+        this.tipdeuCodigo = tipdeuCodigo;
     }
     public Set getCivDeudases() {
         return this.civDeudases;

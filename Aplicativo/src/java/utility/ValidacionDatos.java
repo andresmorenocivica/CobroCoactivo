@@ -6,6 +6,7 @@
 package utility;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,12 +14,16 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.Validator;
+import javax.faces.validator.ValidatorException;
 
 /**
  *
  * @author Roymer Camacho
  */
-public class ValidacionDatos {
+public class ValidacionDatos implements  Validator {
 
     private static final String ORIGINAL = "ÁáÉéÍíÓóÚúÑñÜü";
     private static final String REPLACEMENT = "AaEeIiOoUuNnUu";
@@ -138,6 +143,52 @@ public class ValidacionDatos {
             System.out.println((String) it1.next());
         }
         return mapResultado;
+    }
+    
+
+    public String validarFechasReportes(Date campo1, Date campo2) throws Exception {
+        if (campo1 == null || campo2 == null) {
+            return "Campos vacíos";
+        }
+        if (campo1.after(campo2)) {
+            return "La fecha final debe ser mayor a la fecha inicial";
+
+        }
+        if (campo1.after(new Date())) {
+            return "La fecha inicial no puede ser mayor que la fecha actual";
+        }
+        
+        if (campo2.after(new Date())) {
+            return "La fecha final no puede ser mayor que la fecha actual";
+        }
+        return "true";
+    }
+
+    public String validarCampoAño(String campo) throws Exception {
+        if (campo.equals("")) {
+            return "Campos vacíos";
+        }
+
+        if (!validarSolonumeros(campo)) {
+            return "Campo inválido. Ejemplo campo válido: 2018";
+        }
+
+        if (campo.length() != 4) {
+            return "Año inválido";
+        }
+        return "true";
+    }
+
+    public static boolean validarVacios(String campo) {
+        if (!campo.equals("")) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
