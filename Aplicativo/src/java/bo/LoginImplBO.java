@@ -178,7 +178,7 @@ public class LoginImplBO implements LoginBO, Serializable {
             CivRecursos r = listR.get(x);
             if (listModulo.isEmpty()) {
                 mod = new Modulo();
-                mod.setCodigo(r.getCivModulos().getModId().intValue());
+                mod.setId(r.getCivModulos().getModId().intValue());
                 mod.setIcon(r.getCivModulos().getIcon());
                 mod.setNombre(r.getCivModulos().getModNombre());
                 listModulo.add(mod);
@@ -186,14 +186,14 @@ public class LoginImplBO implements LoginBO, Serializable {
             boolean sw = true;
             for (int i = 0; i < listModulo.size(); i++) {
                 Modulo m = listModulo.get(i);
-                if (r.getCivModulos().getModId().intValue() == m.getCodigo()) {
+                if (r.getCivModulos().getModId().intValue() == m.getId()) {
                     sw = false;
                     break;
                 }
             }
             if (sw) {
                 mod = new Modulo();
-                mod.setCodigo(r.getCivModulos().getModId().intValue());
+                mod.setId(r.getCivModulos().getModId().intValue());
                 mod.setIcon(r.getCivModulos().getIcon());
                 mod.setNombre(r.getCivModulos().getModNombre());
                 listModulo.add(mod);
@@ -205,7 +205,7 @@ public class LoginImplBO implements LoginBO, Serializable {
             List<Recurso> listrec = new LinkedList<>();
             for (int i = 0; i < listR.size(); i++) {
                 CivRecursos r = listR.get(i);
-                if (r.getCivModulos().getModId().intValue() == m.getCodigo()) {
+                if (r.getCivModulos().getModId().intValue() == m.getId()) {
                     Recurso rec = new Recurso();
                     rec.setCodigo(r.getRecId().intValue());
                     rec.setNombre(new ValidacionDatos().letraMayuscula(r.getRecNombre()));
@@ -248,7 +248,7 @@ public class LoginImplBO implements LoginBO, Serializable {
             CivRecursos r = listR.get(x);
             if (listModulo.isEmpty()) {
                 mod = new Modulo();
-                mod.setCodigo(r.getCivModulos().getModId().intValue());
+                mod.setId(r.getCivModulos().getModId().intValue());
                 mod.setIcon(r.getCivModulos().getIcon());
                 mod.setNombre(r.getCivModulos().getModNombre());
                 listModulo.add(mod);
@@ -256,14 +256,14 @@ public class LoginImplBO implements LoginBO, Serializable {
             boolean sw = true;
             for (int i = 0; i < listModulo.size(); i++) {
                 Modulo m = listModulo.get(i);
-                if (r.getCivModulos().getModId().intValue() == m.getCodigo()) {
+                if (r.getCivModulos().getModId().intValue() == m.getId()) {
                     sw = false;
                     break;
                 }
             }
             if (sw) {
                 mod = new Modulo();
-                mod.setCodigo(r.getCivModulos().getModId().intValue());
+                mod.setId(r.getCivModulos().getModId().intValue());
                 mod.setIcon(r.getCivModulos().getIcon());
                 mod.setNombre(r.getCivModulos().getModNombre());
                 listModulo.add(mod);
@@ -275,7 +275,7 @@ public class LoginImplBO implements LoginBO, Serializable {
             List<Recurso> listrec = new LinkedList<>();
             for (int i = 0; i < listR.size(); i++) {
                 CivRecursos r = listR.get(i);
-                if (r.getCivModulos().getModId().intValue() == m.getCodigo()) {
+                if (r.getCivModulos().getModId().intValue() == m.getId()) {
                     Recurso rec = new Recurso();
                     rec.setCodigo(r.getRecId().intValue());
                     rec.setNombre(new ValidacionDatos().letraMayuscula(r.getRecNombre()));

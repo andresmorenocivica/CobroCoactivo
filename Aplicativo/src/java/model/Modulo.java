@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,12 +17,55 @@ import java.util.List;
  */
 public class Modulo implements Serializable {
 
-    private static final long serialVersionUID = 752642345145887L;
+    private static long serialVersionUID = 752642345145887L;
 
-    private int codigo;
+    private int id,estado;
     private String nombre;
     private String icon;
+    private Date fechaInicial,FechaFinal;
     private List<Recurso> listRecurso;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the estado
+     */
+    public int getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 
     /**
      * @return the nombre
@@ -52,6 +96,34 @@ public class Modulo implements Serializable {
     }
 
     /**
+     * @return the fechaInicial
+     */
+    public Date getFechaInicial() {
+        return fechaInicial;
+    }
+
+    /**
+     * @param fechaInicial the fechaInicial to set
+     */
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+    }
+
+    /**
+     * @return the FechaFinal
+     */
+    public Date getFechaFinal() {
+        return FechaFinal;
+    }
+
+    /**
+     * @param FechaFinal the FechaFinal to set
+     */
+    public void setFechaFinal(Date FechaFinal) {
+        this.FechaFinal = FechaFinal;
+    }
+
+    /**
      * @return the listRecurso
      */
     public List<Recurso> getListRecurso() {
@@ -65,18 +137,5 @@ public class Modulo implements Serializable {
         this.listRecurso = listRecurso;
     }
 
-    /**
-     * @return the codigo
-     */
-    public int getCodigo() {
-        return codigo;
-    }
-
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
+    
 }

@@ -5,6 +5,7 @@
  */
 package jdbc.dao;
 
+import java.math.BigDecimal;
 import persistencias.CivRecursos;
 import java.util.List;
 import org.hibernate.SQLQuery;
@@ -30,11 +31,11 @@ public class DaoRecursos extends HibernateDaoSupport implements ITRecursos {
         getHibernateTemplate().update(recursos);
         return true;
     }
-    
+
     @Override
 
     public List<CivRecursos> getRecursosByModulo(int modulo) throws Exception {
-            
+
         String hql = "from CivRecursos where mod_id =:modulo and rec_fechafin is null";
         List list = getHibernateTemplate().findByNamedParam(hql, "modulo", modulo);
         if (list.size() > 0) {
@@ -46,19 +47,14 @@ public class DaoRecursos extends HibernateDaoSupport implements ITRecursos {
     @Override
 
     public List<CivRecursos> getRecursosByIdPerfil(int id_perfil) throws Exception {
-        Session session = getHibernateTemplate().getSessionFactory().openSession();
-        String hql = "select cr.* "
-                + "from civ_perfiles cp "
-                + "inner join CIV_PERFILRECURSO cpr on cpr.PERF_ID = cp.PERF_ID "
-                + "inner join CIV_RECURSOS cr on cr.rec_id = cpr.REC_ID "
-                + "where cp.PERF_ID=:idperfil order by 1 asc";
-        SQLQuery query = session.createSQLQuery(hql);
-        query.addEntity(CivRecursos.class);
-        query.setInteger("idperfil", id_perfil);
-
-        return query.list();
+         String hql = "from CivRecursos where civPerfiles.perfId =:idPerfil and recFechafin is null";
+        List list = getHibernateTemplate().findByNamedParam(hql, "idPerfil", new  BigDecimal(id_perfil));
+        if (list.size() > 0) {
+            return list;
+        }
+        return null;
     }
-    
+
     @Override
 
     public CivRecursos getRecursosbyId(int id_recurso) throws Exception {
@@ -70,7 +66,7 @@ public class DaoRecursos extends HibernateDaoSupport implements ITRecursos {
         }
         return null;
     }
-    
+
     @Override
 
     public List<CivRecursos> getRecursosAll() throws Exception {
@@ -78,7 +74,7 @@ public class DaoRecursos extends HibernateDaoSupport implements ITRecursos {
         List list = getHibernateTemplate().find(hql);
         return list;
     }
-    
+
     @Override
 
     public List<CivRecursos> listarRecursos(String recurso) throws Exception {

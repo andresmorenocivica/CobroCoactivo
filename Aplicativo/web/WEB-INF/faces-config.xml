@@ -31,4 +31,17 @@
             <value>#{loginBean}</value>
         </managed-property>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>gestionRecursosBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionRecursos</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>gestionRecursosBO</property-name>
+            <value>#{GestionRecursosBO}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>
