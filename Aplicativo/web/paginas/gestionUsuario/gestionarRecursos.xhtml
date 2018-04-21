@@ -174,7 +174,7 @@
                                 </h:panelGroup>
 
                                 <h:commandLink class="fa fa-plus-square" onclick="$('#detalleRecurso').modal('show');">
-                                    <f:ajax event="click" render="frmTiposDatos:pnModalUpdate frmTiposDatos:pnlActualizar frmTiposDatos:pnlGuardar" listener="#{gestionParametrosBean.crearRegistro(tabla)}"></f:ajax>
+                                    <f:ajax event="click" render="frmGestionRecursos:detalleRecurso frmGestionRecursos:pnlActualizar frmGestionRecursos:pnlGuardar" listener="#{gestionRecursosBean.crearRegistro()}"></f:ajax>
                                 </h:commandLink> 
                             </div>
                         </section>
@@ -208,7 +208,7 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Descripción</label>
-                                                    <h:inputText class="form-control" id="txtDescription" value="#{gestionRecursosBean.recurso.descripcion}"/>
+                                                    <h:inputText class="form-control" id="txtDescriptionRecurso" value="#{gestionRecursosBean.recurso.descripcion}"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
@@ -287,8 +287,8 @@
                                             </h:panelGrid>
                                             <h:panelGrid id="pnlGuardar">
                                                 <h:panelGroup rendered="#{gestionParametrosBean.editable}">
-                                                    <h:commandLink value="Guardar" id="btnGuardar" class="btn btn-success">
-                                                        <f:ajax event="click" listener="#{gestionRecursosBean.save()}"  />
+                                                    <h:commandLink value="Guardar" id="btnGuardarRecurso" class="btn btn-success">
+                                                        <f:ajax event="click" listener="#{gestionRecursosBean.save()}" execute="frmGestionRecursos:txtDescriptionRecurso"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
