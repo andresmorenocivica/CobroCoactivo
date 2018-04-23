@@ -26,7 +26,7 @@ public class BeanGestionParametros implements Serializable {
     private List<tablasParametricas> listaTablasParametricas = new ArrayList<>();
     private BeanLogin loginBO;
     private GestionParametrosBO gestionParametrosBO;
-    private Parametros registroParametro = new Parametros();
+     private Parametros registroParametro = new Parametros();
     private boolean editable = true;
 
     private String nombreCorto;

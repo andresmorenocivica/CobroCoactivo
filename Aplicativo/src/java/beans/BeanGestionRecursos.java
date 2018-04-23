@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
-import model.Usuarios;
+import org.primefaces.context.RequestContext;
 import utility.Log_Handler;
 
 /**
@@ -65,6 +65,21 @@ public class BeanGestionRecursos {
     public void save() {
         try {
             getGestionRecursosBO().save(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#detalleRecurso').modal('hide')");
+
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+
+    public void eliminar() {
+        try {
+            getGestionRecursosBO().eliminarRegistro(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#eliminarRecurso').modal('hide')");
 
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
@@ -77,6 +92,7 @@ public class BeanGestionRecursos {
         try {
             setTipoBusqueda(1);
             getGestionRecursosBO().listarRecursos(this);
+            
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -97,8 +113,22 @@ public class BeanGestionRecursos {
 
     public void crearRegistro() {
         try {
-            setEditable(false);
-            setRecurso(new Recurso());
+            setEditable(true);
+            Recurso recurso2 = new Recurso();
+            setRecurso(recurso2);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+    
+    public void update() {
+        try {
+            setEditable(true);
+            getGestionRecursosBO().update(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#detalleRecurso').modal('hide')");
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));

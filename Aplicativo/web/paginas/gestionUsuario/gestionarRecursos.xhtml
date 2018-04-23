@@ -61,6 +61,7 @@
                                                                             <f:selectItem itemValue="0" itemLabel="Seleccione Modulo"/>
                                                                             <f:selectItems value="#{gestionRecursosBean.listMosulo}" var="modulos" itemValue="#{modulos.id}" itemLabel="#{modulos.nombre}" /> 
                                                                         </h:selectOneMenu>
+
                                                                     </div>
                                                                     <span class="input-group-btn">
                                                                         <h:commandLink class="btn btn-info btn-danger" value="Buscar">
@@ -155,16 +156,19 @@
                                         <tbody>
                                             <c:forEach items="#{gestionRecursosBean.listRecurso}" var="recursos">
                                                 <tr>
+                                                    <td>#{recursos.codigo}</td>
                                                     <td>#{recursos.nombre}</td>
                                                     <td>#{recursos.descripcion}</td>
-                                                    <td>#{recursos.codigo}</td>
                                                     <td class="row">
-                                                        <h:commandLink class="fa fa-pencil-square-o col-sm-4" onclick="$('#detalleParametro').modal('show');">
-                                                            <f:ajax event="click" listener="#{gestionParametrosBean.setRegistroParametro(parametros)}" render="frmTiposDatos:pnModalUpdate"></f:ajax>
-                                                            <f:ajax event="click" listener="#{gestionParametrosBean.setEditable(true)}" render="frmTiposDatos:pnlActualizar frmTiposDatos:pnlGuardar"></f:ajax>
+                                                        <h:commandLink class="fa fa-pencil-square-o col-sm-4" onclick="$('#detalleRecurso').modal('show');">
+                                                            <f:ajax event="click" listener="#{gestionRecursosBean.setRecurso(recursos)}" render="frmGestionRecursos:pnModalUpdate"></f:ajax>
+                                                            <f:ajax event="click" listener="#{gestionRecursosBean.setEditable(false)}" render="frmGestionRecursos:pnlActualizar frmGestionRecursos:pnlGuardar"></f:ajax>
                                                         </h:commandLink>
-                                                        <h:commandLink class="fa fa-trash col-sm-4" onclick="$('#eliminarParametro').modal('show');">
-                                                            <f:ajax event="click" listener="#{gestionParametrosBean.setRegistroParametro(parametros)}"></f:ajax>
+
+                                                        <f:ajax event="click" render="frmGestionRecursos:detalleRecurso frmGestionRecursos:pnlActualizar frmGestionRecursos:pnlGuardar" listener="#{gestionRecursosBean.crearRegistro()}"></f:ajax>
+
+                                                        <h:commandLink class="fa fa-trash col-sm-4" onclick="$('#eliminarRecurso').modal('show');">
+                                                            <f:ajax event="click" listener="#{gestionRecursosBean.setRecurso(recursos)}"></f:ajax>
                                                         </h:commandLink> 
                                                     </td>
                                                 </tr>
@@ -173,9 +177,7 @@
                                     </table>
                                 </h:panelGroup>
 
-                                <h:commandLink class="fa fa-plus-square" onclick="$('#detalleRecurso').modal('show');">
-                                    <f:ajax event="click" render="frmGestionRecursos:detalleRecurso frmGestionRecursos:pnlActualizar frmGestionRecursos:pnlGuardar" listener="#{gestionRecursosBean.crearRegistro()}"></f:ajax>
-                                </h:commandLink> 
+
                             </div>
                         </section>
                     </div>
@@ -198,20 +200,26 @@
                                             <div class="modal-header">
 
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>id</label> 
                                                     <h:inputText class="form-control" id="txtId" value="#{gestionRecursosBean.recurso.codigo}" disabled="true"/>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Nombre</label> 
+                                                    <h:inputText class="form-control" id="txtNombre" value="#{gestionRecursosBean.recurso.nombre}" />
+                                                </div>
+                                            </div>
 
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Descripción</label>
                                                     <h:inputText class="form-control" id="txtDescriptionRecurso" value="#{gestionRecursosBean.recurso.descripcion}"/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Estado</label> 
                                                     <h:inputText class="form-control" id="txtEstado" value="#{gestionRecursosBean.recurso.estado}"/>
@@ -236,14 +244,13 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Carpeta</label>
-                                                    <h:inputText class="form-control" id="txtNomCorto" value="#{gestionRecursosBean.recurso.carpeta}"/>
+                                                    <h:inputText class="form-control" id="txtCarpeta" value="#{gestionRecursosBean.recurso.carpeta}"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Modulo</label>
-                                                    <h:selectOneMenu   class="form-control" value="#{gestionRecursosBean.idModuloSeleccionado}">
-                                                        <f:selectItem itemValue="0" itemLabel="Selecione Un Modulo"/>
+                                                    <h:selectOneMenu id="sltUsuario"   class="form-control" value="#{gestionRecursosBean.recurso.moduloId}">
                                                         <f:selectItems value="#{gestionRecursosBean.listMosulo}" var="modulos" itemValue="#{modulos.id}" itemLabel="#{modulos.nombre}" /> 
 
                                                     </h:selectOneMenu>
@@ -252,7 +259,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Tipo</label>
-                                                    <h:selectOneMenu   class="form-control" value="">
+                                                    <h:selectOneMenu   class="form-control" id="sltTipo">
                                                         <f:selectItem itemValue="0" itemLabel="Selecione Un Tipo"/>
                                                     </h:selectOneMenu>
                                                 </div>
@@ -260,8 +267,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Perfil</label>
-                                                    <h:selectOneMenu   class="form-control" value="">
-                                                        <f:selectItem itemValue="0" itemLabel="Selecione Un Perfil"/>
+                                                    <h:selectOneMenu   class="form-control" id="sltPerfil" value="#{gestionRecursosBean.recurso.perfilId}">
                                                         <f:selectItems value="#{gestionRecursosBean.listPerfiles}" var="perfiles" itemValue="#{perfiles.id}" itemLabel="#{perfiles.nombre}"/>
                                                     </h:selectOneMenu>
                                                 </div>
@@ -279,16 +285,16 @@
                                         </div>
                                         <div class="col-lg-1">
                                             <h:panelGrid id="pnlActualizar">
-                                                <h:panelGroup rendered="#{!gestionParametrosBean.editable}">
+                                                <h:panelGroup rendered="#{!gestionRecursosBean.editable}">
                                                     <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
-                                                        <f:ajax event="click" listener="#{gestionParametrosBean.update()}" render="frmTiposDatos:tablaGeneral#{tabla.id}" execute="frmTiposDatos:txtDescription frmTiposDatos:txtEstado frmTiposDatos:txtNomCorto frmTiposDatos:txtCodigo frmTiposDatos:txtFechaFinal frmTiposDatos:txtFechaInicial"/>
+                                                        <f:ajax event="click" listener="#{gestionRecursosBean.update()}" render="frmTiposDatos:tablaGeneral#{tabla.id}" execute="frmTiposDatos:txtDescription frmTiposDatos:txtEstado frmTiposDatos:txtNomCorto frmTiposDatos:txtCodigo frmTiposDatos:txtFechaFinal frmTiposDatos:txtFechaInicial"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                             <h:panelGrid id="pnlGuardar">
-                                                <h:panelGroup rendered="#{gestionParametrosBean.editable}">
+                                                <h:panelGroup rendered="#{gestionRecursosBean.editable}">
                                                     <h:commandLink value="Guardar" id="btnGuardarRecurso" class="btn btn-success">
-                                                        <f:ajax event="click" listener="#{gestionRecursosBean.save()}" execute="frmGestionRecursos:txtDescriptionRecurso"/>
+                                                        <f:ajax event="click" listener="#{gestionRecursosBean.save()}" execute="frmGestionRecursos:txtDescriptionRecurso frmGestionRecursos:txtId frmGestionRecursos:txtEstado frmGestionRecursos:txtFechaInicial frmGestionRecursos:txtFechaFinal frmGestionRecursos:txtCarpeta frmGestionRecursos:sltUsuario frmGestionRecursos:sltTipo frmGestionRecursos:sltPerfil frmGestionRecursos:txtNombre" />
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
@@ -303,6 +309,47 @@
                         <!-- /.modal-dialog -->
                     </div>
                     <!-- end modal    -->
+
+                    <div class="modal fade" id="eliminarRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Eliminar Recurso</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="modal-header">
+                                            ¿ Esta seguro que deseas eliminar el Recurso ?
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <h:commandLink value="Eliminar" class="btn btn-success">
+                                        <f:ajax event="click" listener="#{gestionRecursosBean.eliminar()}"  render="frmTiposDatos"/>
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+                    <!--  floating  button  -->
+                    <h:commandLink class="float" onclick="$('#detalleRecurso').modal('show');">
+                        <i class="fa fa-plus my-float"></i>
+                        <f:ajax event="click" render="frmGestionRecursos:txtId frmGestionRecursos:txtNombre frmGestionRecursos:txtDescriptionRecurso
+                                frmGestionRecursos:txtEstado frmGestionRecursos:txtFechaInicial frmGestionRecursos:txtCarpeta frmGestionRecursos:txtFechaFinal
+                                frmGestionRecursos:pnlActualizar frmGestionRecursos:pnlGuardar frmGestionRecursos:sltUsuario frmGestionRecursos:sltTipo frmGestionRecursos:sltPerfil" listener="#{gestionRecursosBean.crearRegistro()}"></f:ajax>
+                    </h:commandLink> 
+
+                   
 
                 </h:form>
             </ui:define>

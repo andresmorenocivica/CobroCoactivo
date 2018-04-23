@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 /**
  * Clase que define un recurso del sistema. Por ejemplo una vista que se llama
@@ -19,13 +20,18 @@ public class Recurso implements Serializable {
     private static long serialVersionUID = 7526423451548L;
 
     private int codigo;
+    @NotNull(message = "el nombre no puede estar vacio")
     private String nombre;
+    @NotNull(message = "la carpeta no puede estar vacio")
     private String carpeta;
+    @NotNull(message = "la descripcion no puede estar vacio")
     private String descripcion;
+    
     private int tipo;
     private int estado;
     private int moduloId;
     private int perfilId;
+    @NotNull(message = "la fecha no puede estar vacia")
     private Date fechaInicial;
     private Date fechaFinal;
 
