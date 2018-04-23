@@ -44,4 +44,18 @@
             <value>#{loginBean}</value>
         </managed-property>
     </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>gestionModulosBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionModulos</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>gestionModulosBO</property-name>
+            <value>#{GestionModulosBO}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

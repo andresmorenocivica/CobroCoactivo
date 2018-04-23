@@ -19,7 +19,7 @@ public class DaoModulos extends HibernateDaoSupport implements ITModulos {
     @Override
 
     public List<CivModulos> getAll() throws Exception {
-        List list = getHibernateTemplate().find("from CivModulos where mod_fechafin is null");
+        List list = getHibernateTemplate().find("from CivModulos where modFechafin is null");
         return list;
     }
 

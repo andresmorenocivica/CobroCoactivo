@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="./../../plantillas/PlantillaGeneral.xhtml">
+            <ui:define name="content">
+                <h:form id="frmModulos">
+                    <div class="content-wrapper">
+                        <section class="content-header">
+                            <h1>
+                                Consultas
+                                <small>guia formulario para consultas</small>
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                                <li><a href="#">Example</a></li>
+                                <li class="active">Consultas</li>
+                            </ol>
+                        </section>
+                        <section class="content">
+                            <div id="accordion">
+                                <div class="panel-group">
+                                    <c:forEach items="#{gestionModulosBean.listamodulos}" var="modulo">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" id="heading#{modulo.id}">
+                                                <h4 class="panel-title row">
+                                                    <div class="col-sm-11">
+                                                        <a data-toggle="collapse" data-target="#collapse#{modulo.id}" aria-controls="collapse#{modulo.id}">#{modulo.nombre}</a>
+                                                        <span class="badge badge-pill badge-primary">#{tabla.listRecurso.size()}</span>
+                                                    </div>
+                                                    <div class="col-sm-1 text-right">
+                                                       
+                                                    </div>
+                                                </h4>
+                                            </div>
+                                            <div id="collapse#{modulo.id}" aria-labelledby="heading#{tabla1}" data-parent="#accordion" class="collapse">
+                                                <h:panelGroup id="tablaGeneralRecursos#{modulo.id}">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Descripción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <c:forEach items="#{modulo.listRecurso}" var="rec">
+                                                                <tr>
+                                                                    <td>#{rec.codigo}</td>
+                                                                    <td>#{rec.nombre}</td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </h:panelGroup>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Modulo implements Serializable {
     private String nombre;
     private String icon;
     private Date fechaInicial,FechaFinal;
-    private List<Recurso> listRecurso;
+    private List<Recurso> listRecurso = new ArrayList<>();
 
     /**
      * @return the serialVersionUID
