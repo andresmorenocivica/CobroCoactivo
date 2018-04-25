@@ -20,6 +20,7 @@ public class Usuarios {
     private Date fechaInicial;
     private Date fechaFinal;
     private Date fechaProceso;
+    private String nombrePersona;
 
     /**
      * @return the id
@@ -131,6 +132,20 @@ public class Usuarios {
      */
     public void setFechaProceso(Date fechaProceso) {
         this.fechaProceso = fechaProceso;
+    }
+
+    /**
+     * @return the nombrePersona
+     */
+    public String getNombrePersona() {
+        return nombrePersona;
+    }
+
+    /**
+     * @param nombrePersona the nombrePersona to set
+     */
+    public void setNombrePersona(String nombrePersona) {
+        this.nombrePersona = nombrePersona;
     }
     
     

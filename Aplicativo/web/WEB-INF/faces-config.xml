@@ -58,4 +58,18 @@
             <value>#{loginBean}</value>
         </managed-property>
     </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>gestionUsuarioBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionUsuario</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>gestionUsariosBO</property-name>
+            <value>#{GestionUsuariosBO}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

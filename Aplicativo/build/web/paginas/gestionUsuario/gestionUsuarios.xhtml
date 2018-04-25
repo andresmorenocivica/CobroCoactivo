@@ -4,22 +4,23 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
         <ui:composition template="./../../plantillas/PlantillaGeneral.xhtml">
             <ui:define name="content">
-                <h:form id="frmExample">
+                <h:form id="frmGestionUsuario">
                     <div class="content-wrapper">
                         <section class="content-header">
                             <h1>
-                                Consultas
-                                <small>guia formulario para consultas</small>
+                                Consultar Usuario
+                                <small>Modulo encargado de Administrar todos los procesos de los usuario</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                                <li><a href="#">Example</a></li>
-                                <li class="active">Consultas</li>
+                                <li><a href="#">Usuario</a></li>
+                                <li class="active">Administra Usuario</li>
                             </ol>
                         </section>
                         <section class="content">
@@ -36,7 +37,7 @@
                                                 <ul class="nav nav-tabs" >
                                                     <li class="active" ><a href="#numero" data-toggle="tab">Nombre Usuario</a></li>
                                                     <li><a href="#persona" data-toggle="tab">Persona</a></li>
-                                                    <li><a href="#fechas" data-toggle="tab">Fechas creación Usuario</a></li>
+                                                    <li><a href="#fechas" data-toggle="tab">Fechas Creación Usuario</a></li>
                                                 </ul>
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="numero">
@@ -50,14 +51,15 @@
                                                             </div>
                                                             <div class="col-lg-3 visible-lg visible-md" style="width: 13%">
                                                                 <div class="input-group margin-2">
-                                                                    <label class="control-label align-left">Numero</label>
+                                                                    <label class="control-label align-left">Nombre Usuario</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                                                                 <div class="input-group margin-5">
-                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtNombreUsuario"></h:inputText>
+                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtNombreUsuario" value="#{gestionUsuarioBean.nombreUsuario}"></h:inputText>
                                                                     <span class="input-group-btn">
                                                                         <h:commandLink class="btn btn-info btn-danger" value="Buscar">
+                                                                            <f:ajax event="click" listener="#{gestionUsuarioBean.consultarUsuario(1)}" execute="frmGestionUsuario:txtNombreUsuario" render="frmGestionUsuario:tblUsuario"/>
                                                                         </h:commandLink>
                                                                     </span>
                                                                 </div>
@@ -129,7 +131,43 @@
                                         <!-- /.col -->
                                     </div>
                                 </div>
+
+                                <h:panelGroup id="tblUsuario">
+                                    <table class="table table-bordered ">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>nombre</th>
+                                                <th>estado</th>
+                                                <th>fecha Inicial</th>
+                                                <th>Persona</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="#{gestionUsuarioBean.listadoUsuarios}" var="usuario">
+                                                <tr>
+                                                    <td>#{usuario.id}</td>
+                                                    <td>#{usuario.nombre}</td>
+                                                    <td>#{usuario.estado}</td>
+                                                    <td>#{usuario.fechaInicial}</td>
+                                                    <td>#{usuario.nombrePersona}</td>
+                                                    <td class="row">
+                                                        <h:commandLink class="fa fa-eye col-sm-4">
+                                                        </h:commandLink>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
                             </div>
+                            <h:panelGroup>
+                                <ui:insert name="replace" >
+                                    <ui:include src="detalleUsuario.xhtml" >
+                                    </ui:include>
+                                </ui:insert>
+                            </h:panelGroup>
                         </section>
                     </div>
                 </h:form>
