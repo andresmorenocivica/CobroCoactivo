@@ -44,4 +44,8 @@ public interface ITModulos {
      * @throws Exception La Excepción lanzada en caso de error.
      */
     public CivModulos getModuloID(int id_mod) throws Exception;
+    
+    public long insert(CivModulos civModulos)throws Exception;
+    
+    public boolean update(CivModulos civModulos)throws Exception;
 }

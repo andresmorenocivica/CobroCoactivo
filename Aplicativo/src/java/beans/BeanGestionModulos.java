@@ -13,7 +13,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import model.Modulo;
+import model.Perfiles;
 import model.Recurso;
+import org.primefaces.context.RequestContext;
 import utility.Log_Handler;
 
 /**
@@ -25,14 +27,102 @@ public class BeanGestionModulos implements Serializable {
     private BeanLogin loginBO;
 
     private GestionModulosBO gestionModulosBO;
-    
+
     private List<Modulo> listamodulos = new ArrayList<>();
+
+    private List<Perfiles> listaperfil = new ArrayList<>();
+
+    private Modulo registromodulo;
+
+    private boolean editable;
+
+    private Recurso registroRecurso;
 
     @PostConstruct
     public void cargarDatos() {
         try {
             getGestionModulosBO().llenarDatos(this);
-            List<Recurso> listRecurso = getListamodulos().get(0).getListRecurso();
+            getGestionModulosBO().listarperfiles(this);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+        }
+    }
+    public void eliminarRecurso() {
+        try {
+            getGestionModulosBO().eliminarRecurso(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#eliminarRecurso').modal('hide')");
+
+            
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+        }
+    }
+
+    public void crearRegistroModulo() {
+        try {
+            setEditable(false);
+            setRegistromodulo(new Modulo());
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+        }
+
+    }
+     public void crearRegistroRecurso(int idModulo) {
+        try {
+            setEditable(false);
+            setRegistroRecurso(new Recurso());
+            getRegistroRecurso().setModuloId(idModulo);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+        }
+
+    }
+
+    public void guardarRegistro() {
+        try {
+            getGestionModulosBO().guardar(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#modalModulo').modal('hide')");
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+
+        }
+
+    }
+    
+    public void editarRecurso (){
+        
+        try {
+            getGestionModulosBO().actualizarRecurso(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#modalagregarRecurso').modal('hide')");
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+
+        }
+    
+    
+    }
+
+    public void guardarRegistroRecurso() {
+        try {
+            getGestionModulosBO().guardarRecurso(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#modalagregarRecurso').modal('hide')");
+
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -80,6 +170,62 @@ public class BeanGestionModulos implements Serializable {
      */
     public void setListamodulos(List<Modulo> listamodulos) {
         this.listamodulos = listamodulos;
+    }
+
+    /**
+     * @return the registromodulo
+     */
+    public Modulo getRegistromodulo() {
+        return registromodulo;
+    }
+
+    /**
+     * @param registromodulo the registromodulo to set
+     */
+    public void setRegistromodulo(Modulo registromodulo) {
+        this.registromodulo = registromodulo;
+    }
+
+    /**
+     * @return the editable
+     */
+    public boolean isEditable() {
+        return editable;
+    }
+
+    /**
+     * @param editable the editable to set
+     */
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    /**
+     * @return the registroRecurso
+     */
+    public Recurso getRegistroRecurso() {
+        return registroRecurso;
+    }
+
+    /**
+     * @param registroRecurso the registroRecurso to set
+     */
+    public void setRegistroRecurso(Recurso registroRecurso) {
+        this.registroRecurso = registroRecurso;
+    }
+
+    /**
+     * @return the listaperfil
+     */
+    public List<Perfiles> getListaperfil() {
+        return listaperfil;
+    }
+
+    /**
+     * @param listaperfil the listaperfil to set
+     */
+    public void setListaperfil(List<Perfiles> listaperfil) {
+        this.listaperfil = listaperfil;
     }
 
 }

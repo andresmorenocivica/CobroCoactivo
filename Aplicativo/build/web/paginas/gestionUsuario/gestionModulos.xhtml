@@ -25,46 +25,339 @@
                         </section>
                         <section class="content">
                             <div id="accordion">
-                                <div class="panel-group">
-                                    <c:forEach items="#{gestionModulosBean.listamodulos}" var="modulo">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="heading#{modulo.id}">
-                                                <h4 class="panel-title row">
-                                                    <div class="col-sm-11">
-                                                        <a data-toggle="collapse" data-target="#collapse#{modulo.id}" aria-controls="collapse#{modulo.id}">#{modulo.nombre}</a>
-                                                        <span class="badge badge-pill badge-primary">#{tabla.listRecurso.size()}</span>
+                                    <h:panelGroup id="pnlFrmModulo" class="col-lg-12">
+                                        <div class="panel-group">
+                                            <c:forEach items="#{gestionModulosBean.listamodulos}" var="modulo">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" id="heading#{modulo.id}">
+                                                        <h4 class="panel-title row">
+                                                            <div class="col-sm-11">
+                                                                <a data-toggle="collapse" data-target="#collapse#{modulo.id}" aria-controls="collapse#{modulo.id}">#{modulo.nombre}</a>
+                                                                <span class="badge badge-pill badge-primary">#{modulo.listRecurso.size()}</span>
+                                                            </div>
+                                                            <div class="col-sm-1 text-right">
+                                                                <h:commandLink class="fa fa-plus-square" onclick="$('#modalagregarRecurso').modal('show');">
+                                                                    <f:ajax event="click" render="frmModulos:modalagregarRecurso frmModulos:pnlActualizarrecurso frmModulos:pnlGuardarrecurso" listener="#{gestionModulosBean.crearRegistroRecurso(modulo.id)}"></f:ajax>
+                                                                </h:commandLink> 
+                                                            </div>
+                                                        </h4>
                                                     </div>
-                                                    <div class="col-sm-1 text-right">
-                                                       
+                                                    <div id="collapse#{modulo.id}"  data-parent="#accordion" class="collapse">
+                                                        <h:panelGroup id="tablaGeneralRecursos">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Id</th>
+                                                                        <th>nombreRecurso</th>                                                                
+                                                                        <th>Descripcion</th>
+                                                                        <th>Fecha Inicial</th>
+                                                                        <th>Fecha Final</th>
+                                                                        <th>Estado</th>
+                                                                        <th>Carpeta</th>
+                                                                        <th>Tipo</th>                                                                
+                                                                        <th>Perfil</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <c:forEach items="#{modulo.listRecurso}" var="recurso">
+                                                                        <tr>
+                                                                            <td>#{recurso.codigo}</td>
+                                                                            <td>#{recurso.nombre}</td>
+                                                                            <td>#{recurso.descripcion}</td>
+                                                                            <td>
+                                                                                <h:outputText value="#{recurso.fechaInicial}">
+                                                                                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                                                </h:outputText>
+                                                                            </td>
+                                                                            <td>
+                                                                                <h:outputText value="#{recurso.fechaFinal}">
+                                                                                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                                                </h:outputText>
+                                                                            </td>
+                                                                            <td>#{recurso.estado}</td>
+                                                                            <td>#{recurso.carpeta}</td>
+                                                                            <td>#{recurso.tipo}</td>
+                                                                            <td>#{recurso.perfilId}</td>
+                                                                            <td class="row">
+                                                                                <h:commandLink class="fa fa-pencil-square-o col-sm-4" onclick="$('#modalagregarRecurso').modal('show');">
+                                                                                    <f:ajax event="click" listener="#{gestionModulosBean.setRegistroRecurso(recurso)}" render="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario  frmModulos:selectTipo frmModulos:selectPerfil"></f:ajax>
+                                                                                    <f:ajax event="click" listener="#{gestionModulosBean.setEditable(true)}" render="frmModulos:pnlActualizarrecurso frmModulos:pnlGuardarrecurso"></f:ajax>
+                                                                                </h:commandLink>
+
+                                                                                <h:commandLink class="fa fa-trash col-sm-4" onclick="$('#eliminarRecurso').modal('show');">
+                                                                                    <f:ajax event="click" listener="#{gestionModulosBean.setRegistroRecurso(recurso)}"></f:ajax>
+                                                                                </h:commandLink> 
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </h:panelGroup>
                                                     </div>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse#{modulo.id}" aria-labelledby="heading#{tabla1}" data-parent="#accordion" class="collapse">
-                                                <h:panelGroup id="tablaGeneralRecursos#{modulo.id}">
-                                                    <table class="table table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Id</th>
-                                                                <th>Descripción</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <c:forEach items="#{modulo.listRecurso}" var="rec">
-                                                                <tr>
-                                                                    <td>#{rec.codigo}</td>
-                                                                    <td>#{rec.nombre}</td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
-                                                </h:panelGroup>
-                                            </div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
-                                    </c:forEach>
-                                </div>
+                                    </h:panelGroup>
+
+
                             </div>
                         </section>
                     </div>
+                    <!-- modal Para Agregar un nuevo modulo    -->
+                    <div class="modal fade" id="modalModulo" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Actualizar Modulo</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>id</label> 
+                                            <h:inputText class="form-control" id="txtId" value="#{gestionModulosBean.registromodulo.id}" disabled="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <h:inputText class="form-control" id="txtDescription" value="#{gestionModulosBean.registromodulo.nombre}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Fecha Inicial</label>
+                                            <h:inputText class="date datepicker form-control" id="txtFechaInicial" value="#{gestionModulosBean.registromodulo.fechaInicial}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-grup">
+                                            <label>Fecha Final</label>
+                                            <h:inputText id="txtFechaFinal" class="date datepicker form-control" value="#{gestionModulosBean.registromodulo.fechaFinal}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                            </h:inputText>
+                                        </div>                                                                          
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Estado</label> 
+                                            <h:inputText class="form-control" id="txtEstado" value="#{gestionModulosBean.registromodulo.estado}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Icono</label>
+                                            <h:inputText class="form-control" id="txtIcono" value="#{gestionModulosBean.registromodulo.icon}"/>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <h:panelGrid id="pnlActualizar">
+                                                <h:panelGroup rendered="#{gestionModulosBean.editable}">
+                                                    <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.save()}" render="frmModulos:tablaGeneral#{tabla.id}" execute="frmModulos:txtDescription frmModulos:txtEstado frmModulos:txtNomCorto frmModulos:txtCodigo frmModulos:txtFechaFinal frmModulos:txtFechaInicial"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="pnlGuardar">
+                                                <h:panelGroup rendered="#{!gestionModulosBean.editable}">
+                                                    <h:commandLink value="Guardar" id="btnGuardar" class="btn btn-success">
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.guardarRegistro()}" render="frmModulos:tablaGeneral" execute="frmModulos:txtDescription frmModulos:txtEstado frmModulos:txtNomCorto frmModulos:txtCodigo frmModulos:txtFechaFinal frmModulos:txtFechaInicial"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- fin modal modulo -->
+
+                    <!--NEW MODAL AGREGAR RECURSO -->
+
+                    <div class="modal fade" id="modalagregarRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Agregar Recurso</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>id</label> 
+                                            <h:inputText class="form-control" id="textId" value="#{gestionModulosBean.registroRecurso.codigo}" disabled="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Nombre</label> 
+                                            <h:inputText class="form-control" id="textNombre" value="#{gestionModulosBean.registroRecurso.nombre}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Descripción</label>
+                                            <h:inputText class="form-control" id="textoDescription" value="#{gestionModulosBean.registroRecurso.descripcion}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Estado</label> 
+                                            <h:inputText class="form-control" id="textoEstado" value="#{gestionModulosBean.registroRecurso.estado}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Carpeta</label>
+                                            <h:inputText class="form-control" id="textoCarpeta" value="#{gestionModulosBean.registroRecurso.carpeta}"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Fecha Inicial</label>
+                                            <h:inputText class="date datepicker form-control" id="FechaInicial" value="#{gestionModulosBean.registroRecurso.fechaInicial}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Fecha Final</label>
+                                            <h:inputText id="FechaFinal" class="date datepicker form-control" value="#{gestionModulosBean.registroRecurso.fechaFinal}" disabled="true">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                            </h:inputText>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Modulo</label>
+                                            <h:selectOneMenu id="sltUsuario"   class="form-control" value="#{gestionModulosBean.registroRecurso.moduloId}">
+                                                <f:selectItems value="#{gestionModulosBean.listamodulos}" var="modulos" itemValue="#{modulos.id}" itemLabel="#{modulos.nombre}" /> 
+
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Tipo</label>
+                                            <h:selectOneMenu   class="form-control" id="selectTipo">
+                                                <f:selectItem itemValue="0" itemLabel="Selecione Un Tipo"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Perfil</label>
+                                            <h:selectOneMenu   class="form-control" id="selectPerfil" value="#{gestionModulosBean.registroRecurso.perfilId}">
+                                                <f:selectItems value="#{gestionRecursosBean.listPerfiles}" var="perfiles" itemValue="#{perfiles.id}" itemLabel="#{perfiles.nombre}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <h:panelGrid id="pnlActualizarrecurso">
+                                                <h:panelGroup rendered="#{gestionModulosBean.editable}">
+                                                    <h:commandLink value="Actualizar" id="btnActualizarrecurso" class="btn btn-success" >
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.editarRecurso()}" render="frmModulos:tablaGeneralRecursos frmModulos:pnlFrmModulo" execute="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario  frmModulos:selectTipo frmModulos:selectPerfil"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="pnlGuardarrecurso">
+                                                <h:panelGroup rendered="#{!gestionModulosBean.editable}">
+                                                    <h:commandLink value="Guardar" id="btnGuardarrecurso" class="btn btn-success">
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.guardarRegistroRecurso()}" render="frmModulos:tablaGeneralRecursos frmModulos:pnlFrmModulo" execute="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario  frmModulos:selectTipo frmModulos:selectPerfil"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+                    <!-- FIN MODAL AGREGAR RECURSO-->
+
+
+                    <!--  floating  button  -->
+                    <div class="modal fade" id="eliminarRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Eliminar Recurso</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="modal-header">
+                                            ¿ Esta seguro que deseas eliminar el recurso ?
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <h:commandLink value="Eliminar" class="btn btn-success">
+                                        <f:ajax event="click" listener="#{gestionModulosBean.eliminarRecurso()}"  />
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <h:commandLink class="float" onclick="$('#modalModulo').modal('show');">
+                        <i class="fa fa-plus my-float"></i>
+                        <f:ajax event="click" render="" listener="#{gestionModulosBean.crearRegistroModulo()}"></f:ajax>
+                    </h:commandLink> 
                 </h:form>
             </ui:define>
         </ui:composition>

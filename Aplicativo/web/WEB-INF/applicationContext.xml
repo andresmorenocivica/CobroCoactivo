@@ -185,6 +185,7 @@
         <property name="loginDAO" ref="loginDAO"></property>
         <property name="modulosDAO" ref="modulosDAO"></property>
         <property name="recursosDAO" ref="recursosDAO"></property>
+        <property name="perfilesDAO" ref="perfilesDAO"></property>
     </bean>  
    
     <tx:annotation-driven transaction-manager="transactionManager" />

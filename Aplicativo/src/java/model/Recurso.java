@@ -17,23 +17,23 @@ import javax.validation.constraints.NotNull;
  */
 public class Recurso implements Serializable {
 
-    private static long serialVersionUID = 7526423451548L;
+    public static long serialVersionUID = 7526423451548L;
 
-    private int codigo;
+    public int codigo;
     @NotNull(message = "el nombre no puede estar vacio")
-    private String nombre;
+    public String nombre;
     @NotNull(message = "la carpeta no puede estar vacio")
-    private String carpeta;
+    public String carpeta;
     @NotNull(message = "la descripcion no puede estar vacio")
-    private String descripcion;
+    public String descripcion;
     
-    private int tipo;
-    private int estado;
-    private int moduloId;
-    private int perfilId;
+    public int tipo;
+    public int estado;
+    public int moduloId;
+    public int perfilId;
     @NotNull(message = "la fecha no puede estar vacia")
-    private Date fechaInicial;
-    private Date fechaFinal;
+    public Date fechaInicial;
+    public Date fechaFinal;
 
     /**
      * @return the nombre
