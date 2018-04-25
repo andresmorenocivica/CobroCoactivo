@@ -72,4 +72,18 @@
             <value>#{loginBean}</value>
         </managed-property>
     </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>gestionPerfilesBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionPerfiles</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>gestionPerfilesBO</property-name>
+            <value>#{GestionPerfilesBO}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

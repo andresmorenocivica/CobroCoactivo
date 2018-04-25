@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <body>
+        <ui:composition template="./../../plantillas/PlantillaGeneral.xhtml">
+            <ui:define name="content">
+                <h:form id="frmPerfiles">
+                    <div class="content-wrapper">
+                        <section class="content-header">
+                            <h1>
+                                Consultas
+                                <small>guia formulario para consultas</small>
+                            <ol class="breadcrumb">
+                                <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                                <li><a href="#">Example</a></li>
+                                <li class="active">Consultas</li>
+                            </ol>
+                        </section>
+                        <section class="content">
+                            <h:panelGroup layout="block" id="accordion2">
+                                <div id="accordion">
+                                    <div class="panel-group">
+                                        <c:forEach items="#{gestionPerfilesBean.listPerfiles}" var="tabla">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="heading#{tabla.id}">
+                                                    <h4 class="panel-title row">
+                                                        <div class="col-sm-11">
+                                                            <a data-toggle="collapse" data-target="#collapse#{tabla.id}" aria-controls="collapse#{tabla.id}">#{tabla.nombre}</a>
+                                                            <span class="badge badge-pill badge-primary">#{tabla.listRecursos.size()}</span>
+                                                        </div>
+                                                        <div class="col-sm-1 text-right">
+                                                            <h:commandLink class="fa fa-plus-square" onclick="$('#detalleRecurso').modal('show');">
+                                                                <f:ajax listener="#{gestionPerfilesBean.crearRecurso(tabla.id)}" render="frmPerfiles:detalleRecurso2"></f:ajax>
+                                                               
+                                                            </h:commandLink>
+                                                        </div>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse#{tabla.id}" aria-labelledby="heading#{tabla1}" data-parent="#accordion" class="collapse">
+                                                    <h:panelGroup id="tablaGeneral">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Id</th>
+                                                                    <th>Nombre</th>
+                                                                    <th>Descripcion</th>
+                                                                    <th>Fecha Inicial</th>
+                                                                    <th>Fecha Final</th>
+                                                                    <th>Estado</th>
+                                                                    <th>Carpeta</th>
+                                                                    <th>Modulo</th>
+                                                                    <th>Acción</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach items="#{tabla.listRecursos}" var="recursos">
+                                                                    <tr>
+                                                                        <td>#{recursos.codigo}</td>
+                                                                        <td>#{recursos.nombre}</td>
+                                                                        <td>#{recursos.descripcion}</td>
+                                                                        <td>
+                                                                            <h:outputText value="#{recursos.fechaInicial}">
+                                                                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                                            </h:outputText>
+                                                                        </td>
+                                                                        <td>
+                                                                            <h:outputText value="#{recursos.fechaFinal}">
+                                                                                <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                                            </h:outputText>
+                                                                        </td>
+                                                                        <td>#{recursos.estado}</td>
+                                                                        <td>#{recursos.carpeta}</td>
+                                                                        <td>#{recursos.moduloId}</td>
+                                                                        <td class="row">
+                                                                            <h:commandLink class="fa fa-pencil-square-o col-sm-4" onclick="$('#detalleRecurso').modal('show');">
+                                                                                <f:ajax event="click" listener="#{gestionPerfilesBean.setRecursos(recursos)}" render="frmPerfiles:pnModalUpdate"></f:ajax>
+                                                                                <f:ajax event="click" listener="#{gestionPerfilesBean.setEditable(false)}" render="frmPerfiles:pnModalUpdate"></f:ajax>
+                                                                            </h:commandLink>
+                                                                            <h:commandLink class="fa fa-trash col-sm-4" onclick="$('#eliminarRecurso').modal('show');">
+                                                                                <f:ajax event="click" listener="#{gestionPerfilesBean.setRecursos(recursos)}"></f:ajax>
+                                                                            </h:commandLink> 
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </h:panelGroup>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                        </section>
+                    </div>
+                    <h:commandLink class="float" onclick="$('#adicionarPerfil').modal('show');">
+                        <i class="fa fa-plus my-float"></i>
+                        <f:ajax event="click" render=""></f:ajax>
+                    </h:commandLink>
+
+
+                    <!-- modal adicionar perfil   -->
+                    <div class="modal fade" id="adicionarPerfil" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Adicionar Perfil</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="modal-header">
+
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Nombre Del Perfil</label>
+                                                <input class="form-control" jsf:id="txtNombrePerfil" jsf:value="#{gestionPerfilesBean.civPerfiles.nombre}" placeholder="perfil"  type="text"/>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <h:commandLink value="Guardar" class="btn btn-success">
+                                        <f:ajax event="click" execute="frmPerfiles:txtNombrePerfil"  listener="#{gestionPerfilesBean.save()}" render="frmPerfiles:accordion2"/>
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+                    <!-- modal eliminar  -->
+                    <div class="modal fade" id="eliminarRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Eliminar recurso</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="modal-header">
+
+                                        </div>
+
+                                        <h5>¿ esta seguro que quiere eliminar el recurso?</h5>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                    <h:commandLink value="Eliminar" class="btn btn-success">
+                                        <f:ajax event="click" execute="frmPerfiles:txtNombrePerfil"  listener="#{gestionPerfilesBean.delete()}" render="frmPerfiles:accordion2"/>
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+
+                    <!-- end modal eliminar -->
+
+                    <!--  modal editar Recurso -->
+                    <div class="modal fade" id="detalleRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" jsf:id="detalleRecurso2">
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <h4 class="modal-title" id="myModalLabel">Actualizar Recursos</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <p:messages closable="true" autoUpdate="true" id="msggeneral" showDetail="false" />
+                                    <h:panelGroup class="col-lg-12" id="pnModalUpdate">
+                                        <div class="row">
+                                            <div class="modal-header">
+
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>id</label> 
+                                                    <h:inputText class="form-control" id="txtId" disabled="true" value="#{gestionPerfilesBean.recursos.codigo}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Nombre</label> 
+                                                    <h:inputText class="form-control" id="txtNombre" value="#{gestionPerfilesBean.recursos.nombre}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Descripción</label>
+                                                    <h:inputText class="form-control" id="txtDescriptionRecurso" value="#{gestionPerfilesBean.recursos.descripcion}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Estado</label> 
+                                                    <h:inputText class="form-control" id="txtEstado" value="#{gestionPerfilesBean.recursos.estado}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Fecha Inicial</label>
+                                                    <h:inputText class="date datepicker form-control" id="txtFechaInicial"  value="#{gestionPerfilesBean.recursos.fechaInicial}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Fecha Final</label>
+                                                    <h:inputText id="txtFechaFinal" class="date datepicker form-control"  disabled="true" value="#{gestionPerfilesBean.recursos.fechaFinal}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Carpeta</label>
+                                                    <h:inputText class="form-control" id="txtCarpeta" value="#{gestionPerfilesBean.recursos.carpeta}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Modulo</label>
+                                                    <h:selectOneMenu id="sltUsuario"   class="form-control" value="#{gestionPerfilesBean.recursos.moduloId}" >
+                                                        <f:selectItems value="#{gestionPerfilesBean.listModulos}"  var="modulos" itemLabel="#{modulos.nombre}" itemValue="#{modulos.id}"/> 
+
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Tipo</label>
+                                                    <h:selectOneMenu   class="form-control" id="sltTipo">
+                                                        <f:selectItem itemValue="0" itemLabel="Selecione Un Tipo"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Perfil</label>
+                                                    <h:selectOneMenu   class="form-control" id="sltPerfil" value="#{gestionPerfilesBean.recursos.perfilId}" >
+                                                        <f:selectItems value="#{gestionPerfilesBean.listPerfiles}" var="perfiles" itemValue="#{perfiles.id}" itemLabel="#{perfiles.nombre}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <h:panelGrid id="pnlActualizar">
+                                                <h:panelGroup rendered="#{!gestionPerfilesBean.editable}">
+                                                    <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
+                                                        <f:ajax event="click" listener="#{gestionPerfilesBean.update()}" render="frmPerfiles:tablaGeneral" execute="frmPerfiles:txtNombre frmPerfiles:txtId frmPerfiles:txtDescriptionRecurso frmPerfiles:txtEstado frmPerfiles:txtFechaInicial frmPerfiles:txtFechaFinal frmPerfiles:txtCarpeta frmPerfiles:sltUsuario frmPerfiles:sltPerfil"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="pnlGuardar">
+                                                <h:panelGroup rendered="#{gestionPerfilesBean.editable}">
+                                                    <h:commandLink value="Guardar" id="btnGuardarRecurso" class="btn btn-success">
+                                                        <f:ajax event="click" listener="#{gestionPerfilesBean.saveRecurso()}" execute="frmPerfiles:txtNombre frmPerfiles:txtId frmPerfiles:txtDescriptionRecurso frmPerfiles:txtEstado frmPerfiles:txtFechaInicial frmPerfiles:txtFechaFinal frmPerfiles:txtCarpeta frmPerfiles:sltUsuario frmPerfiles:sltPerfil" />
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!--  end modal editar recurso -->
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

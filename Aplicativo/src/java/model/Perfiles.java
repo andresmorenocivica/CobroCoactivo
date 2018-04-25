@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  *
  * @author Admin
@@ -12,6 +16,7 @@ package model;
 public class Perfiles {
     private long id;
     private String nombre;
+    private List<Recurso> listRecursos =  new ArrayList<>();
 
     /**
      * @return the id
@@ -40,6 +45,23 @@ public class Perfiles {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    /**
+     * @return the listRecursos
+     */
+    public List<Recurso> getListRecursos() {
+        return listRecursos;
+    }
+
+    /**
+     * @param listRecursos the listRecursos to set
+     */
+    public void setListRecursos(List<Recurso> listRecursos) {
+        this.listRecursos = listRecursos;
+    }
+
+    
+ 
     
     
 }

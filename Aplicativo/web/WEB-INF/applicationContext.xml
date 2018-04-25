@@ -194,6 +194,12 @@
         <property name="personasDAO" ref="personasDAO"></property>
     </bean>  
    
+    <bean id="GestionPerfilesBO" class="bo.GestionPerfilesImpBO">
+        <property name="loginDAO" ref="loginDAO"></property>
+        <property name="perfilesDAO" ref="perfilesDAO"></property>
+        <property name="recursosDAO" ref="recursosDAO"></property>
+        <property name="modulosDAO" ref="modulosDAO"></property>
+    </bean>
     <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
 

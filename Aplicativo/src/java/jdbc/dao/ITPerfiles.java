@@ -34,4 +34,5 @@ public interface ITPerfiles {
     public CivPerfiles consultarPerfilById(int perfil) throws Exception;
     
     public CivPerfiles consultarPerfilByName(String name) throws Exception;
+    public long insert(CivPerfiles civPerfiles) throws Exception;
 }

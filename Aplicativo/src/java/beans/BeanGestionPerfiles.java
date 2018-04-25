@@ -5,7 +5,8 @@
  */
 package beans;
 
-import bo.GestionRecursosBO;
+import bo.GestionPerfilesBO;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,50 +22,59 @@ import utility.Log_Handler;
  *
  * @author CIVITRANS_FOTOMULTAS
  */
-public class BeanGestionRecursos {
+public class BeanGestionPerfiles implements Serializable {
 
-    private GestionRecursosBO gestionRecursosBO;
-    private List<Recurso> listRecurso = new ArrayList<>();
-    
+    /**
+     * @return the listModulos
+     */
+    public List<Modulo> getListModulos() {
+        return listModulos;
+    }
+
+    /**
+     * @param listModulos the listModulos to set
+     */
+    public void setListModulos(List<Modulo> listModulos) {
+        this.listModulos = listModulos;
+    }
+
     private BeanLogin loginBO;
-    private boolean editable = true;
-    // se tuliza para saber que recuuso se selecciona en la vista para editarlo, eliminarlo o ingresarlo
-    private Recurso recurso;
-    // se utiliza para cargar el combo de usuario en la vista
+    private GestionPerfilesBO gestionPerfilesBO;
     private List<Perfiles> listPerfiles = new ArrayList<>();
-    // se utiliza para cargar el combo de modulos en la vista
-    private List<Modulo> listModulo = new ArrayList<>();
-    // se utiliza para saber que modulo fue seleccionado en la vista
-    private int idModuloSeleccionado;
-    private int idPerfil;// identificador del select en la vista
-    private int tipoBusqueda;
+    private Perfiles civPerfiles = new Perfiles();
+    private Recurso recursos = new Recurso();
+    private List<Modulo> listModulos = new ArrayList<>();
+    private boolean editable;
+    private long idPerfil;
 
-    /**
-     * Creates a new instance of BeanGestionRecursos
-     */
-    /**
-     * @return the gestionRecursosBO
-     *
-     *
-     */
     @PostConstruct
-    public void init() {
+    public void iniciar() {
         try {
-
-            getGestionRecursosBO().listarModulos(this);
-            getGestionRecursosBO().listarPerfiles(this);
+            getGestionPerfilesBO().llenarDatos(this);
 
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
             FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
         }
-
     }
 
     public void save() {
         try {
-            getGestionRecursosBO().save(this);
+            getGestionPerfilesBO().save(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#adicionarPerfil').modal('hide')");
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+
+    public void update() {
+        try {
+            getGestionPerfilesBO().update(this);
+            getGestionPerfilesBO().eliminarRegistro(this);
             RequestContext requestContext = RequestContext.getCurrentInstance();
             requestContext.execute("$('#detalleRecurso').modal('hide')");
 
@@ -75,9 +85,33 @@ public class BeanGestionRecursos {
         }
     }
 
-    public void eliminar() {
+    public void crearRecurso(long id) {
         try {
-            getGestionRecursosBO().eliminarRegistro(this);
+            setRecursos(new Recurso());
+            setEditable(true);
+            setIdPerfil(id);
+
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+    
+    public void saveRecurso(){
+        try {
+            getGestionPerfilesBO().saveRecurso(this);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+
+    public void delete() {
+        try {
+
+            getGestionPerfilesBO().eliminarRegistro(this);
             RequestContext requestContext = RequestContext.getCurrentInstance();
             requestContext.execute("$('#eliminarRecurso').modal('hide')");
 
@@ -88,71 +122,13 @@ public class BeanGestionRecursos {
         }
     }
 
-    public void buscarRecursosByModulo() {
-        try {
-            setTipoBusqueda(1);
-            getGestionRecursosBO().listarRecursos(this);
-            
-        } catch (Exception e) {
-            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
-            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
-        }
+    //Getter and setter
+    public GestionPerfilesBO getGestionPerfilesBO() {
+        return gestionPerfilesBO;
     }
 
-    public void buscarRecursosByPerfil() {
-        try {
-            setTipoBusqueda(2);
-            getGestionRecursosBO().listarRecursos(this);
-        } catch (Exception e) {
-            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
-            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
-        }
-    }
-
-    public void crearRegistro() {
-        try {
-            setEditable(true);
-            Recurso recurso2 = new Recurso();
-            setRecurso(recurso2);
-        } catch (Exception e) {
-            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
-            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
-        }
-    }
-    
-    public void update() {
-        try {
-            setEditable(true);
-            getGestionRecursosBO().update(this);
-            RequestContext requestContext = RequestContext.getCurrentInstance();
-            requestContext.execute("$('#detalleRecurso').modal('hide')");
-        } catch (Exception e) {
-            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
-            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
-        }
-    }
-
-    public GestionRecursosBO getGestionRecursosBO() {
-        return gestionRecursosBO;
-    }
-
-    /**
-     * @param gestionRecursosBO the gestionRecursosBO to set
-     */
-    public void setGestionRecursosBO(GestionRecursosBO gestionRecursosBO) {
-        this.gestionRecursosBO = gestionRecursosBO;
-    }
-
-    public List<Recurso> getListRecurso() {
-        return listRecurso;
-    }
-
-    public void setListRecurso(List<Recurso> listRecurso) {
-        this.listRecurso = listRecurso;
+    public void setGestionPerfilesBO(GestionPerfilesBO gestionPerfilesBO) {
+        this.gestionPerfilesBO = gestionPerfilesBO;
     }
 
     public BeanLogin getLoginBO() {
@@ -163,86 +139,77 @@ public class BeanGestionRecursos {
         this.loginBO = loginBO;
     }
 
-    public boolean isEditable() {
-        return editable;
+    public BeanGestionPerfiles() {
     }
 
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-    }
-
-    public Recurso getRecurso() {
-        return recurso;
-    }
-
-    public void setRecurso(Recurso recurso) {
-        this.recurso = recurso;
-    }
-
+    /**
+     * @return the listPerfiles
+     */
     public List<Perfiles> getListPerfiles() {
         return listPerfiles;
     }
 
+    /**
+     * @param listPerfiles the listPerfiles to set
+     */
     public void setListPerfiles(List<Perfiles> listPerfiles) {
         this.listPerfiles = listPerfiles;
     }
 
     /**
-     * @return the listMosulo
+     * @return the editable
      */
-    public List<Modulo> getListMosulo() {
-        return getListModulo();
+    public boolean isEditable() {
+        return editable;
     }
 
     /**
-     * @param listMosulo the listMosulo to set
+     * @param editable the editable to set
      */
-    public void setListMosulo(List<Modulo> listMosulo) {
-        this.setListModulo(listMosulo);
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
     /**
-     * @return the listModulo
+     * @return the civPerfiles
      */
-    public List<Modulo> getListModulo() {
-        return listModulo;
+    public Perfiles getCivPerfiles() {
+        return civPerfiles;
     }
 
     /**
-     * @param listModulo the listModulo to set
+     * @param civPerfiles the civPerfiles to set
      */
-    public void setListModulo(List<Modulo> listModulo) {
-        this.listModulo = listModulo;
+    public void setCivPerfiles(Perfiles civPerfiles) {
+        this.civPerfiles = civPerfiles;
     }
 
     /**
-     * @return the idModuloSeleccionado
+     * @return the recursos
      */
-    public int getIdModuloSeleccionado() {
-        return idModuloSeleccionado;
+    public Recurso getRecursos() {
+        return recursos;
     }
 
     /**
-     * @param idModuloSeleccionado the idModuloSeleccionado to set
+     * @param recursos the recursos to set
      */
-    public void setIdModuloSeleccionado(int idModuloSeleccionado) {
-        this.idModuloSeleccionado = idModuloSeleccionado;
+    public void setRecursos(Recurso recursos) {
+        this.recursos = recursos;
     }
 
-    public int getIdPerfil() {
+    /**
+     * @return the idPerfil
+     */
+    public long getIdPerfil() {
         return idPerfil;
     }
 
-    public void setIdPerfil(int idPerfil) {
+    /**
+     * @param idPerfil the idPerfil to set
+     */
+    public void setIdPerfil(long idPerfil) {
         this.idPerfil = idPerfil;
-    }
-
-    public int getTipoBusqueda() {
-        return tipoBusqueda;
-    }
-
-    public void setTipoBusqueda(int tipoBusqueda) {
-        this.tipoBusqueda = tipoBusqueda;
     }
 
 }

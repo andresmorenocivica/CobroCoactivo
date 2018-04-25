@@ -8,6 +8,7 @@ package jdbc.dao;
 import persistencias.CivPerfiles;
 import java.util.List;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -45,5 +46,11 @@ public class DaoPerfiles extends HibernateDaoSupport implements ITPerfiles {
             return (CivPerfiles) list.get(0);
         }
         return null;
+    }
+    
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public long insert(CivPerfiles perfiles) throws Exception {
+        return Long.parseLong(getHibernateTemplate().save(perfiles).toString());
     }
 }

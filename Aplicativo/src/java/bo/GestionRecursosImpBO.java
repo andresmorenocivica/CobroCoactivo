@@ -8,7 +8,6 @@ package bo;
 import beans.BeanGestionRecursos;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,15 +15,13 @@ import jdbc.dao.ITLogin;
 import jdbc.dao.ITModulos;
 import jdbc.dao.ITPerfiles;
 import jdbc.dao.ITRecursos;
-import jdbc.dao.ITUsuarios;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
-import model.Usuarios;
 import persistencias.CivModulos;
 import persistencias.CivPerfiles;
 import persistencias.CivRecursos;
-import persistencias.CivUsuarios;
+
 
 /**
  *
