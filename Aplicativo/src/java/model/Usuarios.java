@@ -21,6 +21,8 @@ public class Usuarios {
     private Date fechaFinal;
     private Date fechaProceso;
     private String nombrePersona;
+    private Personas persona;
+    private boolean editable = false;
 
     /**
      * @return the id
@@ -146,6 +148,34 @@ public class Usuarios {
      */
     public void setNombrePersona(String nombrePersona) {
         this.nombrePersona = nombrePersona;
+    }
+
+    /**
+     * @return the persona
+     */
+    public Personas getPersona() {
+        return persona;
+    }
+
+    /**
+     * @param persona the persona to set
+     */
+    public void setPersona(Personas persona) {
+        this.persona = persona;
+    }
+
+    /**
+     * @return the editable
+     */
+    public boolean isEditable() {
+        return editable;
+    }
+
+    /**
+     * @param editable the editable to set
+     */
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
     
     

@@ -12,4 +12,7 @@ package bo;
 public interface GestionUsuarioBO {
 
     void consultar(beans.BeanGestionUsuario bean) throws Exception;
+    
+    void listarPerfiles(beans.BeanGestionUsuario bean) throws Exception;
+
 }

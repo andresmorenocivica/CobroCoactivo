@@ -5,7 +5,7 @@
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
     
-     <application>
+    <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
     <managed-bean>
@@ -18,7 +18,7 @@
         </managed-property>
     </managed-bean>
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>gestionParametrosBean</managed-bean-name>
         <managed-bean-class>beans.BeanGestionParametros</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
@@ -85,5 +85,12 @@
             <property-name>gestionPerfilesBO</property-name>
             <value>#{GestionPerfilesBO}</value>
         </managed-property>
+    </managed-bean>
+    
+    
+    <managed-bean>
+        <managed-bean-name>requestBean</managed-bean-name>
+        <managed-bean-class>beans.BeanRequest</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>

@@ -200,6 +200,15 @@
         <property name="recursosDAO" ref="recursosDAO"></property>
         <property name="modulosDAO" ref="modulosDAO"></property>
     </bean>
+    
+    <bean id="GestionUsuariosBO" class="bo.GestionUsuariosImpBO">
+        <property name="loginDAO" ref="loginDAO"></property>
+        <property name="usuariosDAO" ref="usuariosDAO"></property>
+        <property name="personasDAO" ref="personasDAO"></property>
+        <property name="tiposDocumentosDAO" ref="tiposDocumentosDAO"></property>
+        <property name="perfilesDAO" ref="perfilesDAO"></property>
+        <property name="perfilRecursoDAO" ref="perfilRecursoDAO"></property>
+    </bean> 
     <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
 

@@ -28,6 +28,7 @@ public class Personas {
     private Date fechaIniical;
     private Date fechaFinal;
     private Date fechaProceso;
+    private TipoDocumentos tipoDocumentoPersona;
 
     /**
      * @return the id
@@ -251,6 +252,20 @@ public class Personas {
      */
     public void setFechaProceso(Date fechaProceso) {
         this.fechaProceso = fechaProceso;
+    }
+
+    /**
+     * @return the tipoDocumentoPersona
+     */
+    public TipoDocumentos getTipoDocumentoPersona() {
+        return tipoDocumentoPersona;
+    }
+
+    /**
+     * @param tipoDocumentoPersona the tipoDocumentoPersona to set
+     */
+    public void setTipoDocumentoPersona(TipoDocumentos tipoDocumentoPersona) {
+        this.tipoDocumentoPersona = tipoDocumentoPersona;
     }
 
     

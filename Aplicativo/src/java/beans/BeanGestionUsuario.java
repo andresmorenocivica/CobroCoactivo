@@ -8,6 +8,7 @@ package beans;
 import bo.GestionUsuarioBO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import model.Perfiles;
@@ -25,6 +26,28 @@ public class BeanGestionUsuario {
     private String NombreUsuario;
     private List<Usuarios> listadoUsuarios = new ArrayList<>();
     private int tipoBusqueda;
+
+    // INFORMACION DE DETALLE USUARIO 
+    private String encabezadoDetalleUsuario;
+    private Usuarios usuarioDetalle;
+    private List<Perfiles> listadoPerfiles = new ArrayList<>();
+
+    //---------------------------------------//
+    @PostConstruct
+    public void cargarDetalleUsuario() {
+        try {
+            BeanRequest obj_ = (BeanRequest) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("requestBean");
+            if (obj_ != null) {
+                setUsuarioDetalle(obj_.getUsuario());
+                setEncabezadoDetalleUsuario(obj_.getRuta());
+                getGestionUsariosBO().listarPerfiles(this);
+            }
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
 
     public void consultarUsuario(int tipo) {
         try {
@@ -107,6 +130,48 @@ public class BeanGestionUsuario {
      */
     public void setTipoBusqueda(int tipoBusqueda) {
         this.tipoBusqueda = tipoBusqueda;
+    }
+
+    /**
+     * @return the encabezadoDetalleUsuario
+     */
+    public String getEncabezadoDetalleUsuario() {
+        return encabezadoDetalleUsuario;
+    }
+
+    /**
+     * @param encabezadoDetalleUsuario the encabezadoDetalleUsuario to set
+     */
+    public void setEncabezadoDetalleUsuario(String encabezadoDetalleUsuario) {
+        this.encabezadoDetalleUsuario = encabezadoDetalleUsuario;
+    }
+
+    /**
+     * @return the usuarioDetalle
+     */
+    public Usuarios getUsuarioDetalle() {
+        return usuarioDetalle;
+    }
+
+    /**
+     * @param usuarioDetalle the usuarioDetalle to set
+     */
+    public void setUsuarioDetalle(Usuarios usuarioDetalle) {
+        this.usuarioDetalle = usuarioDetalle;
+    }
+
+    /**
+     * @return the listadoPerfiles
+     */
+    public List<Perfiles> getListadoPerfiles() {
+        return listadoPerfiles;
+    }
+
+    /**
+     * @param listadoPerfiles the listadoPerfiles to set
+     */
+    public void setListadoPerfiles(List<Perfiles> listadoPerfiles) {
+        this.listadoPerfiles = listadoPerfiles;
     }
 
 }

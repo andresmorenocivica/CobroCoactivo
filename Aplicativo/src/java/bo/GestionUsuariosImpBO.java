@@ -10,10 +10,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jdbc.dao.ITLogin;
+import jdbc.dao.ITPerfilRecursos;
+import jdbc.dao.ITPerfiles;
 import jdbc.dao.ITPersonas;
+import jdbc.dao.ITTipoDocumento;
 import jdbc.dao.ITUsuarios;
+import model.PerfilRecurso;
+import model.Perfiles;
+import model.Personas;
+import model.TipoDocumentos;
 import model.Usuarios;
+import persistencias.CivPerfiles;
+import persistencias.CivPerfilrecurso;
 import persistencias.CivPersonas;
+import persistencias.CivTipodocumentos;
 import persistencias.CivUsuarios;
 
 /**
@@ -25,16 +35,19 @@ public class GestionUsuariosImpBO implements GestionUsuarioBO, Serializable {
     private ITLogin loginDAO;
     private ITUsuarios usuariosDAO;
     private ITPersonas personasDAO;
+    private ITTipoDocumento tiposDocumentosDAO;
+    private ITPerfiles perfilesDAO;
+    private ITPerfilRecursos perfilRecursoDAO;
 
     @Override
     public void consultar(BeanGestionUsuario bean) throws Exception {
         List<CivUsuarios> listaCivUsuario = new ArrayList<>();
-        switch(bean.getTipoBusqueda()){
+        switch (bean.getTipoBusqueda()) {
             case 1:
                 listaCivUsuario = getUsuariosDAO().listarUsuarios(bean.getNombreUsuario().toUpperCase());
                 break;
         }
-        if(listaCivUsuario != null && listaCivUsuario.size() >0){
+        if (listaCivUsuario != null && listaCivUsuario.size() > 0) {
             for (CivUsuarios civUsuarios : listaCivUsuario) {
                 Usuarios usuario = new Usuarios();
                 usuario.setId(civUsuarios.getUsuId().intValue());
@@ -42,12 +55,42 @@ public class GestionUsuariosImpBO implements GestionUsuarioBO, Serializable {
                 usuario.setEstado(civUsuarios.getUsuEstado().intValue());
                 usuario.setFechaInicial(civUsuarios.getUsuFechainicial());
                 usuario.setFechaFinal(civUsuarios.getUsuFechafinal());
+                usuario.setFechaProceso(civUsuarios.getUsuFechaproceso());
                 usuario.setIdPersona(civUsuarios.getCivPersonas().getPerId().intValue());
                 CivPersonas personaUsuario = getPersonasDAO().consultarPersonasById(civUsuarios.getCivPersonas().getPerId().intValue());
-                usuario.setNombrePersona(personaUsuario.getPerNombre1() +" "+personaUsuario.getPerApellido1());
+                Personas persona = new Personas();
+                
+                persona.setId(personaUsuario.getPerId().intValue());
+                persona.setNombre1(personaUsuario.getPerNombre1());
+                persona.setNombre2(personaUsuario.getPerNombre2());
+                persona.setApellido1(personaUsuario.getPerApellido1());
+                persona.setApellido2(personaUsuario.getPerApellido2());
+                persona.setDocumento(personaUsuario.getPerDocumento());
+                
+                CivTipodocumentos civTipoDocumento = getTiposDocumentosDAO().getTipoDocumento(personaUsuario.getCivTipodocumentos().getTipdocId());
+                TipoDocumentos tipoDocumentoPersona = new TipoDocumentos();
+                tipoDocumentoPersona.setCodigo(civTipoDocumento.getTipdocCodigo().intValue());
+                tipoDocumentoPersona.setNombre(civTipoDocumento.getTipdocNombre());
+                tipoDocumentoPersona.setNombreCorto(civTipoDocumento.getTipdocNombrecorto());
+                
+                persona.setTipoDocumentoPersona(tipoDocumentoPersona);
+                
+                usuario.setNombrePersona(personaUsuario.getPerNombre1() + " " + personaUsuario.getPerApellido1());
+                usuario.setPersona(persona);
                 bean.getListadoUsuarios().add(usuario);
             }
         }
+    }
+
+     @Override
+    public void listarPerfiles(BeanGestionUsuario bean) throws Exception {
+        List<CivPerfiles> listCivPerfiles = getPerfilesDAO().listarPerfilesUsuario((int)bean.getUsuarioDetalle().getId());
+         for (CivPerfiles civPerfiles : listCivPerfiles) {
+             Perfiles perfil = new Perfiles();
+             perfil.setId(civPerfiles.getPerfId().intValue());
+             perfil.setNombre(civPerfiles.getPerfNombre());
+             bean.getListadoPerfiles().add(perfil);
+         }
     }
 
     /**
@@ -90,6 +133,48 @@ public class GestionUsuariosImpBO implements GestionUsuarioBO, Serializable {
      */
     public void setPersonasDAO(ITPersonas personasDAO) {
         this.personasDAO = personasDAO;
+    }
+
+    /**
+     * @return the tiposDocumentosDAO
+     */
+    public ITTipoDocumento getTiposDocumentosDAO() {
+        return tiposDocumentosDAO;
+    }
+
+    /**
+     * @param tiposDocumentosDAO the tiposDocumentosDAO to set
+     */
+    public void setTiposDocumentosDAO(ITTipoDocumento tiposDocumentosDAO) {
+        this.tiposDocumentosDAO = tiposDocumentosDAO;
+    }
+
+    /**
+     * @return the perfilesDAO
+     */
+    public ITPerfiles getPerfilesDAO() {
+        return perfilesDAO;
+    }
+
+    /**
+     * @param perfilesDAO the perfilesDAO to set
+     */
+    public void setPerfilesDAO(ITPerfiles perfilesDAO) {
+        this.perfilesDAO = perfilesDAO;
+    }
+
+    /**
+     * @return the perfilRecursoDAO
+     */
+    public ITPerfilRecursos getPerfilRecursoDAO() {
+        return perfilRecursoDAO;
+    }
+
+    /**
+     * @param perfilRecursoDAO the perfilRecursoDAO to set
+     */
+    public void setPerfilRecursoDAO(ITPerfilRecursos perfilRecursoDAO) {
+        this.perfilRecursoDAO = perfilRecursoDAO;
     }
 
    
