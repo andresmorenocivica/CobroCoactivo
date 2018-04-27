@@ -211,7 +211,7 @@ public class LoginImplBO implements LoginBO, Serializable {
                     rec.setNombre(new ValidacionDatos().letraMayuscula(r.getRecNombre()));
                     rec.setCarpeta(r.getRecCarpeta());
                     rec.setDescripcion(r.getRecDescripcion());
-                    rec.setTipo(r.getRecTipo().intValue());
+                    rec.setTipo(r.getCivTiporecursos().getTiprecId().intValue());
                     listrec.add(rec);
                 }
             }
@@ -228,7 +228,7 @@ public class LoginImplBO implements LoginBO, Serializable {
         List<CivRecursos> index = new ArrayList<>();
         
         for (CivRecursos civRecursos : listR) {
-            if (civRecursos.getRecTipo().intValue() != tipo && civRecursos.getRecTipo().intValue() != 3) {
+            if (civRecursos.getCivTiporecursos().getTiprecCodigo().intValue() != tipo && civRecursos.getCivTiporecursos().getTiprecCodigo().intValue()  != 3) {
                 index.add(civRecursos);
             }
         }
@@ -281,7 +281,7 @@ public class LoginImplBO implements LoginBO, Serializable {
                     rec.setNombre(new ValidacionDatos().letraMayuscula(r.getRecNombre()));
                     rec.setCarpeta(r.getRecCarpeta());
                     rec.setDescripcion(r.getRecDescripcion());
-                    rec.setTipo(r.getRecTipo().intValue());
+                    rec.setTipo(r.getCivTiporecursos().getTiprecId().intValue());
                     listrec.add(rec);
                 }
             }
@@ -316,7 +316,7 @@ public class LoginImplBO implements LoginBO, Serializable {
     public void filtrarRecursosPlantillas(BeanLogin obj, int tipo) throws Exception {
         obj.setListRedireccion(new ArrayList<>());
         for (CivPerfilrecurso pr : obj.getListPerfilRecursos()) {
-            if (pr.getCivRecursos().getRecTipo().intValue() == tipo) {
+            if (pr.getCivRecursos().getCivTiporecursos().getTiprecCodigo().intValue()== tipo) {
                 obj.getListRedireccion().add(pr);
             }
         }

@@ -14,12 +14,15 @@ import jdbc.dao.ITLogin;
 import jdbc.dao.ITModulos;
 import jdbc.dao.ITPerfiles;
 import jdbc.dao.ITRecursos;
+import jdbc.dao.ITTipoRecursos;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
+import model.TipoRecursos;
 import persistencias.CivModulos;
 import persistencias.CivPerfiles;
 import persistencias.CivRecursos;
+import persistencias.CivTiporecursos;
 
 /**
  *
@@ -31,6 +34,7 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
     private ITPerfiles perfilesDAO;
     private ITRecursos recursosDAO;
     private ITModulos modulosDAO;
+    private ITTipoRecursos tipoRecursosDAO;
 
     /**
      * @return the loginDAO
@@ -45,27 +49,38 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
     public void setLoginDAO(ITLogin loginDAO) {
         this.loginDAO = loginDAO;
     }
-    
-     @Override    
-     public void saveRecurso(BeanGestionPerfiles bean) throws Exception {
-       CivRecursos civRecursos = new CivRecursos();
-       civRecursos.setRecNombre(bean.getRecursos().getNombre());
-       civRecursos.setRecDescripcion(bean.getRecursos().getDescripcion());
-       civRecursos.setRecFechainicial(bean.getRecursos().getFechaInicial());
-       civRecursos.setRecFechafin(bean.getRecursos().getFechaFinal());
-       civRecursos.setRecEstado(new BigDecimal(bean.getRecursos().getEstado()));
-       civRecursos.setRecCarpeta(bean.getRecursos().getCarpeta());
-       civRecursos.setCivModulos(getModulosDAO().getModuloID(bean.getRecursos().getModuloId()));
-       civRecursos.setRecTipo(new BigDecimal(1));
-       civRecursos.setCivPerfiles(getPerfilesDAO().consultarPerfilById((int)bean.getIdPerfil()));
-       getRecursosDAO().insert(civRecursos);
-       
+
+    @Override
+    public void saveRecurso(BeanGestionPerfiles bean) throws Exception {
+        CivRecursos civRecursos = new CivRecursos();
+        civRecursos.setRecNombre(bean.getRecursos().getNombre());
+        civRecursos.setRecDescripcion(bean.getRecursos().getDescripcion());
+        civRecursos.setRecFechainicial(bean.getRecursos().getFechaInicial());
+        civRecursos.setRecFechafin(bean.getRecursos().getFechaFinal());
+        civRecursos.setRecEstado(new BigDecimal(bean.getRecursos().getEstado()));
+        civRecursos.setRecCarpeta(bean.getRecursos().getCarpeta());
+        civRecursos.setCivModulos(getModulosDAO().getModuloID(bean.getRecursos().getModuloId()));
+        CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
+        civRecursos.setCivTiporecursos(tipoRecurso);
+        civRecursos.setCivPerfiles(getPerfilesDAO().consultarPerfilById((int) bean.getIdPerfil()));
+        getRecursosDAO().insert(civRecursos);
+
     }
 
     @Override
     public void llenarDatos(BeanGestionPerfiles bean) throws Exception {
         List<CivPerfiles> listCivPerfiles = getPerfilesDAO().getAllPerfiles();
         List<CivModulos> lisCivModulos = getModulosDAO().getAll();
+        List<CivTiporecursos> listCivTipoRecurso = getTipoRecursosDAO().listAll();
+
+        for (CivTiporecursos civTipoRecurso : listCivTipoRecurso) {
+            TipoRecursos tipoRecursos = new TipoRecursos();
+            tipoRecursos.setCodigo(civTipoRecurso.getTiprecCodigo().intValue());
+            tipoRecursos.setDescripcion(civTipoRecurso.getTiprecDescripcion());
+            tipoRecursos.setId(civTipoRecurso.getTiprecId().intValue());
+            bean.getListTipoRecursos().add(tipoRecursos);
+        }
+
         for (CivModulos civModulos : lisCivModulos) {
             Modulo modulo = new Modulo();
             modulo.setId(civModulos.getModId().intValue());
@@ -91,7 +106,7 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
                     recurso.setEstado(listCivRecurso.getRecEstado().intValue());
                     recurso.setCarpeta(listCivRecurso.getRecCarpeta());
                     recurso.setModuloId(listCivRecurso.getCivModulos().getModId().intValue());
-                    recurso.setTipo(listCivRecurso.getRecTipo().intValue());
+                    recurso.setTipo(listCivRecurso.getCivTiporecursos().getTiprecId().intValue());
                     recurso.setPerfilId(listCivRecurso.getCivPerfiles().getPerfId().intValue());
                     bean.getListPerfiles().get(registro).getListRecursos().add(recurso);
                 }
@@ -103,7 +118,7 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
 
     @Override
     public void eliminarRegistro(BeanGestionPerfiles bean) throws Exception {
-      CivRecursos civRecursos =  new CivRecursos();
+        CivRecursos civRecursos = new CivRecursos();
         civRecursos.setRecId(BigDecimal.valueOf(bean.getRecursos().getCodigo()));
         civRecursos.setRecNombre(bean.getRecursos().getNombre());
         civRecursos.setRecDescripcion(bean.getRecursos().getDescripcion());
@@ -113,15 +128,16 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
         civRecursos.setRecEstado(BigDecimal.valueOf(bean.getRecursos().getEstado()));
         civRecursos.setRecCarpeta(bean.getRecursos().getCarpeta());
         civRecursos.setCivModulos(getModulosDAO().getModuloID(bean.getRecursos().getModuloId()));
-        civRecursos.setRecTipo(new BigDecimal(1));
+        CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
+        civRecursos.setCivTiporecursos(tipoRecurso);
         civRecursos.setCivPerfiles(getPerfilesDAO().consultarPerfilById(bean.getRecursos().getPerfilId()));
         getRecursosDAO().update(civRecursos);
-     
+
     }
 
     @Override
     public void update(BeanGestionPerfiles bean) throws Exception {
-        CivRecursos civRecursos =  new CivRecursos();
+        CivRecursos civRecursos = new CivRecursos();
         civRecursos.setRecId(BigDecimal.valueOf(bean.getRecursos().getCodigo()));
         civRecursos.setRecNombre(bean.getRecursos().getNombre());
         civRecursos.setRecDescripcion(bean.getRecursos().getDescripcion());
@@ -131,7 +147,8 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
         civRecursos.setRecEstado(BigDecimal.valueOf(bean.getRecursos().getEstado()));
         civRecursos.setRecCarpeta(bean.getRecursos().getCarpeta());
         civRecursos.setCivModulos(getModulosDAO().getModuloID(bean.getRecursos().getModuloId()));
-        civRecursos.setRecTipo(new BigDecimal(1));
+         CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
+        civRecursos.setCivTiporecursos(tipoRecurso);
         civRecursos.setCivPerfiles(getPerfilesDAO().consultarPerfilById(bean.getRecursos().getPerfilId()));
         getRecursosDAO().update(civRecursos);
     }
@@ -139,7 +156,7 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
     @Override
     public void save(BeanGestionPerfiles bean) throws Exception {
         CivPerfiles civPerfiles = new CivPerfiles();
-         civPerfiles.setPerfNombre(bean.getCivPerfiles().getNombre());
+        civPerfiles.setPerfNombre(bean.getCivPerfiles().getNombre());
         getPerfilesDAO().insert(civPerfiles);
     }
 
@@ -185,7 +202,18 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
         this.modulosDAO = modulosDAO;
     }
 
- 
-   
+    /**
+     * @return the tipoRecursosDAO
+     */
+    public ITTipoRecursos getTipoRecursosDAO() {
+        return tipoRecursosDAO;
+    }
+
+    /**
+     * @param tipoRecursosDAO the tipoRecursosDAO to set
+     */
+    public void setTipoRecursosDAO(ITTipoRecursos tipoRecursosDAO) {
+        this.tipoRecursosDAO = tipoRecursosDAO;
+    }
 
 }

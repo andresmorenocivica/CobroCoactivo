@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
+import model.TipoRecursos;
 import org.primefaces.context.RequestContext;
 import utility.Log_Handler;
 
@@ -44,8 +45,10 @@ public class BeanGestionPerfiles implements Serializable {
     private Perfiles civPerfiles = new Perfiles();
     private Recurso recursos = new Recurso();
     private List<Modulo> listModulos = new ArrayList<>();
+    private List<TipoRecursos> listTipoRecursos = new ArrayList<>();
     private boolean editable;
     private long idPerfil;
+    private int idTipoRecursoSeleccionado;
 
     @PostConstruct
     public void iniciar() {
@@ -210,6 +213,34 @@ public class BeanGestionPerfiles implements Serializable {
      */
     public void setIdPerfil(long idPerfil) {
         this.idPerfil = idPerfil;
+    }
+
+    /**
+     * @return the listTipoRecursos
+     */
+    public List<TipoRecursos> getListTipoRecursos() {
+        return listTipoRecursos;
+    }
+
+    /**
+     * @param listTipoRecursos the listTipoRecursos to set
+     */
+    public void setListTipoRecursos(List<TipoRecursos> listTipoRecursos) {
+        this.listTipoRecursos = listTipoRecursos;
+    }
+
+    /**
+     * @return the idTipoRecursoSeleccionado
+     */
+    public int getIdTipoRecursoSeleccionado() {
+        return idTipoRecursoSeleccionado;
+    }
+
+    /**
+     * @param idTipoRecursoSeleccionado the idTipoRecursoSeleccionado to set
+     */
+    public void setIdTipoRecursoSeleccionado(int idTipoRecursoSeleccionado) {
+        this.idTipoRecursoSeleccionado = idTipoRecursoSeleccionado;
     }
 
 }

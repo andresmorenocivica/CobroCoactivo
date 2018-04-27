@@ -66,6 +66,7 @@
                 <value>persistencias/CivDetalleRecursos.hbm.xml</value>
                 <value>persistencias/CivPlantillas.hbm.xml</value>
                 <value>persistencias/CivTipodeuda.hbm.xml</value>
+                <value>persistencias/CivTiporecursos.hbm.xml</value>
                 <value>persistencias/CivDetalleProcesojuridico.hbm.xml</value>
                 <value>persistencias/CivAttempts.hbm.xml</value>
                 <value>persistencias/LogEventos.hbm.xml</value>
@@ -139,7 +140,9 @@
     <bean id="tipoPersonasDAO" class="jdbc.dao.DaoTipoPersonas">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-    
+    <bean id="tipoRecursosDAO" class="jdbc.dao.DaoTipoRecursos">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
     
     
     
@@ -179,6 +182,7 @@
         <property name="modulosDAO" ref="modulosDAO"></property>
         <property name="recursosDAO" ref="recursosDAO"></property>
         <property name="perfilesDAO" ref="perfilesDAO"></property>
+        <property name="tipoRecursosDAO" ref="tipoRecursosDAO"></property>
     </bean>  
     
     <bean id="GestionModulosBO" class="bo.GestionModulosImpBO">
@@ -186,6 +190,7 @@
         <property name="modulosDAO" ref="modulosDAO"></property>
         <property name="recursosDAO" ref="recursosDAO"></property>
         <property name="perfilesDAO" ref="perfilesDAO"></property>
+         <property name="tipoRecursosDAO" ref="tipoRecursosDAO"></property>
     </bean>  
    
     <bean id="GestionPerfilesBO" class="bo.GestionPerfilesImpBO">
@@ -193,6 +198,7 @@
         <property name="perfilesDAO" ref="perfilesDAO"></property>
         <property name="recursosDAO" ref="recursosDAO"></property>
         <property name="modulosDAO" ref="modulosDAO"></property>
+         <property name="tipoRecursosDAO" ref="tipoRecursosDAO"></property>
     </bean>
     
     <bean id="GestionUsuariosBO" class="bo.GestionUsuariosImpBO">

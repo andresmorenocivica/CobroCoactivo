@@ -71,4 +71,5 @@ Contributor(s):
   <table-filter match-name="CIV_TIPODATOPERSONA"/>
   <table-filter match-name="CIV_TIPODEUDA"/>
   <table-filter match-name="CIV_TABLASPARAMETRICAS"/>
+  <table-filter match-name="CIV_TIPORECURSOS"/>
 </hibernate-reverse-engineering>

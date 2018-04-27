@@ -263,8 +263,8 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Tipo</label>
-                                                    <h:selectOneMenu   class="form-control" id="sltTipo">
-                                                        <f:selectItem itemValue="0" itemLabel="Selecione Un Tipo"/>
+                                                    <h:selectOneMenu   class="form-control" id="sltTipo" value="#{gestionPerfilesBean.idTipoRecursoSeleccionado}">
+                                                        <f:selectItems value="#{gestionPerfilesBean.listTipoRecursos}" var="tipoRecurso" itemValue="#{tipoRecurso.id}" itemLabel="#{tipoRecurso.descripcion}" /> 
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>
@@ -291,14 +291,14 @@
                                             <h:panelGrid id="pnlActualizar">
                                                 <h:panelGroup rendered="#{!gestionPerfilesBean.editable}">
                                                     <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
-                                                        <f:ajax event="click" listener="#{gestionPerfilesBean.update()}" render="frmPerfiles:tablaGeneral" execute="frmPerfiles:txtNombre frmPerfiles:txtId frmPerfiles:txtDescriptionRecurso frmPerfiles:txtEstado frmPerfiles:txtFechaInicial frmPerfiles:txtFechaFinal frmPerfiles:txtCarpeta frmPerfiles:sltUsuario frmPerfiles:sltPerfil"/>
+                                                        <f:ajax event="click" listener="#{gestionPerfilesBean.update()}" render="frmPerfiles:tablaGeneral" execute="frmPerfiles:txtNombre frmPerfiles:txtId frmPerfiles:txtDescriptionRecurso frmPerfiles:txtEstado frmPerfiles:txtFechaInicial frmPerfiles:txtFechaFinal frmPerfiles:txtCarpeta frmPerfiles:sltUsuario frmPerfiles:sltPerfil frmPerfiles:sltTipo"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                             <h:panelGrid id="pnlGuardar">
                                                 <h:panelGroup rendered="#{gestionPerfilesBean.editable}">
                                                     <h:commandLink value="Guardar" id="btnGuardarRecurso" class="btn btn-success">
-                                                        <f:ajax event="click" listener="#{gestionPerfilesBean.saveRecurso()}" execute="frmPerfiles:txtNombre frmPerfiles:txtId frmPerfiles:txtDescriptionRecurso frmPerfiles:txtEstado frmPerfiles:txtFechaInicial frmPerfiles:txtFechaFinal frmPerfiles:txtCarpeta frmPerfiles:sltUsuario frmPerfiles:sltPerfil" />
+                                                        <f:ajax event="click" listener="#{gestionPerfilesBean.saveRecurso()}" execute="frmPerfiles:txtNombre frmPerfiles:txtId frmPerfiles:txtDescriptionRecurso frmPerfiles:txtEstado frmPerfiles:txtFechaInicial frmPerfiles:txtFechaFinal frmPerfiles:txtCarpeta frmPerfiles:sltUsuario frmPerfiles:sltPerfil frmPerfiles:sltTipo" />
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>

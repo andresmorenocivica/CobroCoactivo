@@ -23,4 +23,6 @@ public interface GestionRecursosBO {
     void update(BeanGestionRecursos bean) throws Exception;
     
     void save(BeanGestionRecursos bean) throws Exception;
+    
+    void listarTipoRecursos(BeanGestionRecursos bean) throws Exception;
 }

@@ -14,12 +14,15 @@ import jdbc.dao.ITLogin;
 import jdbc.dao.ITModulos;
 import jdbc.dao.ITPerfiles;
 import jdbc.dao.ITRecursos;
+import jdbc.dao.ITTipoRecursos;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
+import model.TipoRecursos;
 import persistencias.CivModulos;
 import persistencias.CivPerfiles;
 import persistencias.CivRecursos;
+import persistencias.CivTiporecursos;
 
 /**
  *
@@ -31,6 +34,7 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
     private ITRecursos recursosDAO;
     private ITLogin loginDAO;
     private ITPerfiles perfilesDAO;
+    private ITTipoRecursos tipoRecursosDAO;
 
     @Override
     public void listarperfiles(BeanGestionModulos bean) throws Exception {
@@ -47,6 +51,16 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
     @Override
     public void llenarDatos(BeanGestionModulos bean) throws Exception {
         List<CivModulos> listaCivModulos = getModulosDAO().getAll();
+        List<CivTiporecursos> listCivTipoRecurso = getTipoRecursosDAO().listAll();
+
+        for (CivTiporecursos civTipoRecurso : listCivTipoRecurso) {
+            TipoRecursos tipoRecursos = new TipoRecursos();
+            tipoRecursos.setCodigo(civTipoRecurso.getTiprecCodigo().intValue());
+            tipoRecursos.setDescripcion(civTipoRecurso.getTiprecDescripcion());
+            tipoRecursos.setId(civTipoRecurso.getTiprecId().intValue());
+            bean.getListTipoRecursos().add(tipoRecursos);
+        }
+
         int registro = 0;
         for (CivModulos civModulos : listaCivModulos) {
             Modulo modulo = new Modulo();
@@ -79,7 +93,7 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
 
     @Override
     public void actualizarRecurso(BeanGestionModulos bean) throws Exception {
-        
+
         CivRecursos recursos = new CivRecursos();
         CivModulos civModulos = new CivModulos();
         civModulos.setModId(new BigDecimal(bean.getRegistroRecurso().getModuloId()));
@@ -92,7 +106,8 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
         recursos.setRecFechafin(bean.getRegistroRecurso().getFechaFinal());
         recursos.setRecEstado(BigDecimal.valueOf(bean.getRegistroRecurso().getEstado()));
         recursos.setRecCarpeta(bean.getRegistroRecurso().getCarpeta());
-        recursos.setRecTipo(new BigDecimal(bean.getRegistroRecurso().getTipo()));
+        CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
+        recursos.setCivTiporecursos(tipoRecurso);
         recursos.setCivModulos(civModulos);
         recursos.setCivPerfiles(civPerfiles);
         getRecursosDAO().update(recursos);
@@ -115,7 +130,8 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
         recursos.setRecFechafin(bean.getRegistroRecurso().getFechaFinal());
         recursos.setRecEstado(BigDecimal.valueOf(bean.getRegistroRecurso().getEstado()));
         recursos.setRecCarpeta(bean.getRegistroRecurso().getCarpeta());
-        recursos.setRecTipo(new BigDecimal(bean.getRegistroRecurso().getTipo()));
+        CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
+        recursos.setCivTiporecursos(tipoRecurso);
         recursos.setCivModulos(civModulos);
         recursos.setCivPerfiles(civPerfiles);
         getRecursosDAO().insert(recursos);
@@ -200,6 +216,20 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
      */
     public void setPerfilesDAO(ITPerfiles perfilesDAO) {
         this.perfilesDAO = perfilesDAO;
+    }
+
+    /**
+     * @return the tipoRecursosDAO
+     */
+    public ITTipoRecursos getTipoRecursosDAO() {
+        return tipoRecursosDAO;
+    }
+
+    /**
+     * @param tipoRecursosDAO the tipoRecursosDAO to set
+     */
+    public void setTipoRecursosDAO(ITTipoRecursos tipoRecursosDAO) {
+        this.tipoRecursosDAO = tipoRecursosDAO;
     }
 
 }

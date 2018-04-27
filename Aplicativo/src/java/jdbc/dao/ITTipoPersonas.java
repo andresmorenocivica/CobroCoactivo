@@ -5,23 +5,22 @@
  */
 package jdbc.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import persistencias.CivTipodatopersona;
-
 
 /**
  *
  * @author CIVITRANS_FOTOMULTAS
  */
 public interface ITTipoPersonas {
-    
-  
+
     public long insert(CivTipodatopersona civTipodatopersona) throws Exception;
 
-   
     public boolean update(CivTipodatopersona civTipodatopersona) throws Exception;
-    
-   
+
     public List<CivTipodatopersona> listAll() throws Exception;
-    
+
+  
+
 }

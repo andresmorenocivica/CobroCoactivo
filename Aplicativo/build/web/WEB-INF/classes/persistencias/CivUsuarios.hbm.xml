@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/04/2018 03:40:18 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 26/04/2018 04:35:00 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivUsuarios" table="CIV_USUARIOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan la informacion de los usuarios registrados en el sistema.</comment>
         <id name="usuId" type="big_decimal">
             <column name="USU_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="civPersonas" class="persistencias.CivPersonas" fetch="select">
             <column name="PER_ID" precision="22" scale="0" not-null="true">

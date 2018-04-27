@@ -5,6 +5,7 @@
  */
 package jdbc.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +36,7 @@ public class DaoTipoPersonas extends HibernateDaoSupport implements ITTipoPerson
         List list = getHibernateTemplate().find(hql);
         return list;
     }
+
+    
 
 }

@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
+import model.TipoRecursos;
 import org.primefaces.context.RequestContext;
 import utility.Log_Handler;
 
@@ -34,10 +35,12 @@ public class BeanGestionRecursos {
     private List<Perfiles> listPerfiles = new ArrayList<>();
     // se utiliza para cargar el combo de modulos en la vista
     private List<Modulo> listModulo = new ArrayList<>();
+    private List<TipoRecursos> listTipoRecursos = new ArrayList<>();
     // se utiliza para saber que modulo fue seleccionado en la vista
     private int idModuloSeleccionado;
     private int idPerfil;// identificador del select en la vista
     private int tipoBusqueda;
+    private int idTipoRecursoSeleccionado;
 
     /**
      * Creates a new instance of BeanGestionRecursos
@@ -53,7 +56,7 @@ public class BeanGestionRecursos {
 
             getGestionRecursosBO().listarModulos(this);
             getGestionRecursosBO().listarPerfiles(this);
-
+            getGestionRecursosBO().listarTipoRecursos(this);
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -244,5 +247,35 @@ public class BeanGestionRecursos {
     public void setTipoBusqueda(int tipoBusqueda) {
         this.tipoBusqueda = tipoBusqueda;
     }
+
+    /**
+     * @return the listTipoRecursos
+     */
+    public List<TipoRecursos> getListTipoRecursos() {
+        return listTipoRecursos;
+    }
+
+    /**
+     * @param listTipoRecursos the listTipoRecursos to set
+     */
+    public void setListTipoRecursos(List<TipoRecursos> listTipoRecursos) {
+        this.listTipoRecursos = listTipoRecursos;
+    }
+
+    /**
+     * @return the idTipoRecursoSeleccionado
+     */
+    public int getIdTipoRecursoSeleccionado() {
+        return idTipoRecursoSeleccionado;
+    }
+
+    /**
+     * @param idTipoRecursoSeleccionado the idTipoRecursoSeleccionado to set
+     */
+    public void setIdTipoRecursoSeleccionado(int idTipoRecursoSeleccionado) {
+        this.idTipoRecursoSeleccionado = idTipoRecursoSeleccionado;
+    }
+
+    
 
 }

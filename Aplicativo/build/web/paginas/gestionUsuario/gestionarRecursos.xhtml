@@ -259,8 +259,8 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Tipo</label>
-                                                    <h:selectOneMenu   class="form-control" id="sltTipo">
-                                                        <f:selectItem itemValue="0" itemLabel="Selecione Un Tipo"/>
+                                                    <h:selectOneMenu   class="form-control" id="sltTipo" value="#{gestionRecursosBean.idTipoRecursoSeleccionado}">
+                                                        <f:selectItems value="#{gestionRecursosBean.listTipoRecursos}" var="tipoRecurso" itemValue="#{tipoRecurso.id}" itemLabel="#{tipoRecurso.descripcion}" /> 
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>
@@ -287,7 +287,7 @@
                                             <h:panelGrid id="pnlActualizar">
                                                 <h:panelGroup rendered="#{!gestionRecursosBean.editable}">
                                                     <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
-                                                        <f:ajax event="click" listener="#{gestionRecursosBean.update()}" render="frmTiposDatos:tablaGeneral#{tabla.id}" execute="frmTiposDatos:txtDescription frmTiposDatos:txtEstado frmTiposDatos:txtNomCorto frmTiposDatos:txtCodigo frmTiposDatos:txtFechaFinal frmTiposDatos:txtFechaInicial"/>
+                                                        <f:ajax event="click" listener="#{gestionRecursosBean.update()}" render="frmTiposDatos:tablaGeneral#{tabla.id}" execute="frmGestionRecursos:txtDescriptionRecurso frmGestionRecursos:txtId frmGestionRecursos:txtEstado frmGestionRecursos:txtFechaInicial frmGestionRecursos:txtFechaFinal frmGestionRecursos:txtCarpeta frmGestionRecursos:sltUsuario frmGestionRecursos:sltTipo frmGestionRecursos:sltPerfil frmGestionRecursos:txtNombre"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>

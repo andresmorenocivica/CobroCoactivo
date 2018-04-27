@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 17/04/2018 03:40:17 PM by Hibernate Tools 4.3.1
+// Generated 26/04/2018 04:34:58 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -16,13 +16,13 @@ public class CivRecursos  implements java.io.Serializable {
      private BigDecimal recId;
      private CivModulos civModulos;
      private CivPerfiles civPerfiles;
+     private CivTiporecursos civTiporecursos;
      private String recNombre;
      private String recDescripcion;
      private Date recFechainicial;
      private Date recFechafin;
      private BigDecimal recEstado;
      private String recCarpeta;
-     private BigDecimal recTipo;
      private Set civDetalleRecUsus = new HashSet(0);
      private Set civPerfilrecursos = new HashSet(0);
 
@@ -33,17 +33,17 @@ public class CivRecursos  implements java.io.Serializable {
     public CivRecursos(BigDecimal recId) {
         this.recId = recId;
     }
-    public CivRecursos(BigDecimal recId, CivModulos civModulos, CivPerfiles civPerfiles, String recNombre, String recDescripcion, Date recFechainicial, Date recFechafin, BigDecimal recEstado, String recCarpeta, BigDecimal recTipo, Set civDetalleRecUsus, Set civPerfilrecursos) {
+    public CivRecursos(BigDecimal recId, CivModulos civModulos, CivPerfiles civPerfiles, CivTiporecursos civTiporecursos, String recNombre, String recDescripcion, Date recFechainicial, Date recFechafin, BigDecimal recEstado, String recCarpeta, Set civDetalleRecUsus, Set civPerfilrecursos) {
        this.recId = recId;
        this.civModulos = civModulos;
        this.civPerfiles = civPerfiles;
+       this.civTiporecursos = civTiporecursos;
        this.recNombre = recNombre;
        this.recDescripcion = recDescripcion;
        this.recFechainicial = recFechainicial;
        this.recFechafin = recFechafin;
        this.recEstado = recEstado;
        this.recCarpeta = recCarpeta;
-       this.recTipo = recTipo;
        this.civDetalleRecUsus = civDetalleRecUsus;
        this.civPerfilrecursos = civPerfilrecursos;
     }
@@ -68,6 +68,13 @@ public class CivRecursos  implements java.io.Serializable {
     
     public void setCivPerfiles(CivPerfiles civPerfiles) {
         this.civPerfiles = civPerfiles;
+    }
+    public CivTiporecursos getCivTiporecursos() {
+        return this.civTiporecursos;
+    }
+    
+    public void setCivTiporecursos(CivTiporecursos civTiporecursos) {
+        this.civTiporecursos = civTiporecursos;
     }
     public String getRecNombre() {
         return this.recNombre;
@@ -110,13 +117,6 @@ public class CivRecursos  implements java.io.Serializable {
     
     public void setRecCarpeta(String recCarpeta) {
         this.recCarpeta = recCarpeta;
-    }
-    public BigDecimal getRecTipo() {
-        return this.recTipo;
-    }
-    
-    public void setRecTipo(BigDecimal recTipo) {
-        this.recTipo = recTipo;
     }
     public Set getCivDetalleRecUsus() {
         return this.civDetalleRecUsus;

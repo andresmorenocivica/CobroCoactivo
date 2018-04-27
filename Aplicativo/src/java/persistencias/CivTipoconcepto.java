@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 17/04/2018 03:40:17 PM by Hibernate Tools 4.3.1
+// Generated 26/04/2018 04:34:58 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -20,7 +20,6 @@ public class CivTipoconcepto  implements java.io.Serializable {
      private Date tipconFechafinal;
      private String tipconNombrecorto;
      private BigDecimal tipconCodigo;
-     
      private Set civConceptoses = new HashSet(0);
 
     public CivTipoconcepto() {

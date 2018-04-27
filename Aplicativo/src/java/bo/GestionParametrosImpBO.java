@@ -71,7 +71,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDocumento);
                     }
                     break;
-                    
+
                 case "CIV_TIPOCONCEPTO":
                     List<CivTipoconcepto> listCivTipoconceptos = getTipoConceptosDAO().listAll();
                     for (CivTipoconcepto civTipoconcepto : listCivTipoconceptos) {
@@ -105,7 +105,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDeuda);
                     }
                     break;
-                    
+
                 case "CIV_TIPODATOPERSONA":
                     List<CivTipodatopersona> listCivTipoDatosPersona = getTipoPersonasDAO().listAll();
                     for (CivTipodatopersona civTipoDatosPersona : listCivTipoDatosPersona) {
@@ -121,6 +121,8 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         parametrosTipoDeuda.setIdTabla(civTablasParametricas.getTabparId().intValue());
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDeuda);
                     }
+                    break;
+                case "CIV_TIPORECURSOS":
                     break;
             }
             registro++;

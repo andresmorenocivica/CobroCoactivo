@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/04/2018 04:35:00 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivTiporecursos" table="CIV_TIPORECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="tiprecId" type="big_decimal">
+            <column name="TIPREC_ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="tiprecDescripcion" type="string">
+            <column name="TIPREC_DESCRIPCION" length="100" />
+        </property>
+        <property name="tiprecEstado" type="big_decimal">
+            <column name="TIPREC_ESTADO" precision="22" scale="0" />
+        </property>
+        <property name="tiprecFechafinal" type="date">
+            <column name="TIPREC_FECHAFINAL" length="7" />
+        </property>
+        <property name="tiprecFechainicial" type="date">
+            <column name="TIPREC_FECHAINICIAL" length="7" />
+        </property>
+        <property name="tiprecNombrecorto" type="string">
+            <column name="TIPREC_NOMBRECORTO" length="20" />
+        </property>
+        <property name="tiprecCodigo" type="big_decimal">
+            <column name="TIPREC_CODIGO" precision="22" scale="0" />
+        </property>
+        <set name="civRecursoses" table="CIV_RECURSOS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TIPREC_ID" precision="22" scale="0">
+                    <comment>Tipo de recurso</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencias.CivRecursos" />
+        </set>
+    </class>
+</hibernate-mapping>

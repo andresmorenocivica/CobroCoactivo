@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17/04/2018 03:40:18 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 26/04/2018 04:35:00 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivRecursos" table="CIV_RECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan los recursos disponibles para los usuarios del sistema.</comment>
         <id name="recId" type="big_decimal">
             <column name="REC_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="civModulos" class="persistencias.CivModulos" fetch="select">
             <column name="MOD_ID" precision="22" scale="0">
@@ -17,6 +17,11 @@
         <many-to-one name="civPerfiles" class="persistencias.CivPerfiles" fetch="select">
             <column name="PERF_ID" precision="22" scale="0">
                 <comment>ID unico del perfil</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civTiporecursos" class="persistencias.CivTiporecursos" fetch="select">
+            <column name="TIPREC_ID" precision="22" scale="0">
+                <comment>Tipo de recurso</comment>
             </column>
         </many-to-one>
         <property name="recNombre" type="string">
@@ -47,11 +52,6 @@
         <property name="recCarpeta" type="string">
             <column name="REC_CARPETA" length="500">
                 <comment>Carpeta donde se encuentra localizado el recurso</comment>
-            </column>
-        </property>
-        <property name="recTipo" type="big_decimal">
-            <column name="REC_TIPO" precision="22" scale="0">
-                <comment>Tipo de recurso</comment>
             </column>
         </property>
         <set name="civDetalleRecUsus" table="CIV_DETALLE_REC_USU" inverse="true" lazy="true" fetch="select">
