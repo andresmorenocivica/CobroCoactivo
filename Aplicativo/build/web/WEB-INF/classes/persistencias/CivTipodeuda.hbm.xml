@@ -6,7 +6,7 @@
     <class name="persistencias.CivTipodeuda" table="CIV_TIPODEUDA" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tipdeuId" type="big_decimal">
             <column name="TIPDEU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="tipdeuDescripcion" type="string">
             <column name="TIPDEU_DESCRIPCION" length="100" />
