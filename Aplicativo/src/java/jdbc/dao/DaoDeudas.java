@@ -39,5 +39,12 @@ public class DaoDeudas extends HibernateDaoSupport implements ITDeudas {
         }
         return null;
     }
+    
+     @Override
+    public List<CivDeudas>  buscarHistorialDeudasPersonas(int idPersonas) throws Exception {
+        String hql = "from CivDeudas where civPersonas.perId=:deuId";
+        List list = getHibernateTemplate().findByNamedParam(hql, "deuId", new BigDecimal(idPersonas));
+       return list;
+    }
 
 }

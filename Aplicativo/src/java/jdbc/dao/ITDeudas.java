@@ -5,6 +5,7 @@
  */
 package jdbc.dao;
 
+import java.util.List;
 import persistencias.CivDeudas;
 
 /**
@@ -13,6 +14,10 @@ import persistencias.CivDeudas;
  */
 public interface ITDeudas {
     public long insert(CivDeudas civDeudas) throws Exception;
+    
     public boolean update(CivDeudas civDeudas)throws Exception;
+    
     public CivDeudas getDeuda(int deu_id)throws Exception;
+
+     public List<CivDeudas>  buscarHistorialDeudasPersonas(int idPersonas) throws Exception;
 }

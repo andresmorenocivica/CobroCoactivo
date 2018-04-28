@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -29,7 +31,10 @@ public class Personas {
     private Date fechaFinal;
     private Date fechaProceso;
     private TipoDocumentos tipoDocumentoPersona;
-
+    private boolean editable = false;
+    private List<DatosPersona> listaDatosPersona = new ArrayList<>();
+    private List<Deudas> listaDeudas = new ArrayList<>();
+    
     /**
      * @return the id
      */
@@ -266,6 +271,42 @@ public class Personas {
      */
     public void setTipoDocumentoPersona(TipoDocumentos tipoDocumentoPersona) {
         this.tipoDocumentoPersona = tipoDocumentoPersona;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+    }
+
+    /**
+     * @return the listaDatosPersona
+     */
+    public List<DatosPersona> getListaDatosPersona() {
+        return listaDatosPersona;
+    }
+
+    /**
+     * @param listaDatosPersona the listaDatosPersona to set
+     */
+    public void setListaDatosPersona(List<DatosPersona> listaDatosPersona) {
+        this.listaDatosPersona = listaDatosPersona;
+    }
+
+    /**
+     * @return the listaDeudas
+     */
+    public List<Deudas> getListaDeudas() {
+        return listaDeudas;
+    }
+
+    /**
+     * @param listaDeudas the listaDeudas to set
+     */
+    public void setListaDeudas(List<Deudas> listaDeudas) {
+        this.listaDeudas = listaDeudas;
     }
 
     

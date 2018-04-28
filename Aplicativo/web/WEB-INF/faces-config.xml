@@ -93,4 +93,17 @@
         <managed-bean-class>beans.BeanRequest</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>gestionPersonasBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionPersonas</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+            <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>gestionPersonasBO</property-name>
+            <value>#{GestionPersonasBO}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

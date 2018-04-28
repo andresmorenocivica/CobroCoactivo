@@ -5,6 +5,7 @@
  */
 package beans;
 
+import model.Personas;
 import model.Usuarios;
 
 /**
@@ -21,6 +22,8 @@ public class BeanRequest {
     /// OBJETO PARA INTERACTUAR CON EL DETALLE USUARIO
     private Usuarios usuario;
     
+    //se declara un objeto para ver eñ detalle persona
+    private Personas personas;
     
 
     /**
@@ -56,6 +59,14 @@ public class BeanRequest {
      */
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
+    }
+
+    public Personas getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(Personas personas) {
+        this.personas = personas;
     }
 
   

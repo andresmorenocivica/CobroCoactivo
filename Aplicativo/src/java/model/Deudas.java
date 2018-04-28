@@ -23,6 +23,7 @@ public class Deudas {
     private long idProcesoJuridico;
     private String referencia;
     private Date fecha;
+    private Date fechaDeuda;
 
     /**
      * @return the id
@@ -162,6 +163,20 @@ public class Deudas {
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the fechaDeuda
+     */
+    public Date getFechaDeuda() {
+        return fechaDeuda;
+    }
+
+    /**
+     * @param fechaDeuda the fechaDeuda to set
+     */
+    public void setFechaDeuda(Date fechaDeuda) {
+        this.fechaDeuda = fechaDeuda;
     }
 
     
