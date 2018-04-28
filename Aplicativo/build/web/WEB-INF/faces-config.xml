@@ -106,4 +106,17 @@
             <value>#{GestionPersonasBO}</value>
         </managed-property>
     </managed-bean>
+      <managed-bean>
+        <managed-bean-name>gestionEstadosBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionEstados</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>gestionEstadosBO</property-name>
+            <value>#{GestionEstadosBO}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>
