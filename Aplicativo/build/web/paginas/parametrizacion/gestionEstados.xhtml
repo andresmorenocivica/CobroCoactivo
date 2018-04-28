@@ -4,133 +4,174 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
         <ui:composition template="./../../plantillas/PlantillaGeneral.xhtml">
             <ui:define name="content">
-                <h:form id="frmExample">
+                <h:form id="frmEstadosParametricos">
                     <div class="content-wrapper">
                         <section class="content-header">
                             <h1>
-                                Consultas
-                                <small>guia formulario para consultas</small>
+                                Estados
+                                <small>Formulario para adminstrar los estados del sistema</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                                <li><a href="#">Example</a></li>
-                                <li class="active">Consultas</li>
+                                <li><a href="#">Estados</a></li>
+                                <li class="active">Gestión Estados</li>
                             </ol>
                         </section>
                         <section class="content">
-                            <!-- Default box -->
-                            <div class="box box-danger">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Busquedas</h3>
-                                </div>
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- Custom Tabs -->
-                                            <div class="nav-tabs-custom" >
-                                                <ul class="nav nav-tabs" >
-                                                    <li class="active" ><a href="#numero" data-toggle="tab">Nombre Usuario</a></li>
-                                                    <li><a href="#persona" data-toggle="tab">Persona</a></li>
-                                                    <li><a href="#fechas" data-toggle="tab">Fechas creación Usuario</a></li>
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="numero">
-                                                        <br></br>
-                                                        <div class="row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-xs-12 visible-xs visible-sm">
-                                                                <div class="input-group margin-2">
-                                                                    <label class="control-label align-left">Nombre Usuario</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 visible-lg visible-md" style="width: 13%">
-                                                                <div class="input-group margin-2">
-                                                                    <label class="control-label align-left">Numero</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                                                                <div class="input-group margin-5">
-                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtNombreUsuario"></h:inputText>
-                                                                    <span class="input-group-btn">
-                                                                        <h:commandLink class="btn btn-info btn-danger" value="Buscar">
-                                                                        </h:commandLink>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <br></br>
+                            <div id="accordion">
+                                <div class="panel-group">
+                                    <c:forEach items="#{gestionEstadosBean.listaTablaEstadosParametricos}" var="estadosTabla">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" id="heading#{estadosTabla.id}">
+                                                <h4 class="panel-title row">
+                                                    <div class="col-sm-11">
+                                                        <a data-toggle="collapse" data-target="#collapse#{estadosTabla.id}" aria-controls="collapse#{estadosTabla.id}">#{estadosTabla.nombre}</a>
+                                                        <span class="badge badge-pill badge-primary">#{estadosTabla.listaDatosEstados.size()}</span>
                                                     </div>
-                                                    <!-- /.tab-pane -->
-                                                    <div class="tab-pane" id="persona">
-                                                        <br></br>
-                                                        <div class="row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-xs-12 visible-xs visible-sm">
-                                                                <div class="input-group margin-2">
-                                                                    <label class="control-label align-left">Dato Persona</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-3 visible-lg visible-md" style="width: 13%">
-                                                                <div class="input-group margin-2">
-                                                                    <label class="control-label align-left">Dato Persona</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                                                                <div class="input-group margin-5">
-                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtPersona"></h:inputText>
-                                                                    <span class="input-group-btn">
-                                                                        <h:commandLink class="btn btn-info btn-danger" value="Buscar">
-                                                                        </h:commandLink>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <br></br> 
+                                                    <div class="col-sm-1 text-right">
+                                                        <h:commandLink class="fa fa-plus-square" onclick="$('#detalleParametro').modal('show');">
+                                                            <f:ajax event="click" render="frmEstadosParametricos:pnModalUpdate frmEstadosParametricos:pnlActualizar frmEstadosParametricos:pnlGuardar" listener="#{gestionEstadosBean.crearRegistro(estadoDato)}"></f:ajax>
+                                                        </h:commandLink> 
                                                     </div>
-                                                    <!-- /.tab-pane -->
-                                                    <div class="tab-pane" id="fechas">
-                                                        <br></br>
-                                                        <div class="row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-lg-3 visible-lg visible-md" style="width: 13%">
-                                                                <div class="input-group margin-2">
-                                                                    <label class="control-label align-left">Fecha</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <div class="input-group margin-5">
-                                                                        <p:watermark for="buscarFechaIngreso" value="dd/mm/aaaa"/>
-                                                                        <h:inputText id="buscarFechaIngreso" class="date datepicker form-control" value="#{gestionpersonasBean.buscarFecha}" maxlength="10">
-                                                                            <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                                                                        </h:inputText><!--VALUE OK-->
-                                                                        <span class="input-group-btn">
-                                                                            <h:commandLink class="btn btn-info btn-danger" value="Buscar">
-                                                                            </h:commandLink>
-                                                                        </span>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr></hr>
-                                                    </div>
-                                                    <!-- /.tab-pane -->
-                                                </div>
-                                                <!-- /.tab-content -->
+                                                </h4>
                                             </div>
-                                            <!-- nav-tabs-custom -->
+                                            <div id="collapse#{estadosTabla.id}" aria-labelledby="heading#{tabla1}" data-parent="#accordion" class="collapse">
+                                                <h:panelGroup id="tablaGeneral">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Id</th>
+                                                                <th>Descripción</th>
+                                                                <th>Fecha Inicial</th>
+                                                                <th>Fecha Final</th>
+                                                                <th>Acción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <c:forEach items="#{estadosTabla.listaDatosEstados}" var="datoEstado">
+                                                                <tr>
+                                                                    <td>#{datoEstado.id}</td>
+                                                                    <td>#{datoEstado.descripcion}</td>
+                                                                    <td>
+                                                                        <h:outputText value="#{datoEstado.fechaInicial}">
+                                                                            <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                                        </h:outputText>
+                                                                    </td>
+                                                                    <td>
+                                                                        <h:outputText value="#{datoEstado.fechaInicial}">
+                                                                            <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                                        </h:outputText>
+                                                                    </td>
+                                                                    <td class="row">
+                                                                        <h:commandLink class="fa fa-pencil-square-o col-sm-4" onclick="$('#detalleParametro').modal('show');">
+                                                                            <f:ajax event="click" listener="#{gestionEstadosBean.setRegistroEstado(datoEstado)}" render="frmEstadosParametricos:pnModalUpdate"></f:ajax>
+                                                                            <f:ajax event="click" listener="#{gestionEstadosBean.registroEstado.setEditable(true)}" render="frmEstadosParametricos:pnlActualizar frmEstadosParametricos:pnlGuardar"></f:ajax>
+                                                                        </h:commandLink>
+                                                                        <h:commandLink class="fa fa-trash col-sm-4" onclick="$('#eliminarParametro').modal('show');">
+                                                                            <f:ajax event="click" listener="#{gestionEstadosBean.setRegistroEstado(datoEstado)}"></f:ajax>
+                                                                        </h:commandLink> 
+                                                                    </td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </h:panelGroup>
+                                            </div>
                                         </div>
-                                        <!-- /.col -->
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </section>
+                    </div>
+
+                    <!-- MODAL PARA ADICIONAR O EDITAR UN DATO DE TABLAS ESTADOS -->
+                    <div class="modal fade" id="detalleParametro" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Actualizar Estado</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <p:messages closable="true" autoUpdate="true" id="msggeneral" showDetail="false" />
+                                    <h:panelGroup class="col-lg-12" id="pnModalUpdate">
+                                        <div class="row">
+                                            <div class="modal-header">
+
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Id</label> 
+                                                    <h:inputText class="form-control" id="txtId" value="#{gestionParametrosBean.registroParametro.id}" disabled="true"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label>Descripción</label>
+                                                    <h:inputText class="form-control" id="txtDescription" value="#{gestionParametrosBean.registroParametro.nombre}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Fecha Inicial</label>
+                                                    <h:inputText class="date datepicker form-control" id="txtFechaInicial" value="#{gestionParametrosBean.registroParametro.fechaInicial}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Fecha Final</label>
+                                                    <h:inputText id="txtFechaFinal" class="date datepicker form-control" value="#{gestionParametrosBean.registroParametro.fechaFinal}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:panelGroup>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <h:panelGrid id="pnlActualizar">
+                                                <h:panelGroup rendered="#{gestionParametrosBean.editable}">
+                                                    <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
+                                                        <f:ajax event="click" listener="#{gestionParametrosBean.update()}" render="frmEstadosParametricos:tablaGeneral" execute="frmEstadosParametricos:txtDescription  frmEstadosParametricos:txtFechaFinal frmEstadosParametricos:txtFechaInicial"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="pnlGuardar">
+                                                <h:panelGroup rendered="#{!gestionParametrosBean.editable}">
+                                                    <h:commandLink value="Guardar" id="btnGuardar" class="btn btn-success">
+                                                        <f:ajax event="click" listener="#{gestionParametrosBean.save()}" render="frmEstadosParametricos:tablaGeneral" execute="frmEstadosParametricos:txtDescription  frmEstadosParametricos:txtFechaFinal frmEstadosParametricos:txtFechaInicial"/>
+                                                    </h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
                     </div>
                 </h:form>
             </ui:define>

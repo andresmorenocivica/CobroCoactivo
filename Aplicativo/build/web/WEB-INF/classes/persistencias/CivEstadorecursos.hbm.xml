@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivEstadorecursos" table="CIV_ESTADORECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="estrecId" type="big_decimal">
+            <column name="ESTREC_ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="estrecDescripcion" type="string">
+            <column name="ESTREC_DESCRIPCION" length="100" />
+        </property>
+        <property name="estrecFechainicial" type="date">
+            <column name="ESTREC_FECHAINICIAL" length="7" />
+        </property>
+        <property name="estrecFechafinal" type="date">
+            <column name="ESTREC_FECHAFINAL" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

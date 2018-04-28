@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivEstadoattempts" table="CIV_ESTADOATTEMPTS" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="estattId" type="big_decimal">
+            <column name="ESTATT_ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="estattDescripcion" type="string">
+            <column name="ESTATT_DESCRIPCION" length="100" />
+        </property>
+        <property name="estattFechainicial" type="date">
+            <column name="ESTATT_FECHAINICIAL" length="7" />
+        </property>
+        <property name="estaattFechafinal" type="date">
+            <column name="ESTAATT_FECHAFINAL" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 26/04/2018 04:34:58 PM by Hibernate Tools 4.3.1
+// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,8 +12,8 @@ public class CivDetalleDeudas  implements java.io.Serializable {
 
 
      private BigDecimal detdeuId;
-     private CivConceptos civConceptos;
      private CivDeudas civDeudas;
+     private CivConceptos civConceptos;
      private String detdeuReferencia;
      private Date detdeuFecha;
      private BigDecimal detdeuEstado;
@@ -23,18 +23,18 @@ public class CivDetalleDeudas  implements java.io.Serializable {
     }
 
 	
-    public CivDetalleDeudas(BigDecimal detdeuId, CivConceptos civConceptos, CivDeudas civDeudas, Date detdeuFecha, BigDecimal detdeuEstado, BigDecimal detdeuValor) {
+    public CivDetalleDeudas(BigDecimal detdeuId, CivDeudas civDeudas, CivConceptos civConceptos, Date detdeuFecha, BigDecimal detdeuEstado, BigDecimal detdeuValor) {
         this.detdeuId = detdeuId;
-        this.civConceptos = civConceptos;
         this.civDeudas = civDeudas;
+        this.civConceptos = civConceptos;
         this.detdeuFecha = detdeuFecha;
         this.detdeuEstado = detdeuEstado;
         this.detdeuValor = detdeuValor;
     }
-    public CivDetalleDeudas(BigDecimal detdeuId, CivConceptos civConceptos, CivDeudas civDeudas, String detdeuReferencia, Date detdeuFecha, BigDecimal detdeuEstado, BigDecimal detdeuValor) {
+    public CivDetalleDeudas(BigDecimal detdeuId, CivDeudas civDeudas, CivConceptos civConceptos, String detdeuReferencia, Date detdeuFecha, BigDecimal detdeuEstado, BigDecimal detdeuValor) {
        this.detdeuId = detdeuId;
-       this.civConceptos = civConceptos;
        this.civDeudas = civDeudas;
+       this.civConceptos = civConceptos;
        this.detdeuReferencia = detdeuReferencia;
        this.detdeuFecha = detdeuFecha;
        this.detdeuEstado = detdeuEstado;
@@ -48,19 +48,19 @@ public class CivDetalleDeudas  implements java.io.Serializable {
     public void setDetdeuId(BigDecimal detdeuId) {
         this.detdeuId = detdeuId;
     }
-    public CivConceptos getCivConceptos() {
-        return this.civConceptos;
-    }
-    
-    public void setCivConceptos(CivConceptos civConceptos) {
-        this.civConceptos = civConceptos;
-    }
     public CivDeudas getCivDeudas() {
         return this.civDeudas;
     }
     
     public void setCivDeudas(CivDeudas civDeudas) {
         this.civDeudas = civDeudas;
+    }
+    public CivConceptos getCivConceptos() {
+        return this.civConceptos;
+    }
+    
+    public void setCivConceptos(CivConceptos civConceptos) {
+        this.civConceptos = civConceptos;
     }
     public String getDetdeuReferencia() {
         return this.detdeuReferencia;

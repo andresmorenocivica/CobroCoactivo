@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 26/04/2018 04:34:58 PM by Hibernate Tools 4.3.1
+// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,8 +12,8 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
 
 
      private BigDecimal detprojuId;
-     private CivProcesosjuridicos civProcesosjuridicos;
      private CivUsuarios civUsuarios;
+     private CivProcesosjuridicos civProcesosjuridicos;
      private BigDecimal detprojuTipo;
      private BigDecimal detprojuDiainicial;
      private BigDecimal detprojuDiafinal;
@@ -30,10 +30,10 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     public CivDetalleProcesojuridico(BigDecimal detprojuId) {
         this.detprojuId = detprojuId;
     }
-    public CivDetalleProcesojuridico(BigDecimal detprojuId, CivProcesosjuridicos civProcesosjuridicos, CivUsuarios civUsuarios, BigDecimal detprojuTipo, BigDecimal detprojuDiainicial, BigDecimal detprojuDiafinal, BigDecimal repId, Boolean detprojuDireccion, BigDecimal detprojuEstado, Date detprojuFechainicial, Date detprojuFechafinal) {
+    public CivDetalleProcesojuridico(BigDecimal detprojuId, CivUsuarios civUsuarios, CivProcesosjuridicos civProcesosjuridicos, BigDecimal detprojuTipo, BigDecimal detprojuDiainicial, BigDecimal detprojuDiafinal, BigDecimal repId, Boolean detprojuDireccion, BigDecimal detprojuEstado, Date detprojuFechainicial, Date detprojuFechafinal) {
        this.detprojuId = detprojuId;
-       this.civProcesosjuridicos = civProcesosjuridicos;
        this.civUsuarios = civUsuarios;
+       this.civProcesosjuridicos = civProcesosjuridicos;
        this.detprojuTipo = detprojuTipo;
        this.detprojuDiainicial = detprojuDiainicial;
        this.detprojuDiafinal = detprojuDiafinal;
@@ -51,19 +51,19 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     public void setDetprojuId(BigDecimal detprojuId) {
         this.detprojuId = detprojuId;
     }
-    public CivProcesosjuridicos getCivProcesosjuridicos() {
-        return this.civProcesosjuridicos;
-    }
-    
-    public void setCivProcesosjuridicos(CivProcesosjuridicos civProcesosjuridicos) {
-        this.civProcesosjuridicos = civProcesosjuridicos;
-    }
     public CivUsuarios getCivUsuarios() {
         return this.civUsuarios;
     }
     
     public void setCivUsuarios(CivUsuarios civUsuarios) {
         this.civUsuarios = civUsuarios;
+    }
+    public CivProcesosjuridicos getCivProcesosjuridicos() {
+        return this.civProcesosjuridicos;
+    }
+    
+    public void setCivProcesosjuridicos(CivProcesosjuridicos civProcesosjuridicos) {
+        this.civProcesosjuridicos = civProcesosjuridicos;
     }
     public BigDecimal getDetprojuTipo() {
         return this.detprojuTipo;

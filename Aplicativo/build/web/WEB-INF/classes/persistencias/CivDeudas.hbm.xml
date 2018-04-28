@@ -1,21 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26/04/2018 04:35:00 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivDeudas" table="CIV_DEUDAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="deuId" type="big_decimal">
             <column name="DEU_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
-        <many-to-one name="civPersonas" class="persistencias.CivPersonas" fetch="select">
-            <column name="PER_ID" precision="22" scale="0" not-null="true">
-                <comment>PERSONA A QUIEN PERTENECE LA DEUDA</comment>
-            </column>
-        </many-to-one>
-        <many-to-one name="civProcesosjuridicos" class="persistencias.CivProcesosjuridicos" fetch="select">
-            <column name="PROJU_ID" precision="22" scale="0" not-null="true">
-                <comment>PROCESO JURIDICO DE LA DEUDA</comment>
+        <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
+            <column name="USU_ID" precision="22" scale="0" not-null="true">
+                <comment>USUARIO QUIEN CREO LA DEUDA EN EL SISTEMA</comment>
             </column>
         </many-to-one>
         <many-to-one name="civTipodeuda" class="persistencias.CivTipodeuda" fetch="select">
@@ -23,9 +18,14 @@
                 <comment>TIPO DE LA DEUDA</comment>
             </column>
         </many-to-one>
-        <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
-            <column name="USU_ID" precision="22" scale="0" not-null="true">
-                <comment>USUARIO QUIEN CREO LA DEUDA EN EL SISTEMA</comment>
+        <many-to-one name="civProcesosjuridicos" class="persistencias.CivProcesosjuridicos" fetch="select">
+            <column name="PROJU_ID" precision="22" scale="0" not-null="true">
+                <comment>PROCESO JURIDICO DE LA DEUDA</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civPersonas" class="persistencias.CivPersonas" fetch="select">
+            <column name="PER_ID" precision="22" scale="0" not-null="true">
+                <comment>PERSONA A QUIEN PERTENECE LA DEUDA</comment>
             </column>
         </many-to-one>
         <property name="deuFecha" type="date">
@@ -35,7 +35,7 @@
         </property>
         <property name="deuEstado" type="big_decimal">
             <column name="DEU_ESTADO" precision="22" scale="0" not-null="true">
-                <comment>ESTADO DE LA DEUDA</comment>
+                <comment>ESTADO QUE SE OBTUVO LA DEUDA</comment>
             </column>
         </property>
         <property name="deuReferencia" type="string">
@@ -51,6 +51,11 @@
         <property name="deuSaldo" type="big_decimal">
             <column name="DEU_SALDO" precision="22" scale="0" not-null="true">
                 <comment>SALDO DE LA DEUDA</comment>
+            </column>
+        </property>
+        <property name="deuFechadeuda" type="date">
+            <column name="DEU_FECHADEUDA" length="7" not-null="true">
+                <comment>FECHA DE LA DEUDA</comment>
             </column>
         </property>
         <set name="civDetalleDeudases" table="CIV_DETALLE_DEUDAS" inverse="true" lazy="true" fetch="select">

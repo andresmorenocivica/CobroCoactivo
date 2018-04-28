@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26/04/2018 04:35:00 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivPerfilrecurso" table="CIV_PERFILRECURSO" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan los recursos disponibles para los diferentes perfiles de usuario del sistema.</comment>
@@ -13,14 +13,14 @@
                 <column name="USU_ID" precision="22" scale="0" />
             </key-property>
         </composite-id>
-        <many-to-one name="civRecursos" class="persistencias.CivRecursos" update="false" insert="false" fetch="select">
-            <column name="REC_ID" precision="22" scale="0" not-null="true">
-                <comment>ID del recurso</comment>
-            </column>
-        </many-to-one>
         <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" update="false" insert="false" fetch="select">
             <column name="USU_ID" precision="22" scale="0" not-null="true">
                 <comment>ID unico del usuario</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civRecursos" class="persistencias.CivRecursos" update="false" insert="false" fetch="select">
+            <column name="REC_ID" precision="22" scale="0" not-null="true">
+                <comment>ID del recurso</comment>
             </column>
         </many-to-one>
         <property name="perrecFechaini" type="date">

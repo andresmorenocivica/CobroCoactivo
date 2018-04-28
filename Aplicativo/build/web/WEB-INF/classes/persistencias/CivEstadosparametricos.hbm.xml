@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivEstadosparametricos" table="CIV_ESTADOSPARAMETRICOS" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="estparId" type="big_decimal">
+            <column name="ESTPAR_ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="estparNombretabla" type="string">
+            <column name="ESTPAR_NOMBRETABLA" length="50" />
+        </property>
+        <property name="estparNombre" type="string">
+            <column name="ESTPAR_NOMBRE" length="50" />
+        </property>
+        <property name="estparFechainicial" type="date">
+            <column name="ESTPAR_FECHAINICIAL" length="7" />
+        </property>
+        <property name="estparFechafinal" type="date">
+            <column name="ESTPAR_FECHAFINAL" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>
