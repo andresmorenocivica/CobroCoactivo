@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -13,9 +13,9 @@ public class CivUspHistoria  implements java.io.Serializable {
 
      private BigDecimal id;
      private CivUsuarios civUsuarios;
+     private CivEstadouspHistoria civEstadouspHistoria;
      private String PData;
      private Date fechaProceso;
-     private BigDecimal estado;
 
     public CivUspHistoria() {
     }
@@ -24,12 +24,12 @@ public class CivUspHistoria  implements java.io.Serializable {
     public CivUspHistoria(BigDecimal id) {
         this.id = id;
     }
-    public CivUspHistoria(BigDecimal id, CivUsuarios civUsuarios, String PData, Date fechaProceso, BigDecimal estado) {
+    public CivUspHistoria(BigDecimal id, CivUsuarios civUsuarios, CivEstadouspHistoria civEstadouspHistoria, String PData, Date fechaProceso) {
        this.id = id;
        this.civUsuarios = civUsuarios;
+       this.civEstadouspHistoria = civEstadouspHistoria;
        this.PData = PData;
        this.fechaProceso = fechaProceso;
-       this.estado = estado;
     }
    
     public BigDecimal getId() {
@@ -46,6 +46,13 @@ public class CivUspHistoria  implements java.io.Serializable {
     public void setCivUsuarios(CivUsuarios civUsuarios) {
         this.civUsuarios = civUsuarios;
     }
+    public CivEstadouspHistoria getCivEstadouspHistoria() {
+        return this.civEstadouspHistoria;
+    }
+    
+    public void setCivEstadouspHistoria(CivEstadouspHistoria civEstadouspHistoria) {
+        this.civEstadouspHistoria = civEstadouspHistoria;
+    }
     public String getPData() {
         return this.PData;
     }
@@ -59,13 +66,6 @@ public class CivUspHistoria  implements java.io.Serializable {
     
     public void setFechaProceso(Date fechaProceso) {
         this.fechaProceso = fechaProceso;
-    }
-    public BigDecimal getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(BigDecimal estado) {
-        this.estado = estado;
     }
 
 

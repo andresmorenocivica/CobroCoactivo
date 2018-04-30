@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -15,8 +15,8 @@ public class CivProcesosjuridicos  implements java.io.Serializable {
 
      private BigDecimal projuId;
      private CivUsuarios civUsuarios;
+     private CivEstadoprocesojuridicos civEstadoprocesojuridicos;
      private String projuNombre;
-     private BigDecimal projuEstado;
      private Date projuFechainicial;
      private Date projuFechafinal;
      private BigDecimal divId;
@@ -31,11 +31,11 @@ public class CivProcesosjuridicos  implements java.io.Serializable {
         this.projuId = projuId;
         this.projuNombre = projuNombre;
     }
-    public CivProcesosjuridicos(BigDecimal projuId, CivUsuarios civUsuarios, String projuNombre, BigDecimal projuEstado, Date projuFechainicial, Date projuFechafinal, BigDecimal divId, Set civDeudases, Set civDetalleProcesojuridicos) {
+    public CivProcesosjuridicos(BigDecimal projuId, CivUsuarios civUsuarios, CivEstadoprocesojuridicos civEstadoprocesojuridicos, String projuNombre, Date projuFechainicial, Date projuFechafinal, BigDecimal divId, Set civDeudases, Set civDetalleProcesojuridicos) {
        this.projuId = projuId;
        this.civUsuarios = civUsuarios;
+       this.civEstadoprocesojuridicos = civEstadoprocesojuridicos;
        this.projuNombre = projuNombre;
-       this.projuEstado = projuEstado;
        this.projuFechainicial = projuFechainicial;
        this.projuFechafinal = projuFechafinal;
        this.divId = divId;
@@ -57,19 +57,19 @@ public class CivProcesosjuridicos  implements java.io.Serializable {
     public void setCivUsuarios(CivUsuarios civUsuarios) {
         this.civUsuarios = civUsuarios;
     }
+    public CivEstadoprocesojuridicos getCivEstadoprocesojuridicos() {
+        return this.civEstadoprocesojuridicos;
+    }
+    
+    public void setCivEstadoprocesojuridicos(CivEstadoprocesojuridicos civEstadoprocesojuridicos) {
+        this.civEstadoprocesojuridicos = civEstadoprocesojuridicos;
+    }
     public String getProjuNombre() {
         return this.projuNombre;
     }
     
     public void setProjuNombre(String projuNombre) {
         this.projuNombre = projuNombre;
-    }
-    public BigDecimal getProjuEstado() {
-        return this.projuEstado;
-    }
-    
-    public void setProjuEstado(BigDecimal projuEstado) {
-        this.projuEstado = projuEstado;
     }
     public Date getProjuFechainicial() {
         return this.projuFechainicial;

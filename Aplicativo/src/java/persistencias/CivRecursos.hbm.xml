@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivRecursos" table="CIV_RECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan los recursos disponibles para los usuarios del sistema.</comment>
@@ -24,6 +24,11 @@
                 <comment>ID de modulo</comment>
             </column>
         </many-to-one>
+        <many-to-one name="civEstadorecursos" class="persistencias.CivEstadorecursos" fetch="select">
+            <column name="ESTREC_ID" precision="22" scale="0">
+                <comment>Estado del registro</comment>
+            </column>
+        </many-to-one>
         <property name="recNombre" type="string">
             <column name="REC_NOMBRE" length="100">
                 <comment>Nombre de recurso</comment>
@@ -42,11 +47,6 @@
         <property name="recFechafin" type="date">
             <column name="REC_FECHAFIN" length="7">
                 <comment>Fecha fin de registro</comment>
-            </column>
-        </property>
-        <property name="recEstado" type="big_decimal">
-            <column name="REC_ESTADO" precision="22" scale="0">
-                <comment>Estado del registro</comment>
             </column>
         </property>
         <property name="recCarpeta" type="string">

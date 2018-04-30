@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class CivTipoconcepto  implements java.io.Serializable {
 
 
      private BigDecimal tipconId;
+     private CivEstadotipoconcepto civEstadotipoconcepto;
      private String tipconDescripcion;
-     private BigDecimal tipconEstado;
      private Date tipconFechainicial;
      private Date tipconFechafinal;
      private String tipconNombrecorto;
@@ -29,10 +29,10 @@ public class CivTipoconcepto  implements java.io.Serializable {
     public CivTipoconcepto(BigDecimal tipconId) {
         this.tipconId = tipconId;
     }
-    public CivTipoconcepto(BigDecimal tipconId, String tipconDescripcion, BigDecimal tipconEstado, Date tipconFechainicial, Date tipconFechafinal, String tipconNombrecorto, BigDecimal tipconCodigo, Set civConceptoses) {
+    public CivTipoconcepto(BigDecimal tipconId, CivEstadotipoconcepto civEstadotipoconcepto, String tipconDescripcion, Date tipconFechainicial, Date tipconFechafinal, String tipconNombrecorto, BigDecimal tipconCodigo, Set civConceptoses) {
        this.tipconId = tipconId;
+       this.civEstadotipoconcepto = civEstadotipoconcepto;
        this.tipconDescripcion = tipconDescripcion;
-       this.tipconEstado = tipconEstado;
        this.tipconFechainicial = tipconFechainicial;
        this.tipconFechafinal = tipconFechafinal;
        this.tipconNombrecorto = tipconNombrecorto;
@@ -47,19 +47,19 @@ public class CivTipoconcepto  implements java.io.Serializable {
     public void setTipconId(BigDecimal tipconId) {
         this.tipconId = tipconId;
     }
+    public CivEstadotipoconcepto getCivEstadotipoconcepto() {
+        return this.civEstadotipoconcepto;
+    }
+    
+    public void setCivEstadotipoconcepto(CivEstadotipoconcepto civEstadotipoconcepto) {
+        this.civEstadotipoconcepto = civEstadotipoconcepto;
+    }
     public String getTipconDescripcion() {
         return this.tipconDescripcion;
     }
     
     public void setTipconDescripcion(String tipconDescripcion) {
         this.tipconDescripcion = tipconDescripcion;
-    }
-    public BigDecimal getTipconEstado() {
-        return this.tipconEstado;
-    }
-    
-    public void setTipconEstado(BigDecimal tipconEstado) {
-        this.tipconEstado = tipconEstado;
     }
     public Date getTipconFechainicial() {
         return this.tipconFechainicial;

@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class CivDatospersona  implements java.io.Serializable {
      private BigDecimal datperId;
      private CivTipodatopersona civTipodatopersona;
      private CivPersonas civPersonas;
+     private CivEstadodatospersona civEstadodatospersona;
      private String datperDescripcion;
-     private BigDecimal datperEstado;
      private Date datperFechainicial;
      private Date datperFechafinal;
 
@@ -23,20 +23,20 @@ public class CivDatospersona  implements java.io.Serializable {
     }
 
 	
-    public CivDatospersona(BigDecimal datperId, CivTipodatopersona civTipodatopersona, CivPersonas civPersonas, String datperDescripcion, BigDecimal datperEstado, Date datperFechainicial) {
+    public CivDatospersona(BigDecimal datperId, CivTipodatopersona civTipodatopersona, CivPersonas civPersonas, CivEstadodatospersona civEstadodatospersona, String datperDescripcion, Date datperFechainicial) {
         this.datperId = datperId;
         this.civTipodatopersona = civTipodatopersona;
         this.civPersonas = civPersonas;
+        this.civEstadodatospersona = civEstadodatospersona;
         this.datperDescripcion = datperDescripcion;
-        this.datperEstado = datperEstado;
         this.datperFechainicial = datperFechainicial;
     }
-    public CivDatospersona(BigDecimal datperId, CivTipodatopersona civTipodatopersona, CivPersonas civPersonas, String datperDescripcion, BigDecimal datperEstado, Date datperFechainicial, Date datperFechafinal) {
+    public CivDatospersona(BigDecimal datperId, CivTipodatopersona civTipodatopersona, CivPersonas civPersonas, CivEstadodatospersona civEstadodatospersona, String datperDescripcion, Date datperFechainicial, Date datperFechafinal) {
        this.datperId = datperId;
        this.civTipodatopersona = civTipodatopersona;
        this.civPersonas = civPersonas;
+       this.civEstadodatospersona = civEstadodatospersona;
        this.datperDescripcion = datperDescripcion;
-       this.datperEstado = datperEstado;
        this.datperFechainicial = datperFechainicial;
        this.datperFechafinal = datperFechafinal;
     }
@@ -62,19 +62,19 @@ public class CivDatospersona  implements java.io.Serializable {
     public void setCivPersonas(CivPersonas civPersonas) {
         this.civPersonas = civPersonas;
     }
+    public CivEstadodatospersona getCivEstadodatospersona() {
+        return this.civEstadodatospersona;
+    }
+    
+    public void setCivEstadodatospersona(CivEstadodatospersona civEstadodatospersona) {
+        this.civEstadodatospersona = civEstadodatospersona;
+    }
     public String getDatperDescripcion() {
         return this.datperDescripcion;
     }
     
     public void setDatperDescripcion(String datperDescripcion) {
         this.datperDescripcion = datperDescripcion;
-    }
-    public BigDecimal getDatperEstado() {
-        return this.datperEstado;
-    }
-    
-    public void setDatperEstado(BigDecimal datperEstado) {
-        this.datperEstado = datperEstado;
     }
     public Date getDatperFechainicial() {
         return this.datperFechainicial;

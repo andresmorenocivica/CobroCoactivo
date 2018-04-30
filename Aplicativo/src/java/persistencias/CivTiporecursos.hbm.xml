@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivTiporecursos" table="CIV_TIPORECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tiprecId" type="big_decimal">
             <column name="TIPREC_ID" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="civEstadotiporecursos" class="persistencias.CivEstadotiporecursos" fetch="select">
+            <column name="ESTTIPREC_ID" precision="22" scale="0" />
+        </many-to-one>
         <property name="tiprecDescripcion" type="string">
             <column name="TIPREC_DESCRIPCION" length="100" />
-        </property>
-        <property name="tiprecEstado" type="big_decimal">
-            <column name="TIPREC_ESTADO" precision="22" scale="0" />
         </property>
         <property name="tiprecFechafinal" type="date">
             <column name="TIPREC_FECHAFINAL" length="7" />

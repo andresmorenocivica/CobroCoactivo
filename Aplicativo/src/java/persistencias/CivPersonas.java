@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -15,6 +15,7 @@ public class CivPersonas  implements java.io.Serializable {
 
      private BigDecimal perId;
      private CivTipodocumentos civTipodocumentos;
+     private CivEstadopersona civEstadopersona;
      private String perDocumento;
      private Date perFechanac;
      private String perSexo;
@@ -24,7 +25,6 @@ public class CivPersonas  implements java.io.Serializable {
      private String perApellido2;
      private BigDecimal perLugarnacimiento;
      private Date perFechaexp;
-     private BigDecimal perEstado;
      private Date perFechainicial;
      private Date perFechafinal;
      private Date perFechaproceso;
@@ -37,17 +37,18 @@ public class CivPersonas  implements java.io.Serializable {
     }
 
 	
-    public CivPersonas(BigDecimal perId, CivTipodocumentos civTipodocumentos, String perDocumento, String perNombre1, String perApellido1, BigDecimal perEstado) {
+    public CivPersonas(BigDecimal perId, CivTipodocumentos civTipodocumentos, CivEstadopersona civEstadopersona, String perDocumento, String perNombre1, String perApellido1) {
         this.perId = perId;
         this.civTipodocumentos = civTipodocumentos;
+        this.civEstadopersona = civEstadopersona;
         this.perDocumento = perDocumento;
         this.perNombre1 = perNombre1;
         this.perApellido1 = perApellido1;
-        this.perEstado = perEstado;
     }
-    public CivPersonas(BigDecimal perId, CivTipodocumentos civTipodocumentos, String perDocumento, Date perFechanac, String perSexo, String perNombre1, String perNombre2, String perApellido1, String perApellido2, BigDecimal perLugarnacimiento, Date perFechaexp, BigDecimal perEstado, Date perFechainicial, Date perFechafinal, Date perFechaproceso, BigDecimal perLugarexpedicion, Set civUsuarioses, Set civDatospersonas, Set civDeudases) {
+    public CivPersonas(BigDecimal perId, CivTipodocumentos civTipodocumentos, CivEstadopersona civEstadopersona, String perDocumento, Date perFechanac, String perSexo, String perNombre1, String perNombre2, String perApellido1, String perApellido2, BigDecimal perLugarnacimiento, Date perFechaexp, Date perFechainicial, Date perFechafinal, Date perFechaproceso, BigDecimal perLugarexpedicion, Set civUsuarioses, Set civDatospersonas, Set civDeudases) {
        this.perId = perId;
        this.civTipodocumentos = civTipodocumentos;
+       this.civEstadopersona = civEstadopersona;
        this.perDocumento = perDocumento;
        this.perFechanac = perFechanac;
        this.perSexo = perSexo;
@@ -57,7 +58,6 @@ public class CivPersonas  implements java.io.Serializable {
        this.perApellido2 = perApellido2;
        this.perLugarnacimiento = perLugarnacimiento;
        this.perFechaexp = perFechaexp;
-       this.perEstado = perEstado;
        this.perFechainicial = perFechainicial;
        this.perFechafinal = perFechafinal;
        this.perFechaproceso = perFechaproceso;
@@ -80,6 +80,13 @@ public class CivPersonas  implements java.io.Serializable {
     
     public void setCivTipodocumentos(CivTipodocumentos civTipodocumentos) {
         this.civTipodocumentos = civTipodocumentos;
+    }
+    public CivEstadopersona getCivEstadopersona() {
+        return this.civEstadopersona;
+    }
+    
+    public void setCivEstadopersona(CivEstadopersona civEstadopersona) {
+        this.civEstadopersona = civEstadopersona;
     }
     public String getPerDocumento() {
         return this.perDocumento;
@@ -143,13 +150,6 @@ public class CivPersonas  implements java.io.Serializable {
     
     public void setPerFechaexp(Date perFechaexp) {
         this.perFechaexp = perFechaexp;
-    }
-    public BigDecimal getPerEstado() {
-        return this.perEstado;
-    }
-    
-    public void setPerEstado(BigDecimal perEstado) {
-        this.perEstado = perEstado;
     }
     public Date getPerFechainicial() {
         return this.perFechainicial;

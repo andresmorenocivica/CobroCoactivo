@@ -71,7 +71,7 @@ public class DaoLogin extends HibernateDaoSupport implements ITLogin, Serializab
      */
     @Override
     public CivUsuarios getUsuario(String nombre_usu) throws Exception {
-        List list = getHibernateTemplate().findByNamedParam("from CivUsuarios where usu_nombre = :nombre AND USU_FECHAFINAL is null", "nombre", nombre_usu);
+        List list = getHibernateTemplate().findByNamedParam("from CivUsuarios where usuNombre = :nombre AND usuFechafinal is null", "nombre", nombre_usu);
         if (list.size() > 0) {
             return (CivUsuarios) list.get(0);
         }

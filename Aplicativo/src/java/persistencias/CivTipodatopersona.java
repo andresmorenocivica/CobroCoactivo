@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class CivTipodatopersona  implements java.io.Serializable {
 
 
      private BigDecimal tipdatperId;
+     private CivEstadotipodatopersona civEstadotipodatopersona;
      private String tipdatperDescripcion;
-     private BigDecimal tipdatperEstado;
      private Date tipdatperFechainical;
      private Date tipdatperFechafinal;
      private String tipdatperNombrecorto;
@@ -29,10 +29,10 @@ public class CivTipodatopersona  implements java.io.Serializable {
     public CivTipodatopersona(BigDecimal tipdatperId) {
         this.tipdatperId = tipdatperId;
     }
-    public CivTipodatopersona(BigDecimal tipdatperId, String tipdatperDescripcion, BigDecimal tipdatperEstado, Date tipdatperFechainical, Date tipdatperFechafinal, String tipdatperNombrecorto, BigDecimal tipdatperCodigo, Set civDatospersonas) {
+    public CivTipodatopersona(BigDecimal tipdatperId, CivEstadotipodatopersona civEstadotipodatopersona, String tipdatperDescripcion, Date tipdatperFechainical, Date tipdatperFechafinal, String tipdatperNombrecorto, BigDecimal tipdatperCodigo, Set civDatospersonas) {
        this.tipdatperId = tipdatperId;
+       this.civEstadotipodatopersona = civEstadotipodatopersona;
        this.tipdatperDescripcion = tipdatperDescripcion;
-       this.tipdatperEstado = tipdatperEstado;
        this.tipdatperFechainical = tipdatperFechainical;
        this.tipdatperFechafinal = tipdatperFechafinal;
        this.tipdatperNombrecorto = tipdatperNombrecorto;
@@ -47,19 +47,19 @@ public class CivTipodatopersona  implements java.io.Serializable {
     public void setTipdatperId(BigDecimal tipdatperId) {
         this.tipdatperId = tipdatperId;
     }
+    public CivEstadotipodatopersona getCivEstadotipodatopersona() {
+        return this.civEstadotipodatopersona;
+    }
+    
+    public void setCivEstadotipodatopersona(CivEstadotipodatopersona civEstadotipodatopersona) {
+        this.civEstadotipodatopersona = civEstadotipodatopersona;
+    }
     public String getTipdatperDescripcion() {
         return this.tipdatperDescripcion;
     }
     
     public void setTipdatperDescripcion(String tipdatperDescripcion) {
         this.tipdatperDescripcion = tipdatperDescripcion;
-    }
-    public BigDecimal getTipdatperEstado() {
-        return this.tipdatperEstado;
-    }
-    
-    public void setTipdatperEstado(BigDecimal tipdatperEstado) {
-        this.tipdatperEstado = tipdatperEstado;
     }
     public Date getTipdatperFechainical() {
         return this.tipdatperFechainical;

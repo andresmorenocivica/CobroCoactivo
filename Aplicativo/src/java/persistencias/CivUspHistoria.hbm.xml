@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivUspHistoria" table="CIV_USP_HISTORIA" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan el historial de credenciales de cada usuario en el sistema.</comment>
@@ -14,6 +14,11 @@
                 <comment>ID de usuario</comment>
             </column>
         </many-to-one>
+        <many-to-one name="civEstadouspHistoria" class="persistencias.CivEstadouspHistoria" fetch="select">
+            <column name="ESTUSP_ID" precision="22" scale="0">
+                <comment>Estado del registro</comment>
+            </column>
+        </many-to-one>
         <property name="PData" type="string">
             <column name="P_DATA" length="130">
                 <comment>Hash</comment>
@@ -22,11 +27,6 @@
         <property name="fechaProceso" type="date">
             <column name="FECHA_PROCESO" length="7">
                 <comment>Fecha del sistema</comment>
-            </column>
-        </property>
-        <property name="estado" type="big_decimal">
-            <column name="ESTADO" precision="22" scale="0">
-                <comment>Estado del registro</comment>
             </column>
         </property>
     </class>

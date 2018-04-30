@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivConceptos" table="CIV_CONCEPTOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="conId" type="big_decimal">
@@ -11,6 +11,11 @@
         <many-to-one name="civTipoconcepto" class="persistencias.CivTipoconcepto" fetch="select">
             <column name="TIPCON_ID" precision="22" scale="0" not-null="true">
                 <comment>TIPO DEL CONCEPTO</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civEstadoconceptos" class="persistencias.CivEstadoconceptos" fetch="select">
+            <column name="ESTCON_ID" precision="22" scale="0" not-null="true">
+                <comment>ESTADO DEL CONCEPTO</comment>
             </column>
         </many-to-one>
         <property name="conNombre" type="string">
@@ -41,11 +46,6 @@
         <property name="conFechafinal" type="date">
             <column name="CON_FECHAFINAL" length="7">
                 <comment>FECHA FINAL DEL CONCEPTO</comment>
-            </column>
-        </property>
-        <property name="conEstado" type="big_decimal">
-            <column name="CON_ESTADO" precision="22" scale="0" not-null="true">
-                <comment>ESTADO DEL CONCEPTO</comment>
             </column>
         </property>
         <set name="civDetalleDeudases" table="CIV_DETALLE_DEUDAS" inverse="true" lazy="true" fetch="select">

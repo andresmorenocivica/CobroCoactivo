@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -15,36 +15,36 @@ public class CivConceptos  implements java.io.Serializable {
 
      private BigDecimal conId;
      private CivTipoconcepto civTipoconcepto;
+     private CivEstadoconceptos civEstadoconceptos;
      private String conNombre;
      private String conDescripcion;
      private BigDecimal conClase;
      private BigDecimal conPrioridad;
      private Date conFechainicial;
      private Date conFechafinal;
-     private BigDecimal conEstado;
      private Set civDetalleDeudases = new HashSet(0);
 
     public CivConceptos() {
     }
 
 	
-    public CivConceptos(BigDecimal conId, CivTipoconcepto civTipoconcepto, String conNombre, Date conFechainicial, BigDecimal conEstado) {
+    public CivConceptos(BigDecimal conId, CivTipoconcepto civTipoconcepto, CivEstadoconceptos civEstadoconceptos, String conNombre, Date conFechainicial) {
         this.conId = conId;
         this.civTipoconcepto = civTipoconcepto;
+        this.civEstadoconceptos = civEstadoconceptos;
         this.conNombre = conNombre;
         this.conFechainicial = conFechainicial;
-        this.conEstado = conEstado;
     }
-    public CivConceptos(BigDecimal conId, CivTipoconcepto civTipoconcepto, String conNombre, String conDescripcion, BigDecimal conClase, BigDecimal conPrioridad, Date conFechainicial, Date conFechafinal, BigDecimal conEstado, Set civDetalleDeudases) {
+    public CivConceptos(BigDecimal conId, CivTipoconcepto civTipoconcepto, CivEstadoconceptos civEstadoconceptos, String conNombre, String conDescripcion, BigDecimal conClase, BigDecimal conPrioridad, Date conFechainicial, Date conFechafinal, Set civDetalleDeudases) {
        this.conId = conId;
        this.civTipoconcepto = civTipoconcepto;
+       this.civEstadoconceptos = civEstadoconceptos;
        this.conNombre = conNombre;
        this.conDescripcion = conDescripcion;
        this.conClase = conClase;
        this.conPrioridad = conPrioridad;
        this.conFechainicial = conFechainicial;
        this.conFechafinal = conFechafinal;
-       this.conEstado = conEstado;
        this.civDetalleDeudases = civDetalleDeudases;
     }
    
@@ -61,6 +61,13 @@ public class CivConceptos  implements java.io.Serializable {
     
     public void setCivTipoconcepto(CivTipoconcepto civTipoconcepto) {
         this.civTipoconcepto = civTipoconcepto;
+    }
+    public CivEstadoconceptos getCivEstadoconceptos() {
+        return this.civEstadoconceptos;
+    }
+    
+    public void setCivEstadoconceptos(CivEstadoconceptos civEstadoconceptos) {
+        this.civEstadoconceptos = civEstadoconceptos;
     }
     public String getConNombre() {
         return this.conNombre;
@@ -103,13 +110,6 @@ public class CivConceptos  implements java.io.Serializable {
     
     public void setConFechafinal(Date conFechafinal) {
         this.conFechafinal = conFechafinal;
-    }
-    public BigDecimal getConEstado() {
-        return this.conEstado;
-    }
-    
-    public void setConEstado(BigDecimal conEstado) {
-        this.conEstado = conEstado;
     }
     public Set getCivDetalleDeudases() {
         return this.civDetalleDeudases;

@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -18,8 +18,8 @@ public class CivDeudas  implements java.io.Serializable {
      private CivTipodeuda civTipodeuda;
      private CivProcesosjuridicos civProcesosjuridicos;
      private CivPersonas civPersonas;
+     private CivEstadodeudas civEstadodeudas;
      private Date deuFecha;
-     private BigDecimal deuEstado;
      private String deuReferencia;
      private BigDecimal deuValor;
      private BigDecimal deuSaldo;
@@ -30,26 +30,26 @@ public class CivDeudas  implements java.io.Serializable {
     }
 
 	
-    public CivDeudas(BigDecimal deuId, CivUsuarios civUsuarios, CivTipodeuda civTipodeuda, CivProcesosjuridicos civProcesosjuridicos, CivPersonas civPersonas, Date deuFecha, BigDecimal deuEstado, BigDecimal deuValor, BigDecimal deuSaldo, Date deuFechadeuda) {
+    public CivDeudas(BigDecimal deuId, CivUsuarios civUsuarios, CivTipodeuda civTipodeuda, CivProcesosjuridicos civProcesosjuridicos, CivPersonas civPersonas, CivEstadodeudas civEstadodeudas, Date deuFecha, BigDecimal deuValor, BigDecimal deuSaldo, Date deuFechadeuda) {
         this.deuId = deuId;
         this.civUsuarios = civUsuarios;
         this.civTipodeuda = civTipodeuda;
         this.civProcesosjuridicos = civProcesosjuridicos;
         this.civPersonas = civPersonas;
+        this.civEstadodeudas = civEstadodeudas;
         this.deuFecha = deuFecha;
-        this.deuEstado = deuEstado;
         this.deuValor = deuValor;
         this.deuSaldo = deuSaldo;
         this.deuFechadeuda = deuFechadeuda;
     }
-    public CivDeudas(BigDecimal deuId, CivUsuarios civUsuarios, CivTipodeuda civTipodeuda, CivProcesosjuridicos civProcesosjuridicos, CivPersonas civPersonas, Date deuFecha, BigDecimal deuEstado, String deuReferencia, BigDecimal deuValor, BigDecimal deuSaldo, Date deuFechadeuda, Set civDetalleDeudases) {
+    public CivDeudas(BigDecimal deuId, CivUsuarios civUsuarios, CivTipodeuda civTipodeuda, CivProcesosjuridicos civProcesosjuridicos, CivPersonas civPersonas, CivEstadodeudas civEstadodeudas, Date deuFecha, String deuReferencia, BigDecimal deuValor, BigDecimal deuSaldo, Date deuFechadeuda, Set civDetalleDeudases) {
        this.deuId = deuId;
        this.civUsuarios = civUsuarios;
        this.civTipodeuda = civTipodeuda;
        this.civProcesosjuridicos = civProcesosjuridicos;
        this.civPersonas = civPersonas;
+       this.civEstadodeudas = civEstadodeudas;
        this.deuFecha = deuFecha;
-       this.deuEstado = deuEstado;
        this.deuReferencia = deuReferencia;
        this.deuValor = deuValor;
        this.deuSaldo = deuSaldo;
@@ -92,19 +92,19 @@ public class CivDeudas  implements java.io.Serializable {
     public void setCivPersonas(CivPersonas civPersonas) {
         this.civPersonas = civPersonas;
     }
+    public CivEstadodeudas getCivEstadodeudas() {
+        return this.civEstadodeudas;
+    }
+    
+    public void setCivEstadodeudas(CivEstadodeudas civEstadodeudas) {
+        this.civEstadodeudas = civEstadodeudas;
+    }
     public Date getDeuFecha() {
         return this.deuFecha;
     }
     
     public void setDeuFecha(Date deuFecha) {
         this.deuFecha = deuFecha;
-    }
-    public BigDecimal getDeuEstado() {
-        return this.deuEstado;
-    }
-    
-    public void setDeuEstado(BigDecimal deuEstado) {
-        this.deuEstado = deuEstado;
     }
     public String getDeuReferencia() {
         return this.deuReferencia;

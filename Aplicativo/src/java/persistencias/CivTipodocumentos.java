@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,9 +14,9 @@ public class CivTipodocumentos  implements java.io.Serializable {
 
 
      private BigDecimal tipdocId;
+     private CivEstadotipodocumentos civEstadotipodocumentos;
      private BigDecimal tipdocCodigo;
      private String tipdocNombre;
-     private BigDecimal tipdocEstado;
      private Date tipdocFechainicial;
      private Date tipdocFechafinal;
      private String tipdocNombrecorto;
@@ -26,18 +26,18 @@ public class CivTipodocumentos  implements java.io.Serializable {
     }
 
 	
-    public CivTipodocumentos(BigDecimal tipdocId, BigDecimal tipdocCodigo, String tipdocNombre, BigDecimal tipdocEstado, Date tipdocFechainicial) {
+    public CivTipodocumentos(BigDecimal tipdocId, CivEstadotipodocumentos civEstadotipodocumentos, BigDecimal tipdocCodigo, String tipdocNombre, Date tipdocFechainicial) {
         this.tipdocId = tipdocId;
+        this.civEstadotipodocumentos = civEstadotipodocumentos;
         this.tipdocCodigo = tipdocCodigo;
         this.tipdocNombre = tipdocNombre;
-        this.tipdocEstado = tipdocEstado;
         this.tipdocFechainicial = tipdocFechainicial;
     }
-    public CivTipodocumentos(BigDecimal tipdocId, BigDecimal tipdocCodigo, String tipdocNombre, BigDecimal tipdocEstado, Date tipdocFechainicial, Date tipdocFechafinal, String tipdocNombrecorto, Set civPersonases) {
+    public CivTipodocumentos(BigDecimal tipdocId, CivEstadotipodocumentos civEstadotipodocumentos, BigDecimal tipdocCodigo, String tipdocNombre, Date tipdocFechainicial, Date tipdocFechafinal, String tipdocNombrecorto, Set civPersonases) {
        this.tipdocId = tipdocId;
+       this.civEstadotipodocumentos = civEstadotipodocumentos;
        this.tipdocCodigo = tipdocCodigo;
        this.tipdocNombre = tipdocNombre;
-       this.tipdocEstado = tipdocEstado;
        this.tipdocFechainicial = tipdocFechainicial;
        this.tipdocFechafinal = tipdocFechafinal;
        this.tipdocNombrecorto = tipdocNombrecorto;
@@ -50,6 +50,13 @@ public class CivTipodocumentos  implements java.io.Serializable {
     
     public void setTipdocId(BigDecimal tipdocId) {
         this.tipdocId = tipdocId;
+    }
+    public CivEstadotipodocumentos getCivEstadotipodocumentos() {
+        return this.civEstadotipodocumentos;
+    }
+    
+    public void setCivEstadotipodocumentos(CivEstadotipodocumentos civEstadotipodocumentos) {
+        this.civEstadotipodocumentos = civEstadotipodocumentos;
     }
     public BigDecimal getTipdocCodigo() {
         return this.tipdocCodigo;
@@ -64,13 +71,6 @@ public class CivTipodocumentos  implements java.io.Serializable {
     
     public void setTipdocNombre(String tipdocNombre) {
         this.tipdocNombre = tipdocNombre;
-    }
-    public BigDecimal getTipdocEstado() {
-        return this.tipdocEstado;
-    }
-    
-    public void setTipdocEstado(BigDecimal tipdocEstado) {
-        this.tipdocEstado = tipdocEstado;
     }
     public Date getTipdocFechainicial() {
         return this.tipdocFechainicial;

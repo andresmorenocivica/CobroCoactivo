@@ -115,7 +115,7 @@ public class DaoUsuarios extends HibernateDaoSupport implements ITUsuarios {
     public Date consultarFechaUltimoPassword(int id_usuario) throws Exception {
         Date fecha = null;
         Session session = getHibernateTemplate().getSessionFactory().openSession();
-        String sql = "select FECHA_PROCESO from CIV_USP_HISTORIA where USU_ID =:usu_id and ESTADO=1 order by FECHA_PROCESO DESC";
+        String sql = "select FECHA_PROCESO from CIV_USP_HISTORIA where USU_ID =:usu_id and ESTUSP_ID=1 order by FECHA_PROCESO DESC";
         SQLQuery query = session.createSQLQuery(sql);
         query.setInteger("usu_id", id_usuario);
 

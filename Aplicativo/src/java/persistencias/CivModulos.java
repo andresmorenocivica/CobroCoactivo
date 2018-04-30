@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,10 +14,10 @@ public class CivModulos  implements java.io.Serializable {
 
 
      private BigDecimal modId;
+     private CivEstadomodulos civEstadomodulos;
      private String modNombre;
      private Date modFechaini;
      private Date modFechafin;
-     private BigDecimal modEstado;
      private String icon;
      private Set civRecursoses = new HashSet(0);
 
@@ -28,12 +28,12 @@ public class CivModulos  implements java.io.Serializable {
     public CivModulos(BigDecimal modId) {
         this.modId = modId;
     }
-    public CivModulos(BigDecimal modId, String modNombre, Date modFechaini, Date modFechafin, BigDecimal modEstado, String icon, Set civRecursoses) {
+    public CivModulos(BigDecimal modId, CivEstadomodulos civEstadomodulos, String modNombre, Date modFechaini, Date modFechafin, String icon, Set civRecursoses) {
        this.modId = modId;
+       this.civEstadomodulos = civEstadomodulos;
        this.modNombre = modNombre;
        this.modFechaini = modFechaini;
        this.modFechafin = modFechafin;
-       this.modEstado = modEstado;
        this.icon = icon;
        this.civRecursoses = civRecursoses;
     }
@@ -44,6 +44,13 @@ public class CivModulos  implements java.io.Serializable {
     
     public void setModId(BigDecimal modId) {
         this.modId = modId;
+    }
+    public CivEstadomodulos getCivEstadomodulos() {
+        return this.civEstadomodulos;
+    }
+    
+    public void setCivEstadomodulos(CivEstadomodulos civEstadomodulos) {
+        this.civEstadomodulos = civEstadomodulos;
     }
     public String getModNombre() {
         return this.modNombre;
@@ -65,13 +72,6 @@ public class CivModulos  implements java.io.Serializable {
     
     public void setModFechafin(Date modFechafin) {
         this.modFechafin = modFechafin;
-    }
-    public BigDecimal getModEstado() {
-        return this.modEstado;
-    }
-    
-    public void setModEstado(BigDecimal modEstado) {
-        this.modEstado = modEstado;
     }
     public String getIcon() {
         return this.icon;

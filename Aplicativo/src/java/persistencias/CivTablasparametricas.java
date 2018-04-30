@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,9 +12,9 @@ public class CivTablasparametricas  implements java.io.Serializable {
 
 
      private BigDecimal tabparId;
+     private CivEstadotablasparametrica civEstadotablasparametrica;
      private String tabparNombretabla;
      private String tabparNombre;
-     private BigDecimal tabparEstado;
      private Date tabparFechainicial;
      private Date tabparFechafinal;
 
@@ -22,18 +22,18 @@ public class CivTablasparametricas  implements java.io.Serializable {
     }
 
 	
-    public CivTablasparametricas(BigDecimal tabparId, String tabparNombretabla, String tabparNombre, BigDecimal tabparEstado, Date tabparFechainicial) {
+    public CivTablasparametricas(BigDecimal tabparId, CivEstadotablasparametrica civEstadotablasparametrica, String tabparNombretabla, String tabparNombre, Date tabparFechainicial) {
         this.tabparId = tabparId;
+        this.civEstadotablasparametrica = civEstadotablasparametrica;
         this.tabparNombretabla = tabparNombretabla;
         this.tabparNombre = tabparNombre;
-        this.tabparEstado = tabparEstado;
         this.tabparFechainicial = tabparFechainicial;
     }
-    public CivTablasparametricas(BigDecimal tabparId, String tabparNombretabla, String tabparNombre, BigDecimal tabparEstado, Date tabparFechainicial, Date tabparFechafinal) {
+    public CivTablasparametricas(BigDecimal tabparId, CivEstadotablasparametrica civEstadotablasparametrica, String tabparNombretabla, String tabparNombre, Date tabparFechainicial, Date tabparFechafinal) {
        this.tabparId = tabparId;
+       this.civEstadotablasparametrica = civEstadotablasparametrica;
        this.tabparNombretabla = tabparNombretabla;
        this.tabparNombre = tabparNombre;
-       this.tabparEstado = tabparEstado;
        this.tabparFechainicial = tabparFechainicial;
        this.tabparFechafinal = tabparFechafinal;
     }
@@ -44,6 +44,13 @@ public class CivTablasparametricas  implements java.io.Serializable {
     
     public void setTabparId(BigDecimal tabparId) {
         this.tabparId = tabparId;
+    }
+    public CivEstadotablasparametrica getCivEstadotablasparametrica() {
+        return this.civEstadotablasparametrica;
+    }
+    
+    public void setCivEstadotablasparametrica(CivEstadotablasparametrica civEstadotablasparametrica) {
+        this.civEstadotablasparametrica = civEstadotablasparametrica;
     }
     public String getTabparNombretabla() {
         return this.tabparNombretabla;
@@ -58,13 +65,6 @@ public class CivTablasparametricas  implements java.io.Serializable {
     
     public void setTabparNombre(String tabparNombre) {
         this.tabparNombre = tabparNombre;
-    }
-    public BigDecimal getTabparEstado() {
-        return this.tabparEstado;
-    }
-    
-    public void setTabparEstado(BigDecimal tabparEstado) {
-        this.tabparEstado = tabparEstado;
     }
     public Date getTabparFechainicial() {
         return this.tabparFechainicial;

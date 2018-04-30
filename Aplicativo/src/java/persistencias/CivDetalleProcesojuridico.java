@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,12 +14,12 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
      private BigDecimal detprojuId;
      private CivUsuarios civUsuarios;
      private CivProcesosjuridicos civProcesosjuridicos;
+     private CivEstadodetalleProceso civEstadodetalleProceso;
      private BigDecimal detprojuTipo;
      private BigDecimal detprojuDiainicial;
      private BigDecimal detprojuDiafinal;
      private BigDecimal repId;
      private Boolean detprojuDireccion;
-     private BigDecimal detprojuEstado;
      private Date detprojuFechainicial;
      private Date detprojuFechafinal;
 
@@ -30,16 +30,16 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     public CivDetalleProcesojuridico(BigDecimal detprojuId) {
         this.detprojuId = detprojuId;
     }
-    public CivDetalleProcesojuridico(BigDecimal detprojuId, CivUsuarios civUsuarios, CivProcesosjuridicos civProcesosjuridicos, BigDecimal detprojuTipo, BigDecimal detprojuDiainicial, BigDecimal detprojuDiafinal, BigDecimal repId, Boolean detprojuDireccion, BigDecimal detprojuEstado, Date detprojuFechainicial, Date detprojuFechafinal) {
+    public CivDetalleProcesojuridico(BigDecimal detprojuId, CivUsuarios civUsuarios, CivProcesosjuridicos civProcesosjuridicos, CivEstadodetalleProceso civEstadodetalleProceso, BigDecimal detprojuTipo, BigDecimal detprojuDiainicial, BigDecimal detprojuDiafinal, BigDecimal repId, Boolean detprojuDireccion, Date detprojuFechainicial, Date detprojuFechafinal) {
        this.detprojuId = detprojuId;
        this.civUsuarios = civUsuarios;
        this.civProcesosjuridicos = civProcesosjuridicos;
+       this.civEstadodetalleProceso = civEstadodetalleProceso;
        this.detprojuTipo = detprojuTipo;
        this.detprojuDiainicial = detprojuDiainicial;
        this.detprojuDiafinal = detprojuDiafinal;
        this.repId = repId;
        this.detprojuDireccion = detprojuDireccion;
-       this.detprojuEstado = detprojuEstado;
        this.detprojuFechainicial = detprojuFechainicial;
        this.detprojuFechafinal = detprojuFechafinal;
     }
@@ -64,6 +64,13 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     
     public void setCivProcesosjuridicos(CivProcesosjuridicos civProcesosjuridicos) {
         this.civProcesosjuridicos = civProcesosjuridicos;
+    }
+    public CivEstadodetalleProceso getCivEstadodetalleProceso() {
+        return this.civEstadodetalleProceso;
+    }
+    
+    public void setCivEstadodetalleProceso(CivEstadodetalleProceso civEstadodetalleProceso) {
+        this.civEstadodetalleProceso = civEstadodetalleProceso;
     }
     public BigDecimal getDetprojuTipo() {
         return this.detprojuTipo;
@@ -99,13 +106,6 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     
     public void setDetprojuDireccion(Boolean detprojuDireccion) {
         this.detprojuDireccion = detprojuDireccion;
-    }
-    public BigDecimal getDetprojuEstado() {
-        return this.detprojuEstado;
-    }
-    
-    public void setDetprojuEstado(BigDecimal detprojuEstado) {
-        this.detprojuEstado = detprojuEstado;
     }
     public Date getDetprojuFechainicial() {
         return this.detprojuFechainicial;

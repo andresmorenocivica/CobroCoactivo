@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -17,11 +17,11 @@ public class CivRecursos  implements java.io.Serializable {
      private CivTiporecursos civTiporecursos;
      private CivPerfiles civPerfiles;
      private CivModulos civModulos;
+     private CivEstadorecursos civEstadorecursos;
      private String recNombre;
      private String recDescripcion;
      private Date recFechainicial;
      private Date recFechafin;
-     private BigDecimal recEstado;
      private String recCarpeta;
      private Set civDetalleRecUsus = new HashSet(0);
      private Set civPerfilrecursos = new HashSet(0);
@@ -33,16 +33,16 @@ public class CivRecursos  implements java.io.Serializable {
     public CivRecursos(BigDecimal recId) {
         this.recId = recId;
     }
-    public CivRecursos(BigDecimal recId, CivTiporecursos civTiporecursos, CivPerfiles civPerfiles, CivModulos civModulos, String recNombre, String recDescripcion, Date recFechainicial, Date recFechafin, BigDecimal recEstado, String recCarpeta, Set civDetalleRecUsus, Set civPerfilrecursos) {
+    public CivRecursos(BigDecimal recId, CivTiporecursos civTiporecursos, CivPerfiles civPerfiles, CivModulos civModulos, CivEstadorecursos civEstadorecursos, String recNombre, String recDescripcion, Date recFechainicial, Date recFechafin, String recCarpeta, Set civDetalleRecUsus, Set civPerfilrecursos) {
        this.recId = recId;
        this.civTiporecursos = civTiporecursos;
        this.civPerfiles = civPerfiles;
        this.civModulos = civModulos;
+       this.civEstadorecursos = civEstadorecursos;
        this.recNombre = recNombre;
        this.recDescripcion = recDescripcion;
        this.recFechainicial = recFechainicial;
        this.recFechafin = recFechafin;
-       this.recEstado = recEstado;
        this.recCarpeta = recCarpeta;
        this.civDetalleRecUsus = civDetalleRecUsus;
        this.civPerfilrecursos = civPerfilrecursos;
@@ -76,6 +76,13 @@ public class CivRecursos  implements java.io.Serializable {
     public void setCivModulos(CivModulos civModulos) {
         this.civModulos = civModulos;
     }
+    public CivEstadorecursos getCivEstadorecursos() {
+        return this.civEstadorecursos;
+    }
+    
+    public void setCivEstadorecursos(CivEstadorecursos civEstadorecursos) {
+        this.civEstadorecursos = civEstadorecursos;
+    }
     public String getRecNombre() {
         return this.recNombre;
     }
@@ -103,13 +110,6 @@ public class CivRecursos  implements java.io.Serializable {
     
     public void setRecFechafin(Date recFechafin) {
         this.recFechafin = recFechafin;
-    }
-    public BigDecimal getRecEstado() {
-        return this.recEstado;
-    }
-    
-    public void setRecEstado(BigDecimal recEstado) {
-        this.recEstado = recEstado;
     }
     public String getRecCarpeta() {
         return this.recCarpeta;

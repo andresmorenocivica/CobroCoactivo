@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class CivTipodeuda  implements java.io.Serializable {
 
 
      private BigDecimal tipdeuId;
+     private CivEstadotipodeuda civEstadotipodeuda;
      private String tipdeuDescripcion;
-     private BigDecimal tipdeuEstado;
      private Date tipdeuFechainicial;
      private Date tipdeuFechafinal;
      private String tipdeuNombrecorto;
@@ -29,10 +29,10 @@ public class CivTipodeuda  implements java.io.Serializable {
     public CivTipodeuda(BigDecimal tipdeuId) {
         this.tipdeuId = tipdeuId;
     }
-    public CivTipodeuda(BigDecimal tipdeuId, String tipdeuDescripcion, BigDecimal tipdeuEstado, Date tipdeuFechainicial, Date tipdeuFechafinal, String tipdeuNombrecorto, BigDecimal tipdeuCodigo, Set civDeudases) {
+    public CivTipodeuda(BigDecimal tipdeuId, CivEstadotipodeuda civEstadotipodeuda, String tipdeuDescripcion, Date tipdeuFechainicial, Date tipdeuFechafinal, String tipdeuNombrecorto, BigDecimal tipdeuCodigo, Set civDeudases) {
        this.tipdeuId = tipdeuId;
+       this.civEstadotipodeuda = civEstadotipodeuda;
        this.tipdeuDescripcion = tipdeuDescripcion;
-       this.tipdeuEstado = tipdeuEstado;
        this.tipdeuFechainicial = tipdeuFechainicial;
        this.tipdeuFechafinal = tipdeuFechafinal;
        this.tipdeuNombrecorto = tipdeuNombrecorto;
@@ -47,19 +47,19 @@ public class CivTipodeuda  implements java.io.Serializable {
     public void setTipdeuId(BigDecimal tipdeuId) {
         this.tipdeuId = tipdeuId;
     }
+    public CivEstadotipodeuda getCivEstadotipodeuda() {
+        return this.civEstadotipodeuda;
+    }
+    
+    public void setCivEstadotipodeuda(CivEstadotipodeuda civEstadotipodeuda) {
+        this.civEstadotipodeuda = civEstadotipodeuda;
+    }
     public String getTipdeuDescripcion() {
         return this.tipdeuDescripcion;
     }
     
     public void setTipdeuDescripcion(String tipdeuDescripcion) {
         this.tipdeuDescripcion = tipdeuDescripcion;
-    }
-    public BigDecimal getTipdeuEstado() {
-        return this.tipdeuEstado;
-    }
-    
-    public void setTipdeuEstado(BigDecimal tipdeuEstado) {
-        this.tipdeuEstado = tipdeuEstado;
     }
     public Date getTipdeuFechainicial() {
         return this.tipdeuFechainicial;

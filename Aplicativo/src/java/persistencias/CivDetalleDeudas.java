@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,32 +12,32 @@ public class CivDetalleDeudas  implements java.io.Serializable {
 
 
      private BigDecimal detdeuId;
+     private CivEstadodetalleDeudas civEstadodetalleDeudas;
      private CivDeudas civDeudas;
      private CivConceptos civConceptos;
      private String detdeuReferencia;
      private Date detdeuFecha;
-     private BigDecimal detdeuEstado;
      private BigDecimal detdeuValor;
 
     public CivDetalleDeudas() {
     }
 
 	
-    public CivDetalleDeudas(BigDecimal detdeuId, CivDeudas civDeudas, CivConceptos civConceptos, Date detdeuFecha, BigDecimal detdeuEstado, BigDecimal detdeuValor) {
+    public CivDetalleDeudas(BigDecimal detdeuId, CivEstadodetalleDeudas civEstadodetalleDeudas, CivDeudas civDeudas, CivConceptos civConceptos, Date detdeuFecha, BigDecimal detdeuValor) {
         this.detdeuId = detdeuId;
+        this.civEstadodetalleDeudas = civEstadodetalleDeudas;
         this.civDeudas = civDeudas;
         this.civConceptos = civConceptos;
         this.detdeuFecha = detdeuFecha;
-        this.detdeuEstado = detdeuEstado;
         this.detdeuValor = detdeuValor;
     }
-    public CivDetalleDeudas(BigDecimal detdeuId, CivDeudas civDeudas, CivConceptos civConceptos, String detdeuReferencia, Date detdeuFecha, BigDecimal detdeuEstado, BigDecimal detdeuValor) {
+    public CivDetalleDeudas(BigDecimal detdeuId, CivEstadodetalleDeudas civEstadodetalleDeudas, CivDeudas civDeudas, CivConceptos civConceptos, String detdeuReferencia, Date detdeuFecha, BigDecimal detdeuValor) {
        this.detdeuId = detdeuId;
+       this.civEstadodetalleDeudas = civEstadodetalleDeudas;
        this.civDeudas = civDeudas;
        this.civConceptos = civConceptos;
        this.detdeuReferencia = detdeuReferencia;
        this.detdeuFecha = detdeuFecha;
-       this.detdeuEstado = detdeuEstado;
        this.detdeuValor = detdeuValor;
     }
    
@@ -47,6 +47,13 @@ public class CivDetalleDeudas  implements java.io.Serializable {
     
     public void setDetdeuId(BigDecimal detdeuId) {
         this.detdeuId = detdeuId;
+    }
+    public CivEstadodetalleDeudas getCivEstadodetalleDeudas() {
+        return this.civEstadodetalleDeudas;
+    }
+    
+    public void setCivEstadodetalleDeudas(CivEstadodetalleDeudas civEstadodetalleDeudas) {
+        this.civEstadodetalleDeudas = civEstadodetalleDeudas;
     }
     public CivDeudas getCivDeudas() {
         return this.civDeudas;
@@ -75,13 +82,6 @@ public class CivDetalleDeudas  implements java.io.Serializable {
     
     public void setDetdeuFecha(Date detdeuFecha) {
         this.detdeuFecha = detdeuFecha;
-    }
-    public BigDecimal getDetdeuEstado() {
-        return this.detdeuEstado;
-    }
-    
-    public void setDetdeuEstado(BigDecimal detdeuEstado) {
-        this.detdeuEstado = detdeuEstado;
     }
     public BigDecimal getDetdeuValor() {
         return this.detdeuValor;

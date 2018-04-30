@@ -62,17 +62,17 @@ public class LoginImplBO implements LoginBO, Serializable {
         login = getLoginDAO().validarLogin(login); //Carga de datos por medio de password 
         obj.setPassword("");
         if (login != null) {
-            if (login.getUsuEstado().intValue() == 2) { //En caso de que el usuario no se encuentre activo 
+            if (login.getCivEstadousuarios().getEstusuId().intValue() == 2) { //En caso de que el usuario no se encuentre activo 
                 throw new LoginException("Este usuario ha sido deshabilitado. Por favor contáctese con el administrador del sistema.");
             }
-            if (login.getUsuEstado().intValue() == 4) { //(Revalidación)En caso de que el usuario no se encuentre activo por bloqueo de intentos
+            if (login.getCivEstadousuarios().getEstusuId().intValue() == 4) { //(Revalidación)En caso de que el usuario no se encuentre activo por bloqueo de intentos
                 throw new LoginException("Este usuario ha sido bloqueado por superar el número máximo de intentos de usuario. Por favor contáctese con el administrador del sistema.");
             }
             reestablecerIntentosUsuario(login.getUsuId().intValue());
             Date fecha_pass = getUsuariosDAO().consultarFechaUltimoPassword(login.getUsuId().intValue());
             if (fecha_pass == null) {
                 obj.setUserEstado(3);
-                login.setUsuEstado(new BigDecimal(3));
+                login.setCivEstadousuarios(new BigDecimal(3));
                 getUsuariosDAO().update(login);
                 fecha_pass = new Date(); //Fecha para reestablecer automaticamente si no hay historial 
                 Log_Handler.registrarEvento("El usuario ID:" + login.getUsuId().intValue() + " necesita restaurar su contraseña ya que no hay registro de una contraseña anterior.", null, Log_Handler.INFO, getClass(), login.getUsuId().intValue());
@@ -94,7 +94,7 @@ public class LoginImplBO implements LoginBO, Serializable {
             //Se cargan datos básicos de usuario 
             obj.setID_Usuario(login.getUsuId() + "");
             obj.setNombre(login.getUsuNombre());
-            obj.setUserEstado(login.getUsuEstado().intValue());
+            obj.setUserEstado(login.getCivEstadousuarios().getEstusuId().intValue());
             obj.setIdPersonaUsuario(login.getCivPersonas().getPerId().intValue());
         } else {
             throw new LoginException("Usuario y/o contraseña inválidos");
@@ -126,7 +126,7 @@ public class LoginImplBO implements LoginBO, Serializable {
             CivUsuarios obj_usuario = getUsuariosDAO().consultarUsuarioBy(usuario);
             if (horas >= TIEMPO_RESTABLECER_HORAS) {
                 aut.setTtpIntentos(0L);
-                if (obj_usuario.getUsuEstado().intValue() == 4) {
+                if (obj_usuario.getCivEstadousuarios().getEstusuId().intValue() == 4) {
                     obj_usuario.setUsuEstado(new BigDecimal(3)); //Por reestablecer
                     getUsuariosDAO().update(obj_usuario);
                     Log_Handler.registrarEvento("El usuario ID:" + usuario + " debe reestablecer su contraseña ya que hace mas de " + TIEMPO_RESTABLECER_HORAS + " horas se registró un bloqueo por intentos de inicio de sesión.", null, Log_Handler.WARN, getClass(), usuario);

@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ public class CivTiporecursos  implements java.io.Serializable {
 
 
      private BigDecimal tiprecId;
+     private CivEstadotiporecursos civEstadotiporecursos;
      private String tiprecDescripcion;
-     private BigDecimal tiprecEstado;
      private Date tiprecFechafinal;
      private Date tiprecFechainicial;
      private String tiprecNombrecorto;
@@ -29,10 +29,10 @@ public class CivTiporecursos  implements java.io.Serializable {
     public CivTiporecursos(BigDecimal tiprecId) {
         this.tiprecId = tiprecId;
     }
-    public CivTiporecursos(BigDecimal tiprecId, String tiprecDescripcion, BigDecimal tiprecEstado, Date tiprecFechafinal, Date tiprecFechainicial, String tiprecNombrecorto, BigDecimal tiprecCodigo, Set civRecursoses) {
+    public CivTiporecursos(BigDecimal tiprecId, CivEstadotiporecursos civEstadotiporecursos, String tiprecDescripcion, Date tiprecFechafinal, Date tiprecFechainicial, String tiprecNombrecorto, BigDecimal tiprecCodigo, Set civRecursoses) {
        this.tiprecId = tiprecId;
+       this.civEstadotiporecursos = civEstadotiporecursos;
        this.tiprecDescripcion = tiprecDescripcion;
-       this.tiprecEstado = tiprecEstado;
        this.tiprecFechafinal = tiprecFechafinal;
        this.tiprecFechainicial = tiprecFechainicial;
        this.tiprecNombrecorto = tiprecNombrecorto;
@@ -47,19 +47,19 @@ public class CivTiporecursos  implements java.io.Serializable {
     public void setTiprecId(BigDecimal tiprecId) {
         this.tiprecId = tiprecId;
     }
+    public CivEstadotiporecursos getCivEstadotiporecursos() {
+        return this.civEstadotiporecursos;
+    }
+    
+    public void setCivEstadotiporecursos(CivEstadotiporecursos civEstadotiporecursos) {
+        this.civEstadotiporecursos = civEstadotiporecursos;
+    }
     public String getTiprecDescripcion() {
         return this.tiprecDescripcion;
     }
     
     public void setTiprecDescripcion(String tiprecDescripcion) {
         this.tiprecDescripcion = tiprecDescripcion;
-    }
-    public BigDecimal getTiprecEstado() {
-        return this.tiprecEstado;
-    }
-    
-    public void setTiprecEstado(BigDecimal tiprecEstado) {
-        this.tiprecEstado = tiprecEstado;
     }
     public Date getTiprecFechafinal() {
         return this.tiprecFechafinal;

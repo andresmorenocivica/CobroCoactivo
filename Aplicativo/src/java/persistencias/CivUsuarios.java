@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1
+// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -15,9 +15,9 @@ public class CivUsuarios  implements java.io.Serializable {
 
      private BigDecimal usuId;
      private CivPersonas civPersonas;
+     private CivEstadousuarios civEstadousuarios;
      private String usuNombre;
      private String usuPassword;
-     private BigDecimal usuEstado;
      private Date usuFechainicial;
      private Date usuFechafinal;
      private Date usuFechaproceso;
@@ -33,21 +33,21 @@ public class CivUsuarios  implements java.io.Serializable {
     }
 
 	
-    public CivUsuarios(BigDecimal usuId, CivPersonas civPersonas, String usuNombre, String usuPassword, BigDecimal usuEstado, Date usuFechainicial, Date usuFechaproceso) {
+    public CivUsuarios(BigDecimal usuId, CivPersonas civPersonas, CivEstadousuarios civEstadousuarios, String usuNombre, String usuPassword, Date usuFechainicial, Date usuFechaproceso) {
         this.usuId = usuId;
         this.civPersonas = civPersonas;
+        this.civEstadousuarios = civEstadousuarios;
         this.usuNombre = usuNombre;
         this.usuPassword = usuPassword;
-        this.usuEstado = usuEstado;
         this.usuFechainicial = usuFechainicial;
         this.usuFechaproceso = usuFechaproceso;
     }
-    public CivUsuarios(BigDecimal usuId, CivPersonas civPersonas, String usuNombre, String usuPassword, BigDecimal usuEstado, Date usuFechainicial, Date usuFechafinal, Date usuFechaproceso, Set civAttemptses, Set civProcesosjuridicoses, Set civDeudases, Set civUspHistorias, Set civPerfilrecursos, Set civDetalleRecUsus, Set civDetalleProcesojuridicos) {
+    public CivUsuarios(BigDecimal usuId, CivPersonas civPersonas, CivEstadousuarios civEstadousuarios, String usuNombre, String usuPassword, Date usuFechainicial, Date usuFechafinal, Date usuFechaproceso, Set civAttemptses, Set civProcesosjuridicoses, Set civDeudases, Set civUspHistorias, Set civPerfilrecursos, Set civDetalleRecUsus, Set civDetalleProcesojuridicos) {
        this.usuId = usuId;
        this.civPersonas = civPersonas;
+       this.civEstadousuarios = civEstadousuarios;
        this.usuNombre = usuNombre;
        this.usuPassword = usuPassword;
-       this.usuEstado = usuEstado;
        this.usuFechainicial = usuFechainicial;
        this.usuFechafinal = usuFechafinal;
        this.usuFechaproceso = usuFechaproceso;
@@ -74,6 +74,13 @@ public class CivUsuarios  implements java.io.Serializable {
     public void setCivPersonas(CivPersonas civPersonas) {
         this.civPersonas = civPersonas;
     }
+    public CivEstadousuarios getCivEstadousuarios() {
+        return this.civEstadousuarios;
+    }
+    
+    public void setCivEstadousuarios(CivEstadousuarios civEstadousuarios) {
+        this.civEstadousuarios = civEstadousuarios;
+    }
     public String getUsuNombre() {
         return this.usuNombre;
     }
@@ -87,13 +94,6 @@ public class CivUsuarios  implements java.io.Serializable {
     
     public void setUsuPassword(String usuPassword) {
         this.usuPassword = usuPassword;
-    }
-    public BigDecimal getUsuEstado() {
-        return this.usuEstado;
-    }
-    
-    public void setUsuEstado(BigDecimal usuEstado) {
-        this.usuEstado = usuEstado;
     }
     public Date getUsuFechainicial() {
         return this.usuFechainicial;

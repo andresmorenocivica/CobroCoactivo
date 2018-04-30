@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivDeudas" table="CIV_DEUDAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="deuId" type="big_decimal">
@@ -28,14 +28,14 @@
                 <comment>PERSONA A QUIEN PERTENECE LA DEUDA</comment>
             </column>
         </many-to-one>
+        <many-to-one name="civEstadodeudas" class="persistencias.CivEstadodeudas" fetch="select">
+            <column name="ESTDEU_ID" precision="22" scale="0" not-null="true">
+                <comment>ESTADO QUE SE OBTUVO LA DEUDA</comment>
+            </column>
+        </many-to-one>
         <property name="deuFecha" type="date">
             <column name="DEU_FECHA" length="7" not-null="true">
                 <comment>FECHA DE LA DEUDA</comment>
-            </column>
-        </property>
-        <property name="deuEstado" type="big_decimal">
-            <column name="DEU_ESTADO" precision="22" scale="0" not-null="true">
-                <comment>ESTADO QUE SE OBTUVO LA DEUDA</comment>
             </column>
         </property>
         <property name="deuReferencia" type="string">
