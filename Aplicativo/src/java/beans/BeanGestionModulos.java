@@ -12,6 +12,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import model.EstadosDatos;
+import model.EstadosRecursos;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
@@ -26,22 +28,16 @@ import utility.Log_Handler;
 public class BeanGestionModulos implements Serializable {
 
     private BeanLogin loginBO;
-
     private GestionModulosBO gestionModulosBO;
-
     private List<Modulo> listamodulos = new ArrayList<>();
-
     private List<Perfiles> listaperfil = new ArrayList<>();
-
     private Modulo registromodulo;
-
     private boolean editable;
-
     private Recurso registroRecurso;
-
     private int idTipoRecursoSeleccionado;
     private List<TipoRecursos> listTipoRecursos = new ArrayList<>();
-
+    private List<EstadosRecursos> listaEstadoRecursos = new ArrayList<>();
+    
     @PostConstruct
     public void cargarDatos() {
         try {
@@ -258,6 +254,20 @@ public class BeanGestionModulos implements Serializable {
      */
     public void setListTipoRecursos(List<TipoRecursos> listTipoRecursos) {
         this.listTipoRecursos = listTipoRecursos;
+    }
+
+    /**
+     * @return the listaEstadoRecursos
+     */
+    public List<EstadosDatos> getListaEstadoRecursos() {
+        return listaEstadoRecursos;
+    }
+
+    /**
+     * @param listaEstadoRecursos the listaEstadoRecursos to set
+     */
+    public void setListaEstadoRecursos(List<EstadosDatos> listaEstadoRecursos) {
+        this.listaEstadoRecursos = listaEstadoRecursos;
     }
 
 }
