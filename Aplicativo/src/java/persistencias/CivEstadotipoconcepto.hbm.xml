@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadotipoconcepto" table="CIV_ESTADOTIPOCONCEPTO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="esttipconId" type="big_decimal">
             <column name="ESTTIPCON_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="esttipconDescripcion" type="string">
             <column name="ESTTIPCON_DESCRIPCION" length="100" />

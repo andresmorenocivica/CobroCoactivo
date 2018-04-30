@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadodetalleProceso" table="CIV_ESTADODETALLE_PROCESO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estdetproId" type="big_decimal">
             <column name="ESTDETPRO_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estdetproDescripcion" type="string">
             <column name="ESTDETPRO_DESCRIPCION" length="100" />

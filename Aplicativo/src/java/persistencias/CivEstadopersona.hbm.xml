@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadopersona" table="CIV_ESTADOPERSONA" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estperId" type="big_decimal">
             <column name="ESTPER_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estperDescripcion" type="string">
             <column name="ESTPER_DESCRIPCION" length="100" />

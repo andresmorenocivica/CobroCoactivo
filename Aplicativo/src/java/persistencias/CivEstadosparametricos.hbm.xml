@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadosparametricos" table="CIV_ESTADOSPARAMETRICOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estparId" type="big_decimal">
             <column name="ESTPAR_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estparNombretabla" type="string">
             <column name="ESTPAR_NOMBRETABLA" length="50" />

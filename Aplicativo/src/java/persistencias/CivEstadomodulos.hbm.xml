@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadomodulos" table="CIV_ESTADOMODULOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estmodId" type="big_decimal">
             <column name="ESTMOD_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estmodDescripcion" type="string">
             <column name="ESTMOD_DESCRIPCION" length="100" />

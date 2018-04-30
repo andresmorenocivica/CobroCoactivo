@@ -6,7 +6,7 @@
     <class name="persistencias.CivDatospersona" table="CIV_DATOSPERSONA" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="datperId" type="big_decimal">
             <column name="DATPER_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civTipodatopersona" class="persistencias.CivTipodatopersona" fetch="select">
             <column name="TIPDATPER_ID" precision="22" scale="0" not-null="true" />

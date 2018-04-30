@@ -6,7 +6,7 @@
     <class name="persistencias.CivDetalleRecursos" table="CIV_DETALLE_RECURSOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="detRecId" type="big_decimal">
             <column name="DET_REC_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="recId" type="big_decimal">
             <column name="REC_ID" precision="22" scale="0" />
