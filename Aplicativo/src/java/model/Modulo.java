@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * Clase que define los módulos y recursos a los cuales los usuarios tienen
@@ -20,10 +21,14 @@ public class Modulo implements Serializable {
 
     private static long serialVersionUID = 752642345145887L;
 
-    private int id,estado;
+    private int id, estado;
+    @NotNull(message = "El nombre es requerido")
     private String nombre;
     private String icon;
-    private Date fechaInicial,FechaFinal;
+
+    @NotNull(message = "la fecha inicial no puede estar vacia")
+    private Date fechaInicial;
+    private Date FechaFinal;
     private List<Recurso> listRecurso = new ArrayList<>();
 
     /**
@@ -138,5 +143,4 @@ public class Modulo implements Serializable {
         this.listRecurso = listRecurso;
     }
 
-    
 }

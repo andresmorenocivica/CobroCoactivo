@@ -13,6 +13,14 @@ import java.util.Date;
  */
 public class TipoDato {
 
+    private long id;
+    private String descripcion;
+    private EstadoPersona estadoPersona;
+    private Date fechaInicial;
+    private Date FechaFinal;
+    private String nombreCorto;
+    private long codigo;
+
     /**
      * @return the id
      */
@@ -39,20 +47,6 @@ public class TipoDato {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    /**
-     * @return the estado
-     */
-    public short getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(short estado) {
-        this.estado = estado;
     }
 
     /**
@@ -111,14 +105,18 @@ public class TipoDato {
         this.codigo = codigo;
     }
 
-  
-    
-    private long id;
-    private String descripcion;
-    private short estado;
-    private Date fechaInicial;
-    private Date FechaFinal;
-    private String nombreCorto;
-    private long codigo;
-    
+    /**
+     * @return the estadoPersona
+     */
+    public EstadoPersona getEstadoPersona() {
+        return estadoPersona;
+    }
+
+    /**
+     * @param estadoPersona the estadoPersona to set
+     */
+    public void setEstadoPersona(EstadoPersona estadoPersona) {
+        this.estadoPersona = estadoPersona;
+    }
+
 }

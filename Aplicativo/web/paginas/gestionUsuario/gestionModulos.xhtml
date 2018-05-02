@@ -110,15 +110,18 @@
                             <div class="modal-content">
                                 <div class="modal-header">
 
-                                    <h4 class="modal-title" id="myModalLabel">Actualizar Modulo</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Agregar Modulo</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
+                                       
                                     </div>
                                 </div>
                                 <div class="modal-body">
+                                    <p:messages closable="true" autoUpdate="true" id="msggeneral" showDetail="false" />
                                     <div class="col-lg-4">
                                         <div class="form-group">
+                                            
                                             <label>id</label> 
                                             <h:inputText class="form-control" id="txtId" value="#{gestionModulosBean.registromodulo.id}" disabled="true"/>
                                         </div>
@@ -146,13 +149,13 @@
                                         </div>                                                                          
                                     </div>
                                     <div class="col-lg-4">
-                                          <div class="form-group">
+                                        <div class="form-group">
                                             <label>Estado</label>
                                             <h:selectOneMenu class="form-control" value="#{gestionModulosBean.idEstadoSelecionado}" id="idEstadoModuloSelecionado">
                                                 <f:selectItems value="#{gestionModulosBean.listaEstadoMudulos}" var="listaEstadoModulos" itemLabel="#{listaEstadoModulos.descripcion}" itemValue="#{listaEstadoModulos.id}"></f:selectItems>
                                             </h:selectOneMenu>
                                         </div>
-                                       
+
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -236,7 +239,7 @@
                                             <h:selectOneMenu class="form-control" value="#{gestionModulosBean.idEstadoSelecionado}" id="textoEstado">
                                                 <f:selectItems value="#{gestionModulosBean.listaEstadoMudulos}" var="listadoModulos" itemLabel="#{listadoModulos.descripcion}" itemValue="#{listadoModulos.id}"></f:selectItems>
                                             </h:selectOneMenu>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

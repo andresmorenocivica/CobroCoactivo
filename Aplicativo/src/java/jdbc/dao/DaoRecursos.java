@@ -36,8 +36,8 @@ public class DaoRecursos extends HibernateDaoSupport implements ITRecursos {
 
     public List<CivRecursos> getRecursosByModulo(int modulo) throws Exception {
 
-        String hql = "from CivRecursos where mod_id =:modulo and rec_fechafin is null";
-        List list = getHibernateTemplate().findByNamedParam(hql, "modulo", modulo);
+        String hql = "from CivRecursos where civModulos.modId =:modulo and recFechafin is null";
+        List list = getHibernateTemplate().findByNamedParam(hql, "modulo", new BigDecimal(modulo));
         if (list.size() > 0) {
             return list;
         }

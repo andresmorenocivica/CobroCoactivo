@@ -25,4 +25,6 @@ public interface GestionRecursosBO {
     void save(BeanGestionRecursos bean) throws Exception;
     
     void listarTipoRecursos(BeanGestionRecursos bean) throws Exception;
+    
+     public void listarEstadoRecursos(BeanGestionRecursos bean) throws Exception;
 }

@@ -221,6 +221,7 @@
         <property name="recursosDAO" ref="recursosDAO"></property>
         <property name="perfilesDAO" ref="perfilesDAO"></property>
         <property name="tipoRecursosDAO" ref="tipoRecursosDAO"></property>
+        <property name="estadosRecursosDAO" ref="estadosRecursosDAO"></property>
     </bean>  
     
     <bean id="GestionModulosBO" class="bo.GestionModulosImpBO">

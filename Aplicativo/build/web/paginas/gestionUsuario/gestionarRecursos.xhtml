@@ -221,8 +221,10 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Estado</label> 
-                                                    <h:inputText class="form-control" id="txtEstado" value="#{gestionRecursosBean.recurso.estado}"/>
+                                                    <label>Estado</label>
+                                                    <h:selectOneMenu id="txtEstado" class="form-control" value="#{gestionRecursosBean.estadoSelecionado}">
+                                                        <f:selectItems value="#{gestionRecursosBean.listaEstadoRecursos}" var="listaEstadoRecursos" itemLabel="#{listaEstadoRecursos.descripcion}" itemValue="#{listaEstadoRecursos.id}"></f:selectItems>
+                                                    </h:selectOneMenu>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import model.EstadosRecursos;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
@@ -41,6 +42,8 @@ public class BeanGestionRecursos {
     private int idPerfil;// identificador del select en la vista
     private int tipoBusqueda;
     private int idTipoRecursoSeleccionado;
+    private List<EstadosRecursos> listaEstadoRecursos =  new ArrayList<>();
+    private int estadoSelecionado;
 
     /**
      * Creates a new instance of BeanGestionRecursos
@@ -57,6 +60,7 @@ public class BeanGestionRecursos {
             getGestionRecursosBO().listarModulos(this);
             getGestionRecursosBO().listarPerfiles(this);
             getGestionRecursosBO().listarTipoRecursos(this);
+            getGestionRecursosBO().listarEstadoRecursos(this);
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -274,6 +278,34 @@ public class BeanGestionRecursos {
      */
     public void setIdTipoRecursoSeleccionado(int idTipoRecursoSeleccionado) {
         this.idTipoRecursoSeleccionado = idTipoRecursoSeleccionado;
+    }
+
+    /**
+     * @return the listaEstadoRecursos
+     */
+    public List<EstadosRecursos> getListaEstadoRecursos() {
+        return listaEstadoRecursos;
+    }
+
+    /**
+     * @param listaEstadoRecursos the listaEstadoRecursos to set
+     */
+    public void setListaEstadoRecursos(List<EstadosRecursos> listaEstadoRecursos) {
+        this.listaEstadoRecursos = listaEstadoRecursos;
+    }
+
+    /**
+     * @return the estadoSelecionado
+     */
+    public int getEstadoSelecionado() {
+        return estadoSelecionado;
+    }
+
+    /**
+     * @param estadoSelecionado the estadoSelecionado to set
+     */
+    public void setEstadoSelecionado(int estadoSelecionado) {
+        this.estadoSelecionado = estadoSelecionado;
     }
 
     

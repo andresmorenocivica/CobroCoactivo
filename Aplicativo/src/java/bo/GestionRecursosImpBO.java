@@ -11,15 +11,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import jdbc.dao.ITEstadoRecursos;
 import jdbc.dao.ITLogin;
 import jdbc.dao.ITModulos;
 import jdbc.dao.ITPerfiles;
 import jdbc.dao.ITRecursos;
 import jdbc.dao.ITTipoRecursos;
+import model.EstadosRecursos;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
 import model.TipoRecursos;
+import persistencias.CivEstadorecursos;
 import persistencias.CivModulos;
 import persistencias.CivPerfiles;
 import persistencias.CivRecursos;
@@ -36,13 +39,14 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
     private ITRecursos recursosDAO;
     private ITPerfiles perfilesDAO;
     private ITTipoRecursos tipoRecursosDAO;
+    private ITEstadoRecursos estadosRecursosDAO;
 
     @Override
     public void eliminarRegistro(BeanGestionRecursos bean) throws Exception {
         CivRecursos civRecursos = new CivRecursos();
         civRecursos = getRecursosDAO().getRecursosbyId(bean.getRecurso().getCodigo());
         civRecursos.setRecFechafin(new Date());
-        civRecursos.setRecEstado(BigDecimal.valueOf(2));
+        civRecursos.setCivEstadorecursos(getEstadosRecursosDAO().consultarEstadoRecursoById(2));
         getRecursosDAO().update(civRecursos);
     }
 
@@ -57,7 +61,7 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
         civRecursos.setRecNombre(bean.getRecurso().getNombre());
         civRecursos.setRecDescripcion(bean.getRecurso().getDescripcion());
         civRecursos.setRecFechainicial(bean.getRecurso().getFechaInicial());
-        civRecursos.setRecEstado(BigDecimal.valueOf(bean.getRecurso().getEstado()));
+        civRecursos.setCivEstadorecursos(getEstadosRecursosDAO().consultarEstadoRecursoById(bean.getEstadoSelecionado()));
         civRecursos.setRecCarpeta(bean.getRecurso().getCarpeta());
         civRecursos.setCivModulos(civModulos);
         civRecursos.setCivPerfiles(civPerfiles);
@@ -79,7 +83,7 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
         recursos.setRecDescripcion(bean.getRecurso().getDescripcion());
         recursos.setRecFechainicial(bean.getRecurso().getFechaInicial());
         recursos.setRecFechafin(bean.getRecurso().getFechaFinal());
-        recursos.setRecEstado(BigDecimal.valueOf(bean.getRecurso().getEstado()));
+        recursos.setCivEstadorecursos(getEstadosRecursosDAO().consultarEstadoRecursoById(bean.getEstadoSelecionado()));
         recursos.setRecCarpeta(bean.getRecurso().getCarpeta());
         CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
         recursos.setCivTiporecursos(tipoRecurso);
@@ -101,15 +105,20 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
                 listadoCivRecursos = getRecursosDAO().getRecursosByIdPerfil(bean.getIdPerfil());
                 break;
         }
-        if (listadoCivRecursos != null || listadoCivRecursos.size() != 0) {
+        if (listadoCivRecursos != null && listadoCivRecursos.size() != 0) {
             for (CivRecursos civRecurso : listadoCivRecursos) {
                 Recurso recurso = new Recurso();
+                EstadosRecursos estadosRecursos = new EstadosRecursos();
+                estadosRecursos.setId(civRecurso.getCivEstadorecursos().getEstrecId().longValue());
+                estadosRecursos.setDescripcion(civRecurso.getCivEstadorecursos().getEstrecDescripcion());
+                estadosRecursos.setFechaInicial(civRecurso.getCivEstadorecursos().getEstrecFechainicial());
+                estadosRecursos.setFechaFinal(civRecurso.getCivEstadorecursos().getEstrecFechafinal());
                 recurso.setCodigo(civRecurso.getRecId().intValue());
                 recurso.setDescripcion(civRecurso.getRecDescripcion());
                 recurso.setNombre(civRecurso.getRecNombre());
                 recurso.setFechaInicial(civRecurso.getRecFechainicial());
                 recurso.setFechaFinal(civRecurso.getRecFechafin());
-                recurso.setEstado(civRecurso.getRecEstado().intValue());
+                recurso.setEstadosRecursos(estadosRecursos);
                 recurso.setCarpeta(civRecurso.getRecCarpeta());
                 recurso.setModuloId(civRecurso.getCivModulos().getModId().intValue());
                 recurso.setPerfilId(civRecurso.getCivPerfiles().getPerfId().intValue());
@@ -142,6 +151,7 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
 
         }
     }
+
     @Override
     public void listarTipoRecursos(BeanGestionRecursos bean) throws Exception {
         List<CivTiporecursos> listTipoRecursos = getTipoRecursosDAO().listAll();
@@ -151,6 +161,19 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
             tipoRecursos.setDescripcion(civTipoRecurso.getTiprecDescripcion());
             tipoRecursos.setId(civTipoRecurso.getTiprecId().intValue());
             bean.getListTipoRecursos().add(tipoRecursos);
+        }
+    }
+
+    @Override
+    public void listarEstadoRecursos(BeanGestionRecursos bean) throws Exception {
+        List<CivEstadorecursos> listEstadoRecursos = getEstadosRecursosDAO().listAll();
+        for (CivEstadorecursos listEstadoRecurso : listEstadoRecursos) {
+            EstadosRecursos estadosRecursos = new EstadosRecursos();
+            estadosRecursos.setId(listEstadoRecurso.getEstrecId().longValue());
+            estadosRecursos.setDescripcion(listEstadoRecurso.getEstrecDescripcion());
+            estadosRecursos.setFechaInicial(listEstadoRecurso.getEstrecFechainicial());
+            estadosRecursos.setFechaFinal(listEstadoRecurso.getEstrecFechafinal());
+            bean.getListaEstadoRecursos().add(estadosRecursos);
         }
     }
 
@@ -218,6 +241,18 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
         this.tipoRecursosDAO = tipoRecursosDAO;
     }
 
-    
+    /**
+     * @return the estadosRecursosDAO
+     */
+    public ITEstadoRecursos getEstadosRecursosDAO() {
+        return estadosRecursosDAO;
+    }
+
+    /**
+     * @param estadosRecursosDAO the estadosRecursosDAO to set
+     */
+    public void setEstadosRecursosDAO(ITEstadoRecursos estadosRecursosDAO) {
+        this.estadosRecursosDAO = estadosRecursosDAO;
+    }
 
 }

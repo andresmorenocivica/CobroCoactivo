@@ -16,7 +16,7 @@ public class DatosPersona {
     private long id;
     private TipoDato tipoDatoPersona;
     private String Descricion;
-    private short estado;
+    private EstadoPersona estadoPersona;
     private Date fechaInicial;
     private Date fechaFinal;
     private Personas personas;
@@ -64,20 +64,6 @@ public class DatosPersona {
     }
 
     /**
-     * @return the estado
-     */
-    public short getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(short estado) {
-        this.estado = estado;
-    }
-
-    /**
      * @return the fechaInicial
      */
     public Date getFechaInicial() {
@@ -117,6 +103,20 @@ public class DatosPersona {
      */
     public void setPersonas(Personas personas) {
         this.personas = personas;
+    }
+
+    /**
+     * @return the estadoPersona
+     */
+    public EstadoPersona getEstadoPersona() {
+        return estadoPersona;
+    }
+
+    /**
+     * @param estadoPersona the estadoPersona to set
+     */
+    public void setEstadoPersona(EstadoPersona estadoPersona) {
+        this.estadoPersona = estadoPersona;
     }
     
     
