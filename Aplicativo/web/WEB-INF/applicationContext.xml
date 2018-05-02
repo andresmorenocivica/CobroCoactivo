@@ -263,6 +263,10 @@
         <property name="estadosPatametricosDAO" ref="estadosPatametricosDAO"></property>
         <property name="estadosPersonaDAO" ref="estadosPersonaDAO"></property>
     </bean>
+    
+    <bean id="gestionMovimientosBO" class="bo.GestionMovimientosImpBO">
+        <property name="loginDAO" ref="loginDAO"></property>
+    </bean>
 	
     <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
