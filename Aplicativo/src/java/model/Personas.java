@@ -18,6 +18,7 @@ public class Personas {
     private int tipoDocumento;
     private int lugarNacimiento;
     private int estado;
+    private String nombreEstado;
     private int lugarExpedicion;
     private String documento;
     private String sexo;
@@ -307,6 +308,20 @@ public class Personas {
      */
     public void setListaDeudas(List<Deudas> listaDeudas) {
         this.listaDeudas = listaDeudas;
+    }
+
+    /**
+     * @return the nombreEstado
+     */
+    public String getNombreEstado() {
+        return nombreEstado;
+    }
+
+    /**
+     * @param nombreEstado the nombreEstado to set
+     */
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
     }
 
     

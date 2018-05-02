@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import jdbc.dao.ITDatosPersonas;
 import jdbc.dao.ITDeudas;
+import jdbc.dao.ITEstadosPersona;
 import jdbc.dao.ITLogin;
 import jdbc.dao.ITPersonas;
 import jdbc.dao.ITTipoDocumento;
@@ -24,6 +25,7 @@ import model.TipoDato;
 import model.TipoDocumentos;
 import persistencias.CivDatospersona;
 import persistencias.CivDeudas;
+import persistencias.CivEstadopersona;
 import persistencias.CivPersonas;
 import persistencias.CivTipodatopersona;
 import persistencias.CivTipodocumentos;
@@ -39,6 +41,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
     private ITPersonas personasDAO;
     private ITDatosPersonas datosPersonasDAO;
     private ITDeudas deudasDAO;
+    private ITEstadosPersona estadosPersonaDAO;
 
     @Override
     public void llenarDatos(BeanGestionPersonas bean) throws Exception {
@@ -131,7 +134,9 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
         personas.setApellido2(civPersonas.getPerApellido2());
         personas.setLugarNacimiento(civPersonas.getPerLugarnacimiento().intValue());
         personas.setFechaExpedicion(civPersonas.getPerFechaexp());
-        personas.setEstado(civPersonas.getCivEstadopersona().getEstperId().intValue());
+        CivEstadopersona civEstadopersona = getEstadosPersonaDAO().consultarById(civPersonas.getCivEstadopersona().getEstperId().intValue());
+        personas.setEstado(civEstadopersona.getEstperId().intValue());
+        personas.setNombreEstado(civEstadopersona.getEstperDescripcion());
         personas.setFechaIniical(civPersonas.getPerFechainicial());
         personas.setFechaFinal(civPersonas.getPerFechafinal());
         personas.setFechaProceso(civPersonas.getPerFechaproceso());
@@ -219,6 +224,20 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
      */
     public void setDeudasDAO(ITDeudas deudasDAO) {
         this.deudasDAO = deudasDAO;
+    }
+
+    /**
+     * @return the estadosPersonaDAO
+     */
+    public ITEstadosPersona getEstadosPersonaDAO() {
+        return estadosPersonaDAO;
+    }
+
+    /**
+     * @param estadosPersonaDAO the estadosPersonaDAO to set
+     */
+    public void setEstadosPersonaDAO(ITEstadosPersona estadosPersonaDAO) {
+        this.estadosPersonaDAO = estadosPersonaDAO;
     }
 
 }

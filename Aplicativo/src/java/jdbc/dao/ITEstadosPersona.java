@@ -19,4 +19,6 @@ public interface ITEstadosPersona {
     public boolean update(CivEstadopersona estadopersona) throws Exception;
 
     public List<CivEstadopersona> listAll() throws Exception;
+    
+    public CivEstadopersona consultarById(int estperId) throws Exception;
 }

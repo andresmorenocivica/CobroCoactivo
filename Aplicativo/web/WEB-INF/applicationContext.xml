@@ -256,6 +256,7 @@
         <property name="personasDAO" ref="personasDAO"></property>
         <property name="datosPersonasDAO" ref="datosPersonasDAO"></property>
         <property name="deudasDAO" ref="deudasDAO"></property>
+        <property name="estadosPersonaDAO" ref="estadosPersonaDAO"></property>
     </bean> 
     <bean id="GestionEstadosBO" class="bo.GestionEstadosImpBO">
         <property name="loginDAO" ref="loginDAO"></property>
