@@ -60,7 +60,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             TipoDato tipoDato = new TipoDato();
             tipoDato.setCodigo(civTipodatopersona.getTipdatperId().longValue());
             tipoDato.setDescripcion(civTipodatopersona.getTipdatperDescripcion());
-            tipoDato.setEstado(civTipodatopersona.getTipdatperEstado().shortValue());
+            tipoDato.setEstado(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatId().shortValue());
             tipoDato.setFechaInicial(civTipodatopersona.getTipdatperFechainical());
             tipoDato.setFechaFinal(civTipodatopersona.getTipdatperFechafinal());
             tipoDato.setNombreCorto(civTipodatopersona.getTipdatperNombrecorto());
@@ -68,7 +68,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             datoPersona.setId(civDatospersona.getDatperId().longValue());
             datoPersona.setTipoDatoPersona(tipoDato);
             datoPersona.setDescricion(civDatospersona.getDatperDescripcion());
-            datoPersona.setEstado(civDatospersona.getDatperEstado().shortValue());
+            datoPersona.setEstado(civDatospersona.getCivEstadodatospersona().getEstdatperId().shortValue());
             datoPersona.setFechaInicial(civDatospersona.getDatperFechainicial());
             datoPersona.setFechaFinal(civDatospersona.getDatperFechafinal());
             bean.getDetallePersona().getListaDatosPersona().add(datoPersona);
@@ -84,7 +84,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             Deudas deuda =  new Deudas();
             deuda.setId(listDeuda.getDeuId().longValue());
             deuda.setFecha(listDeuda.getDeuFecha());
-            deuda.setEstado(listDeuda.getDeuEstado().intValue());
+            deuda.setEstado(listDeuda.getCivEstadodeudas().getEstdeuId().intValue());
             deuda.setIdPersona(listDeuda.getCivTipodeuda().getTipdeuId().longValue());
             deuda.setReferencia(listDeuda.getDeuReferencia());
             deuda.setValor(listDeuda.getDeuValor().intValue());
@@ -116,7 +116,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
         TipoDocumentos tipoDocumentosPersonas = new TipoDocumentos();
         CivTipodocumentos civTipodocumentosPersona = getTiposDocumentosDAO().getTipoDocumento(civPersonas.getCivTipodocumentos().getTipdocCodigo());
         tipoDocumentosPersonas.setCodigo(civTipodocumentosPersona.getTipdocCodigo().intValue());
-        tipoDocumentosPersonas.setEstado(civTipodocumentosPersona.getTipdocEstado().intValue());
+        tipoDocumentosPersonas.setEstado(civTipodocumentosPersona.getCivEstadotipodocumentos().getEsttipdocId().intValue());
         tipoDocumentosPersonas.setFechaFinal(civTipodocumentosPersona.getTipdocFechafinal());
         tipoDocumentosPersonas.setNombre(civTipodocumentosPersona.getTipdocNombre());
         tipoDocumentosPersonas.setNombreCorto(civTipodocumentosPersona.getTipdocNombrecorto());
@@ -131,7 +131,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
         personas.setApellido2(civPersonas.getPerApellido2());
         personas.setLugarNacimiento(civPersonas.getPerLugarnacimiento().intValue());
         personas.setFechaExpedicion(civPersonas.getPerFechaexp());
-        personas.setEstado(civPersonas.getPerEstado().intValue());
+        personas.setEstado(civPersonas.getCivEstadopersona().getEstperId().intValue());
         personas.setFechaIniical(civPersonas.getPerFechainicial());
         personas.setFechaFinal(civPersonas.getPerFechafinal());
         personas.setFechaProceso(civPersonas.getPerFechaproceso());
