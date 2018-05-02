@@ -16,11 +16,13 @@ import jdbc.dao.ITModulos;
 import jdbc.dao.ITPerfiles;
 import jdbc.dao.ITRecursos;
 import jdbc.dao.ITTipoRecursos;
+import model.EstadoModulos;
 import model.EstadosRecursos;
 import model.Modulo;
 import model.Perfiles;
 import model.Recurso;
 import model.TipoRecursos;
+import persistencias.CivEstadomodulos;
 import persistencias.CivEstadorecursos;
 import persistencias.CivModulos;
 import persistencias.CivPerfiles;
@@ -84,7 +86,12 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
                     recurso.setNombre(civRecurso.getRecNombre());
                     recurso.setFechaInicial(civRecurso.getRecFechainicial());
                     recurso.setFechaFinal(civRecurso.getRecFechafin());
-                    recurso.setEstado(civRecurso.getCivModulos().getModId().intValue());
+                    EstadosRecursos estadosRecursos = new EstadosRecursos();
+                    estadosRecursos.setId(civRecurso.getCivEstadorecursos().getEstrecId().longValue());
+                    estadosRecursos.setDescripcion(civRecurso.getCivEstadorecursos().getEstrecDescripcion());
+                    estadosRecursos.setFechaInicial(civRecurso.getCivEstadorecursos().getEstrecFechainicial());
+                    estadosRecursos.setFechaFinal(civRecurso.getCivEstadorecursos().getEstrecFechafinal());
+                    recurso.setEstadosRecursos(estadosRecursos);
                     recurso.setCarpeta(civRecurso.getRecCarpeta());
                     recurso.setModuloId(civRecurso.getCivModulos().getModId().intValue());
                     recurso.setPerfilId(civRecurso.getCivPerfiles().getPerfId().intValue());
@@ -95,14 +102,14 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
         }
         
         //llenar combo gestiopn modulos estados 
-        List<CivEstadorecursos> listaEstadoRecursos = getEstadosRecursosDAO().listAll();
-        for (CivEstadorecursos listaEstadoRecurso : listaEstadoRecursos) {
-            EstadosRecursos estadosRecursos = new EstadosRecursos();
-            estadosRecursos.setId(listaEstadoRecurso.getEstrecId().longValue());
-            estadosRecursos.setDescripcion(listaEstadoRecurso.getEstrecDescripcion());
-            estadosRecursos.setFechaInicial(listaEstadoRecurso.getEstrecFechainicial());
-            estadosRecursos.setFechaFinal(listaEstadoRecurso.getEstrecFechafinal());
-            bean.getListaEstadoRecursos().add(estadosRecursos);
+        List<CivEstadomodulos> listaEstadomodulos = getEstadosModulosDAO().listAll();
+        for (CivEstadomodulos listaEstadoModulo : listaEstadomodulos) {
+            EstadoModulos estadoModulos = new EstadoModulos();
+            estadoModulos.setId(listaEstadoModulo.getEstmodId().longValue());
+            estadoModulos.setDescripcion(listaEstadoModulo.getEstmodDescripcion());
+            estadoModulos.setFechaInicial(listaEstadoModulo.getEstmodFechainicial());
+            estadoModulos.setFechaFinal(listaEstadoModulo.getEstmodFechafinal());
+            bean.getListaEstadoMudulos().add(estadoModulos);
             
             
         }
@@ -123,7 +130,7 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
         recursos.setRecDescripcion(bean.getRegistroRecurso().getDescripcion());
         recursos.setRecFechainicial(bean.getRegistroRecurso().getFechaInicial());
         recursos.setRecFechafin(bean.getRegistroRecurso().getFechaFinal());
-        recursos.setCivEstadorecursos(BigDecimal.valueOf(bean.getRegistroRecurso().getEstado()));
+        recursos.setCivEstadorecursos(getEstadosRecursosDAO().consultarEstadoRecursoById(bean.getIdEstadoSelecionado()));
         recursos.setRecCarpeta(bean.getRegistroRecurso().getCarpeta());
         CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
         recursos.setCivTiporecursos(tipoRecurso);
@@ -139,8 +146,7 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
 
         CivRecursos recursos = new CivRecursos();
         CivModulos civModulos = new CivModulos();
-        CivEstadorecursos civEstadorecursos = new CivEstadorecursos();
-        
+        CivEstadorecursos civEstadorecursos = getEstadosRecursosDAO().consultarEstadoRecursoById(bean.getIdEstadoSelecionado());
         civModulos.setModId(new BigDecimal(bean.getRegistroRecurso().getModuloId()));
         CivPerfiles civPerfiles = new CivPerfiles();
         civPerfiles = getPerfilesDAO().consultarPerfilById(bean.getRegistroRecurso().getPerfilId());
@@ -149,7 +155,8 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
         recursos.setRecDescripcion(bean.getRegistroRecurso().getDescripcion());
         recursos.setRecFechainicial(bean.getRegistroRecurso().getFechaInicial());
         recursos.setRecFechafin(bean.getRegistroRecurso().getFechaFinal());
-        recursos.setCivModulos(BigDecimal.valueOf(bean.getRegistroRecurso().getEstado()));
+        recursos.setCivModulos(civModulos);
+        recursos.setCivEstadorecursos(civEstadorecursos);
         recursos.setRecCarpeta(bean.getRegistroRecurso().getCarpeta());
         CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
         recursos.setCivTiporecursos(tipoRecurso);
@@ -165,7 +172,7 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
         CivRecursos civrecurso = new CivRecursos();
         civrecurso.setRecId(BigDecimal.valueOf(bean.getRegistroRecurso().getCodigo()));
         civrecurso.setRecFechafin(bean.getRegistroRecurso().getFechaFinal());
-        civrecurso.setRecEstado(BigDecimal.valueOf(2));
+        civrecurso.setCivEstadorecursos(getEstadosRecursosDAO().consultarEstadoRecursoById(2));
         getRecursosDAO().update(civrecurso);
 
     }
@@ -173,13 +180,13 @@ public class GestionModulosImpBO implements GestionModulosBO, Serializable {
     @Override
     public void guardar(BeanGestionModulos bean) throws Exception {
         CivModulos civmodulos = new CivModulos();
+        CivEstadomodulos civEstadomodulos =  getEstadosModulosDAO().consultarModuloById(bean.getIdEstadoSelecionado());
         civmodulos.setModNombre(bean.getRegistromodulo().getNombre());
         civmodulos.setModId(BigDecimal.valueOf(bean.getRegistromodulo().getId()));
         civmodulos.setModFechaini(bean.getRegistromodulo().getFechaInicial());
         civmodulos.setModFechafin(bean.getRegistromodulo().getFechaFinal());
-        civmodulos.setCivEstadomodulos(BigDecimal.valueOf(bean.getRegistromodulo().getEstado()));
+        civmodulos.setCivEstadomodulos(civEstadomodulos);
         civmodulos.setIcon(bean.getRegistromodulo().getIcon());
-
         getModulosDAO().insert(civmodulos);
     }
 

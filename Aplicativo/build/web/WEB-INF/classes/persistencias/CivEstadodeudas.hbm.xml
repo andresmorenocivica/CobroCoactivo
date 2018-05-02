@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivEstadodeudas" table="CIV_ESTADODEUDAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estdeuId" type="big_decimal">
             <column name="ESTDEU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estdeuDescripcion" type="string">
             <column name="ESTDEU_DESCRIPCION" length="100" />
@@ -17,5 +17,13 @@
         <property name="estdeuFechafinal" type="date">
             <column name="ESTDEU_FECHAFINAL" length="7" />
         </property>
+        <set name="civDeudases" table="CIV_DEUDAS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ESTDEU_ID" precision="22" scale="0" not-null="true">
+                    <comment>ESTADO QUE SE OBTUVO LA DEUDA</comment>
+                </column>
+            </key>
+            <one-to-many class="persistencias.CivDeudas" />
+        </set>
     </class>
 </hibernate-mapping>

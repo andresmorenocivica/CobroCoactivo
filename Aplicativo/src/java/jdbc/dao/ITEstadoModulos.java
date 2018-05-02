@@ -20,4 +20,7 @@ public interface ITEstadoModulos {
     
     public List<CivEstadomodulos> listAll()throws Exception;
     
+    
+    public CivEstadomodulos consultarModuloById(int mod_id) throws Exception;
+    
 }

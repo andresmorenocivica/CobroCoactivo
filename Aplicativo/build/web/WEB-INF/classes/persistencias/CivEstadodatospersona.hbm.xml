@@ -1,21 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivEstadodatospersona" table="CIV_ESTADODATOSPERSONA" schema="COBROCOACTIVO" optimistic-lock="version">
-        <id name="estdatId" type="big_decimal">
-            <column name="ESTDAT_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+        <id name="estdatperId" type="big_decimal">
+            <column name="ESTDATPER_ID" precision="22" scale="0" />
+            <generator class="increment" />
         </id>
-        <property name="estdatDescripcion" type="string">
-            <column name="ESTDAT_DESCRIPCION" length="100" />
+        <property name="estdatperDescripcion" type="string">
+            <column name="ESTDATPER_DESCRIPCION" length="100" />
         </property>
-        <property name="estdatFechainicial" type="date">
-            <column name="ESTDAT_FECHAINICIAL" length="7" />
+        <property name="estdatperFechainicial" type="date">
+            <column name="ESTDATPER_FECHAINICIAL" length="7" />
         </property>
-        <property name="estdatFechafinal" type="date">
-            <column name="ESTDAT_FECHAFINAL" length="7" />
+        <property name="estdatperFechafinal" type="date">
+            <column name="ESTDATPER_FECHAFINAL" length="7" />
         </property>
+        <set name="civDatospersonas" table="CIV_DATOSPERSONA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ESTDATPER_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="persistencias.CivDatospersona" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -1,17 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivUsuarios" table="CIV_USUARIOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan la informacion de los usuarios registrados en el sistema.</comment>
         <id name="usuId" type="big_decimal">
             <column name="USU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civPersonas" class="persistencias.CivPersonas" fetch="select">
             <column name="PER_ID" precision="22" scale="0" not-null="true">
                 <comment>ID unico de persona</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="civEstadousuarios" class="persistencias.CivEstadousuarios" fetch="select">
+            <column name="ESTUSU_ID" precision="22" scale="0" not-null="true">
+                <comment>Estado del registro</comment>
             </column>
         </many-to-one>
         <property name="usuNombre" type="string">
@@ -22,11 +27,6 @@
         <property name="usuPassword" type="string">
             <column name="USU_PASSWORD" length="390" not-null="true">
                 <comment>Hash del password</comment>
-            </column>
-        </property>
-        <property name="usuEstado" type="big_decimal">
-            <column name="USU_ESTADO" precision="22" scale="0" not-null="true">
-                <comment>Estado del registro</comment>
             </column>
         </property>
         <property name="usuFechainicial" type="date">

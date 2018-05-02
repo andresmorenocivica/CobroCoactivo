@@ -52,7 +52,7 @@ public class GestionUsuariosImpBO implements GestionUsuarioBO, Serializable {
                 Usuarios usuario = new Usuarios();
                 usuario.setId(civUsuarios.getUsuId().intValue());
                 usuario.setNombre(civUsuarios.getUsuNombre());
-                usuario.setEstado(civUsuarios.getUsuEstado().intValue());
+                usuario.setEstado(civUsuarios.getCivEstadousuarios().getEstusuId().intValue());
                 usuario.setFechaInicial(civUsuarios.getUsuFechainicial());
                 usuario.setFechaFinal(civUsuarios.getUsuFechafinal());
                 usuario.setFechaProceso(civUsuarios.getUsuFechaproceso());

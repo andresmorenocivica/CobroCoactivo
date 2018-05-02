@@ -75,7 +75,7 @@
                                                                                 <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
                                                                             </h:outputText>
                                                                         </td>
-                                                                        <td>#{recurso.estado}</td>
+                                                                        <td>#{recurso.estadosRecursos.descripcion}</td>
                                                                         <td>#{recurso.carpeta}</td>
                                                                         <td>#{recurso.tipo}</td>
                                                                         <td>#{recurso.perfilId}</td>
@@ -148,14 +148,11 @@
                                     <div class="col-lg-4">
                                           <div class="form-group">
                                             <label>Estado</label>
-                                            <h:selectOneMenu>
-                                                <f:selectItems></f:selectItems>
+                                            <h:selectOneMenu class="form-control" value="#{gestionModulosBean.idEstadoSelecionado}" id="idEstadoModuloSelecionado">
+                                                <f:selectItems value="#{gestionModulosBean.listaEstadoMudulos}" var="listaEstadoModulos" itemLabel="#{listaEstadoModulos.descripcion}" itemValue="#{listaEstadoModulos.id}"></f:selectItems>
                                             </h:selectOneMenu>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Estado</label> 
-                                            <h:inputText class="form-control" id="txtEstado" value="#{gestionModulosBean.registromodulo.estado}"/>
-                                        </div>
+                                       
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -163,7 +160,6 @@
                                             <h:inputText class="form-control" id="txtIcono" value="#{gestionModulosBean.registromodulo.icon}"/>
                                         </div>
                                     </div>
-
 
 
                                 </div>
@@ -185,7 +181,7 @@
                                             <h:panelGrid id="pnlGuardar">
                                                 <h:panelGroup rendered="#{!gestionModulosBean.editable}">
                                                     <h:commandLink value="Guardar" id="btnGuardar" class="btn btn-success">
-                                                        <f:ajax event="click" listener="#{gestionModulosBean.guardarRegistro()}" render="frmModulos:tablaGeneral" execute="frmModulos:txtDescription frmModulos:txtEstado frmModulos:txtNomCorto frmModulos:txtCodigo frmModulos:txtFechaFinal frmModulos:txtFechaInicial"/>
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.guardarRegistro()}" render="frmModulos:tablaGeneral" execute="frmModulos:txtDescription frmModulos:txtEstado frmModulos:txtNomCorto frmModulos:txtCodigo frmModulos:txtFechaFinal frmModulos:txtFechaInicial frmModulos:idEstadoModuloSelecionado frmModulos:txtIcono"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
@@ -237,7 +233,10 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Estado</label> 
-                                            <h:inputText class="form-control" id="textoEstado" value="#{gestionModulosBean.registroRecurso.estado}"/>
+                                            <h:selectOneMenu class="form-control" value="#{gestionModulosBean.idEstadoSelecionado}" id="textoEstado">
+                                                <f:selectItems value="#{gestionModulosBean.listaEstadoMudulos}" var="listadoModulos" itemLabel="#{listadoModulos.descripcion}" itemValue="#{listadoModulos.id}"></f:selectItems>
+                                            </h:selectOneMenu>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -287,11 +286,6 @@
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
-
-
-
-
-
                                 </div>
                                 <div class="modal-footer">
                                     <div class="row">
@@ -304,14 +298,14 @@
                                             <h:panelGrid id="pnlActualizarrecurso">
                                                 <h:panelGroup rendered="#{gestionModulosBean.editable}">
                                                     <h:commandLink value="Actualizar" id="btnActualizarrecurso" class="btn btn-success" >
-                                                        <f:ajax event="click" listener="#{gestionModulosBean.editarRecurso()}" render="frmModulos:tablaGeneralRecursos frmModulos:pnlFrmModulo" execute="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario  frmModulos:selectTipo frmModulos:selectPerfil frmModulos:sltTipo"/>
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.editarRecurso()}" render="frmModulos:tablaGeneralRecursos frmModulos:pnlFrmModulo" execute="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario frmModulos:selectPerfil frmModulos:sltTipo"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                             <h:panelGrid id="pnlGuardarrecurso">
                                                 <h:panelGroup rendered="#{!gestionModulosBean.editable}">
                                                     <h:commandLink value="Guardar" id="btnGuardarrecurso" class="btn btn-success">
-                                                        <f:ajax event="click" listener="#{gestionModulosBean.guardarRegistroRecurso()}" render="frmModulos:tablaGeneralRecursos frmModulos:pnlFrmModulo" execute="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario  frmModulos:selectTipo frmModulos:selectPerfil frmModulos:sltTipo"/>
+                                                        <f:ajax event="click" listener="#{gestionModulosBean.guardarRegistroRecurso()}" render="frmModulos:tablaGeneralRecursos frmModulos:pnlFrmModulo" execute="frmModulos:textId frmModulos:textNombre frmModulos:textoDescription frmModulos:textoEstado frmModulos:textoCarpeta frmModulos:FechaInicial frmModulos:FechaFinal frmModulos:sltUsuario frmModulos:selectPerfil frmModulos:sltTipo"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>

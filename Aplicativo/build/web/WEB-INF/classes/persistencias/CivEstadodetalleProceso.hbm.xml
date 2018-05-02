@@ -1,21 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivEstadodetalleProceso" table="CIV_ESTADODETALLE_PROCESO" schema="COBROCOACTIVO" optimistic-lock="version">
-        <id name="estdetdeuId" type="big_decimal">
-            <column name="ESTDETDEU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+        <id name="estdetproId" type="big_decimal">
+            <column name="ESTDETPRO_ID" precision="22" scale="0" />
+            <generator class="increment" />
         </id>
-        <property name="estdetdeuDescripcion" type="string">
-            <column name="ESTDETDEU_DESCRIPCION" length="100" />
+        <property name="estdetproDescripcion" type="string">
+            <column name="ESTDETPRO_DESCRIPCION" length="100" />
         </property>
-        <property name="estdetdeuFechainicial" type="date">
-            <column name="ESTDETDEU_FECHAINICIAL" length="7" />
+        <property name="estdetproFechainicial" type="date">
+            <column name="ESTDETPRO_FECHAINICIAL" length="7" />
         </property>
-        <property name="estdetdeuFechafinal" type="date">
-            <column name="ESTDETDEU_FECHAFINAL" length="7" />
+        <property name="estdetproFechafinal" type="date">
+            <column name="ESTDETPRO_FECHAFINAL" length="7" />
         </property>
+        <set name="civDetalleProcesojuridicos" table="CIV_DETALLE_PROCESOJURIDICO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ESTDETPRO_ID" precision="22" scale="0" />
+            </key>
+            <one-to-many class="persistencias.CivDetalleProcesojuridico" />
+        </set>
     </class>
 </hibernate-mapping>

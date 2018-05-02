@@ -28,7 +28,7 @@ public class Recurso implements Serializable {
     public String descripcion;
     
     public int tipo;
-    public int estado;
+    private EstadosRecursos estadosRecursos;
     public int moduloId;
     public int perfilId;
     @NotNull(message = "la fecha no puede estar vacia")
@@ -119,19 +119,7 @@ public class Recurso implements Serializable {
         serialVersionUID = aSerialVersionUID;
     }
 
-    /**
-     * @return the estado
-     */
-    public int getEstado() {
-        return estado;
-    }
 
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
 
     /**
      * @return the moduloId
@@ -187,5 +175,19 @@ public class Recurso implements Serializable {
      */
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
+    }
+
+    /**
+     * @return the estadosRecursos
+     */
+    public EstadosRecursos getEstadosRecursos() {
+        return estadosRecursos;
+    }
+
+    /**
+     * @param estadosRecursos the estadosRecursos to set
+     */
+    public void setEstadosRecursos(EstadosRecursos estadosRecursos) {
+        this.estadosRecursos = estadosRecursos;
     }
 }

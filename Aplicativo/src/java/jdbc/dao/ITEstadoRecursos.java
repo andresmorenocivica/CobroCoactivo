@@ -20,4 +20,6 @@ public interface ITEstadoRecursos {
     
     public List<CivEstadorecursos> listAll()throws Exception;
     
+     public CivEstadorecursos consultarEstadoRecursoById(int estMod_id) throws Exception;
+    
 }

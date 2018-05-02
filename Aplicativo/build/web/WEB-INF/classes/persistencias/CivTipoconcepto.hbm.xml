@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivTipoconcepto" table="CIV_TIPOCONCEPTO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tipconId" type="big_decimal">
             <column name="TIPCON_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
+        <many-to-one name="civEstadotipoconcepto" class="persistencias.CivEstadotipoconcepto" fetch="select">
+            <column name="ESTTIPCON_ID" precision="22" scale="0" />
+        </many-to-one>
         <property name="tipconDescripcion" type="string">
             <column name="TIPCON_DESCRIPCION" length="100" />
-        </property>
-        <property name="tipconEstado" type="big_decimal">
-            <column name="TIPCON_ESTADO" precision="22" scale="0" />
         </property>
         <property name="tipconFechainicial" type="date">
             <column name="TIPCON_FECHAINICIAL" length="7" />

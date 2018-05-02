@@ -5,6 +5,7 @@
  */
 package jdbc.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,16 @@ public class DaoEstadoRecursos extends HibernateDaoSupport implements ITEstadoRe
         String hql = "from CivEstadorecursos";
         List list = getHibernateTemplate().find(hql);
         return list;
+    }
+    
+         @Override
+    public CivEstadorecursos consultarEstadoRecursoById(int estMod_id) throws Exception {
+        String hql = "from CivEstadorecursos where estrecId =:estrecId";
+        List list = getHibernateTemplate().findByNamedParam(hql, "estrecId", BigDecimal.valueOf(estMod_id));
+        if (list.size() > 0) {
+            return (CivEstadorecursos) list.get(0);
+        }
+        return null;
     }
 
 }

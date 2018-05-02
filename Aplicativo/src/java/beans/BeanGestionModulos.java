@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import model.EstadoModulos;
 import model.EstadosDatos;
 import model.EstadosRecursos;
 import model.Modulo;
@@ -37,6 +38,8 @@ public class BeanGestionModulos implements Serializable {
     private int idTipoRecursoSeleccionado;
     private List<TipoRecursos> listTipoRecursos = new ArrayList<>();
     private List<EstadosRecursos> listaEstadoRecursos = new ArrayList<>();
+    private List<EstadoModulos> listaEstadoMudulos = new ArrayList<>();
+    private int idEstadoSelecionado;
     
     @PostConstruct
     public void cargarDatos() {
@@ -256,18 +259,33 @@ public class BeanGestionModulos implements Serializable {
         this.listTipoRecursos = listTipoRecursos;
     }
 
+
     /**
-     * @return the listaEstadoRecursos
+     * @return the listaEstadoMudulos
      */
-    public List<EstadosDatos> getListaEstadoRecursos() {
-        return listaEstadoRecursos;
+    public List<EstadoModulos> getListaEstadoMudulos() {
+        return listaEstadoMudulos;
     }
 
     /**
-     * @param listaEstadoRecursos the listaEstadoRecursos to set
+     * @param listaEstadoMudulos the listaEstadoMudulos to set
      */
-    public void setListaEstadoRecursos(List<EstadosDatos> listaEstadoRecursos) {
-        this.listaEstadoRecursos = listaEstadoRecursos;
+    public void setListaEstadoMudulos(List<EstadoModulos> listaEstadoMudulos) {
+        this.listaEstadoMudulos = listaEstadoMudulos;
+    }
+
+    /**
+     * @return the idEstadoSelecionado
+     */
+    public int getIdEstadoSelecionado() {
+        return idEstadoSelecionado;
+    }
+
+    /**
+     * @param idEstadoSelecionado the idEstadoSelecionado to set
+     */
+    public void setIdEstadoSelecionado(int idEstadoSelecionado) {
+        this.idEstadoSelecionado = idEstadoSelecionado;
     }
 
 }

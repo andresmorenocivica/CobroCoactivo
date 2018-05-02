@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 27/04/2018 03:42:45 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivDetalleProcesojuridico" table="CIV_DETALLE_PROCESOJURIDICO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="detprojuId" type="big_decimal">
             <column name="DETPROJU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
             <column name="USU_ID" precision="22" scale="0" />
         </many-to-one>
         <many-to-one name="civProcesosjuridicos" class="persistencias.CivProcesosjuridicos" fetch="select">
             <column name="PROJU_ID" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="civEstadodetalleProceso" class="persistencias.CivEstadodetalleProceso" fetch="select">
+            <column name="ESTDETPRO_ID" precision="22" scale="0" />
         </many-to-one>
         <property name="detprojuTipo" type="big_decimal">
             <column name="DETPROJU_TIPO" precision="22" scale="0" />
@@ -28,9 +31,6 @@
         </property>
         <property name="detprojuDireccion" type="java.lang.Boolean">
             <column name="DETPROJU_DIRECCION" precision="1" scale="0" />
-        </property>
-        <property name="detprojuEstado" type="big_decimal">
-            <column name="DETPROJU_ESTADO" precision="22" scale="0" />
         </property>
         <property name="detprojuFechainicial" type="date">
             <column name="DETPROJU_FECHAINICIAL" length="7" />
