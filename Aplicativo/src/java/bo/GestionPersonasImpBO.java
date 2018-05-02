@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package bo;
 
 import beans.BeanGestionPersonas;
@@ -20,6 +16,7 @@ import jdbc.dao.ITPersonas;
 import jdbc.dao.ITTipoDocumento;
 import model.DatosPersona;
 import model.Deudas;
+import model.EstadoPersona;
 import model.Personas;
 import model.TipoDato;
 import model.TipoDocumentos;
@@ -63,7 +60,12 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             TipoDato tipoDato = new TipoDato();
             tipoDato.setCodigo(civTipodatopersona.getTipdatperId().longValue());
             tipoDato.setDescripcion(civTipodatopersona.getTipdatperDescripcion());
-            tipoDato.setEstado(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatId().shortValue());
+            EstadoPersona estadoPersona =  new EstadoPersona();
+            estadoPersona.setId(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatId().longValue());
+            estadoPersona.setDescripcion(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatDescripcion());
+            estadoPersona.setFechaInicial(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatFechainicial());
+            estadoPersona.setFechaFinal(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatFechafinal());
+            tipoDato.setEstadoPersona(estadoPersona);
             tipoDato.setFechaInicial(civTipodatopersona.getTipdatperFechainical());
             tipoDato.setFechaFinal(civTipodatopersona.getTipdatperFechafinal());
             tipoDato.setNombreCorto(civTipodatopersona.getTipdatperNombrecorto());
@@ -71,7 +73,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             datoPersona.setId(civDatospersona.getDatperId().longValue());
             datoPersona.setTipoDatoPersona(tipoDato);
             datoPersona.setDescricion(civDatospersona.getDatperDescripcion());
-            datoPersona.setEstado(civDatospersona.getCivEstadodatospersona().getEstdatperId().shortValue());
+            datoPersona.setEstadoPersona(estadoPersona);
             datoPersona.setFechaInicial(civDatospersona.getDatperFechainicial());
             datoPersona.setFechaFinal(civDatospersona.getDatperFechafinal());
             bean.getDetallePersona().getListaDatosPersona().add(datoPersona);
@@ -164,7 +166,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
         civPersonas.setPerApellido1(bean.getDetallePersona().getApellido1());
         civPersonas.setPerApellido2(bean.getDetallePersona().getApellido2());
         civPersonas.setPerFechaexp(bean.getDetallePersona().getFechaExpedicion());
-        civPersonas.setPerEstado(new BigDecimal(bean.getDetallePersona().getEstado()));
+        civPersonas.setCivEstadopersona(getEstadosPersonaDAO().consultarById(bean.getDetallePersona().getEstado()));
         getPersonasDAO().update(civPersonas);
 
     }
