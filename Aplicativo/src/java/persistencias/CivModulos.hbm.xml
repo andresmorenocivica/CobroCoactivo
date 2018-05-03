@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 3/05/2018 09:12:05 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivModulos" table="CIV_MODULOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <comment>En esta tabla se almacenan los diferentes modulos accesibles desde de sistema</comment>
         <id name="modId" type="big_decimal">
             <column name="MOD_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="civEstadomodulos" class="persistencias.CivEstadomodulos" fetch="select">
             <column name="ESTMOD_ID" precision="22" scale="0">

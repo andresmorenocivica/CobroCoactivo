@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 30/04/2018 08:39:48 AM by Hibernate Tools 4.3.1
+// Generated 3/05/2018 09:12:03 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -22,6 +22,7 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
      private Boolean detprojuDireccion;
      private Date detprojuFechainicial;
      private Date detprojuFechafinal;
+     private String deprojuNombre;
 
     public CivDetalleProcesojuridico() {
     }
@@ -30,7 +31,7 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     public CivDetalleProcesojuridico(BigDecimal detprojuId) {
         this.detprojuId = detprojuId;
     }
-    public CivDetalleProcesojuridico(BigDecimal detprojuId, CivUsuarios civUsuarios, CivProcesosjuridicos civProcesosjuridicos, CivEstadodetalleProceso civEstadodetalleProceso, BigDecimal detprojuTipo, BigDecimal detprojuDiainicial, BigDecimal detprojuDiafinal, BigDecimal repId, Boolean detprojuDireccion, Date detprojuFechainicial, Date detprojuFechafinal) {
+    public CivDetalleProcesojuridico(BigDecimal detprojuId, CivUsuarios civUsuarios, CivProcesosjuridicos civProcesosjuridicos, CivEstadodetalleProceso civEstadodetalleProceso, BigDecimal detprojuTipo, BigDecimal detprojuDiainicial, BigDecimal detprojuDiafinal, BigDecimal repId, Boolean detprojuDireccion, Date detprojuFechainicial, Date detprojuFechafinal, String deprojuNombre) {
        this.detprojuId = detprojuId;
        this.civUsuarios = civUsuarios;
        this.civProcesosjuridicos = civProcesosjuridicos;
@@ -42,6 +43,7 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
        this.detprojuDireccion = detprojuDireccion;
        this.detprojuFechainicial = detprojuFechainicial;
        this.detprojuFechafinal = detprojuFechafinal;
+       this.deprojuNombre = deprojuNombre;
     }
    
     public BigDecimal getDetprojuId() {
@@ -120,6 +122,13 @@ public class CivDetalleProcesojuridico  implements java.io.Serializable {
     
     public void setDetprojuFechafinal(Date detprojuFechafinal) {
         this.detprojuFechafinal = detprojuFechafinal;
+    }
+    public String getDeprojuNombre() {
+        return this.deprojuNombre;
+    }
+    
+    public void setDeprojuNombre(String deprojuNombre) {
+        this.deprojuNombre = deprojuNombre;
     }
 
 

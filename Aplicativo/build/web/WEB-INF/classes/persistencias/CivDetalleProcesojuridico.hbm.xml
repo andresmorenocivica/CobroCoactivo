@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30/04/2018 08:39:50 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 3/05/2018 09:12:05 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivDetalleProcesojuridico" table="CIV_DETALLE_PROCESOJURIDICO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="detprojuId" type="big_decimal">
             <column name="DETPROJU_ID" precision="22" scale="0" />
-            <generator class="increment" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
             <column name="USU_ID" precision="22" scale="0" />
@@ -37,6 +37,9 @@
         </property>
         <property name="detprojuFechafinal" type="date">
             <column name="DETPROJU_FECHAFINAL" length="7" />
+        </property>
+        <property name="deprojuNombre" type="string">
+            <column name="DEPROJU_NOMBRE" length="50" />
         </property>
     </class>
 </hibernate-mapping>
