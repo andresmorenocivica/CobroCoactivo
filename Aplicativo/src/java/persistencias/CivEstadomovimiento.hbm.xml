@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 4/05/2018 09:28:55 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="persistencias.CivEstadomovimiento" table="CIV_ESTADOMOVIMIENTO" schema="COBROCOACTIVO" optimistic-lock="version">
+        <id name="estmoviId" type="big_decimal">
+            <column name="ESTMOVI_ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="estmoviDescripcion" type="string">
+            <column name="ESTMOVI_DESCRIPCION" length="100" />
+        </property>
+        <property name="column1" type="date">
+            <column name="COLUMN1" length="7" />
+        </property>
+        <property name="estmoviFechafinal" type="date">
+            <column name="ESTMOVI_FECHAFINAL" length="7" />
+        </property>
+        <one-to-one name="civMovimientos" class="persistencias.CivMovimientos"></one-to-one>
+    </class>
+</hibernate-mapping>

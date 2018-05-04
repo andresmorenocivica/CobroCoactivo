@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 3/05/2018 09:12:03 AM by Hibernate Tools 4.3.1
+// Generated 4/05/2018 09:28:55 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;

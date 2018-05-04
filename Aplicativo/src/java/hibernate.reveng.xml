@@ -98,6 +98,7 @@ Contributor(s):
     <table-filter match-name="CIV_ESTADOUSP_HISTORIA"/>
     <table-filter match-name="CIV_ESTADOUSUARIOS"/>
     <table-filter match-name="CIV_ESTADOLOG_EVENTOS"/>
-    
-     <table-filter match-name="CIV_ESTADOPERSONA"/>
+    <table-filter match-name="CIV_ESTADOPERSONA"/>
+    <table-filter match-name="CIV_MOVIMIENTOS"/>
+    <table-filter match-name="CIV_ESTADOMOVIMIENTO"/>
 </hibernate-reverse-engineering>

@@ -48,6 +48,7 @@ Contributor(s):
     <property name="hibernate.connection.password">desarrollo</property>
     <mapping resource="persistencias/CivHistorialPerfilRecurso.hbm.xml"/>
     <mapping resource="persistencias/CivEstadodetalleDeudas.hbm.xml"/>
+    <mapping resource="persistencias/CivMovimientos.hbm.xml"/>
     <mapping resource="persistencias/CivEstadotipodeuda.hbm.xml"/>
     <mapping resource="persistencias/CivTablasparametricas.hbm.xml"/>
     <mapping resource="persistencias/CivModulos.hbm.xml"/>
@@ -87,6 +88,7 @@ Contributor(s):
     <mapping resource="persistencias/CivDetalleProcesojuridico.hbm.xml"/>
     <mapping resource="persistencias/CivAttempts.hbm.xml"/>
     <mapping resource="persistencias/LogEventos.hbm.xml"/>
+    <mapping resource="persistencias/CivEstadomovimiento.hbm.xml"/>
     <mapping resource="persistencias/CivPerfiles.hbm.xml"/>
     <mapping resource="persistencias/CivEstadodeudas.hbm.xml"/>
     <mapping resource="persistencias/CivRecursos.hbm.xml"/>
