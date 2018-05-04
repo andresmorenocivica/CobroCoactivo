@@ -177,7 +177,10 @@
     <bean id="estadosModulosDAO" class="jdbc.dao.DaoEstadoModulos">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-       <bean id="estadosUsuariosDAO" class="jdbc.dao.DaoEstadoUsuarios">
+    <bean id="estadosUsuariosDAO" class="jdbc.dao.DaoEstadoUsuarios">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="estadoTipoDocumentoDAO" class="jdbc.dao.DaoEstadoTipoDocumento">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
     
@@ -214,6 +217,7 @@
         <property name="tipoConceptosDAO" ref="tipoConceptosDAO"></property>
         <property name="tipoDeudaDAO" ref="tipoDeudaDAO"></property>
         <property name="tipoPersonasDAO" ref="tipoPersonasDAO"></property>
+        <property name="estadoTipoDocumentoDAO" ref="estadoTipoDocumentoDAO"></property>
     </bean>  
     <bean id="GestionRecursosBO" class="bo.GestionRecursosImpBO">
         <property name="loginDAO" ref="loginDAO"></property>

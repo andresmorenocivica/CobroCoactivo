@@ -119,18 +119,4 @@
             <value>#{loginBean}</value>
         </managed-property>
     </managed-bean>
-    
-      <managed-bean>
-         <managed-bean-name>beanGestionMovimientos</managed-bean-name>
-        <managed-bean-class>beans.BeanGestionMovimientos</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
-        <managed-property>
-            <property-name>gestionMovimientosBO</property-name>
-            <value>#{GestionMovimientosBO}</value>
-        </managed-property>
-        <managed-property>
-            <property-name>loginBO</property-name>
-            <value>#{loginBean}</value>
-        </managed-property>
-    </managed-bean>
 </faces-config>

@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import jdbc.dao.ITEstadoTipoDocumento;
 import jdbc.dao.ITLogin;
 import jdbc.dao.ITTablasParametricas;
 import jdbc.dao.ITTipoConceptos;
@@ -37,6 +38,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
     private ITTipoConceptos tipoConceptosDAO;
     private ITTipoDeuda tipoDeudaDAO;
     private ITTipoPersonas tipoPersonasDAO;
+    private ITEstadoTipoDocumento estadoTipoDocumentoDAO;
 
     @Override
     public void llenarDatos(BeanGestionParametros bean) throws Exception {
@@ -50,7 +52,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
             tablaParameticasModel.setId(civTablasParametricas.getTabparId().intValue());
             tablaParameticasModel.setNombre(civTablasParametricas.getTabparNombre());
             tablaParameticasModel.setNombreTabla(civTablasParametricas.getTabparNombretabla());
-            tablaParameticasModel.setEstado(civTablasParametricas.getTabparEstado().intValue());
+            tablaParameticasModel.setEstado(civTablasParametricas.getCivEstadotablasparametrica().getEsttabId().intValue());
             tablaParameticasModel.setFechaInicial(civTablasParametricas.getTabparFechainicial());
             tablaParameticasModel.setFechaFinal(civTablasParametricas.getTabparFechafinal());
             bean.getListaTablasParametricas().add(tablaParameticasModel);
@@ -60,7 +62,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                     for (CivTipodocumentos civTipoDocumentos : listCivTipodocumentos) {
                         Parametros parametrosTipoDocumento = new Parametros();
                         parametrosTipoDocumento.setCodigo(civTipoDocumentos.getTipdocCodigo().intValue());
-                        parametrosTipoDocumento.setEstado(civTipoDocumentos.getTipdocEstado().intValue());
+                        parametrosTipoDocumento.setEstado(civTipoDocumentos.getCivEstadotipodocumentos().getEsttipdocId().intValue());
                         parametrosTipoDocumento.setFechaFinal(civTipoDocumentos.getTipdocFechafinal());
                         parametrosTipoDocumento.setFechaInicial(civTipoDocumentos.getTipdocFechainicial());
                         parametrosTipoDocumento.setNombre(civTipoDocumentos.getTipdocNombre());
@@ -77,7 +79,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                     for (CivTipoconcepto civTipoconcepto : listCivTipoconceptos) {
                         Parametros parametrosTipoDocumento = new Parametros();
                         parametrosTipoDocumento.setCodigo(civTipoconcepto.getTipconCodigo().intValue());
-                        parametrosTipoDocumento.setEstado(civTipoconcepto.getTipconEstado().intValue());
+                        parametrosTipoDocumento.setEstado(civTipoconcepto.getCivEstadotipoconcepto().getEsttipconId().intValue());
                         parametrosTipoDocumento.setFechaFinal(civTipoconcepto.getTipconFechafinal());
                         parametrosTipoDocumento.setFechaInicial(civTipoconcepto.getTipconFechainicial());
                         parametrosTipoDocumento.setNombre(civTipoconcepto.getTipconDescripcion());
@@ -94,7 +96,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                     for (CivTipodeuda civTipoDeuda : listCivTipoDeuda) {
                         Parametros parametrosTipoDeuda = new Parametros();
                         parametrosTipoDeuda.setCodigo(civTipoDeuda.getTipdeuCodigo().intValue());
-                        parametrosTipoDeuda.setEstado(civTipoDeuda.getTipdeuEstado().intValue());
+                        parametrosTipoDeuda.setEstado(civTipoDeuda.getCivEstadotipodeuda().getEsttipdeuId().intValue());
                         parametrosTipoDeuda.setFechaFinal(civTipoDeuda.getTipdeuFechafinal());
                         parametrosTipoDeuda.setFechaInicial(civTipoDeuda.getTipdeuFechainicial());
                         parametrosTipoDeuda.setNombre(civTipoDeuda.getTipdeuDescripcion());
@@ -111,7 +113,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                     for (CivTipodatopersona civTipoDatosPersona : listCivTipoDatosPersona) {
                         Parametros parametrosTipoDeuda = new Parametros();
                         parametrosTipoDeuda.setCodigo(civTipoDatosPersona.getTipdatperCodigo().intValue());
-                        parametrosTipoDeuda.setEstado(civTipoDatosPersona.getTipdatperEstado().intValue());
+                        parametrosTipoDeuda.setEstado(civTipoDatosPersona.getCivEstadotipodatopersona().getEsttipdatId().intValue());
                         parametrosTipoDeuda.setFechaFinal(civTipoDatosPersona.getTipdatperFechafinal());
                         parametrosTipoDeuda.setFechaInicial(civTipoDatosPersona.getTipdatperFechainical());
                         parametrosTipoDeuda.setNombre(civTipoDatosPersona.getTipdatperDescripcion());
@@ -134,22 +136,22 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
     public void eliminarRegistro(BeanGestionParametros bean) throws Exception {
         switch (bean.getRegistroParametro().getNombreTabla()) {
             case "CIV_TIPOSDOCUMENTOS":
-                CivTipodocumentos civTipoDocuementos = new CivTipodocumentos();
-                civTipoDocuementos.setTipdocId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
-                civTipoDocuementos.setTipdocCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDocuementos.setTipdocEstado(BigDecimal.valueOf(2));
-                civTipoDocuementos.setTipdocFechainicial(bean.getRegistroParametro().getFechaInicial());
-                civTipoDocuementos.setTipdocFechafinal(new Date());
-                civTipoDocuementos.setTipdocNombre(bean.getRegistroParametro().getNombre());
-                civTipoDocuementos.setTipdocNombrecorto(bean.getRegistroParametro().getNombreCorto());
-                getTiposDocumentosDAO().update(civTipoDocuementos);
+                CivTipodocumentos civTipoDocumentos = new CivTipodocumentos();
+                civTipoDocumentos.setTipdocId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
+                civTipoDocumentos.setTipdocCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
+                civTipoDocumentos.setCivEstadotipodocumentos(getEstadoTipoDocumentoDAO().consultarById(2));
+                civTipoDocumentos.setTipdocFechainicial(bean.getRegistroParametro().getFechaInicial());
+                civTipoDocumentos.setTipdocFechafinal(new Date());
+                civTipoDocumentos.setTipdocNombre(bean.getRegistroParametro().getNombre());
+                civTipoDocumentos.setTipdocNombrecorto(bean.getRegistroParametro().getNombreCorto());
+                getTiposDocumentosDAO().update(civTipoDocumentos);
                 break;
 
             case "CIV_TIPOCONCEPTO":
                 CivTipoconcepto civTipoconcepto = new CivTipoconcepto();
                 civTipoconcepto.setTipconId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoconcepto.setTipconCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoconcepto.setTipconEstado(BigDecimal.valueOf(2));
+                //civTipoconcepto.setTipconEstado(BigDecimal.valueOf(2));
                 civTipoconcepto.setTipconFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoconcepto.setTipconFechafinal(new Date());
                 civTipoconcepto.setTipconDescripcion(bean.getRegistroParametro().getNombre());
@@ -161,7 +163,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodeuda civTipodeuda = new CivTipodeuda();
                 civTipodeuda.setTipdeuId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipodeuda.setTipdeuCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipodeuda.setTipdeuEstado(BigDecimal.valueOf(2));
+                //civTipodeuda.setTipdeuEstado(BigDecimal.valueOf(2));
                 civTipodeuda.setTipdeuFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipodeuda.setTipdeuFechafinal(new Date());
                 civTipodeuda.setTipdeuDescripcion(bean.getRegistroParametro().getNombre());
@@ -173,7 +175,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodatopersona civTipoDatopersona = new CivTipodatopersona();
                 civTipoDatopersona.setTipdatperId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoDatopersona.setTipdatperCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDatopersona.setTipdatperEstado(BigDecimal.valueOf(2));
+                //civTipoDatopersona.setTipdatperEstado(BigDecimal.valueOf(2));
                 civTipoDatopersona.setTipdatperFechainical(bean.getRegistroParametro().getFechaInicial());
                 civTipoDatopersona.setTipdatperFechafinal(new Date());
                 civTipoDatopersona.setTipdatperDescripcion(bean.getRegistroParametro().getNombre());
@@ -192,7 +194,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodocumentos civTipoDocuementos = new CivTipodocumentos();
                 civTipoDocuementos.setTipdocId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoDocuementos.setTipdocCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDocuementos.setTipdocEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoDocuementos.setTipdocEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoDocuementos.setTipdocFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoDocuementos.setTipdocFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoDocuementos.setTipdocNombre(bean.getRegistroParametro().getNombre());
@@ -203,7 +205,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipoconcepto civTipoconcepto = new CivTipoconcepto();
                 civTipoconcepto.setTipconId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoconcepto.setTipconCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoconcepto.setTipconEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoconcepto.setTipconEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoconcepto.setTipconFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoconcepto.setTipconFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoconcepto.setTipconDescripcion(bean.getRegistroParametro().getNombre());
@@ -214,7 +216,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodeuda civTipoDeuda = new CivTipodeuda();
                 civTipoDeuda.setTipdeuId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoDeuda.setTipdeuCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDeuda.setTipdeuEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoDeuda.setTipdeuEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoDeuda.setTipdeuFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoDeuda.setTipdeuFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoDeuda.setTipdeuDescripcion(bean.getRegistroParametro().getNombre());
@@ -225,7 +227,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodatopersona civTipoDatoPersona = new CivTipodatopersona();
                 civTipoDatoPersona.setTipdatperId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoDatoPersona.setTipdatperCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDatoPersona.setTipdatperEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoDatoPersona.setTipdatperEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoDatoPersona.setTipdatperFechainical(bean.getRegistroParametro().getFechaInicial());
                 civTipoDatoPersona.setTipdatperFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoDatoPersona.setTipdatperDescripcion(bean.getRegistroParametro().getNombre());
@@ -243,7 +245,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodocumentos civTipoDocuementos = new CivTipodocumentos();
 
                 civTipoDocuementos.setTipdocCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDocuementos.setTipdocEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoDocuementos.setTipdocEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoDocuementos.setTipdocFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoDocuementos.setTipdocFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoDocuementos.setTipdocNombre(bean.getRegistroParametro().getNombre());
@@ -254,7 +256,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipoconcepto civTipoconcepto = new CivTipoconcepto();
                 civTipoconcepto.setTipconId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoconcepto.setTipconCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoconcepto.setTipconEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoconcepto.setTipconEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoconcepto.setTipconFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoconcepto.setTipconFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoconcepto.setTipconDescripcion(bean.getRegistroParametro().getNombre());
@@ -265,7 +267,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodeuda civTipoDeuda = new CivTipodeuda();
                 civTipoDeuda.setTipdeuId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoDeuda.setTipdeuCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDeuda.setTipdeuEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoDeuda.setTipdeuEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoDeuda.setTipdeuFechainicial(bean.getRegistroParametro().getFechaInicial());
                 civTipoDeuda.setTipdeuFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoDeuda.setTipdeuDescripcion(bean.getRegistroParametro().getNombre());
@@ -276,7 +278,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                 CivTipodatopersona civTipoDatosPersona = new CivTipodatopersona();
                 civTipoDatosPersona.setTipdatperId(BigDecimal.valueOf(bean.getRegistroParametro().getId()));
                 civTipoDatosPersona.setTipdatperCodigo(BigDecimal.valueOf(bean.getRegistroParametro().getCodigo()));
-                civTipoDatosPersona.setTipdatperEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
+                //civTipoDatosPersona.setTipdatperEstado(BigDecimal.valueOf(bean.getRegistroParametro().getEstado()));
                 civTipoDatosPersona.setTipdatperFechainical(bean.getRegistroParametro().getFechaInicial());
                 civTipoDatosPersona.setTipdatperFechafinal(bean.getRegistroParametro().getFechaFinal());
                 civTipoDatosPersona.setTipdatperDescripcion(bean.getRegistroParametro().getNombre());
@@ -352,6 +354,20 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
      */
     public void setTipoPersonasDAO(ITTipoPersonas tipoPersonasDAO) {
         this.tipoPersonasDAO = tipoPersonasDAO;
+    }
+
+    /**
+     * @return the estadoTipoDocumentoDAO
+     */
+    public ITEstadoTipoDocumento getEstadoTipoDocumentoDAO() {
+        return estadoTipoDocumentoDAO;
+    }
+
+    /**
+     * @param estadoTipoDocumentoDAO the estadoTipoDocumentoDAO to set
+     */
+    public void setEstadoTipoDocumentoDAO(ITEstadoTipoDocumento estadoTipoDocumentoDAO) {
+        this.estadoTipoDocumentoDAO = estadoTipoDocumentoDAO;
     }
 
 }
