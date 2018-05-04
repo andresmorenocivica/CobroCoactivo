@@ -5,6 +5,8 @@
  */
 package jdbc.dao;
 
+
+import java.util.List;
 import persistencias.CivProcesosjuridicos;
 
 /**
@@ -17,4 +19,8 @@ public interface ITProcesosJuridicos {
     public boolean update(CivProcesosjuridicos civProcesosjuridicos) throws Exception;
     
     public CivProcesosjuridicos getConcepto(int projuId) throws Exception;
+    
+      public List<CivProcesosjuridicos> listAll() throws Exception;
+    
+    
 }

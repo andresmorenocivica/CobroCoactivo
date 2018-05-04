@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
+import persistencias.CivDetalleProcesojuridico;
 import persistencias.CivProcesosjuridicos;
 
 /**
@@ -39,5 +40,16 @@ public class DaoProcesosJuridicos extends HibernateDaoSupport implements ITProce
         }
         return null;
     }
+
+ 
+    
+     @Override
+    public List<CivProcesosjuridicos> listAll() throws Exception {
+        String hql = "from CivProcesosjuridicos where projuFechafinal is null order by 1 asc";
+        List list = getHibernateTemplate().find(hql);
+        return list;
+
+}
+    
 
 }
