@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadomovimiento" table="CIV_ESTADOMOVIMIENTO" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estmoviId" type="big_decimal">
             <column name="ESTMOVI_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estmoviDescripcion" type="string">
             <column name="ESTMOVI_DESCRIPCION" length="100" />

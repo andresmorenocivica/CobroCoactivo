@@ -19,5 +19,7 @@ public interface ITDeudas {
     
     public CivDeudas getDeuda(int deu_id)throws Exception;
 
-     public List<CivDeudas>  buscarHistorialDeudasPersonas(int idPersonas) throws Exception;
+    public List<CivDeudas>  buscarHistorialDeudasPersonas(int idPersonas) throws Exception;
+    
+    public List<CivDeudas> getListDeudasbyProcesos(int idProceso) throws Exception;
 }

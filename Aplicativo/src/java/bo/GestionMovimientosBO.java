@@ -5,13 +5,25 @@
  */
 package bo;
 
-import beans.BeanLogin;
+import beans.BeanGestionMovimientos;
+import java.util.List;
+import model.DetalleProcesoJuridico;
+import model.Deudas;
 
 /**
  *
  * @author jvergara
  */
 public interface GestionMovimientosBO {
+    
+    
+    public void cargarListaProceso(BeanGestionMovimientos bean) throws Exception;
+    
+    
+    public List<DetalleProcesoJuridico> llenarDetalleProceso(long id) throws Exception;
+    
+    
+    public List<Deudas> listaDeDeudas(long idProceso) throws Exception;
     
   
     

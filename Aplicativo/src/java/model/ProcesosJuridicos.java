@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -15,10 +16,10 @@ public class ProcesosJuridicos {
     private long id;
     private long idUsuario;
     private long idDivipo;
-    private int estado;
     private String nombre;
     private Date fechaInicial;
     private Date fechaFinal;
+    private List<DetalleProcesoJuridico> detalleProcesoJuridico;
 
     /**
      * @return the id
@@ -63,20 +64,6 @@ public class ProcesosJuridicos {
     }
 
     /**
-     * @return the estado
-     */
-    public int getEstado() {
-        return estado;
-    }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
-    /**
      * @return the nombre
      */
     public String getNombre() {
@@ -116,6 +103,20 @@ public class ProcesosJuridicos {
      */
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
+    }
+
+    /**
+     * @return the detalleProcesoJuridico
+     */
+    public List<DetalleProcesoJuridico> getDetalleProcesoJuridico() {
+        return detalleProcesoJuridico;
+    }
+
+    /**
+     * @param detalleProcesoJuridico the detalleProcesoJuridico to set
+     */
+    public void setDetalleProcesoJuridico(List<DetalleProcesoJuridico> detalleProcesoJuridico) {
+        this.detalleProcesoJuridico = detalleProcesoJuridico;
     }
     
     

@@ -6,7 +6,7 @@
     <class name="persistencias.CivTipodeuda" table="CIV_TIPODEUDA" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tipdeuId" type="big_decimal">
             <column name="TIPDEU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civEstadotipodeuda" class="persistencias.CivEstadotipodeuda" fetch="select">
             <column name="ESTTIPDEU_ID" precision="22" scale="0" />

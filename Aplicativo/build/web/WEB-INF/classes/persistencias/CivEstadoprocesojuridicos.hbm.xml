@@ -6,7 +6,7 @@
     <class name="persistencias.CivEstadoprocesojuridicos" table="CIV_ESTADOPROCESOJURIDICOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="estproId" type="big_decimal">
             <column name="ESTPRO_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="estproDescripcion" type="string">
             <column name="ESTPRO_DESCRIPCION" length="100" />
