@@ -25,6 +25,5 @@ public interface GestionModulosBO {
     
     void actualizarRecurso (BeanGestionModulos bean) throws Exception;
     
-    
-    
+        
 }
