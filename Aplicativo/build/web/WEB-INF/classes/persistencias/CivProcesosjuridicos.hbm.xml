@@ -6,7 +6,7 @@
     <class name="persistencias.CivProcesosjuridicos" table="CIV_PROCESOSJURIDICOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="projuId" type="big_decimal">
             <column name="PROJU_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civUsuarios" class="persistencias.CivUsuarios" fetch="select">
             <column name="USU_ID" precision="22" scale="0" />

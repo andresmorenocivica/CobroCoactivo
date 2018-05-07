@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -23,6 +25,8 @@ public class DetalleProcesoJuridico {
     private boolean direccion;
     private Date fechainicial;
     private Date fechaFinal;
+    private String nombre;
+    private List<Deudas> listaDeudas = new ArrayList<>();
 
     /**
      * @return the id
@@ -176,6 +180,34 @@ public class DetalleProcesoJuridico {
      */
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the listaDeudas
+     */
+    public List<Deudas> getListaDeudas() {
+        return listaDeudas;
+    }
+
+    /**
+     * @param listaDeudas the listaDeudas to set
+     */
+    public void setListaDeudas(List<Deudas> listaDeudas) {
+        this.listaDeudas = listaDeudas;
     }
 
     

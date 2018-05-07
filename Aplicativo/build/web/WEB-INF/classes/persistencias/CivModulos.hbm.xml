@@ -7,7 +7,7 @@
         <comment>En esta tabla se almacenan los diferentes modulos accesibles desde de sistema</comment>
         <id name="modId" type="big_decimal">
             <column name="MOD_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civEstadomodulos" class="persistencias.CivEstadomodulos" fetch="select">
             <column name="ESTMOD_ID" precision="22" scale="0">

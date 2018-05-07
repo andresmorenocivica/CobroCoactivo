@@ -39,5 +39,24 @@ public class DaoDetalleProcesosJuridicos extends HibernateDaoSupport implements 
         }
         return null;
     }
+    
+    
+    @Override
+    public List<CivDetalleProcesojuridico> listAll() throws Exception {
+        String hql = "from CivDetalleProcesojuridico where tipdocFechafinal is null order by 1 asc";
+        List list = getHibernateTemplate().find(hql);
+        return list;
+    }
+    
+    
+        @Override
+    public List<CivDetalleProcesojuridico> listarDetalleUsuarioBy(long id) throws Exception {
+
+        String hql = "from CivDetalleProcesojuridico where civProcesosjuridicos.projuId=:id ORDER BY 1 asc";
+        List list = getHibernateTemplate().findByNamedParam(hql, "id", new BigDecimal(id) );
+        return list;
+    }
+
+
 
 }

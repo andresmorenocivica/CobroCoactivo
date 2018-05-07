@@ -6,7 +6,7 @@
     <class name="persistencias.CivPersonas" table="CIV_PERSONAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="perId" type="big_decimal">
             <column name="PER_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civTipodocumentos" class="persistencias.CivTipodocumentos" fetch="select">
             <column name="TIPDOC_ID" precision="22" scale="0" not-null="true" />

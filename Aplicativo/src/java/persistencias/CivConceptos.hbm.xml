@@ -6,7 +6,7 @@
     <class name="persistencias.CivConceptos" table="CIV_CONCEPTOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="conId" type="big_decimal">
             <column name="CON_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civTipoconcepto" class="persistencias.CivTipoconcepto" fetch="select">
             <column name="TIPCON_ID" precision="22" scale="0" not-null="true">

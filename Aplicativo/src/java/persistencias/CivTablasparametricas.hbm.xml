@@ -6,7 +6,7 @@
     <class name="persistencias.CivTablasparametricas" table="CIV_TABLASPARAMETRICAS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="tabparId" type="big_decimal">
             <column name="TABPAR_ID" precision="22" scale="0" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="civEstadotablasparametrica" class="persistencias.CivEstadotablasparametrica" fetch="select">
             <column name="ESTTAB_ID" precision="22" scale="0" not-null="true" />
