@@ -1,5 +1,5 @@
 package persistencias;
-// Generated 4/05/2018 09:28:55 AM by Hibernate Tools 4.3.1
+// Generated 7/05/2018 09:33:50 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -18,25 +18,24 @@ public class CivMovimientos  implements java.io.Serializable {
      private Date fechaInicial;
      private Date fechaFinal;
      private BigDecimal usuId;
-     private BigDecimal estmovId;
 
     public CivMovimientos() {
     }
 
 	
-    public CivMovimientos(CivEstadomovimiento civEstadomovimiento, BigDecimal usuId, BigDecimal estmovId) {
+    public CivMovimientos(BigDecimal movId, CivEstadomovimiento civEstadomovimiento, BigDecimal usuId) {
+        this.movId = movId;
         this.civEstadomovimiento = civEstadomovimiento;
         this.usuId = usuId;
-        this.estmovId = estmovId;
     }
-    public CivMovimientos(CivEstadomovimiento civEstadomovimiento, BigDecimal deuId, BigDecimal detpropId, Date fechaInicial, Date fechaFinal, BigDecimal usuId, BigDecimal estmovId) {
+    public CivMovimientos(BigDecimal movId, CivEstadomovimiento civEstadomovimiento, BigDecimal deuId, BigDecimal detpropId, Date fechaInicial, Date fechaFinal, BigDecimal usuId) {
+       this.movId = movId;
        this.civEstadomovimiento = civEstadomovimiento;
        this.deuId = deuId;
        this.detpropId = detpropId;
        this.fechaInicial = fechaInicial;
        this.fechaFinal = fechaFinal;
        this.usuId = usuId;
-       this.estmovId = estmovId;
     }
    
     public BigDecimal getMovId() {
@@ -87,13 +86,6 @@ public class CivMovimientos  implements java.io.Serializable {
     
     public void setUsuId(BigDecimal usuId) {
         this.usuId = usuId;
-    }
-    public BigDecimal getEstmovId() {
-        return this.estmovId;
-    }
-    
-    public void setEstmovId(BigDecimal estmovId) {
-        this.estmovId = estmovId;
     }
 
 

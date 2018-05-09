@@ -25,6 +25,9 @@ public interface GestionMovimientosBO {
     
     public List<Deudas> listaDeDeudas(long idProceso) throws Exception;
     
+    
+   public void movimientoDeudaCambiarFase(BeanGestionMovimientos bean) throws Exception;
+    
   
     
 }

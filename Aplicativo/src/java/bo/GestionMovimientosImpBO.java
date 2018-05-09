@@ -7,20 +7,28 @@ package bo;
 
 import beans.BeanGestionMovimientos;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.IntStream;
 import jdbc.dao.ITDetalleProcesosJuridicos;
 import jdbc.dao.ITDeudas;
 import jdbc.dao.ITLogin;
 import jdbc.dao.ITMovimiento;
+import jdbc.dao.ITPersonas;
 import jdbc.dao.ITProcesosJuridicos;
 import model.DetalleProcesoJuridico;
 import model.Deudas;
 import model.ProcesosJuridicos;
 import persistencias.CivDetalleProcesojuridico;
 import persistencias.CivDeudas;
+import persistencias.CivEstadomovimiento;
 import persistencias.CivMovimientos;
+import persistencias.CivPersonas;
 import persistencias.CivProcesosjuridicos;
+import utility.DateUtility;
 
 /**
  *
@@ -33,6 +41,8 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
     private ITDetalleProcesosJuridicos detalleProcesosJuridicosDAO;
     private ITDeudas deudasDAO;
     private ITMovimiento movimientoDAO;
+    private ITPersonas personasDAO;
+    
 
     @Override
     public void cargarListaProceso(BeanGestionMovimientos bean) throws Exception {
@@ -50,29 +60,40 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
     @Override
     public List<DetalleProcesoJuridico> llenarDetalleProceso(long id) throws Exception {
         List<Deudas> lisDeudasModel = listaDeDeudas(id);
-        DetalleProcesoJuridico detalleProcesoJuridico = new DetalleProcesoJuridico();
         List<CivDetalleProcesojuridico> listaDetalleProcesoJuridico = getDetalleProcesosJuridicosDAO().listarDetalleUsuarioBy(id);
         List<DetalleProcesoJuridico> detalleProcesoJuridicos = new ArrayList<>();
-        int registro = 0;
         for (CivDetalleProcesojuridico civDetalleProcesojuridico : listaDetalleProcesoJuridico) {
+            DetalleProcesoJuridico detalleProcesoJuridico = new DetalleProcesoJuridico();
             detalleProcesoJuridico.setId(civDetalleProcesojuridico.getDetprojuId().longValue());
             detalleProcesoJuridico.setNombre(civDetalleProcesojuridico.getDeprojuNombre());
             detalleProcesoJuridicos.add(detalleProcesoJuridico);
-            for (Deudas deudas : lisDeudasModel) {
-                CivMovimientos civMovimientos = new CivMovimientos();
-                if (registro == 0) {
-                    civMovimientos = getMovimientoDAO().getMovimientoByIdDeuda((int) deudas.getId());
-                    if (civMovimientos == null) {
-                        detalleProcesoJuridicos.get(registro).getListaDeudas().add(deudas);
-                    }
-                } else {
-                    if (detalleProcesoJuridicos.get(registro).getListaDeudas().set(registro, deudas) == null) {
-                        detalleProcesoJuridicos.get(registro).getListaDeudas().add(deudas);
-                    }
-                }
+        }
 
+        for (Deudas deudas : lisDeudasModel) {
+            List<CivMovimientos> civMovimientos = getMovimientoDAO().getlistMovimientosById((int) deudas.getId());
+            
+            CivPersonas personaDeudor =  getPersonasDAO().consultarPersonasById((int)deudas.getIdPersona());
+            int dias = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
+            System.out.println("diferencias en dias "+ dias);
+           
+            
+            if (civMovimientos.size() == 0) {
+                detalleProcesoJuridicos.get(0).getListaDeudas().add(deudas);
+            } else {
+                int i = 0;
+                for (CivMovimientos civMovimiento : civMovimientos) {
+                    CivDetalleProcesojuridico civDetalleProcesojuridico = getDetalleProcesosJuridicosDAO().getDetalleProcesoJuridicoByid(civMovimientos.get(i).getDetpropId().intValue());
+                    int index = IntStream.range(0, detalleProcesoJuridicos.size())
+                            .filter(userInd -> detalleProcesoJuridicos.get(userInd).getNombre().equals(civDetalleProcesojuridico.getDeprojuNombre()))
+                            .findFirst().orElse(-1);
+                    if (index == detalleProcesoJuridicos.size() - 1) {
+
+                    } else {
+                        detalleProcesoJuridicos.get(index + 1).getListaDeudas().add(deudas);
+                    }
+                    i++;
+                }
             }
-            registro++;
         }
 
         return detalleProcesoJuridicos;
@@ -99,6 +120,22 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
         }
 
         return listaDeDeudasModel;
+    }
+
+    @Override
+    public void movimientoDeudaCambiarFase(BeanGestionMovimientos bean) throws Exception {
+        for (Deudas deuda : bean.getProcesosJuridicos().getDetalleProcesoJuridico().get(bean.getIndex()).getListaDeudas()) {
+            if (deuda.isSelecionado()) {
+                CivMovimientos civMovimientos = new CivMovimientos();
+                civMovimientos.setDeuId(new BigDecimal(deuda.getId()));
+                CivEstadomovimiento civEstadomovimiento = new CivEstadomovimiento();
+                civEstadomovimiento.setEstmoviId(new BigDecimal(1));
+                civMovimientos.setDetpropId(new BigDecimal(bean.getProcesosJuridicos().getDetalleProcesoJuridico().get(bean.getIndex()).getId()));
+                civMovimientos.setUsuId(new BigDecimal(bean.getLoginBO().getID_Usuario()));
+                civMovimientos.setCivEstadomovimiento(civEstadomovimiento);
+                movimientoDAO.insert(civMovimientos);
+            }
+        }
     }
 
     /**
@@ -169,6 +206,20 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
      */
     public void setMovimientoDAO(ITMovimiento movimientoDAO) {
         this.movimientoDAO = movimientoDAO;
+    }
+
+    /**
+     * @return the personasDAO
+     */
+    public ITPersonas getPersonasDAO() {
+        return personasDAO;
+    }
+
+    /**
+     * @param personasDAO the personasDAO to set
+     */
+    public void setPersonasDAO(ITPersonas personasDAO) {
+        this.personasDAO = personasDAO;
     }
 
 }

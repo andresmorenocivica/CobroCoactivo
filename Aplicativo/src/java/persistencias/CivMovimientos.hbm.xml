@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 4/05/2018 09:28:55 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 7/05/2018 09:33:50 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="persistencias.CivMovimientos" table="CIV_MOVIMIENTOS" schema="COBROCOACTIVO" optimistic-lock="version">
         <id name="movId" type="big_decimal">
             <column name="MOV_ID" precision="22" scale="0" />
-            <generator class="foreign">
-                <param name="property">civEstadomovimiento</param>
-            </generator>
+            <generator class="increment" />
         </id>
-        <one-to-one name="civEstadomovimiento" class="persistencias.CivEstadomovimiento" constrained="true"></one-to-one>
+        <many-to-one name="civEstadomovimiento" class="persistencias.CivEstadomovimiento" fetch="select">
+            <column name="ESTMOV_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
         <property name="deuId" type="big_decimal">
             <column name="DEU_ID" precision="22" scale="0" />
         </property>
@@ -25,9 +25,6 @@
         </property>
         <property name="usuId" type="big_decimal">
             <column name="USU_ID" precision="22" scale="0" not-null="true" />
-        </property>
-        <property name="estmovId" type="big_decimal">
-            <column name="ESTMOV_ID" precision="22" scale="0" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

@@ -17,9 +17,10 @@ public interface ITDetalleProcesosJuridicos {
 
     public boolean update(CivDetalleProcesojuridico civDetalleProcesojuridico) throws Exception;
     
-    public CivDetalleProcesojuridico getConcepto(int detprojuId) throws Exception;
+    public CivDetalleProcesojuridico getDetalleProcesoJuridicoByid(int detprojuId) throws Exception;
     
     public List<CivDetalleProcesojuridico> listAll() throws Exception;
     
     public List<CivDetalleProcesojuridico> listarDetalleUsuarioBy(long projuId) throws Exception;
+    
 }

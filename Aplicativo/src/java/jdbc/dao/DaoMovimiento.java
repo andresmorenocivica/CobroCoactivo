@@ -15,9 +15,9 @@ import persistencias.CivMovimientos;
  *
  * @author jvergara
  */
-public class DaoMovimiento extends HibernateDaoSupport implements ITMovimiento{
+public class DaoMovimiento extends HibernateDaoSupport implements ITMovimiento {
 
-   @Override
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public long insert(CivMovimientos civMovimientos) throws Exception {
         return Long.parseLong(getHibernateTemplate().save(civMovimientos).toString());
@@ -26,13 +26,13 @@ public class DaoMovimiento extends HibernateDaoSupport implements ITMovimiento{
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean update(CivMovimientos civMovimientos) throws Exception {
-       getHibernateTemplate().update(civMovimientos);
+        getHibernateTemplate().update(civMovimientos);
         return true;
     }
 
     @Override
     public CivMovimientos getMovimientoByIdDeuda(int deuId) throws Exception {
-         String hql = "from CivMovimientos where deuId=:deuId";
+        String hql = "from CivMovimientos where deuId=:deuId";
         List list = getHibernateTemplate().findByNamedParam(hql, "deuId", new BigDecimal(deuId));
         if (list.size() > 0) {
             return (CivMovimientos) list.get(0);
@@ -46,5 +46,12 @@ public class DaoMovimiento extends HibernateDaoSupport implements ITMovimiento{
         List list = getHibernateTemplate().find(hql);
         return list;
     }
-    
+
+    @Override
+    public List<CivMovimientos> getlistMovimientosById(int deuId) throws Exception {
+        String hql = "from CivMovimientos where deuId=:deuId";
+       List list = getHibernateTemplate().findByNamedParam(hql, "deuId", new BigDecimal(deuId));
+        return list;
+    }
+
 }

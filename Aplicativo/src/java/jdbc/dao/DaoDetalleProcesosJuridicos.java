@@ -31,8 +31,8 @@ public class DaoDetalleProcesosJuridicos extends HibernateDaoSupport implements 
     }
 
     @Override
-    public CivDetalleProcesojuridico getConcepto(int detprojuId) throws Exception {
-        String hql = "from CivConceptos where detprojuId=:detprojuId";
+    public CivDetalleProcesojuridico getDetalleProcesoJuridicoByid(int detprojuId) throws Exception {
+        String hql = "from CivDetalleProcesojuridico where detprojuId=:detprojuId";
         List list = getHibernateTemplate().findByNamedParam(hql, "detprojuId", new BigDecimal(detprojuId));
         if (list.size() > 0) {
             return (CivDetalleProcesojuridico) list.get(0);
@@ -56,6 +56,7 @@ public class DaoDetalleProcesosJuridicos extends HibernateDaoSupport implements 
         List list = getHibernateTemplate().findByNamedParam(hql, "id", new BigDecimal(id) );
         return list;
     }
+
 
 
 

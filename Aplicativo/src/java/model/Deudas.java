@@ -24,6 +24,7 @@ public class Deudas {
     private String referencia;
     private Date fecha;
     private Date fechaDeuda;
+    private boolean selecionado;
 
     /**
      * @return the id
@@ -177,6 +178,20 @@ public class Deudas {
      */
     public void setFechaDeuda(Date fechaDeuda) {
         this.fechaDeuda = fechaDeuda;
+    }
+
+    /**
+     * @return the selecionado
+     */
+    public boolean isSelecionado() {
+        return selecionado;
+    }
+
+    /**
+     * @param selecionado the selecionado to set
+     */
+    public void setSelecionado(boolean selecionado) {
+        this.selecionado = selecionado;
     }
 
     

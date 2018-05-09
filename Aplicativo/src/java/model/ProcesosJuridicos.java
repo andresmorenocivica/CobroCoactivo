@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -118,6 +119,8 @@ public class ProcesosJuridicos {
     public void setDetalleProcesoJuridico(List<DetalleProcesoJuridico> detalleProcesoJuridico) {
         this.detalleProcesoJuridico = detalleProcesoJuridico;
     }
+
+   
     
     
 }

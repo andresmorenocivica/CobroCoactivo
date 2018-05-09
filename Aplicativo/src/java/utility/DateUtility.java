@@ -1,6 +1,7 @@
 package utility;
 
-
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -44,8 +45,6 @@ public class DateUtility {
      * @return Objeto Date con la fecha
      * @throws java.lang.Exception
      */
-    
-
     /**
      * Calcula la diferencia entre dos fechas
      *
@@ -72,49 +71,70 @@ public class DateUtility {
         cal.setTime(date);
         return cal;
     }
-    
+
     public synchronized Calendar formatearFecha(Date date) throws Exception {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         return cal;
     }
-    
+
     public static synchronized String consultarFechaActualSincronizadaString() throws Exception {
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return date.format(formatter);
     }
-    
+
     public static synchronized Date consultarFechaActualSincronizadaDate() throws Exception {
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return new Date(date.format(formatter));
     }
-    
+
     public static synchronized String convertirFechaSincronizadaString(Date fecha) throws Exception {
         LocalDate localDate = fecha.toInstant()
-                              .atZone(ZoneId.systemDefault())
-                              .toLocalDate();
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       
+
         return formatter.format(localDate);
     }
-    
+
     public static synchronized Date convertirFechaSincronizadaDate(Date fecha) throws Exception {
         LocalDate localDate = fecha.toInstant()
-                              .atZone(ZoneId.systemDefault())
-                              .toLocalDate();
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       
+
         return new Date(formatter.format(localDate));
     }
-    
+
     public static synchronized Date convertirFechaSincronizadaDate(String fecha) throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(fecha, formatter);
         return new Date(date.format(formatter));
     }
-    
+
+    public static int fechasDiferenciaEnDias(Date fechaInicial, Date fechaFinal) throws Exception{
+
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        String fechaInicioString = df.format(fechaInicial);
+        try {
+            fechaInicial = df.parse(fechaInicioString);
+        } catch (ParseException ex) {
+        }
+
+        String fechaFinalString = df.format(fechaFinal);
+        try {
+            fechaFinal = df.parse(fechaFinalString);
+        } catch (ParseException ex) {
+        }
+
+        long fechaInicialMs = fechaInicial.getTime();
+        long fechaFinalMs = fechaFinal.getTime();
+        long diferencia = fechaFinalMs - fechaInicialMs;
+        double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        return ((int) dias);
+    }
 
     private DateUtility() {
     }

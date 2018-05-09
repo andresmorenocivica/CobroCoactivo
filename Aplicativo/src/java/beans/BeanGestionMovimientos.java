@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import model.DetalleProcesoJuridico;
+import model.Deudas;
 import model.ProcesosJuridicos;
 import utility.Log_Handler;
 
@@ -21,19 +22,21 @@ import utility.Log_Handler;
  */
 public class BeanGestionMovimientos {
 
-    
     private GestionMovimientosBO gestionMovimientosBO;
     private BeanLogin loginBO;
     private List<ProcesosJuridicos> listaProcesoJuridisco = new ArrayList<>();
-    private List<DetalleProcesoJuridico> listDetalleProcesoJuridico;
-    
-    
-        @PostConstruct
+    private ProcesosJuridicos procesosJuridicos;
+    private int index;
+    private boolean checkGeneral;
+    private boolean renderBtnGuardar;
+    private boolean  renderTabla= false;
+
+    @PostConstruct
     public void cargarDatos() {
         try {
-          
-            getGestionMovimientosBO().cargarListaProceso(this);
 
+            getGestionMovimientosBO().cargarListaProceso(this);
+            setRenderBtnGuardar(true);
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -41,12 +44,63 @@ public class BeanGestionMovimientos {
         }
     }
 
-    
-    
+    public void movimientoDeudaCambiarFase() {
+        try {
+            getGestionMovimientosBO().movimientoDeudaCambiarFase(this);
+
+        } catch (Exception e) {
+
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+
+    public void establecerListaDeudas(int index, List<Deudas> deudas) {
+        try {
+            getProcesosJuridicos().getDetalleProcesoJuridico().get(index).setListaDeudas(deudas);
+            setIndex(index);
+            if (index ==  getProcesosJuridicos().getDetalleProcesoJuridico().size() - 1) {
+                setRenderBtnGuardar(false);
+            }else{
+                setRenderBtnGuardar(true);
+            }
+            
+
+        } catch (Exception e) {
+
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+
+    }
+
+    public void seleccionarTodosCombox() {
+        try {
+            if (checkGeneral) {
+                for (int i = 0; i < getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().size(); i++) {
+                    getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().get(i).setSelecionado(true);
+                }
+
+            }else{
+                  for (int i=0;i < getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().size();i++) {
+                getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().get(i).setSelecionado(false);
+            }
+            
+            }
+
+        } catch (Exception e) {
+
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+
     /**
      * @return the gestionMovimientosBO
      */
-    
     public GestionMovimientosBO getGestionMovimientosBO() {
         return gestionMovimientosBO;
     }
@@ -86,18 +140,71 @@ public class BeanGestionMovimientos {
         this.listaProcesoJuridisco = listaProcesoJuridisco;
     }
 
-    /**
-     * @return the listDetalleProcesoJuridico
-     */
-    public List<DetalleProcesoJuridico> getListDetalleProcesoJuridico() {
-        return listDetalleProcesoJuridico;
+    public ProcesosJuridicos getProcesosJuridicos() {
+        return procesosJuridicos;
     }
 
     /**
-     * @param listDetalleProcesoJuridico the listDetalleProcesoJuridico to set
+     * @param procesosJuridicos the procesosJuridicos to set
      */
-    public void setListDetalleProcesoJuridico(List<DetalleProcesoJuridico> listDetalleProcesoJuridico) {
-        this.listDetalleProcesoJuridico = listDetalleProcesoJuridico;
+    public void setProcesosJuridicos(ProcesosJuridicos procesosJuridicos) {
+        this.procesosJuridicos = procesosJuridicos;
     }
-    
+
+    /**
+     * @return the index
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    /**
+     * @return the checkGeneral
+     */
+    public boolean isCheckGeneral() {
+        return checkGeneral;
+    }
+
+    /**
+     * @param checkGeneral the checkGeneral to set
+     */
+    public void setCheckGeneral(boolean checkGeneral) {
+        this.checkGeneral = checkGeneral;
+    }
+
+    /**
+     * @return the renderBtnGuardar
+     */
+    public boolean isRenderBtnGuardar() {
+        return renderBtnGuardar;
+    }
+
+    /**
+     * @param renderBtnGuardar the renderBtnGuardar to set
+     */
+    public void setRenderBtnGuardar(boolean renderBtnGuardar) {
+        this.renderBtnGuardar = renderBtnGuardar;
+    }
+
+    /**
+     * @return the renderTabla
+     */
+    public boolean isRenderTabla() {
+        return renderTabla;
+    }
+
+    /**
+     * @param renderTabla the renderTabla to set
+     */
+    public void setRenderTabla(boolean renderTabla) {
+        this.renderTabla = renderTabla;
+    }
+
 }

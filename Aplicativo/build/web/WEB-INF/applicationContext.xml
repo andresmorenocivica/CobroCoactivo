@@ -279,6 +279,7 @@
         <property name="detalleProcesosJuridicosDAO" ref="detalleProcesosJuridicosDAO"></property>
         <property name="deudasDAO" ref="deudasDAO"></property>
         <property name="movimientoDAO" ref="movimientoDAO"></property>
+        <property name="personasDAO" ref="personasDAO"></property>
     </bean>
 	
     <tx:annotation-driven transaction-manager="transactionManager" />
