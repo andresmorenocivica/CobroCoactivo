@@ -23,3 +23,7 @@ hs_err_pid*
 /Aplicativo/dist/
 Aplicativo/nbproject/private/private.properties
 *.properties
+Aplicativo/build/web/WEB-INF/glassfish-web.xml
+Aplicativo/nbproject/private/private.properties
+Aplicativo/nbproject/private/private.properties
+Aplicativo/build/web/WEB-INF/glassfish-web.xml

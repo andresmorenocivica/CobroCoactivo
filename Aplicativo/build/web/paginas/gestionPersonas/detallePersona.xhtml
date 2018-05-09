@@ -4,7 +4,8 @@
                 template="./../../plantillas/PlantillaGeneral.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:jsf="http://xmlns.jcp.org/jsf"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
         <h:form id="frmDetallePersona">
@@ -160,7 +161,7 @@
                                 <div class="panel-heading">
                                     <h4 class="panel-title row">
                                         <div class="col-sm-11">
-                                            <a data-toggle="collapse" data-target="#collapse" aria-controls="collapse}">Historial Personas</a>
+                                            <a style="cursor: pointer" data-toggle="collapse" data-target="#collapse" aria-controls="collapse">Historial Deudas</a>
 
                                         </div>
 
@@ -177,7 +178,7 @@
                                                     <th>Valor</th>
                                                     <th>Saldo</th>
                                                     <th>Fecha Deuda</th>
-
+                                                    <th>Mostrar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -189,6 +190,11 @@
                                                         <td>#{deudaPersona.valor}</td>
                                                         <td>#{deudaPersona.saldo}</td>
                                                         <td>#{deudaPersona.fechaDeuda}</td>
+                                                        <td>
+                                                            <h:commandLink class="fa fa-eye col-sm-4" onclick="$('#modalMovimiento').modal('show');"> 
+                                                                <f:ajax event="click" listener="#{gestionPersonasBean.cargarMovimientoDeudas(deudaPersona)}" render="frmDetallePersona:modalMovimiento frmDetallePersona:tablaMovimientos" ></f:ajax>
+                                                            </h:commandLink>
+                                                        </td>
                                                     </tr>
                                                 </ui:repeat>
 
@@ -200,6 +206,43 @@
                         </div>
                     </div>
                     <!-- termina historial de la persona -->
+                    <!-- Empieza Modal Movimiento de la persona -->
+                    <div class="modal fade" id="modalMovimiento" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Movimiento De la Deuda</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h:panelGroup id="tablaMovimientos">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Movimiento ID</th>
+                                                    <th>Movimiento</th>
+                                                    <th>Fecha Movimiento</th>
+                                                    <th>Usuario</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ui:repeat value="#{gestionPersonasBean.deudas.listaMovimiento}" var="MovimientoDeuda" >
+                                                    <tr>
+                                                        <td>#{MovimientoDeuda.movId}</td>
+                                                        <td>#{MovimientoDeuda.nombreDetalleProceso}</td>
+                                                        <td>#{MovimientoDeuda.fechaInicial}</td>
+                                                        <td>#{MovimientoDeuda.nombreUsuario}</td>
+                                                    </tr>
+                                                </ui:repeat>
+                                            </tbody>
+                                        </table>
+                                    </h:panelGroup>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </h:form>

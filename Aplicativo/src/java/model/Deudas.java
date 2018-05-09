@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Deudas {
     private Date fecha;
     private Date fechaDeuda;
     private boolean selecionado;
+    private List<Movimientos> listaMovimiento = new ArrayList<>();
 
     /**
      * @return the id
@@ -192,6 +195,20 @@ public class Deudas {
      */
     public void setSelecionado(boolean selecionado) {
         this.selecionado = selecionado;
+    }
+
+    /**
+     * @return the listaMovimiento
+     */
+    public List<Movimientos> getListaMovimiento() {
+        return listaMovimiento;
+    }
+
+    /**
+     * @param listaMovimiento the listaMovimiento to set
+     */
+    public void setListaMovimiento(List<Movimientos> listaMovimiento) {
+        this.listaMovimiento = listaMovimiento;
     }
 
     

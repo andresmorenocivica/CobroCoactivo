@@ -13,14 +13,13 @@ import persistencias.CivEstadomodulos;
  * @author jvergara
  */
 public interface ITEstadoModulos {
-    
-     public long insert(CivEstadomodulos estadorEstadomodulos)throws Exception;
-    
-    public boolean update(CivEstadomodulos estadorEstadomodulos)throws Exception;
-    
-    public List<CivEstadomodulos> listAll()throws Exception;
-    
-    
+
+    public long insert(CivEstadomodulos estadorEstadomodulos) throws Exception;
+
+    public boolean update(CivEstadomodulos estadorEstadomodulos) throws Exception;
+
+    public List<CivEstadomodulos> listAll() throws Exception;
+
     public CivEstadomodulos consultarModuloById(int mod_id) throws Exception;
-    
+
 }

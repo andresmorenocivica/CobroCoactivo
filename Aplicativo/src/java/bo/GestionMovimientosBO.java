@@ -15,19 +15,15 @@ import model.Deudas;
  * @author jvergara
  */
 public interface GestionMovimientosBO {
-    
-    
+
     public void cargarListaProceso(BeanGestionMovimientos bean) throws Exception;
-    
-    
+
     public List<DetalleProcesoJuridico> llenarDetalleProceso(long id) throws Exception;
-    
-    
+
     public List<Deudas> listaDeDeudas(long idProceso) throws Exception;
-    
-    
-   public void movimientoDeudaCambiarFase(BeanGestionMovimientos bean) throws Exception;
-    
-  
-    
+
+    public void movimientoDeudaCambiarFase(BeanGestionMovimientos bean) throws Exception;
+
+    public void consultaMovimiento(BeanGestionMovimientos bean) throws Exception;
+
 }

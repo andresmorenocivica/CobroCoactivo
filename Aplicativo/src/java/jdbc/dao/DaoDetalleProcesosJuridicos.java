@@ -57,7 +57,7 @@ public class DaoDetalleProcesosJuridicos extends HibernateDaoSupport implements 
         return list;
     }
 
-
+    
 
 
 }

@@ -10,15 +10,19 @@ package bo;
  * @author pruebadesarrollo
  */
 public interface GestionProcesoBO {
+
+    public void cargarListaProceso(beans.BeanGestionProceso bean) throws Exception;
+
+    public void guardarProcesoJuridico(beans.BeanGestionProceso bean) throws Exception;
+
+    public void cargarEstadoProceso(beans.BeanGestionProceso bean) throws Exception;
+
+    public void actualizarProceso(beans.BeanGestionProceso bean) throws Exception;
+
+    public void eliminarRegistro(beans.BeanGestionProceso bean) throws Exception;
+
+    public void guardarFases(beans.BeanGestionProceso bean) throws Exception;
     
-    public void cargarListaProceso (beans.BeanGestionProceso bean ) throws Exception;
-    
-    public void guardarProcesoJuridico (beans.BeanGestionProceso bean) throws Exception;
-    
-    public void cargarEstadoProceso (beans.BeanGestionProceso bean) throws Exception;
-    
-    public void actualizarProceso (beans.BeanGestionProceso bean) throws Exception;
-    
-    public void eliminarRegistro (beans.BeanGestionProceso bean) throws Exception;
-    
+    public void actulizarFases (beans.BeanGestionProceso bean) throws Exception;
+
 }

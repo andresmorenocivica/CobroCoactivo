@@ -20,7 +20,8 @@ public class ProcesosJuridicos {
     private String nombre;
     private Date fechaInicial;
     private Date fechaFinal;
-    private List<DetalleProcesoJuridico> detalleProcesoJuridico;
+    private List<DetalleProcesoJuridico> detalleProcesoJuridico= new ArrayList<>();;
+   private long estado;
 
     /**
      * @return the id
@@ -118,6 +119,20 @@ public class ProcesosJuridicos {
      */
     public void setDetalleProcesoJuridico(List<DetalleProcesoJuridico> detalleProcesoJuridico) {
         this.detalleProcesoJuridico = detalleProcesoJuridico;
+    }
+
+    /**
+     * @return the estado
+     */
+    public long getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(long estado) {
+        this.estado = estado;
     }
 
    

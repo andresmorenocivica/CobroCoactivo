@@ -133,4 +133,17 @@
             <value>#{loginBean}</value>
         </managed-property>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>gestionProcesoBean</managed-bean-name>
+        <managed-bean-class>beans.BeanGestionProceso</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>gestionProcesoBO</property-name>
+            <value>#{GestionProcesoBO}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>loginBO</property-name>
+            <value>#{loginBean}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

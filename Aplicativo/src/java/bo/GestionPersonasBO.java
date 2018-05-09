@@ -27,4 +27,5 @@ public interface GestionPersonasBO {
     
     void  buscarHistorialDeudasPersonas(BeanGestionPersonas bean) throws Exception;
     
+    void  buscarMovimientoDeudaPersona (BeanGestionPersonas bean) throws Exception;
 }

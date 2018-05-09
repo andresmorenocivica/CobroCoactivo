@@ -19,8 +19,10 @@ import jdbc.dao.ITLogin;
 import jdbc.dao.ITMovimiento;
 import jdbc.dao.ITPersonas;
 import jdbc.dao.ITProcesosJuridicos;
+import jdbc.dao.ITUsuarios;
 import model.DetalleProcesoJuridico;
 import model.Deudas;
+import model.Movimientos;
 import model.ProcesosJuridicos;
 import persistencias.CivDetalleProcesojuridico;
 import persistencias.CivDeudas;
@@ -28,6 +30,7 @@ import persistencias.CivEstadomovimiento;
 import persistencias.CivMovimientos;
 import persistencias.CivPersonas;
 import persistencias.CivProcesosjuridicos;
+import persistencias.CivUsuarios;
 import utility.DateUtility;
 
 /**
@@ -42,6 +45,7 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
     private ITDeudas deudasDAO;
     private ITMovimiento movimientoDAO;
     private ITPersonas personasDAO;
+    private ITUsuarios usuariosDAO;
     
 
     @Override
@@ -137,6 +141,27 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             }
         }
     }
+    
+    @Override
+    public void consultaMovimiento(BeanGestionMovimientos bean) throws Exception {
+         bean.getDeudas().setListaMovimiento(new ArrayList<>());
+        List<CivMovimientos> listMovimiento = getMovimientoDAO().buscarMovimientoDeudasPersonas((int) bean.getDeudas().getId());
+        if (listMovimiento != null) {
+            for (CivMovimientos civMovimientos : listMovimiento) {
+                Movimientos movimiento = new Movimientos();
+                movimiento.setDeuId(civMovimientos.getDeuId());
+                movimiento.setMovId(civMovimientos.getMovId());
+                movimiento.setDetpropId(civMovimientos.getDetpropId());
+                CivDetalleProcesojuridico civDetalleProcesojuridico = getDetalleProcesosJuridicosDAO().getDetalleProcesoJuridicoByid(civMovimientos.getDetpropId().intValue());
+                movimiento.setNombreDetalleProceso(civDetalleProcesojuridico.getDeprojuNombre());
+                movimiento.setFechaInicial(civMovimientos.getFechaInicial());
+                movimiento.setUsuId(civMovimientos.getUsuId());
+                CivUsuarios civUsuarios = getUsuariosDAO().consultarUsuarioBy(civMovimientos.getUsuId().intValue());
+                movimiento.setNombreUsuario(civUsuarios.getUsuNombre());
+                bean.getDeudas().getListaMovimiento().add(movimiento);
+            }
+        }
+    }
 
     /**
      * @return the loginDAO
@@ -221,5 +246,22 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
     public void setPersonasDAO(ITPersonas personasDAO) {
         this.personasDAO = personasDAO;
     }
+
+    /**
+     * @return the usuariosDAO
+     */
+    public ITUsuarios getUsuariosDAO() {
+        return usuariosDAO;
+    }
+
+    /**
+     * @param usuariosDAO the usuariosDAO to set
+     */
+    public void setUsuariosDAO(ITUsuarios usuariosDAO) {
+        this.usuariosDAO = usuariosDAO;
+    }
+
+
+    
 
 }

@@ -23,5 +23,7 @@ public interface ITMovimiento {
     public List<CivMovimientos> listAll() throws Exception;
     
     public List<CivMovimientos> getlistMovimientosById(int deuId) throws Exception;
+    
+    public List<CivMovimientos> buscarMovimientoDeudasPersonas(int deuId) throws Exception;
 
 }

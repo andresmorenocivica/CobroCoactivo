@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import model.DetalleProcesoJuridico;
 import model.Estado;
 import model.ProcesosJuridicos;
 import org.primefaces.context.RequestContext;
@@ -29,6 +30,8 @@ public class BeanGestionProceso {
     private ProcesosJuridicos registroProcesoJuridico = new ProcesosJuridicos();
     private List<Estado> estadoProceso = new ArrayList<>();
     private boolean editable = false;
+    private DetalleProcesoJuridico detalleProcesoJuridico = new DetalleProcesoJuridico();
+    
 
     @PostConstruct
     public void cargarDatos() {
@@ -47,7 +50,6 @@ public class BeanGestionProceso {
             getGestionProcesoBO().guardarProcesoJuridico(this);
             RequestContext requestContext = RequestContext.getCurrentInstance();
             requestContext.execute("$('#modalagregarProceso').modal('hide')");
-
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -70,7 +72,8 @@ public class BeanGestionProceso {
         try {
             setEditable(true);
             getGestionProcesoBO().actualizarProceso(this);
-
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#modalagregarProceso').modal('hide')");
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -85,13 +88,33 @@ public class BeanGestionProceso {
             } else {
                 getRegistroProcesoJuridico().setFechaFinal(null);
             }
-
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
             FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
         }
+    }
 
+    public void guardarFases() {
+        try {
+            getGestionProcesoBO().guardarFases(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#modalagregarFases').modal('hide')");
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+        }
+    }
+    public void actualizar(){
+        try{
+            getGestionProcesoBO().actulizarFases(this);
+        }catch (Exception e){
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionModulos" + "messageGeneral");
+        }
+    
     }
 
     /**
@@ -179,6 +202,17 @@ public class BeanGestionProceso {
     }
 
     /**
-     * @return the registroProceso
+     * @return the detalleProcesoJuridico
      */
+    public DetalleProcesoJuridico getDetalleProcesoJuridico() {
+        return detalleProcesoJuridico;
+    }
+
+    /**
+     * @param detalleProcesoJuridico the detalleProcesoJuridico to set
+     */
+    public void setDetalleProcesoJuridico(DetalleProcesoJuridico detalleProcesoJuridico) {
+        this.detalleProcesoJuridico = detalleProcesoJuridico;
+    }
+
 }

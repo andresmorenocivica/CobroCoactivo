@@ -1,4 +1,3 @@
-
 package bo;
 
 import beans.BeanGestionPersonas;
@@ -9,23 +8,30 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import jdbc.dao.ITDatosPersonas;
+import jdbc.dao.ITDetalleProcesosJuridicos;
 import jdbc.dao.ITDeudas;
 import jdbc.dao.ITEstadosPersona;
 import jdbc.dao.ITLogin;
+import jdbc.dao.ITMovimiento;
 import jdbc.dao.ITPersonas;
 import jdbc.dao.ITTipoDocumento;
+import jdbc.dao.ITUsuarios;
 import model.DatosPersona;
 import model.Deudas;
 import model.EstadoPersona;
+import model.Movimientos;
 import model.Personas;
 import model.TipoDato;
 import model.TipoDocumentos;
 import persistencias.CivDatospersona;
+import persistencias.CivDetalleProcesojuridico;
 import persistencias.CivDeudas;
 import persistencias.CivEstadopersona;
+import persistencias.CivMovimientos;
 import persistencias.CivPersonas;
 import persistencias.CivTipodatopersona;
 import persistencias.CivTipodocumentos;
+import persistencias.CivUsuarios;
 
 /**
  *
@@ -39,6 +45,9 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
     private ITDatosPersonas datosPersonasDAO;
     private ITDeudas deudasDAO;
     private ITEstadosPersona estadosPersonaDAO;
+    private ITMovimiento movimientoDAO;
+    private ITDetalleProcesosJuridicos detalleProcesosJuridicosDAO;
+    private ITUsuarios usuariosDAO;
 
     @Override
     public void llenarDatos(BeanGestionPersonas bean) throws Exception {
@@ -60,7 +69,7 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             TipoDato tipoDato = new TipoDato();
             tipoDato.setCodigo(civTipodatopersona.getTipdatperId().longValue());
             tipoDato.setDescripcion(civTipodatopersona.getTipdatperDescripcion());
-            EstadoPersona estadoPersona =  new EstadoPersona();
+            EstadoPersona estadoPersona = new EstadoPersona();
             estadoPersona.setId(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatId().longValue());
             estadoPersona.setDescripcion(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatDescripcion());
             estadoPersona.setFechaInicial(civTipodatopersona.getCivEstadotipodatopersona().getEsttipdatFechainicial());
@@ -83,10 +92,31 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
     }
 
     @Override
+    public void buscarMovimientoDeudaPersona(BeanGestionPersonas bean) throws Exception {
+        bean.getDeudas().setListaMovimiento(new ArrayList<>());
+        List<CivMovimientos> listMovimiento = getMovimientoDAO().buscarMovimientoDeudasPersonas((int) bean.getDeudas().getId());
+        if (listMovimiento != null) {
+            for (CivMovimientos civMovimientos : listMovimiento) {
+                Movimientos movimiento = new Movimientos();
+                movimiento.setDeuId(civMovimientos.getDeuId());
+                movimiento.setMovId(civMovimientos.getMovId());
+                movimiento.setDetpropId(civMovimientos.getDetpropId());
+                CivDetalleProcesojuridico civDetalleProcesojuridico = getDetalleProcesosJuridicosDAO().getDetalleProcesoJuridicoByid(civMovimientos.getDetpropId().intValue());
+                movimiento.setNombreDetalleProceso(civDetalleProcesojuridico.getDeprojuNombre());
+                movimiento.setFechaInicial(civMovimientos.getFechaInicial());
+                movimiento.setUsuId(civMovimientos.getUsuId());
+                CivUsuarios civUsuarios = getUsuariosDAO().consultarUsuarioBy(civMovimientos.getUsuId().intValue());
+                movimiento.setNombreUsuario(civUsuarios.getUsuNombre());
+                bean.getDeudas().getListaMovimiento().add(movimiento);
+            }
+        }
+    }
+
+    @Override
     public void buscarHistorialDeudasPersonas(BeanGestionPersonas bean) throws Exception {
         List<CivDeudas> listDeudas = getDeudasDAO().buscarHistorialDeudasPersonas((int) bean.getDetallePersona().getId());
         for (CivDeudas listDeuda : listDeudas) {
-            Deudas deuda =  new Deudas();
+            Deudas deuda = new Deudas();
             deuda.setId(listDeuda.getDeuId().longValue());
             deuda.setFecha(listDeuda.getDeuFecha());
             deuda.setEstado(listDeuda.getCivEstadodeudas().getEstdeuId().intValue());
@@ -99,11 +129,9 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
             deuda.setIdProcesoJuridico(listDeuda.getCivProcesosjuridicos().getProjuId().intValue());
             deuda.setFechaDeuda(listDeuda.getDeuFecha());
             bean.getDetallePersona().getListaDeudas().add(deuda);
-            
-            
-            
+
         }
-        
+
     }
 
     @Override
@@ -240,6 +268,48 @@ public class GestionPersonasImpBO implements GestionPersonasBO, Serializable {
      */
     public void setEstadosPersonaDAO(ITEstadosPersona estadosPersonaDAO) {
         this.estadosPersonaDAO = estadosPersonaDAO;
+    }
+
+    /**
+     * @return the movimientoDAO
+     */
+    public ITMovimiento getMovimientoDAO() {
+        return movimientoDAO;
+    }
+
+    /**
+     * @param movimientoDAO the movimientoDAO to set
+     */
+    public void setMovimientoDAO(ITMovimiento movimientoDAO) {
+        this.movimientoDAO = movimientoDAO;
+    }
+
+    /**
+     * @return the detalleProcesosJuridicosDAO
+     */
+    public ITDetalleProcesosJuridicos getDetalleProcesosJuridicosDAO() {
+        return detalleProcesosJuridicosDAO;
+    }
+
+    /**
+     * @param detalleProcesosJuridicosDAO the detalleProcesosJuridicosDAO to set
+     */
+    public void setDetalleProcesosJuridicosDAO(ITDetalleProcesosJuridicos detalleProcesosJuridicosDAO) {
+        this.detalleProcesosJuridicosDAO = detalleProcesosJuridicosDAO;
+    }
+
+    /**
+     * @return the usuariosDAO
+     */
+    public ITUsuarios getUsuariosDAO() {
+        return usuariosDAO;
+    }
+
+    /**
+     * @param usuariosDAO the usuariosDAO to set
+     */
+    public void setUsuariosDAO(ITUsuarios usuariosDAO) {
+        this.usuariosDAO = usuariosDAO;
     }
 
 }

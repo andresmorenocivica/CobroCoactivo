@@ -324,5 +324,8 @@ public class Personas {
         this.nombreEstado = nombreEstado;
     }
 
+
+   
+
     
 }

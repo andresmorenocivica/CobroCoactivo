@@ -33,6 +33,7 @@ public class BeanGestionPersonas {
     private int idDocumentoSelecionado;
     private GestionPersonasBO gestionPersonasBO;
     private Deudas deudas;
+    private int idDeuda;
     private List<TipoDato> datosPersona;
     private String encabezadoDetallePersona; //informacion detalle personas
     private Personas detallePersona;
@@ -40,7 +41,6 @@ public class BeanGestionPersonas {
     @PostConstruct
     public void init() {
         try {
-
             BeanRequest obj_ = (BeanRequest) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("requestBean");
             if (obj_ != null) {
                 setDetallePersona(obj_.getPersonas());
@@ -53,7 +53,6 @@ public class BeanGestionPersonas {
             setListTipoDocumento(new ArrayList<>());
             setListPersonas(new ArrayList<>());
             getGestionPersonasBO().llenarDatos(this);
-            
 
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
@@ -65,6 +64,7 @@ public class BeanGestionPersonas {
 
     public void consultarPorNumero() {
         try {
+            
             getGestionPersonasBO().consultarPorNumero(this);
 
         } catch (Exception e) {
@@ -76,7 +76,7 @@ public class BeanGestionPersonas {
 
     public void buscarDatosPersonas() {
         try {
-           getGestionPersonasBO().buscarDatosPersonas(this);
+            getGestionPersonasBO().buscarDatosPersonas(this);
 
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
@@ -98,7 +98,16 @@ public class BeanGestionPersonas {
         }
     }
 
-    public BeanGestionPersonas() {
+    public void cargarMovimientoDeudas(Deudas deuda) {
+
+        try {
+            setDeudas(deuda);
+            getGestionPersonasBO().buscarMovimientoDeudaPersona(this);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
     }
 
     public List<TipoDocumentos> getListTipoDocumento() {
@@ -195,6 +204,20 @@ public class BeanGestionPersonas {
 
     public void setDatosPersona(List<TipoDato> datosPersona) {
         this.datosPersona = datosPersona;
+    }
+
+    /**
+     * @return the idDeuda
+     */
+    public int getIdDeuda() {
+        return idDeuda;
+    }
+
+    /**
+     * @param idDeuda the idDeuda to set
+     */
+    public void setIdDeuda(int idDeuda) {
+        this.idDeuda = idDeuda;
     }
 
 }

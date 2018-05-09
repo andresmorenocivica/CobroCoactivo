@@ -46,7 +46,7 @@
         </property>
         <property name="mappingResources">
             <list>
-                   <value>persistencias/CivHistorialPerfilRecurso.hbm.xml</value>
+                <value>persistencias/CivHistorialPerfilRecurso.hbm.xml</value>
                 <value>persistencias/CivEstadodetalleDeudas.hbm.xml</value>
                 <value>persistencias/CivMovimientos.hbm.xml</value>
                 <value>persistencias/CivEstadotipodeuda.hbm.xml</value>
@@ -188,8 +188,13 @@
     <bean id="movimientoDAO" class="jdbc.dao.DaoMovimiento">
         <property name="sessionFactory" ref="sessionFactory"></property>
     </bean>
-    
-    
+    <bean id="estadoProcesoJuridicoDAO" class="jdbc.dao.DaoEstadoProcesoJuridico">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <bean id="estadoDetalleProcesoJuridicoDAO" class="jdbc.dao.DaoEstadoDetalleProcesoJuridico">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean> 
+   
     
     
     
@@ -266,7 +271,11 @@
         <property name="datosPersonasDAO" ref="datosPersonasDAO"></property>
         <property name="deudasDAO" ref="deudasDAO"></property>
         <property name="estadosPersonaDAO" ref="estadosPersonaDAO"></property>
+        <property name="movimientoDAO" ref="movimientoDAO"></property>
+        <property name="detalleProcesosJuridicosDAO" ref="detalleProcesosJuridicosDAO"></property>
+        <property name="usuariosDAO" ref="usuariosDAO" />
     </bean> 
+    
     <bean id="GestionEstadosBO" class="bo.GestionEstadosImpBO">
         <property name="loginDAO" ref="loginDAO"></property>
         <property name="estadosPatametricosDAO" ref="estadosPatametricosDAO"></property>
@@ -280,6 +289,17 @@
         <property name="deudasDAO" ref="deudasDAO"></property>
         <property name="movimientoDAO" ref="movimientoDAO"></property>
         <property name="personasDAO" ref="personasDAO"></property>
+        <property name="usuariosDAO" ref="usuariosDAO" />
+    </bean>
+    
+     <bean id="GestionProcesoBO" class="bo.GestionProcesoImpBO">
+        <property name="loginDAO" ref="loginDAO"></property>
+        <property name="procesosJuridicosDAO" ref="procesosJuridicosDAO"></property>
+        <property name="estadoProcesoJuridicoDAO" ref="estadoProcesoJuridicoDAO"></property>
+        <property name="deudasDAO" ref="deudasDAO"></property>
+        <property name="detalleProcesosJuridicosDAO" ref="detalleProcesosJuridicosDAO"></property>
+        <property name="estadoDetalleProcesoJuridicoDAO" ref="estadoDetalleProcesoJuridicoDAO"></property>
+        <property name="usuariosDAO" ref="usuariosDAO" />
     </bean>
 	
     <tx:annotation-driven transaction-manager="transactionManager" />

@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import model.DetalleProcesoJuridico;
 import model.Deudas;
+import model.Movimientos;
 import model.ProcesosJuridicos;
 import utility.Log_Handler;
 
@@ -29,7 +30,10 @@ public class BeanGestionMovimientos {
     private int index;
     private boolean checkGeneral;
     private boolean renderBtnGuardar;
-    private boolean  renderTabla= false;
+    private boolean renderTabla = false;
+
+    private List<Movimientos> listaMovimientos;
+    private Deudas deudas;
 
     @PostConstruct
     public void cargarDatos() {
@@ -44,6 +48,17 @@ public class BeanGestionMovimientos {
         }
     }
 
+      public void consultaMovimiento(Deudas deuda) {
+        try {
+            setDeudas(deuda);
+            getGestionMovimientosBO().consultaMovimiento(this);
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+    
     public void movimientoDeudaCambiarFase() {
         try {
             getGestionMovimientosBO().movimientoDeudaCambiarFase(this);
@@ -60,12 +75,11 @@ public class BeanGestionMovimientos {
         try {
             getProcesosJuridicos().getDetalleProcesoJuridico().get(index).setListaDeudas(deudas);
             setIndex(index);
-            if (index ==  getProcesosJuridicos().getDetalleProcesoJuridico().size() - 1) {
+            if (index == getProcesosJuridicos().getDetalleProcesoJuridico().size() - 1) {
                 setRenderBtnGuardar(false);
-            }else{
+            } else {
                 setRenderBtnGuardar(true);
             }
-            
 
         } catch (Exception e) {
 
@@ -83,11 +97,11 @@ public class BeanGestionMovimientos {
                     getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().get(i).setSelecionado(true);
                 }
 
-            }else{
-                  for (int i=0;i < getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().size();i++) {
-                getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().get(i).setSelecionado(false);
-            }
-            
+            } else {
+                for (int i = 0; i < getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().size(); i++) {
+                    getProcesosJuridicos().getDetalleProcesoJuridico().get(getIndex()).getListaDeudas().get(i).setSelecionado(false);
+                }
+
             }
 
         } catch (Exception e) {
@@ -205,6 +219,34 @@ public class BeanGestionMovimientos {
      */
     public void setRenderTabla(boolean renderTabla) {
         this.renderTabla = renderTabla;
+    }
+
+    /**
+     * @return the listaMovimientos
+     */
+    public List<Movimientos> getListaMovimientos() {
+        return listaMovimientos;
+    }
+
+    /**
+     * @param listaMovimientos the listaMovimientos to set
+     */
+    public void setListaMovimientos(List<Movimientos> listaMovimientos) {
+        this.listaMovimientos = listaMovimientos;
+    }
+
+    /**
+     * @return the deudas
+     */
+    public Deudas getDeudas() {
+        return deudas;
+    }
+
+    /**
+     * @param deudas the deudas to set
+     */
+    public void setDeudas(Deudas deudas) {
+        this.deudas = deudas;
     }
 
 }
