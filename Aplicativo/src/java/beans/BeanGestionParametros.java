@@ -14,7 +14,9 @@ import javax.faces.context.FacesContext;
 import model.tablasParametricas;
 import utility.Log_Handler;
 import bo.GestionParametrosBO;
+import com.sun.xml.xsom.impl.scd.Iterators;
 import model.Parametros;
+import model.tablaEstadosParametricos;
 import org.primefaces.context.RequestContext;
 
 /**
@@ -28,8 +30,8 @@ public class BeanGestionParametros implements Serializable {
     private GestionParametrosBO gestionParametrosBO;
     private Parametros registroParametro = new Parametros();
     private boolean editable = true;
-
     private String nombreCorto;
+    private List<tablaEstadosParametricos> listaEstadoTablaParametricas = new ArrayList<>();
 
     @PostConstruct
     public void cargarDatos() {
@@ -179,6 +181,20 @@ public class BeanGestionParametros implements Serializable {
      */
     public void setEditable(boolean editable) {
         this.editable = editable;
+    }
+
+    /**
+     * @return the listaEstadoTablaParametricas
+     */
+    public List<tablaEstadosParametricos> getListaEstadoTablaParametricas() {
+        return listaEstadoTablaParametricas;
+    }
+
+    /**
+     * @param listaEstadoTablaParametricas the listaEstadoTablaParametricas to set
+     */
+    public void setListaEstadoTablaParametricas(List<tablaEstadosParametricos> listaEstadoTablaParametricas) {
+        this.listaEstadoTablaParametricas = listaEstadoTablaParametricas;
     }
 
 }

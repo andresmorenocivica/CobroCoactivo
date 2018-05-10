@@ -14,7 +14,9 @@ import javax.faces.context.FacesContext;
 import model.DetalleProcesoJuridico;
 import model.Deudas;
 import model.Movimientos;
+import model.Personas;
 import model.ProcesosJuridicos;
+import model.TipoDocumentos;
 import utility.Log_Handler;
 
 /**
@@ -36,6 +38,13 @@ public class BeanGestionMovimientos {
     private Deudas deudas;
     private String nombreFaseBotonGuardar;
 
+//comentario para deuda
+    private List<Deudas> listaDeudas = new ArrayList<>();
+    private int tipoBusqueda;
+    private Personas personaConsulta;
+    private String referenciaDeuda;
+    private List<TipoDocumentos> listTipoDocumentos = new ArrayList<>();
+
     @PostConstruct
     public void cargarDatos() {
         try {
@@ -49,7 +58,18 @@ public class BeanGestionMovimientos {
         }
     }
 
-      public void consultaMovimiento(Deudas deuda) {
+    public void cargarMovimientoDeuda() {
+        try {
+            getGestionMovimientosBO().cargarMovimientoDeuda(this);
+
+        } catch (Exception e) {
+            Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
+        }
+    }
+
+    public void consultaMovimiento(Deudas deuda) {
         try {
             setDeudas(deuda);
             getGestionMovimientosBO().consultaMovimiento(this);
@@ -59,7 +79,7 @@ public class BeanGestionMovimientos {
             FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
         }
     }
-    
+
     public void movimientoDeudaCambiarFase() {
         try {
             getGestionMovimientosBO().movimientoDeudaCambiarFase(this);
@@ -263,6 +283,76 @@ public class BeanGestionMovimientos {
      */
     public void setNombreFaseBotonGuardar(String nombreFaseBotonGuardar) {
         this.nombreFaseBotonGuardar = nombreFaseBotonGuardar;
+    }
+
+    /**
+     * @return the listaDeudas
+     */
+    public List<Deudas> getListaDeudas() {
+        return listaDeudas;
+    }
+
+    /**
+     * @param listaDeudas the listaDeudas to set
+     */
+    public void setListaDeudas(List<Deudas> listaDeudas) {
+        this.listaDeudas = listaDeudas;
+    }
+
+    /**
+     * @return the tipoBusqueda
+     */
+    public int getTipoBusqueda() {
+        return tipoBusqueda;
+    }
+
+    /**
+     * @param tipoBusqueda the tipoBusqueda to set
+     */
+    public void setTipoBusqueda(int tipoBusqueda) {
+        this.tipoBusqueda = tipoBusqueda;
+    }
+
+    /**
+     * @return the personaConsulta
+     */
+    public Personas getPersonaConsulta() {
+        return personaConsulta;
+    }
+
+    /**
+     * @param personaConsulta the personaConsulta to set
+     */
+    public void setPersonaConsulta(Personas personaConsulta) {
+        this.personaConsulta = personaConsulta;
+    }
+
+    /**
+     * @return the referenciaDeuda
+     */
+    public String getReferenciaDeuda() {
+        return referenciaDeuda;
+    }
+
+    /**
+     * @param referenciaDeuda the referenciaDeuda to set
+     */
+    public void setReferenciaDeuda(String referenciaDeuda) {
+        this.referenciaDeuda = referenciaDeuda;
+    }
+
+    /**
+     * @return the listTipoDocumentos
+     */
+    public List<TipoDocumentos> getListTipoDocumentos() {
+        return listTipoDocumentos;
+    }
+
+    /**
+     * @param listTipoDocumentos the listTipoDocumentos to set
+     */
+    public void setListTipoDocumentos(List<TipoDocumentos> listTipoDocumentos) {
+        this.listTipoDocumentos = listTipoDocumentos;
     }
 
 }

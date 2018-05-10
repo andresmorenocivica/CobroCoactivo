@@ -125,6 +125,9 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label>Estado</label> 
+                                                    <h:selectOneMenu>
+                                                        <f:selectItems value="#{gestionParametrosBean.listaEstadoTablaParametricas}" var="tablaEstado" itemValue="#{tablaEstado.id}" itemLabel="#{tablaEstado.nombre}"></f:selectItems>
+                                                    </h:selectOneMenu>
                                                     <h:inputText class="form-control" id="txtEstado" value="#{gestionParametrosBean.registroParametro.estado}"/>
                                                 </div>
                                             </div>

@@ -19,7 +19,9 @@ import jdbc.dao.ITTipoDeuda;
 import jdbc.dao.ITTipoDocumento;
 import jdbc.dao.ITTipoPersonas;
 import model.Parametros;
+import model.tablaEstadosParametricos;
 import model.tablasParametricas;
+import persistencias.CivEstadotablasparametrica;
 import persistencias.CivTablasparametricas;
 import persistencias.CivTipoconcepto;
 import persistencias.CivTipodatopersona;
@@ -56,6 +58,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
             tablaParameticasModel.setFechaInicial(civTablasParametricas.getTabparFechainicial());
             tablaParameticasModel.setFechaFinal(civTablasParametricas.getTabparFechafinal());
             bean.getListaTablasParametricas().add(tablaParameticasModel);
+            
             switch (civTablasParametricas.getTabparNombretabla()) {
                 case "CIV_TIPOSDOCUMENTOS":
                     List<CivTipodocumentos> listCivTipodocumentos = getTiposDocumentosDAO().listAll();
@@ -71,6 +74,8 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         parametrosTipoDocumento.setNombreTabla(civTablasParametricas.getTabparNombretabla());
                         parametrosTipoDocumento.setIdTabla(civTablasParametricas.getTabparId().intValue());
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDocumento);
+                        cargarListaEstado(bean);
+
                     }
                     break;
 
@@ -88,6 +93,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         parametrosTipoDocumento.setNombreTabla(civTablasParametricas.getTabparNombretabla());
                         parametrosTipoDocumento.setIdTabla(civTablasParametricas.getTabparId().intValue());
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDocumento);
+                        cargarListaEstado(bean);
                     }
                     break;
 
@@ -105,6 +111,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         parametrosTipoDeuda.setNombreTabla(civTablasParametricas.getTabparNombretabla());
                         parametrosTipoDeuda.setIdTabla(civTablasParametricas.getTabparId().intValue());
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDeuda);
+                        cargarListaEstado(bean);
                     }
                     break;
 
@@ -122,6 +129,7 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
                         parametrosTipoDeuda.setNombreTabla(civTablasParametricas.getTabparNombretabla());
                         parametrosTipoDeuda.setIdTabla(civTablasParametricas.getTabparId().intValue());
                         bean.getListaTablasParametricas().get(registro).getListParametros().add(parametrosTipoDeuda);
+                        cargarListaEstado(bean);
                     }
                     break;
                 case "CIV_TIPORECURSOS":
@@ -130,6 +138,16 @@ public class GestionParametrosImpBO implements GestionParametrosBO, Serializable
             registro++;
         }
 
+    }
+
+    public void cargarListaEstado(BeanGestionParametros bean) throws Exception {
+//        List<CivEstadotablasparametrica> civTablasparametricases = getTablasParametricasDAO().listAll();
+//        for (CivTablasparametricas civTablasparametricase : civTablasparametricases) {
+//            tablaEstadosParametricos taParametricas = new tablaEstadosParametricos();
+//            taParametricas.setId(civTablasparametricase.getTabparId().longValue());
+//            taParametricas.setNombre(civTablasparametricase.getTabparNombre());
+//            bean.getListaEstadoTablaParametricas().add(taParametricas);
+//        }
     }
 
     @Override

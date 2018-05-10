@@ -18,15 +18,16 @@ public class CivMovimientos  implements java.io.Serializable {
      private Date fechaInicial;
      private Date fechaFinal;
      private BigDecimal usuId;
-
+     
     public CivMovimientos() {
     }
 
 	
-    public CivMovimientos(BigDecimal movId, CivEstadomovimiento civEstadomovimiento, BigDecimal usuId) {
+    public CivMovimientos(BigDecimal movId, CivEstadomovimiento civEstadomovimiento,  BigDecimal usuId) {
         this.movId = movId;
         this.civEstadomovimiento = civEstadomovimiento;
         this.usuId = usuId;
+        
     }
     public CivMovimientos(BigDecimal movId, CivEstadomovimiento civEstadomovimiento, BigDecimal deuId, BigDecimal detpropId, Date fechaInicial, Date fechaFinal, BigDecimal usuId) {
        this.movId = movId;
@@ -36,6 +37,7 @@ public class CivMovimientos  implements java.io.Serializable {
        this.fechaInicial = fechaInicial;
        this.fechaFinal = fechaFinal;
        this.usuId = usuId;
+       
     }
    
     public BigDecimal getMovId() {
@@ -88,6 +90,7 @@ public class CivMovimientos  implements java.io.Serializable {
         this.usuId = usuId;
     }
 
+   
 
 
 

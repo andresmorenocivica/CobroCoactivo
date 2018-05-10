@@ -24,6 +24,10 @@ public interface GestionMovimientosBO {
 
     public void movimientoDeudaCambiarFase(BeanGestionMovimientos bean) throws Exception;
 
-    public void consultaMovimiento(BeanGestionMovimientos bean) throws Exception;
 
+    public void cargarListaDeudas(BeanGestionMovimientos bean) throws Exception;
+
+    public void cargarMovimientoDeuda(BeanGestionMovimientos bean) throws Exception;
+    
+    public void consultaMovimiento(BeanGestionMovimientos bean) throws Exception;
 }

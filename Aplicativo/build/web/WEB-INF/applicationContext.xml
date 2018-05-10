@@ -290,10 +290,11 @@
         <property name="movimientoDAO" ref="movimientoDAO"></property>
         <property name="personasDAO" ref="personasDAO"></property>
         <property name="usuariosDAO" ref="usuariosDAO" />
-         <property name="datosPersonasDAO" ref="datosPersonasDAO"></property>
+        <property name="datosPersonasDAO" ref="datosPersonasDAO"></property>
+        <property name="tiposDocumentosDAO" ref="tiposDocumentosDAO"></property>
     </bean>
     
-     <bean id="GestionProcesoBO" class="bo.GestionProcesoImpBO">
+    <bean id="GestionProcesoBO" class="bo.GestionProcesoImpBO">
         <property name="loginDAO" ref="loginDAO"></property>
         <property name="procesosJuridicosDAO" ref="procesosJuridicosDAO"></property>
         <property name="estadoProcesoJuridicoDAO" ref="estadoProcesoJuridicoDAO"></property>

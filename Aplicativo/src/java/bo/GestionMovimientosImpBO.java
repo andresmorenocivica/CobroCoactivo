@@ -20,11 +20,13 @@ import jdbc.dao.ITLogin;
 import jdbc.dao.ITMovimiento;
 import jdbc.dao.ITPersonas;
 import jdbc.dao.ITProcesosJuridicos;
+import jdbc.dao.ITTipoDocumento;
 import jdbc.dao.ITUsuarios;
 import model.DetalleProcesoJuridico;
 import model.Deudas;
 import model.Movimientos;
 import model.ProcesosJuridicos;
+import model.TipoDocumentos;
 import persistencias.CivDatospersona;
 import persistencias.CivDetalleProcesojuridico;
 import persistencias.CivDeudas;
@@ -32,6 +34,7 @@ import persistencias.CivEstadomovimiento;
 import persistencias.CivMovimientos;
 import persistencias.CivPersonas;
 import persistencias.CivProcesosjuridicos;
+import persistencias.CivTipodocumentos;
 import persistencias.CivUsuarios;
 import utility.DateUtility;
 
@@ -49,6 +52,64 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
     private ITPersonas personasDAO;
     private ITUsuarios usuariosDAO;
     private ITDatosPersonas datosPersonasDAO;
+    private ITTipoDocumento tiposDocumentosDAO;
+
+    public void cargarListaDeudas(BeanGestionMovimientos bean) throws Exception {
+
+        List<CivDeudas> ListCivDeudas = new ArrayList<>();
+        bean.setListaDeudas(new ArrayList<>());
+        switch (bean.getTipoBusqueda()) {
+            case 1:
+                //Busqueda de deuda  persona
+                CivPersonas civPersonas = getPersonasDAO().consultarPersonasByDocumento(bean.getPersonaConsulta().getTipoDocumento(), bean.getPersonaConsulta().getDocumento());
+                ListCivDeudas = getDeudasDAO().buscarHistorialDeudasPersonas(civPersonas.getPerId().intValue());
+                break;
+            case 2:
+                //busqueda de deuda Por referencia
+                ListCivDeudas = getDeudasDAO().listarDeudasByReferencia(bean.getReferenciaDeuda().toUpperCase());
+                break;
+        }
+        if (ListCivDeudas != null) {
+            if (ListCivDeudas.size() > 0) {
+                int registro = 0;
+                for (CivDeudas civDeudas : ListCivDeudas) {
+                    Deudas deuda = new Deudas();
+                    deuda.setId(civDeudas.getDeuId().intValue());
+                    deuda.setReferencia(civDeudas.getDeuReferencia());
+                    deuda.setIdUsuario(civDeudas.getCivUsuarios().getUsuId().intValue());
+                    deuda.setIdPersona(civDeudas.getCivPersonas().getPerId().intValue());
+                    deuda.setIdProcesoJuridico(civDeudas.getCivProcesosjuridicos().getProjuId().intValue());
+                    deuda.setEstado(civDeudas.getCivEstadodeudas().getEstdeuId().intValue());
+                    deuda.setFechaDeuda(civDeudas.getDeuFechadeuda());
+                    deuda.setFecha(civDeudas.getDeuFecha());
+                    deuda.setValor(civDeudas.getDeuValor().intValue());
+                    deuda.setSaldo(civDeudas.getDeuSaldo().intValue());
+                    deuda.setTipo(civDeudas.getCivTipodeuda().getTipdeuId().intValue());
+
+                    bean.getListaDeudas().add(deuda);
+
+                    registro++;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void cargarMovimientoDeuda(BeanGestionMovimientos bean) throws Exception {
+        List<CivMovimientos> ListCivMovimiento = getMovimientoDAO().buscarMovimientoDeudasPersonas((int) bean.getDeudas().getId());
+        if (ListCivMovimiento != null && ListCivMovimiento.size() > 0) {
+            for (CivMovimientos civMovimientos : ListCivMovimiento) {
+                Movimientos movimiento = new Movimientos();
+                movimiento.setMovId(civMovimientos.getMovId());
+                movimiento.setNombreDetalleProceso(civMovimientos.getDetpropId().toString());
+                movimiento.setFechaInicial(civMovimientos.getFechaInicial());
+                movimiento.setNombreUsuario(civMovimientos.getUsuId().toString());
+
+                bean.getDeudas().getListaMovimiento().add(movimiento);
+            }
+        }
+
+    }
 
     @Override
     public void cargarListaProceso(BeanGestionMovimientos bean) throws Exception {
@@ -59,6 +120,13 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             procesosJuridicos.setNombre(listaCivProcesosJuridico.getProjuNombre());
             procesosJuridicos.setDetalleProcesoJuridico(llenarDetalleProceso(listaCivProcesosJuridico.getProjuId().longValue()));
             bean.getListaProcesoJuridisco().add(procesosJuridicos);
+        }
+        List<CivTipodocumentos> tipodocumento = getTiposDocumentosDAO().listAll();
+        for (CivTipodocumentos civTipodocumentos : tipodocumento) {
+            TipoDocumentos tipoDocumentoModel = new TipoDocumentos();
+            tipoDocumentoModel.setId(civTipodocumentos.getTipdocId().longValue());
+            tipoDocumentoModel.setNombre(civTipodocumentos.getTipdocNombre());
+            bean.getListTipoDocumentos().add(tipoDocumentoModel);
         }
 
     }
@@ -81,11 +149,11 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             int diasDeuda = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
             CivPersonas personaDeudor = getPersonasDAO().consultarPersonasById((int) deudas.getIdPersona());
             CivDatospersona civDatospersona = getDatosPersonasDAO().getDatoPersonaByIdPersonaByTipoDato(personaDeudor.getPerId().intValue(), 1);
-            boolean direccion = civDatospersona != null? true:false;
+            boolean direccion = civDatospersona != null ? true : false;
             int registroDetalleProceso = 0;
             for (CivDetalleProcesojuridico civDetalleProcesojuridico : listaDetalleProcesoJuridico) {
                 if (diasDeuda >= civDetalleProcesojuridico.getDetprojuDiainicial().intValue() && diasDeuda > civDetalleProcesojuridico.getDetprojuDiafinal().intValue()) {
-                    if (civDetalleProcesojuridico.getDetprojuDireccion() == direccion || civDetalleProcesojuridico.getDetprojuTipo().intValue()==2) {
+                    if (civDetalleProcesojuridico.getDetprojuDireccion() == direccion || civDetalleProcesojuridico.getDetprojuTipo().intValue() == 2) {
                         CivMovimientos movimientoDeudaFase = getMovimientoDAO().getMovimientoByDeudaByfDetalleProceso(new BigDecimal(deudas.getId()), civDetalleProcesojuridico.getDetprojuId());
                         if (movimientoDeudaFase == null) {
                             deudas.setNombreFase(detalleProcesoJuridicos.get(registroDetalleProceso).getNombre());
@@ -153,7 +221,7 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             deudas.setIdUsuario(civDeudas.getCivUsuarios().getUsuId().intValue());
             deudas.setIdProcesoJuridico(civDeudas.getCivProcesosjuridicos().getProjuId().longValue());
             deudas.setFechaDeuda(civDeudas.getDeuFechadeuda());
-             int diasDeuda = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
+            int diasDeuda = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
             deudas.setDiasDeuda(diasDeuda);
             listaDeDeudasModel.add(deudas);
         }
@@ -308,6 +376,20 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
      */
     public void setDatosPersonasDAO(ITDatosPersonas datosPersonasDAO) {
         this.datosPersonasDAO = datosPersonasDAO;
+    }
+
+    /**
+     * @return the tiposDocumentosDAO
+     */
+    public ITTipoDocumento getTiposDocumentosDAO() {
+        return tiposDocumentosDAO;
+    }
+
+    /**
+     * @param tiposDocumentosDAO the tiposDocumentosDAO to set
+     */
+    public void setTiposDocumentosDAO(ITTipoDocumento tiposDocumentosDAO) {
+        this.tiposDocumentosDAO = tiposDocumentosDAO;
     }
 
 }

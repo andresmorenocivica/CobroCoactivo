@@ -29,4 +29,5 @@ public interface ITMovimiento {
     
     public CivMovimientos getMovimientoByDeudaByfDetalleProceso(BigDecimal deuId, BigDecimal detpropId) throws Exception;
 
+    public CivMovimientos consultarPersonasDocumento(String Documento) throws Exception;
 }

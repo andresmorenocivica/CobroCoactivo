@@ -73,4 +73,9 @@ public class DaoMovimiento extends HibernateDaoSupport implements ITMovimiento {
         }
         return null;
     }
+
+    @Override
+    public CivMovimientos consultarPersonasDocumento(String Documento) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
