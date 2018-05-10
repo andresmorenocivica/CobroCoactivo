@@ -49,5 +49,14 @@ public class DaoDatosPersonas extends HibernateDaoSupport implements ITDatosPers
         }
         return null;
     }
+    
+   public CivDatospersona getDatoPersonaByIdPersonaByTipoDato(int idPersona,int idTipoDato)  throws Exception {
+        String hql = "from CivDatospersona where civPersonas.perId=:perId and civTipodatopersona.tipdatperId=:tipdatperId";
+        List list = getHibernateTemplate().findByNamedParam(hql, new String[]{"perId","tipdatperId"}, new Object[]{new BigDecimal(idPersona), new BigDecimal(idTipoDato)});
+        if (list.size() > 0) {
+            return (CivDatospersona) list.get(0);
+        }
+        return null;
+    }
 
 }

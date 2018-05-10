@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.IntStream;
+import jdbc.dao.ITDatosPersonas;
 import jdbc.dao.ITDetalleProcesosJuridicos;
 import jdbc.dao.ITDeudas;
 import jdbc.dao.ITLogin;
@@ -24,6 +25,7 @@ import model.DetalleProcesoJuridico;
 import model.Deudas;
 import model.Movimientos;
 import model.ProcesosJuridicos;
+import persistencias.CivDatospersona;
 import persistencias.CivDetalleProcesojuridico;
 import persistencias.CivDeudas;
 import persistencias.CivEstadomovimiento;
@@ -46,7 +48,7 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
     private ITMovimiento movimientoDAO;
     private ITPersonas personasDAO;
     private ITUsuarios usuariosDAO;
-    
+    private ITDatosPersonas datosPersonasDAO;
 
     @Override
     public void cargarListaProceso(BeanGestionMovimientos bean) throws Exception {
@@ -70,34 +72,65 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             DetalleProcesoJuridico detalleProcesoJuridico = new DetalleProcesoJuridico();
             detalleProcesoJuridico.setId(civDetalleProcesojuridico.getDetprojuId().longValue());
             detalleProcesoJuridico.setNombre(civDetalleProcesojuridico.getDeprojuNombre());
+            detalleProcesoJuridico.setDiaInicial(civDetalleProcesojuridico.getDetprojuDiainicial().intValue());
+            detalleProcesoJuridico.setDiaFinal(civDetalleProcesojuridico.getDetprojuDiafinal().intValue());
             detalleProcesoJuridicos.add(detalleProcesoJuridico);
         }
 
         for (Deudas deudas : lisDeudasModel) {
-            List<CivMovimientos> civMovimientos = getMovimientoDAO().getlistMovimientosById((int) deudas.getId());
-            
-            CivPersonas personaDeudor =  getPersonasDAO().consultarPersonasById((int)deudas.getIdPersona());
-            int dias = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
-            System.out.println("diferencias en dias "+ dias);
-           
-            
-            if (civMovimientos.size() == 0) {
-                detalleProcesoJuridicos.get(0).getListaDeudas().add(deudas);
-            } else {
-                int i = 0;
-                for (CivMovimientos civMovimiento : civMovimientos) {
-                    CivDetalleProcesojuridico civDetalleProcesojuridico = getDetalleProcesosJuridicosDAO().getDetalleProcesoJuridicoByid(civMovimientos.get(i).getDetpropId().intValue());
-                    int index = IntStream.range(0, detalleProcesoJuridicos.size())
-                            .filter(userInd -> detalleProcesoJuridicos.get(userInd).getNombre().equals(civDetalleProcesojuridico.getDeprojuNombre()))
-                            .findFirst().orElse(-1);
-                    if (index == detalleProcesoJuridicos.size() - 1) {
-
-                    } else {
-                        detalleProcesoJuridicos.get(index + 1).getListaDeudas().add(deudas);
+            int diasDeuda = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
+            CivPersonas personaDeudor = getPersonasDAO().consultarPersonasById((int) deudas.getIdPersona());
+            CivDatospersona civDatospersona = getDatosPersonasDAO().getDatoPersonaByIdPersonaByTipoDato(personaDeudor.getPerId().intValue(), 1);
+            boolean direccion = civDatospersona != null? true:false;
+            int registroDetalleProceso = 0;
+            for (CivDetalleProcesojuridico civDetalleProcesojuridico : listaDetalleProcesoJuridico) {
+                if (diasDeuda >= civDetalleProcesojuridico.getDetprojuDiainicial().intValue() && diasDeuda > civDetalleProcesojuridico.getDetprojuDiafinal().intValue()) {
+                    if (civDetalleProcesojuridico.getDetprojuDireccion() == direccion || civDetalleProcesojuridico.getDetprojuTipo().intValue()==2) {
+                        CivMovimientos movimientoDeudaFase = getMovimientoDAO().getMovimientoByDeudaByfDetalleProceso(new BigDecimal(deudas.getId()), civDetalleProcesojuridico.getDetprojuId());
+                        if (movimientoDeudaFase == null) {
+                            deudas.setNombreFase(detalleProcesoJuridicos.get(registroDetalleProceso).getNombre());
+                            detalleProcesoJuridicos.get(registroDetalleProceso).getListaDeudas().add(deudas);
+                            break;
+                        }
                     }
-                    i++;
+
+                } else if (diasDeuda >= civDetalleProcesojuridico.getDetprojuDiainicial().intValue() && diasDeuda <= civDetalleProcesojuridico.getDetprojuDiafinal().intValue()) {
+                    if (civDetalleProcesojuridico.getDetprojuDireccion() == direccion) {
+                        CivMovimientos movimientoDeudaFase = getMovimientoDAO().getMovimientoByDeudaByfDetalleProceso(new BigDecimal(deudas.getId()), civDetalleProcesojuridico.getDetprojuId());
+                        if (movimientoDeudaFase == null) {
+                            deudas.setNombreFase(detalleProcesoJuridicos.get(registroDetalleProceso).getNombre());
+                            detalleProcesoJuridicos.get(registroDetalleProceso).getListaDeudas().add(deudas);
+                            break;
+                        }
+                    }
                 }
+                registroDetalleProceso++;
             }
+
+//            List<CivMovimientos> civMovimientos = getMovimientoDAO().getlistMovimientosById((int) deudas.getId());
+//            
+//            CivPersonas personaDeudor =  getPersonasDAO().consultarPersonasById((int)deudas.getIdPersona());
+//            int dias = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
+//            System.out.println("diferencias en dias "+ dias);
+//           
+//            
+//            if (civMovimientos.size() == 0) {
+//                detalleProcesoJuridicos.get(0).getListaDeudas().add(deudas);
+//            } else {
+//                int i = 0;
+//                for (CivMovimientos civMovimiento : civMovimientos) {
+//                    CivDetalleProcesojuridico civDetalleProcesojuridico = getDetalleProcesosJuridicosDAO().getDetalleProcesoJuridicoByid(civMovimientos.get(i).getDetpropId().intValue());
+//                    int index = IntStream.range(0, detalleProcesoJuridicos.size())
+//                            .filter(userInd -> detalleProcesoJuridicos.get(userInd).getNombre().equals(civDetalleProcesojuridico.getDeprojuNombre()))
+//                            .findFirst().orElse(-1);
+//                    if (index == detalleProcesoJuridicos.size() - 1) {
+//
+//                    } else {
+//                        detalleProcesoJuridicos.get(index + 1).getListaDeudas().add(deudas);
+//                    }
+//                    i++;
+//                }
+//            }
         }
 
         return detalleProcesoJuridicos;
@@ -120,6 +153,8 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             deudas.setIdUsuario(civDeudas.getCivUsuarios().getUsuId().intValue());
             deudas.setIdProcesoJuridico(civDeudas.getCivProcesosjuridicos().getProjuId().longValue());
             deudas.setFechaDeuda(civDeudas.getDeuFechadeuda());
+             int diasDeuda = DateUtility.fechasDiferenciaEnDias(deudas.getFechaDeuda(), new Date());
+            deudas.setDiasDeuda(diasDeuda);
             listaDeDeudasModel.add(deudas);
         }
 
@@ -141,10 +176,10 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
             }
         }
     }
-    
+
     @Override
     public void consultaMovimiento(BeanGestionMovimientos bean) throws Exception {
-         bean.getDeudas().setListaMovimiento(new ArrayList<>());
+        bean.getDeudas().setListaMovimiento(new ArrayList<>());
         List<CivMovimientos> listMovimiento = getMovimientoDAO().buscarMovimientoDeudasPersonas((int) bean.getDeudas().getId());
         if (listMovimiento != null) {
             for (CivMovimientos civMovimientos : listMovimiento) {
@@ -261,7 +296,18 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
         this.usuariosDAO = usuariosDAO;
     }
 
+    /**
+     * @return the datosPersonasDAO
+     */
+    public ITDatosPersonas getDatosPersonasDAO() {
+        return datosPersonasDAO;
+    }
 
-    
+    /**
+     * @param datosPersonasDAO the datosPersonasDAO to set
+     */
+    public void setDatosPersonasDAO(ITDatosPersonas datosPersonasDAO) {
+        this.datosPersonasDAO = datosPersonasDAO;
+    }
 
 }

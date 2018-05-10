@@ -37,10 +37,10 @@
                                         </div>
                                         <div class="box-body no-padding">
                                             <ul class="nav nav-pills nav-stacked">
-                                                <ui:repeat value="#{gestionMovimientosBean.listaProcesoJuridisco}"  var="procesoJuridico">
+                                                <ui:repeat value="#{gestionMovimientosBean.listaProcesoJuridisco}"  var="procesoJuridico" varStatus="contProceso">
                                                     <li>
                                                         <h:commandLink><i class="fa fa-inbox"></i> #{procesoJuridico.nombre}
-                                                            <span class="label label-primary pull-right">#{procesoJuridico.detalleProcesoJuridico.size()}</span>
+                                                            <span title="Etapas" class="label label-primary pull-right">#{procesoJuridico.detalleProcesoJuridico.size()}</span>
                                                             <f:ajax event="click" render="formGestionMovimientos:fases" listener="#{gestionMovimientosBean.setProcesosJuridicos(procesoJuridico)}"></f:ajax>
                                                         </h:commandLink>
                                                     </li>
@@ -65,8 +65,9 @@
                                                     <li>
                                                         <h:commandLink>
                                                             <i class="fa fa-inbox"></i> #{lista.nombre}
-                                                            <span class="label label-primary pull-right">#{lista.listaDeudas.size()}</span>
-                                                            <f:ajax event="click" render="formGestionMovimientos:deudas formGestionMovimientos:divBtnGuardar" listener="#{gestionMovimientosBean.establecerListaDeudas(contador.index,lista.listaDeudas)}"></f:ajax>
+                                                            <span title="Deudas" class="label label-primary pull-right">#{lista.listaDeudas.size()}</span>
+                                                            <span title="Periodo" class="label label-warning pull-right" style="margin-right:20px">#{lista.diaInicial} - #{lista.diaFinal}</span>
+                                                            <f:ajax event="click" render="formGestionMovimientos:deudas formGestionMovimientos:divBtnGuardar formGestionMovimientos:tituloDetalleProceso" listener="#{gestionMovimientosBean.establecerListaDeudas(contador.index,lista.listaDeudas)}"></f:ajax>
                                                         </h:commandLink>
                                                     </li>
                                                 </ui:repeat>
@@ -80,7 +81,7 @@
                                 <div class="col-md-9">
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">Deudas</h3>
+                                            <h:outputLabel id="tituloDetalleProceso" class="box-title" value="#{gestionMovimientosBean.nombreFaseBotonGuardar}"></h:outputLabel>
                                             <!-- /.box-tools -->
                                         </div>
                                         <!-- /.box-header -->
@@ -94,13 +95,14 @@
                                                         <tr>
                                                             <th>
                                                                 <h:selectBooleanCheckbox value="#{gestionMovimientosBean.checkGeneral}">
-                                                                    <f:ajax event="change" render="formGestionMovimientos:deudas formGestionMovimientos:btnGuardar" listener="#{gestionMovimientosBean.seleccionarTodosCombox()}"></f:ajax>
+                                                                    <f:ajax event="change" render="formGestionMovimientos:deudas formGestionMovimientos:btnGuardar  formGestionMovimientos:tituloDetalleProceso" listener="#{gestionMovimientosBean.seleccionarTodosCombox()}"></f:ajax>
                                                                 </h:selectBooleanCheckbox>
                                                             </th>
                                                             <th>Referencia</th>
                                                             <th>Valor</th>
                                                             <th>Saldo</th>
                                                             <th>Fecha Deuda</th>
+                                                            <th>Dias</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -115,6 +117,7 @@
                                                                 <td>#{listaDeudas.valor}</td>
                                                                 <td>#{listaDeudas.saldo}</td>
                                                                 <td>#{listaDeudas.fechaDeuda}</td>
+                                                                <td>#{listaDeudas.diasDeuda}</td>
                                                             </tr>
                                                         </ui:repeat>
                                                     </tbody>
@@ -126,7 +129,7 @@
                                         <!-- /.box-body -->
                                         <div class="box-footer no-padding">
                                             <div class="mailbox-controls" jsf:id="divBtnGuardar">
-                                                <h:commandButton value="guardar Todo" class="btn btn-success" rendered="#{gestionMovimientosBean.renderBtnGuardar}" id="btnGuardar">
+                                                <h:commandButton value="Realizar Proceso" class="btn btn-success" rendered="#{gestionMovimientosBean.renderBtnGuardar}" id="btnGuardar">
                                                     <f:ajax event="click" render="formGestionMovimientos:deudas" listener="#{gestionMovimientosBean.movimientoDeudaCambiarFase()}"></f:ajax>
                                                 </h:commandButton>
                                             </div>

@@ -50,16 +50,26 @@ public class DaoMovimiento extends HibernateDaoSupport implements ITMovimiento {
     @Override
     public List<CivMovimientos> getlistMovimientosById(int deuId) throws Exception {
         String hql = "from CivMovimientos where deuId=:deuId";
-       List list = getHibernateTemplate().findByNamedParam(hql, "deuId", new BigDecimal(deuId));
+        List list = getHibernateTemplate().findByNamedParam(hql, "deuId", new BigDecimal(deuId));
         return list;
     }
 
-      @Override
+    @Override
     public List<CivMovimientos> buscarMovimientoDeudasPersonas(int deuId) throws Exception {
         String hql = "from CivMovimientos where deuId=:deuId";
         List list = getHibernateTemplate().findByNamedParam(hql, "deuId", new BigDecimal(deuId));
         if (list.size() > 0) {
             return list;
+        }
+        return null;
+    }
+
+    @Override
+    public CivMovimientos getMovimientoByDeudaByfDetalleProceso(BigDecimal deuId, BigDecimal detpropId) throws Exception {
+        String hql = "from CivMovimientos Where deuId=:deuId and detpropId=:detpropId";
+        List list = getHibernateTemplate().findByNamedParam(hql, new String[]{"deuId","detpropId"}, new Object[]{deuId, detpropId});
+        if (list.size() > 0) {
+            return (CivMovimientos) list.get(0);
         }
         return null;
     }

@@ -23,11 +23,13 @@ public class Deudas {
     private long idPersona;
     private long idUsuario;
     private long idProcesoJuridico;
+    private String nombreFase;
     private String referencia;
     private Date fecha;
     private Date fechaDeuda;
     private boolean selecionado;
     private List<Movimientos> listaMovimiento = new ArrayList<>();
+    private int diasDeuda;
 
     /**
      * @return the id
@@ -209,6 +211,34 @@ public class Deudas {
      */
     public void setListaMovimiento(List<Movimientos> listaMovimiento) {
         this.listaMovimiento = listaMovimiento;
+    }
+
+    /**
+     * @return the diasDeuda
+     */
+    public int getDiasDeuda() {
+        return diasDeuda;
+    }
+
+    /**
+     * @param diasDeuda the diasDeuda to set
+     */
+    public void setDiasDeuda(int diasDeuda) {
+        this.diasDeuda = diasDeuda;
+    }
+
+    /**
+     * @return the nombreFase
+     */
+    public String getNombreFase() {
+        return nombreFase;
+    }
+
+    /**
+     * @param nombreFase the nombreFase to set
+     */
+    public void setNombreFase(String nombreFase) {
+        this.nombreFase = nombreFase;
     }
 
     

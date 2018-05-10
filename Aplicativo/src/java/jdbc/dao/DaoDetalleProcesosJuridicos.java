@@ -52,7 +52,7 @@ public class DaoDetalleProcesosJuridicos extends HibernateDaoSupport implements 
         @Override
     public List<CivDetalleProcesojuridico> listarDetalleUsuarioBy(long id) throws Exception {
 
-        String hql = "from CivDetalleProcesojuridico where civProcesosjuridicos.projuId=:id ORDER BY 1 asc";
+        String hql = "from CivDetalleProcesojuridico where civProcesosjuridicos.projuId=:id ORDER BY detprojuDiainicial,detprojuDiafinal asc";
         List list = getHibernateTemplate().findByNamedParam(hql, "id", new BigDecimal(id) );
         return list;
     }

@@ -290,6 +290,7 @@
         <property name="movimientoDAO" ref="movimientoDAO"></property>
         <property name="personasDAO" ref="personasDAO"></property>
         <property name="usuariosDAO" ref="usuariosDAO" />
+         <property name="datosPersonasDAO" ref="datosPersonasDAO"></property>
     </bean>
     
      <bean id="GestionProcesoBO" class="bo.GestionProcesoImpBO">

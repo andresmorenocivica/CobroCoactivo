@@ -5,6 +5,7 @@
  */
 package jdbc.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import persistencias.CivMovimientos;
 
@@ -25,5 +26,7 @@ public interface ITMovimiento {
     public List<CivMovimientos> getlistMovimientosById(int deuId) throws Exception;
     
     public List<CivMovimientos> buscarMovimientoDeudasPersonas(int deuId) throws Exception;
+    
+    public CivMovimientos getMovimientoByDeudaByfDetalleProceso(BigDecimal deuId, BigDecimal detpropId) throws Exception;
 
 }

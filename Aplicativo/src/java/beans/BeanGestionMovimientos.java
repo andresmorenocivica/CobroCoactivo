@@ -34,6 +34,7 @@ public class BeanGestionMovimientos {
 
     private List<Movimientos> listaMovimientos;
     private Deudas deudas;
+    private String nombreFaseBotonGuardar;
 
     @PostConstruct
     public void cargarDatos() {
@@ -75,11 +76,12 @@ public class BeanGestionMovimientos {
         try {
             getProcesosJuridicos().getDetalleProcesoJuridico().get(index).setListaDeudas(deudas);
             setIndex(index);
-            if (index == getProcesosJuridicos().getDetalleProcesoJuridico().size() - 1) {
-                setRenderBtnGuardar(false);
-            } else {
-                setRenderBtnGuardar(true);
-            }
+            setNombreFaseBotonGuardar(getProcesosJuridicos().getDetalleProcesoJuridico().get(index).getNombre());
+//            if (index == getProcesosJuridicos().getDetalleProcesoJuridico().size() - 1) {
+//                setRenderBtnGuardar(false);
+//            } else {
+//                setRenderBtnGuardar(true);
+//            }
 
         } catch (Exception e) {
 
@@ -247,6 +249,20 @@ public class BeanGestionMovimientos {
      */
     public void setDeudas(Deudas deudas) {
         this.deudas = deudas;
+    }
+
+    /**
+     * @return the nombreFaseBotonGuardar
+     */
+    public String getNombreFaseBotonGuardar() {
+        return nombreFaseBotonGuardar;
+    }
+
+    /**
+     * @param nombreFaseBotonGuardar the nombreFaseBotonGuardar to set
+     */
+    public void setNombreFaseBotonGuardar(String nombreFaseBotonGuardar) {
+        this.nombreFaseBotonGuardar = nombreFaseBotonGuardar;
     }
 
 }

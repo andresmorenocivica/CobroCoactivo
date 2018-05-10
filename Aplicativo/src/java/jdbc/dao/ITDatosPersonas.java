@@ -22,4 +22,6 @@ public interface ITDatosPersonas {
     
     public CivDatospersona getDatosPersona(int idPersonas)throws Exception;
     
+    public CivDatospersona getDatoPersonaByIdPersonaByTipoDato(int idPersona,int idTipoDato) throws Exception;
+    
 }
