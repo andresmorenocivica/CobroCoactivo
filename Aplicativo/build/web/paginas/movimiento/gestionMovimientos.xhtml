@@ -5,7 +5,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
         <ui:composition template="./../../plantillas/PlantillaGeneral.xhtml">
@@ -23,6 +24,7 @@
                         </ol>
                     </section>
                     <section class="content">
+                        <p:messages closable="true" autoUpdate="true" id="msggeneral2" showDetail="false" />
                         <h:form id="formGestionMovimientos">
                             <div class="row">
                                 <div class="col-md-3">
@@ -39,7 +41,7 @@
                                             <ul class="nav nav-pills nav-stacked">
                                                 <ui:repeat value="#{gestionMovimientosBean.listaProcesoJuridisco}"  var="procesoJuridico" varStatus="contProceso">
                                                     <li>
-                                                        <h:commandLink><i class="fa fa-inbox"></i> #{procesoJuridico.nombre}
+                                                        <h:commandLink class="identificador"><i class="fa fa-inbox"></i> #{procesoJuridico.nombre}
                                                             <span title="Etapas" class="label label-primary pull-right">#{procesoJuridico.detalleProcesoJuridico.size()}</span>
                                                             <f:ajax event="click" render="formGestionMovimientos:fases" listener="#{gestionMovimientosBean.setProcesosJuridicos(procesoJuridico)}"></f:ajax>
                                                         </h:commandLink>
@@ -61,16 +63,18 @@
                                         </div>
                                         <div class="box-body no-padding">
                                             <ul class="nav nav-pills nav-stacked">
-                                                <ui:repeat value="#{gestionMovimientosBean.procesosJuridicos.detalleProcesoJuridico}"  var="lista" varStatus="contador">
-                                                    <li>
-                                                        <h:commandLink>
-                                                            <i class="fa fa-inbox"></i> #{lista.nombre}
-                                                            <span title="Deudas" class="label label-primary pull-right">#{lista.listaDeudas.size()}</span>
-                                                            <span title="Periodo" class="label label-warning pull-right" style="margin-right:20px">#{lista.diaInicial} - #{lista.diaFinal}</span>
-                                                            <f:ajax event="click" render="formGestionMovimientos:deudas formGestionMovimientos:divBtnGuardar formGestionMovimientos:tituloDetalleProceso" listener="#{gestionMovimientosBean.establecerListaDeudas(contador.index,lista.listaDeudas)}"></f:ajax>
-                                                        </h:commandLink>
-                                                    </li>
-                                                </ui:repeat>
+                                                <c:if test="#{gestionMovimientosBean.procesosJuridicos != null}">
+                                                    <ui:repeat value="#{gestionMovimientosBean.procesosJuridicos.detalleProcesoJuridico}"  var="lista" varStatus="contador">
+                                                        <li>
+                                                            <h:commandLink>
+                                                                <i class="fa fa-inbox"></i> #{lista.nombre}
+                                                                <span title="Deudas" class="label label-primary pull-right">#{lista.listaDeudas.size()}</span>
+                                                                <span title="Periodo" class="label label-warning pull-right" style="margin-right:20px">#{lista.diaInicial} - #{lista.diaFinal}</span>
+                                                                <f:ajax event="click" render="formGestionMovimientos:deudas formGestionMovimientos:divBtnGuardar formGestionMovimientos:tituloDetalleProceso" listener="#{gestionMovimientosBean.establecerListaDeudas(contador.index,lista.listaDeudas)}" onevent="test"></f:ajax>
+                                                            </h:commandLink>
+                                                        </li>
+                                                    </ui:repeat>
+                                                </c:if>
                                             </ul>
                                         </div>
                                         <!-- /.box-body -->
@@ -89,13 +93,13 @@
                                             <div class="mailbox-controls">
                                             </div>
                                             <!-- corte codigo fuente tabla  -->
-                                            <div class="table-responsive mailbox-messages">
-                                                <table class="table table-hover table-striped" jsf:id="deudas">
+                                            <div class="table-responsive mailbox-messages" jsf:id="deudas">
+                                                <table id="dataTableDetalle" class="table table-bordered table-hover">
                                                     <thead>
                                                         <tr>
                                                             <th>
                                                                 <h:selectBooleanCheckbox value="#{gestionMovimientosBean.checkGeneral}">
-                                                                    <f:ajax event="change" render="formGestionMovimientos:deudas formGestionMovimientos:btnGuardar  formGestionMovimientos:tituloDetalleProceso" listener="#{gestionMovimientosBean.seleccionarTodosCombox()}"></f:ajax>
+                                                                    <f:ajax event="change" render="formGestionMovimientos:deudas formGestionMovimientos:btnGuardar  formGestionMovimientos:tituloDetalleProceso" listener="#{gestionMovimientosBean.seleccionarTodosCombox()}" onevent="test"></f:ajax>
                                                                 </h:selectBooleanCheckbox>
                                                             </th>
                                                             <th>Referencia</th>
@@ -130,7 +134,8 @@
                                         <div class="box-footer no-padding">
                                             <div class="mailbox-controls" jsf:id="divBtnGuardar">
                                                 <h:commandButton value="Realizar Proceso" class="btn btn-success" rendered="#{gestionMovimientosBean.renderBtnGuardar}" id="btnGuardar">
-                                                    <f:ajax event="click" render="formGestionMovimientos:deudas" listener="#{gestionMovimientosBean.movimientoDeudaCambiarFase()}"></f:ajax>
+
+                                                    <f:ajax event="click" render="@form" listener="#{gestionMovimientosBean.movimientoDeudaCambiarFase()}" onevent="test"></f:ajax>
                                                 </h:commandButton>
                                             </div>
                                         </div>

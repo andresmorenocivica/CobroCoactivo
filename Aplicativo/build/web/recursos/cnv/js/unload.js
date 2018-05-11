@@ -1,7 +1,6 @@
 
 function load_complete() {
-    setFechaInput();
-
+    
     bloquear();
 }
 setFechaInput();

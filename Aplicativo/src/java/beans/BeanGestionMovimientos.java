@@ -11,7 +11,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import model.DetalleProcesoJuridico;
 import model.Deudas;
 import model.Movimientos;
 import model.Personas;
@@ -48,7 +47,8 @@ public class BeanGestionMovimientos {
     @PostConstruct
     public void cargarDatos() {
         try {
-
+            setListaProcesoJuridisco(new ArrayList<>());
+            setProcesosJuridicos(null);
             getGestionMovimientosBO().cargarListaProceso(this);
             setRenderBtnGuardar(true);
         } catch (Exception e) {
@@ -83,6 +83,7 @@ public class BeanGestionMovimientos {
     public void movimientoDeudaCambiarFase() {
         try {
             getGestionMovimientosBO().movimientoDeudaCambiarFase(this);
+            
 
         } catch (Exception e) {
 

@@ -9,6 +9,19 @@
 
     <h:head>
         <title>Civitrans</title>
+        <!-- Bootstrap 3.3.7 -->
+        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/font-awesome/css/font-awesome.min.css"></link>
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/Ionicons/css/ionicons.min.css"></link>
+        <!-- data table  -->
+        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"></link>
+        <!-- Theme style -->
+        <link rel="stylesheet" href="#{request.contextPath}/recursos/dist/css/AdminLTE.min.css"></link>
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+          folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="#{request.contextPath}/recursos/dist/css/skins/_all-skins.min.css"></link>
         <link rel="shortcut icon" href="#{request.contextPath}/recursos/images/favicon.png" type="image/x-icon"/>
         <link rel="icon" href="#{request.contextPath}/recursos/images/favicon.png" type="image/x-icon"/>
         <link href="#{request.contextPath}/recursos/cnv/css/controles.css" rel="stylesheet" type="text/css"/>
@@ -19,18 +32,14 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
         <!--Alert style roymer-->
         <link href="#{request.contextPath}/recursos/dist/css/estiloscss.css" rel="stylesheet" type="text/css"/>
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+
         <link rel="stylesheet" href="#{request.contextPath}/recursos/css/PrimefacesOverride.css" />
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/font-awesome/css/font-awesome.min.css"></link>
-        <!-- Ionicons -->
-        <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/Ionicons/css/ionicons.min.css"></link>
-        <!-- Theme style -->
-        <link rel="stylesheet" href="#{request.contextPath}/recursos/dist/css/AdminLTE.min.css"></link>
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="#{request.contextPath}/recursos/dist/css/skins/_all-skins.min.css"></link>
+
+
+
+
+
+
         <!-- Morris chart -->
         <link rel="stylesheet" href="#{request.contextPath}/recursos/bower_components/morris.js/morris.css"></link>
         <!-- jvectormap -->
@@ -46,7 +55,6 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script src="#{request.contextPath}/recursos/js/HabilitarCamposEditables.js" type="text/javascript"></script>
-        <!--<script src="{request.contextPath}/resources/js/jquerydataTablemin.js" type="text/javascript"></script>-->
         <link href="#{request.contextPath}/recursos/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
         <script src="#{request.contextPath}/recursos/js/html5shiv.min.js" type="text/javascript"></script>
         <script src="#{request.contextPath}/recursos/js/respond.min.js" type="text/javascript"></script>
@@ -797,14 +805,17 @@
             </div><!--left and Container--> 
         </div>
         <!-- jQuery 2.1.4 -->        
-        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+        <!--<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+        <h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" /> -->
         <script>
             $.widget.bridge('uibutton', $.ui.button);
         </script>
+        <script src="#{request.contextPath}/recursos/bower_components/jquery/dist/jquery.min.js"></script> 
+
         <!-- Bootstrap 3.3.7 -->
         <script src="#{request.contextPath}/recursos/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="#{request.contextPath}/recursos/js/jquery.dataTables.js"></script>
+        <script src="#{request.contextPath}/recursos/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="#{request.contextPath}/recursos/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <!-- Morris.js charts -->
         <script src="#{request.contextPath}/recursos/bower_components/raphael/raphael.min.js"></script>
         <script src="#{request.contextPath}/recursos/bower_components/morris.js/morris.min.js"></script>
@@ -832,6 +843,41 @@
         <script src="#{request.contextPath}/recursos/cnv/js/paste.js" type="text/javascript"></script>
         <script src="#{request.contextPath}/recursos/cnv/js/unload.js" type="text/javascript"></script>
         <script src="#{request.contextPath}/recursos/cnv/js/jScript.js" type="text/javascript"></script>
+        <script>
+            function test() {
+                $('#dataTableDetalle').DataTable({
+                    'destroy' : true,
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': true,
+                    'bPaginate': true,
+                    'language': {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        
+                    }
+                })
+            }
+        </script>
     </h:body>
 
 </html>

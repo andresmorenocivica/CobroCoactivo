@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.IntStream;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import jdbc.dao.ITDatosPersonas;
 import jdbc.dao.ITDetalleProcesosJuridicos;
 import jdbc.dao.ITDeudas;
@@ -231,6 +233,7 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
 
     @Override
     public void movimientoDeudaCambiarFase(BeanGestionMovimientos bean) throws Exception {
+        int i = 0;
         for (Deudas deuda : bean.getProcesosJuridicos().getDetalleProcesoJuridico().get(bean.getIndex()).getListaDeudas()) {
             if (deuda.isSelecionado()) {
                 CivMovimientos civMovimientos = new CivMovimientos();
@@ -241,8 +244,14 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
                 civMovimientos.setUsuId(new BigDecimal(bean.getLoginBO().getID_Usuario()));
                 civMovimientos.setCivEstadomovimiento(civEstadomovimiento);
                 movimientoDAO.insert(civMovimientos);
+                i++;
             }
+
         }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                i + " Movimiento realizado exitoxamente", null));
+        bean.cargarDatos();
     }
 
     @Override
