@@ -31,7 +31,7 @@
                                             <div class="panel-heading" id="heading#{estadosTabla.id}">
                                                 <h4 class="panel-title row">
                                                     <div class="col-sm-11">
-                                                        <a data-toggle="collapse" data-target="#collapse#{estadosTabla.id}" aria-controls="collapse#{estadosTabla.id}">#{estadosTabla.nombre}</a>
+                                                        <a class="cursor" data-toggle="collapse" data-target="#collapse#{estadosTabla.id}" aria-controls="collapse#{estadosTabla.id}">#{estadosTabla.nombre}</a>
                                                         <span class="badge badge-pill badge-primary">#{estadosTabla.listaDatosEstados.size()}</span>
                                                     </div>
                                                     <div class="col-sm-1 text-right">
@@ -92,10 +92,10 @@
 
                     <!-- MODAL PARA ADICIONAR O EDITAR UN DATO DE TABLAS ESTADOS -->
                     <div class="modal fade" id="detalleParametro" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-md">
+                        <div class="modal-dialog " style="width:38%">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Actualizar Estado</h4>
+                                    <h4  class="modal-title" id="myModalLabel">Actualizar Estado</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -105,17 +105,15 @@
                                     <p:messages closable="true" autoUpdate="true" id="msggeneral" showDetail="false" />
                                     <h:panelGroup class="col-lg-12" id="pnModalUpdate">
                                         <div class="row">
-                                            <div class="modal-header">
-
-                                            </div>
-                                            <div class="col-lg-4">
+                                            
+                                            <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Id</label> 
                                                     <h:inputText class="form-control" id="txtId" value="#{gestionParametrosBean.registroParametro.id}" disabled="true"/>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-8">
+                                            <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Descripción</label>
                                                     <h:inputText class="form-control" id="txtDescription" value="#{gestionParametrosBean.registroParametro.nombre}"/>

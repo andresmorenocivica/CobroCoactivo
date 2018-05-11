@@ -147,7 +147,7 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
 //        civRecursos.setRecEstado(BigDecimal.valueOf(bean.getRecursos().getEstado()));
         civRecursos.setRecCarpeta(bean.getRecursos().getCarpeta());
         civRecursos.setCivModulos(getModulosDAO().getModuloID(bean.getRecursos().getModuloId()));
-         CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
+        CivTiporecursos tipoRecurso = getTipoRecursosDAO().getTipoDocumento(new BigDecimal(bean.getIdTipoRecursoSeleccionado()));
         civRecursos.setCivTiporecursos(tipoRecurso);
         civRecursos.setCivPerfiles(getPerfilesDAO().consultarPerfilById(bean.getRecursos().getPerfilId()));
         getRecursosDAO().update(civRecursos);

@@ -68,8 +68,33 @@
                                                         <br></br>
                                                     </div>
                                                     <!-- /.tab-pane -->
-                                                    <!-- /.tab-pane -->
-                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane " id="persona">
+                                                        <br></br>
+                                                        <div class="row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-xs-12 visible-xs visible-sm">
+                                                                <div class="input-group margin-2">
+                                                                    <label class="control-label align-left">Nombre Persona</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 visible-lg visible-md" style="width: 13%">
+                                                                <div class="input-group margin-2">
+                                                                    <label class="control-label align-left">Nombre Persona</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                                                                <div class="input-group margin-5">
+                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtNombrePersona" value="#{gestionUsuarioBean.nombreUsuario}"></h:inputText>
+                                                                    <span class="input-group-btn">
+                                                                        <h:commandLink class="btn btn-info btn-danger" value="Buscar">
+                                                                            <f:ajax event="click" listener="#{gestionUsuarioBean.consultarUsuario(1)}" execute="frmGestionUsuario:txtNombreUsuario" render="frmGestionUsuario:tblUsuario"/>
+                                                                        </h:commandLink>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br></br>
+                                                    </div>
                                                 </div>
                                                 <!-- /.tab-content -->
                                             </div>

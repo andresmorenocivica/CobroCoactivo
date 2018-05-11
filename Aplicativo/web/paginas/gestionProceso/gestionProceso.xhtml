@@ -21,13 +21,16 @@
 
                                             <h4 >#{proceso.nombre}</h4>
                                             <td class="row">
-                                                <h:commandLink class="fa fa-pencil-square-o " onclick="$('#modalagregarProceso').modal('show');">
-                                                    <f:ajax event="click" listener="#{gestionProcesoBean.setRegistroProcesoJuridico(proceso)}" render="frmProceso:modalagregarProceso frmProceso:textNombre frmProceso:sltEstadoProceso frmProceso:txtFechaInicial frmProceso:txtFechaFinal"></f:ajax>
+                                                <h:commandLink title="Editar Proceso Juridico" class="fa fa-eye " onclick="$('#modalagregarProceso').modal('show');">
+                                                    <f:ajax event="click" listener="#{gestionProcesoBean.setRegistroProcesoJuridico(proceso)}" render="frmProceso:pnlAgregarProceso"></f:ajax>
                                                     <f:ajax event="click" listener="#{gestionProcesoBean.setEditable(true)}" render="frmProceso:pnlActualizar frmProceso:pnlGuardar"></f:ajax>
                                                 </h:commandLink>
-                                                <h:commandLink class="fa fa-plus-square " onclick="$('#modalagregarFases').modal('show');">
-                                                    <f:ajax event="click" render="frmModulos:modalagregarRecurso frmModulos:pnlActualizarrecurso frmModulos:pnlGuardarrecurso" listener="#{gestionModulosBean.crearRegistroRecurso(modulo.id)}"></f:ajax>
-                                                </h:commandLink>
+
+                                                <!--<h:commandLink class="fa fa-plus-square col-md-4" onclick="$('#modalagregarFases').modal('show');">
+
+                                                    <f:ajax event="click" listener="#{gestionProcesoBean.setDetalleProcesoJuridico(fases)}" render="frmProceso:pnlAgregarFases" ></f:ajax>
+                                                    <f:ajax event="click" listener="#{gestionProcesoBean.setEditable(false)}" render="frmProceso:pnlActualizar frmProceso:pnlGuardar"></f:ajax> 
+                                                </h:commandLink>-->
                                             </td>                                        
                                         </div>
                                         <c:forEach items="#{proceso.detalleProcesoJuridico}" var="fases">
@@ -38,9 +41,9 @@
                                                             <a style="cursor: pointer">#{fases.nombre}</a>
                                                         </div>
                                                         <div class="col-sm-1 text-right">
-                                                            <h:commandLink class="fa fa-pencil-square-o " onclick="$('#modalagregarFases').modal('show');">
-                                                                <f:ajax event="click" listener="#{gestionProcesoBean.setDetalleProcesoJuridico(fases)}" render="frmProceso:textId frmProceso:textNom frmProceso:sltProceso frmProceso:estadoProceso frmProceso:textDiaIni frmProceso:textDiaFin  frmProceso:textDireccion  frmProceso:FechaInicial  frmProceso:FechaFinal"></f:ajax>
-                                                                <f:ajax event="click" listener="#{gestionProcesoBean.setEditable(true)}" render="frmProceso:pnlActualizar frmProceso:pnlGuardar"></f:ajax>
+                                                            <h:commandLink title="Editar Fases" class="fa fa-pencil-square-o " onclick="$('#modalagregarFases').modal('show');">
+                                                                <f:ajax event="click" listener="#{gestionProcesoBean.setDetalleProcesoJuridico(fases)}" render="frmProceso:pnlAgregarFases"></f:ajax>
+                                                                <f:ajax event="click" listener="#{gestionProcesoBean.setEditable(false)}" render="frmProceso:pnlActualizar frmProceso:pnlGuardar"></f:ajax>
                                                             </h:commandLink>
 
                                                         </div>
@@ -53,74 +56,77 @@
                             </div>
                         </c:forEach>
                         <div class="modal fade" id="modalagregarFases" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog" style="width:45%">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div  class="modal-header">
                                         <h4 class="modal-title" id="myModalLabel">Agregar Fases</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Id</label> 
-                                                <h:inputText class="form-control" id="textId" value="#{gestionProcesoBean.detalleProcesoJuridico.id}" disabled="true"/>
+
+                                        <h:panelGroup class="col-lg-12" id="pnlAgregarFases">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Id</label> 
+                                                    <h:inputText class="form-control" id="textoId" value="#{gestionProcesoBean.detalleProcesoJuridico.id}" disabled="true"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Nombre de la Fase</label>
-                                                <h:inputText class="form-control" id="textNom" value="#{gestionProcesoBean.detalleProcesoJuridico.nombre}" />
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Nombre de la Fase</label>
+                                                    <h:inputText class="form-control" id="textoNom" value="#{gestionProcesoBean.detalleProcesoJuridico.nombre}" />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Proceso Juridico</label>
-                                                <h:selectOneMenu class="form-control" id="sltProceso" value="#{gestionProcesoBean.detalleProcesoJuridico.idProcesoJuridico}">
-                                                    <f:selectItems value="#{gestionProcesoBean.procesoList}"  var="ListaProcesoJuridico" itemLabel="#{ListaProcesoJuridico.nombre}" itemValue="#{ListaProcesoJuridico.id}" /> 
-                                                </h:selectOneMenu>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Proceso Juridico</label>
+                                                    <h:selectOneMenu class="form-control" id="seltProceso" value="#{gestionProcesoBean.detalleProcesoJuridico.idProcesoJuridico}">
+                                                        <f:selectItems value="#{gestionProcesoBean.procesoList}"  var="ListaProcesoJuridico" itemLabel="#{ListaProcesoJuridico.nombre}" itemValue="#{ListaProcesoJuridico.id}" /> 
+                                                    </h:selectOneMenu>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Estado</label>
-                                                <h:selectOneMenu class="form-control" value="#{gestionProcesoBean.detalleProcesoJuridico.estado}" id="estadoProceso">
-                                                    <f:selectItems value="#{gestionProcesoBean.estadoProceso}" var="listaEstadoProceso" itemLabel="#{listaEstadoProceso.descripcion}" itemValue="#{listaEstadoProceso.id}"></f:selectItems>
-                                                </h:selectOneMenu>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Estado</label>
+                                                    <h:selectOneMenu class="form-control" value="#{gestionProcesoBean.detalleProcesoJuridico.estado}" id="seltEstado">
+                                                        <f:selectItems value="#{gestionProcesoBean.estadoProceso}" var="listaEstadoProceso" itemLabel="#{listaEstadoProceso.descripcion}" itemValue="#{listaEstadoProceso.id}"></f:selectItems>
+                                                    </h:selectOneMenu>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Dia Inicial</label>
-                                                <h:inputText class="form-control" id="textDiaIni" value="#{gestionProcesoBean.detalleProcesoJuridico.diaInicial}"/>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Dia Inicial</label>
+                                                    <h:inputText class="form-control" id="textoDiaIni" value="#{gestionProcesoBean.detalleProcesoJuridico.diaInicial}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Dia Final</label>
-                                                <h:inputText class="form-control" id="textDiaFin" value="#{gestionProcesoBean.detalleProcesoJuridico.diaFinal}"/>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Dia Final</label>
+                                                    <h:inputText class="form-control" id="textoDiaFin" value="#{gestionProcesoBean.detalleProcesoJuridico.diaFinal}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Direccion</label>
-                                                <h:inputText class="form-control" id="textDireccion" value="#{gestionProcesoBean.detalleProcesoJuridico.direccion}"/>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Direccion</label>
+                                                    <h:inputText class="form-control" id="textoDireccion" value="#{gestionProcesoBean.detalleProcesoJuridico.direccion}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Fecha Inicial</label>
-                                                <h:inputText id="FechaInicial" class="date datepicker form-control" value="#{gestionProcesoBean.detalleProcesoJuridico.fechainicial}">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                                                </h:inputText>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Fecha Inicial</label>
+                                                    <h:inputText id="textoFechaInicial" class="date datepicker form-control" value="#{gestionProcesoBean.detalleProcesoJuridico.fechainicial}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Fecha Final</label>
-                                                <h:inputText id="FechaFinal" class="date datepicker form-control" value="#{gestionProcesoBean.detalleProcesoJuridico.fechaFinal}" disabled="true">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                                                </h:inputText>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Fecha Final</label>
+                                                    <h:inputText id="textoFechaFinal" class="date datepicker form-control" value="#{gestionProcesoBean.detalleProcesoJuridico.fechaFinal}" disabled="true">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </h:panelGroup>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row">
@@ -131,9 +137,16 @@
                                             </div>
                                             <div class="col-lg-1">
                                                 <h:panelGrid id="pnlGuardarFase">
-                                                    <h:panelGroup >
+                                                    <h:panelGroup rendered="#{gestionProcesoBean.editable}">
                                                         <h:commandLink value="Guardar" id="btnGuardarFase" class="btn btn-success">
-                                                            <f:ajax event="click" listener="#{gestionProcesoBean.guardarFases()}" execute="frmProceso:textId frmProceso:textNom frmProceso:sltProceso frmProceso:estadoProceso frmProceso:textDiaIni frmProceso:textDiaFin  frmProceso:textDireccion  frmProceso:FechaInicial  frmProceso:FechaFinal"  />
+                                                            <f:ajax event="click" listener="#{gestionProcesoBean.guardarFases()}" execute="frmProceso:textoId frmProceso:textoNom frmProceso:seltProceso frmProceso:seltEstado frmProceso:textoDiaIni frmProceso:textoDiaFin  frmProceso:textoDireccion  frmProceso:textoFechaInicial  frmProceso:textoFechaFinal"  />
+                                                        </h:commandLink>
+                                                    </h:panelGroup>
+                                                </h:panelGrid>
+                                                <h:panelGrid id="pnlActualizarFase">
+                                                    <h:panelGroup rendered="#{!gestionProcesoBean.editable}">
+                                                        <h:commandLink value="Actualizar" id="btnActualizarFase" class="btn btn-primary" >
+                                                            <f:ajax event="click" listener="#{gestionProcesoBean.actualizar()}" execute="frmProceso:textoId frmProceso:textoNom frmProceso:seltProceso frmProceso:seltEstado frmProceso:textoDiaIni frmProceso:textoDiaFin  frmProceso:textoDireccion  frmProceso:textoFechaInicial  frmProceso:textoFechaFinal" />
                                                         </h:commandLink>
                                                     </h:panelGroup>
                                                 </h:panelGrid>
@@ -144,49 +157,51 @@
                             </div> 
                         </div>
                         <div class="modal fade" id="modalagregarProceso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog" style="width:45%">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="myModalLabel">Agregar Proceso</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Id</label> 
-                                                <h:inputText class="form-control" id="txtId" disabled="true"/>
+                                            <h:panelGroup class="col-lg-12" id="pnlAgregarProceso">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Id</label> 
+                                                    <h:inputText class="form-control" id="txtId" disabled="true"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Nombre</label>
-                                                <h:inputText class="form-control" id="textNombre" value="#{gestionProcesoBean.registroProcesoJuridico.nombre}"/>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Nombre</label>
+                                                    <h:inputText class="form-control" id="textNombre" value="#{gestionProcesoBean.registroProcesoJuridico.nombre}"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Estado</label>
-                                                <h:selectOneMenu class="form-control" id="sltEstadoProceso" value="#{gestionProcesoBean.registroProcesoJuridico.estado}" >
-                                                    <f:selectItems value="#{gestionProcesoBean.estadoProceso}" var="EstadoProceso" itemLabel="#{EstadoProceso.descripcion}" itemValue="#{EstadoProceso.id}" ></f:selectItems>
-                                                    <f:ajax event="change" listener="#{gestionProcesoBean.eliminarRegistro()}" render="frmProceso:txtFechaFinal"></f:ajax>
-                                                </h:selectOneMenu>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Estado</label>
+                                                    <h:selectOneMenu class="form-control" id="sltEstadoProceso" value="#{gestionProcesoBean.registroProcesoJuridico.estado}" >
+                                                        <f:selectItems value="#{gestionProcesoBean.estadoProceso}" var="EstadoProceso" itemLabel="#{EstadoProceso.descripcion}" itemValue="#{EstadoProceso.id}" ></f:selectItems>
+                                                        <f:ajax event="change" listener="#{gestionProcesoBean.eliminarRegistro()}" render="frmProceso:txtFechaFinal"></f:ajax>
+                                                    </h:selectOneMenu>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Fecha Inicial</label>
-                                                <h:inputText class="date datepicker form-control" id="txtFechaInicial" value="#{gestionProcesoBean.registroProcesoJuridico.fechaInicial}">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                                                </h:inputText>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Fecha Inicial</label>
+                                                    <h:inputText class="date datepicker form-control" id="txtFechaInicial" value="#{gestionProcesoBean.registroProcesoJuridico.fechaInicial}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-grup">
-                                                <label>Fecha Final</label>
-                                                <h:inputText id="txtFechaFinal" class="date datepicker form-control" value="#{gestionProcesoBean.registroProcesoJuridico.fechaFinal}">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-                                                </h:inputText>
-                                            </div>                                                                          
-                                        </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-grup">
+                                                    <label>Fecha Final</label>
+                                                    <h:inputText id="txtFechaFinal" class="date datepicker form-control" value="#{gestionProcesoBean.registroProcesoJuridico.fechaFinal}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+                                                    </h:inputText>
+                                                </div>                                                                          
+                                            </div>
+                                        </h:panelGroup>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row">

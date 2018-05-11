@@ -23,6 +23,6 @@ public interface GestionProcesoBO {
 
     public void guardarFases(beans.BeanGestionProceso bean) throws Exception;
     
-    public void actulizarFases (beans.BeanGestionProceso bean) throws Exception;
+    public void actualizarFases (beans.BeanGestionProceso bean) throws Exception;
 
 }

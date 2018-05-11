@@ -32,7 +32,7 @@
                                                 <div class="panel-heading" id="heading#{modulo.id}">
                                                     <h4 class="panel-title row">
                                                         <div class="col-sm-11">
-                                                            <a data-toggle="collapse" data-target="#collapse#{modulo.id}" aria-controls="collapse#{modulo.id}">#{modulo.nombre}</a>
+                                                            <a class="cursor" data-toggle="collapse" data-target="#collapse#{modulo.id}" aria-controls="collapse#{modulo.id}">#{modulo.nombre}</a>
                                                             <span class="badge badge-pill badge-primary">#{modulo.listRecurso.size()}</span>
                                                         </div>
                                                         <div class="col-sm-1 text-right">
@@ -106,10 +106,9 @@
                     </div>
                     <!-- modal Para Agregar un nuevo modulo    -->
                     <div class="modal fade" id="modalModulo" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog" style="width: 58%">
                             <div class="modal-content">
                                 <div class="modal-header">
-
                                     <h4 class="modal-title" id="myModalLabel">Agregar Modulo</h4>
                                 </div>
                                 <div class="row">
@@ -336,12 +335,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row">
-                                        <div class="modal-header">
-                                            ¿ Esta seguro que deseas eliminar el recurso ?
-                                        </div>
-
-                                    </div>
+                                    <p>¿ Esta seguro que deseas eliminar el parametro ?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>

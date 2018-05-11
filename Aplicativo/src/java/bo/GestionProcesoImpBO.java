@@ -99,6 +99,21 @@ public class GestionProcesoImpBO implements GestionProcesoBO, Serializable {
     }
 
     @Override
+    public void actualizarFases(BeanGestionProceso bean) throws Exception {
+        CivDetalleProcesojuridico civDetalleProcesojuridico = getDetalleProcesosJuridicosDAO().getDetalleProcesoJuridicoByid((int) bean.getDetalleProcesoJuridico().getId());
+        civDetalleProcesojuridico.setDetprojuId(BigDecimal.valueOf(bean.getDetalleProcesoJuridico().getId()));
+        civDetalleProcesojuridico.setDeprojuNombre(bean.getDetalleProcesoJuridico().getNombre());
+        CivProcesosjuridicos civProcesosjuridicos = new CivProcesosjuridicos();
+        civDetalleProcesojuridico.setCivProcesosjuridicos(civProcesosjuridicos);
+        civDetalleProcesojuridico.setDetprojuFechainicial(bean.getDetalleProcesoJuridico().getFechainicial());
+        civDetalleProcesojuridico.setDetprojuFechafinal(bean.getDetalleProcesoJuridico().getFechaFinal());
+        
+        civDetalleProcesojuridico.setDetprojuDiainicial(BigDecimal.valueOf(bean.getDetalleProcesoJuridico().getDiaInicial()));
+        civDetalleProcesojuridico.setDetprojuDiafinal(BigDecimal.valueOf(bean.getDetalleProcesoJuridico().getDiaFinal()));
+        
+    }
+
+    @Override
     public void actualizarProceso(BeanGestionProceso bean) throws Exception {
         if (bean.getRegistroProcesoJuridico().getFechaFinal() != null) {
             List<CivDeudas> listDeudas = getDeudasDAO().getListDeudasbyProcesos((int) bean.getRegistroProcesoJuridico().getId());
@@ -140,16 +155,12 @@ public class GestionProcesoImpBO implements GestionProcesoBO, Serializable {
         civDetalleProcesojuridico.setDetprojuDiafinal(BigDecimal.valueOf(bean.getDetalleProcesoJuridico().getDiaFinal()));
         civDetalleProcesojuridico.setDetprojuDireccion(false);
         civDetalleProcesojuridico.setDetprojuFechainicial(bean.getDetalleProcesoJuridico().getFechainicial());
-        CivProcesosjuridicos civProcesosjuridicos = getProcesosJuridicosDAO().getConcepto((int)bean.getDetalleProcesoJuridico().getIdProcesoJuridico());
+        CivProcesosjuridicos civProcesosjuridicos = getProcesosJuridicosDAO().getConcepto((int) bean.getDetalleProcesoJuridico().getIdProcesoJuridico());
         civDetalleProcesojuridico.setCivProcesosjuridicos(civProcesosjuridicos);
         CivUsuarios civUsuarios = getUsuariosDAO().consultarUsuarioBy(Integer.parseInt(bean.getLoginBO().getID_Usuario()));
         civDetalleProcesojuridico.setCivUsuarios(civUsuarios);
         getDetalleProcesosJuridicosDAO().insert(civDetalleProcesojuridico);
-    }
-    
-    @Override
-    public void actulizarFases(BeanGestionProceso bean) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     /**
@@ -230,7 +241,8 @@ public class GestionProcesoImpBO implements GestionProcesoBO, Serializable {
     }
 
     /**
-     * @param estadoDetalleProcesoJuridicoDAO the estadoDetalleProcesoJuridicoDAO to set
+     * @param estadoDetalleProcesoJuridicoDAO the
+     * estadoDetalleProcesoJuridicoDAO to set
      */
     public void setEstadoDetalleProcesoJuridicoDAO(ITEstadoDetalleProcesoJuridico estadoDetalleProcesoJuridicoDAO) {
         this.estadoDetalleProcesoJuridicoDAO = estadoDetalleProcesoJuridicoDAO;
@@ -249,7 +261,5 @@ public class GestionProcesoImpBO implements GestionProcesoBO, Serializable {
     public void setUsuariosDAO(ITUsuarios usuariosDAO) {
         this.usuariosDAO = usuariosDAO;
     }
-
-    
 
 }

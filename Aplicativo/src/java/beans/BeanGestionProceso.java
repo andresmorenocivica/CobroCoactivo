@@ -29,7 +29,7 @@ public class BeanGestionProceso {
     private List<ProcesosJuridicos> ProcesoList = new ArrayList<>();
     private ProcesosJuridicos registroProcesoJuridico = new ProcesosJuridicos();
     private List<Estado> estadoProceso = new ArrayList<>();
-    private boolean editable = false;
+    private boolean editable = true;
     private DetalleProcesoJuridico detalleProcesoJuridico = new DetalleProcesoJuridico();
     
 
@@ -50,6 +50,7 @@ public class BeanGestionProceso {
             getGestionProcesoBO().guardarProcesoJuridico(this);
             RequestContext requestContext = RequestContext.getCurrentInstance();
             requestContext.execute("$('#modalagregarProceso').modal('hide')");
+            
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -59,8 +60,10 @@ public class BeanGestionProceso {
 
     public void crearRegistro() {
         try {
-            setRegistroProcesoJuridico(new ProcesosJuridicos());
             setEditable(false);
+            setRegistroProcesoJuridico(new ProcesosJuridicos());
+            setDetalleProcesoJuridico(new DetalleProcesoJuridico());
+            
         } catch (Exception e) {
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));
@@ -97,6 +100,7 @@ public class BeanGestionProceso {
 
     public void guardarFases() {
         try {
+            setEditable(false);
             getGestionProcesoBO().guardarFases(this);
             RequestContext requestContext = RequestContext.getCurrentInstance();
             requestContext.execute("$('#modalagregarFases').modal('hide')");
@@ -108,7 +112,10 @@ public class BeanGestionProceso {
     }
     public void actualizar(){
         try{
-            getGestionProcesoBO().actulizarFases(this);
+            setEditable(true);
+            getGestionProcesoBO().actualizarFases(this);
+            RequestContext requestContext = RequestContext.getCurrentInstance();
+            requestContext.execute("$('#modalagregarFases').modal('hide')");
         }catch (Exception e){
             Log_Handler.registrarEvento("Error al cargar datos : ", e, Log_Handler.ERROR, getClass(), Integer.parseInt(getLoginBO().getID_Usuario()));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", Log_Handler.solucionError(e)));

@@ -15,7 +15,7 @@
                         <section class="content-header">
                             <h1>
                                 Tipos De Datos 
-                               <small>Formulario para administrar los tipos de datos en el sistema.</small>
+                                <small>Formulario para administrar los tipos de datos en el sistema.</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -31,7 +31,7 @@
                                             <div class="panel-heading" id="heading#{tabla.id}">
                                                 <h4 class="panel-title row">
                                                     <div class="col-sm-11">
-                                                        <a data-toggle="collapse" data-target="#collapse#{tabla.id}" aria-controls="collapse#{tabla.id}">#{tabla.nombre}</a>
+                                                        <a class="cursor" data-toggle="collapse" data-target="#collapse#{tabla.id}" aria-controls="collapse#{tabla.id}">#{tabla.nombre}</a>
                                                         <span class="badge badge-pill badge-primary">#{tabla.listParametros.size()}</span>
                                                     </div>
                                                     <div class="col-sm-1 text-right">
@@ -91,96 +91,89 @@
                             </div>
                         </section>
                     </div>
-                    <div class="modal fade" id="detalleParametro" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
+                    <div class="modal fade" id="detalleParametro" style="overflow-y: scroll;" data-keyboard="true" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="width:45%">
                             <div class="modal-content">
-                                <div class="modal-header">
-
+                                <div   class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title" id="myModalLabel">Actualizar Parametro</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                     </div>
                                 </div>
-                                <div class="modal-body">
+                                <div class=" modal-body">
                                     <p:messages closable="true" autoUpdate="true" id="msggeneral" showDetail="false" />
                                     <h:panelGroup class="col-lg-12" id="pnModalUpdate">
                                         <div class="row">
-                                            <div class="modal-header">
-
-                                            </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-2">
                                                 <div class="form-group">
-                                                    <label>id</label> 
+                                                    <label>ID:</label> 
                                                     <h:inputText class="form-control" id="txtId" value="#{gestionParametrosBean.registroParametro.id}" disabled="true"/>
                                                 </div>
                                             </div>
-
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>Codigo:</label>
+                                                    <h:inputText class="form-control" id="txtCodigo" value="#{gestionParametrosBean.registroParametro.codigo}" required="true"/>
+                                                </div>
+                                            </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Descripción</label>
+                                                    <label>Descripción:</label>
                                                     <h:inputText class="form-control" id="txtDescription" value="#{gestionParametrosBean.registroParametro.nombre}"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Estado</label> 
-                                                    <h:selectOneMenu>
-                                                        <f:selectItems value="#{gestionParametrosBean.listaEstadoTablaParametricas}" var="tablaEstado" itemValue="#{tablaEstado.id}" itemLabel="#{tablaEstado.nombre}"></f:selectItems>
-                                                    </h:selectOneMenu>
+                                                    <label>Nombre Corto:</label>
+                                                    <h:inputText class="form-control" id="txtNomCorto" value="#{gestionParametrosBean.registroParametro.nombreCorto}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Estado:</label> 
+
                                                     <h:inputText class="form-control" id="txtEstado" value="#{gestionParametrosBean.registroParametro.estado}"/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Fecha Inicial</label>
+                                                    <label>Fecha Inicial:</label>
                                                     <h:inputText class="date datepicker form-control" id="txtFechaInicial" value="#{gestionParametrosBean.registroParametro.fechaInicial}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
                                                     </h:inputText>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Fecha Final</label>
+                                                    <label>Fecha Final:</label>
                                                     <h:inputText id="txtFechaFinal" class="date datepicker form-control" value="#{gestionParametrosBean.registroParametro.fechaFinal}" disabled="true">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
                                                     </h:inputText>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Nombre Corto</label>
-                                                    <h:inputText class="form-control" id="txtNomCorto" value="#{gestionParametrosBean.registroParametro.nombreCorto}"/>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Codigo</label>
-                                                    <h:inputText class="form-control" id="txtCodigo" value="#{gestionParametrosBean.registroParametro.codigo}" required="true"/>
-                                                </div>
-                                            </div>
                                         </div>
                                     </h:panelGroup>
-
                                 </div>
                                 <div class="modal-footer">
                                     <div class="row">
                                         <div class="col-lg-8">
                                         </div>
                                         <div class="col-lg-2">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                                         </div>
                                         <div class="col-lg-1">
                                             <h:panelGrid id="pnlActualizar">
                                                 <h:panelGroup rendered="#{gestionParametrosBean.editable}">
-                                                    <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-success" >
+                                                    <h:commandLink value="Actualizar" id="btnActualizar" class="btn btn-primary" >
                                                         <f:ajax event="click" listener="#{gestionParametrosBean.update()}" render="frmTiposDatos:tablaGeneral#{tabla.id}" execute="frmTiposDatos:txtDescription frmTiposDatos:txtEstado frmTiposDatos:txtNomCorto frmTiposDatos:txtCodigo frmTiposDatos:txtFechaFinal frmTiposDatos:txtFechaInicial"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                             <h:panelGrid id="pnlGuardar">
                                                 <h:panelGroup rendered="#{!gestionParametrosBean.editable}">
-                                                    <h:commandLink value="Guardar" id="btnGuardar" class="btn btn-success">
+                                                    <h:commandLink value="Guardar" id="btnGuardar" class="btn btn-primary">
                                                         <f:ajax event="click" listener="#{gestionParametrosBean.save()}" render="frmTiposDatos:tablaGeneral" execute="frmTiposDatos:txtDescription frmTiposDatos:txtEstado frmTiposDatos:txtNomCorto frmTiposDatos:txtCodigo frmTiposDatos:txtFechaFinal frmTiposDatos:txtFechaInicial"/>
                                                     </h:commandLink>
                                                 </h:panelGroup>
@@ -207,12 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row">
-                                        <div class="modal-header">
-                                            ¿ Esta seguro que deseas eliminar el parametro ?
-                                        </div>
-
-                                    </div>
+                                    <p>¿ Esta seguro que deseas eliminar el parametro ?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>

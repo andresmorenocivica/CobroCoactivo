@@ -14,8 +14,8 @@
                     <div class="content-wrapper">
                         <section class="content-header">
                             <h1>
-                                Consultas
-                                <small>guia formulario para consultas</small>
+                                Consultar Recurso
+                                <small>Modulo Para Consultar Recurso del Sistema</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -61,7 +61,6 @@
                                                                             <f:selectItem itemValue="0" itemLabel="Seleccione Modulo"/>
                                                                             <f:selectItems value="#{gestionRecursosBean.listMosulo}" var="modulos" itemValue="#{modulos.id}" itemLabel="#{modulos.nombre}" /> 
                                                                         </h:selectOneMenu>
-
                                                                     </div>
                                                                     <span class="input-group-btn">
                                                                         <h:commandLink class="btn btn-info btn-danger" value="Buscar">
@@ -128,7 +127,6 @@
                                                                             </h:commandLink>
                                                                         </span>
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -183,10 +181,9 @@
                     </div>
                     <!-- start modal    -->
                     <div class="modal fade" id="detalleRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog ">
                             <div class="modal-content">
                                 <div class="modal-header">
-
                                     <h4 class="modal-title" id="myModalLabel">Actualizar Recursos</h4>
                                 </div>
                                 <div class="row">
@@ -197,47 +194,43 @@
                                     <p:messages closable="true" autoUpdate="true" id="msggeneral" showDetail="false" />
                                     <h:panelGroup class="col-lg-12" id="pnModalUpdate">
                                         <div class="row">
-                                            <div class="modal-header">
-
-                                            </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>id</label> 
+                                                    <label>Id:</label> 
                                                     <h:inputText class="form-control" id="txtId" value="#{gestionRecursosBean.recurso.codigo}" disabled="true"/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Nombre</label> 
+                                                    <label>Nombre:</label> 
                                                     <h:inputText class="form-control" id="txtNombre" value="#{gestionRecursosBean.recurso.nombre}" />
                                                 </div>
                                             </div>
-
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Descripción</label>
+                                                    <label>Descripción:</label>
                                                     <h:inputText class="form-control" id="txtDescriptionRecurso" value="#{gestionRecursosBean.recurso.descripcion}"/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Estado</label>
+                                                    <label>Estado:</label>
                                                     <h:selectOneMenu id="txtEstado" class="form-control" value="#{gestionRecursosBean.estadoSelecionado}">
                                                         <f:selectItems value="#{gestionRecursosBean.listaEstadoRecursos}" var="listaEstadoRecursos" itemLabel="#{listaEstadoRecursos.descripcion}" itemValue="#{listaEstadoRecursos.id}"></f:selectItems>
                                                     </h:selectOneMenu>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Fecha Inicial</label>
+                                                    <label>Fecha Inicial:</label>
                                                     <h:inputText class="date datepicker form-control" id="txtFechaInicial" value="#{gestionRecursosBean.recurso.fechaInicial}">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
                                                     </h:inputText>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <label>Fecha Final</label>
+                                                    <label>Fecha Final:</label>
                                                     <h:inputText id="txtFechaFinal" class="date datepicker form-control" value="#{gestionRecursosBean.recurso.fechaFinal}" disabled="true">
                                                         <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
                                                     </h:inputText>
@@ -245,13 +238,13 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Carpeta</label>
+                                                    <label>Carpeta:</label>
                                                     <h:inputText class="form-control" id="txtCarpeta" value="#{gestionRecursosBean.recurso.carpeta}"/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Modulo</label>
+                                                    <label>Modulo:</label>
                                                     <h:selectOneMenu id="sltUsuario"   class="form-control" value="#{gestionRecursosBean.recurso.moduloId}">
                                                         <f:selectItems value="#{gestionRecursosBean.listMosulo}" var="modulos" itemValue="#{modulos.id}" itemLabel="#{modulos.nombre}" /> 
 
@@ -260,7 +253,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Tipo</label>
+                                                    <label>Tipo:</label>
                                                     <h:selectOneMenu   class="form-control" id="sltTipo" value="#{gestionRecursosBean.idTipoRecursoSeleccionado}">
                                                         <f:selectItems value="#{gestionRecursosBean.listTipoRecursos}" var="tipoRecurso" itemValue="#{tipoRecurso.id}" itemLabel="#{tipoRecurso.descripcion}" /> 
                                                     </h:selectOneMenu>
@@ -268,7 +261,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Perfil</label>
+                                                    <label>Perfil:</label>
                                                     <h:selectOneMenu   class="form-control" id="sltPerfil" value="#{gestionRecursosBean.recurso.perfilId}">
                                                         <f:selectItems value="#{gestionRecursosBean.listPerfiles}" var="perfiles" itemValue="#{perfiles.id}" itemLabel="#{perfiles.nombre}"/>
                                                     </h:selectOneMenu>
@@ -276,7 +269,6 @@
                                             </div>
                                         </div>
                                     </h:panelGroup>
-
                                 </div>
                                 <div class="modal-footer">
                                     <div class="row">
@@ -302,8 +294,6 @@
                                             </h:panelGrid>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                             <!-- /.modal-content -->
@@ -311,12 +301,10 @@
                         <!-- /.modal-dialog -->
                     </div>
                     <!-- end modal    -->
-
                     <div class="modal fade" id="eliminarRecurso" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">
-
                                     <h4 class="modal-title" id="myModalLabel">Eliminar Recurso</h4>
                                 </div>
                                 <div class="row">
@@ -324,12 +312,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row">
-                                        <div class="modal-header">
-                                            ¿ Esta seguro que deseas eliminar el Recurso ?
-                                        </div>
-
-                                    </div>
+                                    <p>¿ Esta seguro que deseas eliminar el parametro ?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -342,7 +325,6 @@
                         </div>
                         <!-- /.modal-dialog -->
                     </div>
-
                     <!--  floating  button  -->
                     <h:commandLink class="float" onclick="$('#detalleRecurso').modal('show');">
                         <i class="fa fa-plus my-float"></i>
@@ -350,9 +332,6 @@
                                 frmGestionRecursos:txtEstado frmGestionRecursos:txtFechaInicial frmGestionRecursos:txtCarpeta frmGestionRecursos:txtFechaFinal
                                 frmGestionRecursos:pnlActualizar frmGestionRecursos:pnlGuardar frmGestionRecursos:sltUsuario frmGestionRecursos:sltTipo frmGestionRecursos:sltPerfil" listener="#{gestionRecursosBean.crearRegistro()}"></f:ajax>
                     </h:commandLink> 
-
-                   
-
                 </h:form>
             </ui:define>
         </ui:composition>
