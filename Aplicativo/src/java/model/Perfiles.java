@@ -7,6 +7,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class Perfiles {
     private long id;
+    @NotNull(message = "El Nombre del Perfil Es Requerido")
     private String nombre;
     private List<Recurso> listRecursos =  new ArrayList<>();
 

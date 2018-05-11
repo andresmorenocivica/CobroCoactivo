@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import jdbc.dao.ITEstadoRecursos;
 import jdbc.dao.ITLogin;
 import jdbc.dao.ITModulos;
@@ -125,6 +127,9 @@ public class GestionRecursosImpBO implements GestionRecursosBO, Serializable {
                 recurso.setTipo(civRecurso.getCivTiporecursos().getTiprecId().intValue());
                 bean.getListRecurso().add(recurso);
             }
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+               "El modulo no posee recursos", null));
         }
 
     }

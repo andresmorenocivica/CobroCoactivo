@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Usuarios {
     private long id;
     private long idPersona;
+    @NotNull(message = "El nombre es requerido")
     private String nombre;
     private String password;
     private int estado;

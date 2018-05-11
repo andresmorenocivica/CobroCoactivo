@@ -105,7 +105,7 @@ public class GestionPerfilesImpBO implements GestionPerfilesBO, Serializable {
                     recurso.setFechaFinal(listCivRecurso.getRecFechafin());
                     //recurso.setEstado(listCivRecurso.getRecEstado().intValue());
                     recurso.setCarpeta(listCivRecurso.getRecCarpeta());
-                    recurso.setModuloId(listCivRecurso.getCivModulos().getModId().intValue());
+                    //recurso.setModuloId(listCivRecurso.getCivModulos().getModId().intValue());
                     recurso.setTipo(listCivRecurso.getCivTiporecursos().getTiprecId().intValue());
                     recurso.setPerfilId(listCivRecurso.getCivPerfiles().getPerfId().intValue());
                     bean.getListPerfiles().get(registro).getListRecursos().add(recurso);

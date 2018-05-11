@@ -9,6 +9,8 @@ import beans.BeanGestionUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import jdbc.dao.ITLogin;
 import jdbc.dao.ITPerfilRecursos;
 import jdbc.dao.ITPerfiles;
@@ -79,6 +81,9 @@ public class GestionUsuariosImpBO implements GestionUsuarioBO, Serializable {
                 usuario.setPersona(persona);
                 bean.getListadoUsuarios().add(usuario);
             }
+        }else{
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+               "No se Encontro Usuario en el sistema", null));
         }
     }
 
