@@ -40,7 +40,7 @@ public class BeanGestionMovimientos {
 //comentario para deuda
     private List<Deudas> listaDeudas = new ArrayList<>();
     private int tipoBusqueda;
-    private Personas personaConsulta;
+    private Personas personaConsulta = new Personas();
     private String referenciaDeuda;
     private List<TipoDocumentos> listTipoDocumentos = new ArrayList<>();
 
@@ -60,6 +60,7 @@ public class BeanGestionMovimientos {
 
     public void cargarMovimientoDeuda() {
         try {
+            setDeudas(deudas);
             getGestionMovimientosBO().cargarMovimientoDeuda(this);
 
         } catch (Exception e) {
@@ -79,8 +80,9 @@ public class BeanGestionMovimientos {
             FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("gestionParametros" + "messageGeneral");
         }
     }
-      public void buscarDeudas() {
+      public void buscarDeudas(int tipo) {
         try {
+            setTipoBusqueda(tipo);
             getGestionMovimientosBO().cargarListaDeudas(this);
 
         } catch (Exception e) {

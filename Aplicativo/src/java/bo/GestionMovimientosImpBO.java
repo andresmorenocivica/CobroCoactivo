@@ -98,6 +98,7 @@ public class GestionMovimientosImpBO implements GestionMovimientosBO, Serializab
 
     @Override
     public void cargarMovimientoDeuda(BeanGestionMovimientos bean) throws Exception {
+        bean.getDeudas().setListaMovimiento(new ArrayList<>());
         List<CivMovimientos> ListCivMovimiento = getMovimientoDAO().buscarMovimientoDeudasPersonas((int) bean.getDeudas().getId());
         if (ListCivMovimiento != null && ListCivMovimiento.size() > 0) {
             for (CivMovimientos civMovimientos : ListCivMovimiento) {

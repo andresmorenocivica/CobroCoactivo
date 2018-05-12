@@ -80,10 +80,10 @@
                                                             </div>
                                                             <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                                                                 <div class="input-group margin-5">
-                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtPersona" ></h:inputText>
+                                                                    <h:inputText class="form-control text-uppercase" maxlength="20" id="txtPersona" value="#{gestionMovimientosBean.personaConsulta.documento}" ></h:inputText>
                                                                     <span title="My tip" class="input-group-btn">
                                                                         <h:commandLink class="btn btn-info btn-danger" value="Buscar">
-                                                                            <f:ajax event="click" execute="frmMovimientoConsulta:txtPersona" render="frmMovimientoConsulta:tblMovimiento" listener="#{gestionMovimientosBean.buscarDeudas(1)}" />
+                                                                            <f:ajax event="click" execute="frmMovimientoConsulta:txtPersona frmMovimientoConsulta:sltDocumentos" render="frmMovimientoConsulta:tblMovimiento" listener="#{gestionMovimientosBean.buscarDeudas(1)}" />
                                                                         </h:commandLink>
                                                                     </span>
                                                                 </div>
@@ -124,7 +124,7 @@
                                                     <td>#{consulta.fechaDeuda}</td>
                                                     <td>
                                                         <h:commandLink class="fa fa-eye col-sm-4" onclick="$('#modalMovimiento').modal('show');"> 
-                                                            <f:ajax event="click" listener="#{gestionMovimientosBean.cargarMovimientoDeuda()}" render="frmMovimientoConsulta:modalMovimiento frmMovimientoConsulta:tablaMovimientos" ></f:ajax>
+                                                            <f:ajax event="click" listener="#{gestionMovimientosBean.cargarMovimientoDeuda(deudas)}" render="frmMovimientoConsulta:modalMovimiento frmMovimientoConsulta:tablaMovimientos" ></f:ajax>
                                                         </h:commandLink>
                                                     </td>
                                                 </tr>
@@ -134,7 +134,7 @@
                                 </h:panelGroup>
                             </div>
                             <!-- Empieza Modal Movimiento de la persona -->
-                            <div class="modal fade" id="modalMovimiento" style="overflow-y: scroll;" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalMovimiento" style="overflow-y: scroll;" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
